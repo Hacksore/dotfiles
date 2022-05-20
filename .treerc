@@ -1,0 +1,6 @@
+{
+  "ignored": [
+    ".git",
+    "node_modules"
+  ]
+}

@@ -38,5 +38,7 @@ Plug('navarasu/onedark.nvim')
 -- icons
 Plug('kyazdani42/nvim-web-devicons')
 
+-- Git diff
+Plug('airblade/vim-gitgutter')
 
 vim.call('plug#end')

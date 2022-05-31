@@ -4,7 +4,7 @@ vim.o.mouse = 'a'
 --add recursive search to path
 vim.o.path = vim.o.path .. ',**'
 
--- TODO: node_modules are fucked :fin <search> 
+vim.o.wildignore = '**/node_modules/*'
 
 --use clipboard as plus and star registers
 vim.o.clipboard = 'unnamedplus'

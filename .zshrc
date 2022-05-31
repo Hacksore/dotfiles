@@ -11,4 +11,5 @@ export NVM_DIR="$HOME/.nvm"
 
 alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
+# the fuck is pretty cool
 eval $(thefuck --alias)

@@ -1,31 +1,42 @@
---- TODO: convert to table
--- plugs = {}
--- table.insert(plugs, "vim-airline")
--- -- table.insert(plugs, "vim-airline")
--- -- table.insert(plugs, "vim-airline")
--- -- table.insert(plugs, "vim-airline")
--- -- table.insert(plugs, "vim-airline")
--- -- crweate
+local Plug = vim.fn['plug#']
 
-vim.api.nvim_call_function("plug#begin", {"~/.vim/plugged"})
+vim.call('plug#begin', '~/nvim/plugged')
 
-vim.cmd [[
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'navarasu/onedark.nvim'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'neovim/nvim-lspconfig'
-" This needs a font installed on your system
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'onsails/lspkind.nvim'
-]]
+-- completion stuff
+Plug('hrsh7th/cmp-buffer')
+Plug('hrsh7th/cmp-cmdline')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/cmp-path')
+Plug('hrsh7th/cmp-vsnip')
+Plug('hrsh7th/nvim-cmp')
 
-vim.api.nvim_call_function("plug#end", {})
+-- telescope dep and install
+Plug('nvim-lua/plenary.nvim')
+Plug('nvim-telescope/telescope.nvim')
+
+-- idk
+Plug('hrsh7th/vim-vsnip')
+
+-- fuzzy finding
+Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
+Plug('junegunn/fzf.vim')
+
+-- icons and stuff?
+Plug('kyazdani42/nvim-web-devicons')
+
+-- lsp and stuff?
+Plug('onsails/lspkind.nvim')
+Plug('neovim/nvim-lspconfig')
+
+-- idk
+Plug('nvim-lualine/lualine.nvim')
+Plug('nvim-treesitter/nvim-treesitter')
+
+-- themes
+Plug('navarasu/onedark.nvim')
+
+-- icons
+Plug('kyazdani42/nvim-web-devicons')
+
+
+vim.call('plug#end')

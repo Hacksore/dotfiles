@@ -1,2 +1,4 @@
---Escape leaves input mode in neovim-terminal
-vim.api.nvim_set_keymap('t', '<Esc>','<c-\\><C-n>',{})
+vim.api.nvim_set_keymap("n", "T", ":Telescope<CR>", { noremap = true, silent = true })
+
+-- exmaple how to go to thin in ts
+-- vim.api.nvim_set_keymap("n", "T", ":Telescope git_status<CR>", { noremap = true, silent = true })

@@ -4,7 +4,7 @@ vim.o.mouse = 'a'
 --add recursive search to path
 vim.o.path = vim.o.path .. ',**'
 
--- TODO: nodules are fucked :fin <earch>
+-- TODO: node_modules are fucked :fin <search> 
 
 --use clipboard as plus and star registers
 vim.o.clipboard = 'unnamedplus'
@@ -24,6 +24,15 @@ vim.cmd('autocmd BufEnter * norm \'"')
 
 -- don't split on word when wrapping lines
 vim.o.linebreak = true
+
+-- set tab size
+vim.o.shiftwidth = 0
+vim.o.softtabstop = 0
+vim.o.tabstop = 2
+vim.o.expandtab = true
+
+-- set sign column to yes
+vim.o.signcolumn = 'yes'
 
 -- set one dark theme
 vim.cmd "colorscheme onedark"

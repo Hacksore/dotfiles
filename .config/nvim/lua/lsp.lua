@@ -1,3 +1,5 @@
+local lspconfig = require("lspconfig")
+
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
@@ -60,7 +62,11 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- for more lsp go find them on https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 -- typescript lsp
-require('lspconfig').tsserver.setup({})
+require('lspconfig').tsserver.setup({
+  root_dir = function(f)
+    return lspconfig.util.root_pattern('tsconfig.json', 'jsconfig.json', 'package.json', '.git')(f) or vim.loop.cwd()
+  end
+})
 
 -- eslint lsp
 require('lspconfig').eslint.setup({})

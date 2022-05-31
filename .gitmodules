@@ -1,0 +1,6 @@
+[submodule "personal"]
+	path = personal
+	url = git@github.com:Hacksore/dotfiles-personal.git
+[submodule "work"]
+	path = work
+	url = git@github.com:Hacksore/dotfiles-work.git

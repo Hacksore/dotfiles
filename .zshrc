@@ -12,9 +12,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-# config alias to pull and push config
-alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-
 # the fuck is pretty cool
 eval $(thefuck --alias)
 

@@ -10,3 +10,4 @@ vim.api.nvim_create_autocmd({"BufLeave","FocusLost","insertEnter"},{pattern = "*
 require('lualine').setup {
 	options = { theme = 'dracula' }
 }
+

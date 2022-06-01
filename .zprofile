@@ -8,7 +8,10 @@ function p {
   nvim $GHREPOS
 }
 
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gp='git push'
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias v="nvim"
+alias emacs="nvim"
+alias s="zsh"

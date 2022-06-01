@@ -11,3 +11,9 @@ require('lualine').setup {
 	options = { theme = 'dracula' }
 }
 
+local group = vim.api.nvim_create_augroup("DEEZ_NUTS", { clear = true })
+
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", { callback = function()
+        vim.lsp.buf.format { async = true }
+end, group = group })

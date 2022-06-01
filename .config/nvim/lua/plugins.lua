@@ -41,4 +41,7 @@ Plug('kyazdani42/nvim-web-devicons')
 -- Git diff
 Plug('airblade/vim-gitgutter')
 
+-- which key
+Plug('liuchengxu/vim-which-key')
+
 vim.call('plug#end')

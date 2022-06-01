@@ -16,6 +16,10 @@ function cu {
   config add -u .
 }
 
+function plug {
+  nvim $HOME/.config/nvim/lua/plugins.lua
+}
+
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit"

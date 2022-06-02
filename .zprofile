@@ -33,7 +33,7 @@ function c {
       echo "Updated config successfully!"
       ;;
     "p"|"pull"|"sync")
-      configHelpBanner
+      workTreeGit pull
       ;;
     "h"|"help")
       configHelpBanner

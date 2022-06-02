@@ -21,7 +21,8 @@ function c {
         commitMessage=$varargs
         echo "Using message for commit: $varargs"
       else
-        vared -p 'Enter a commit message:\n' -c commitMessage
+        echo "Enter a commit message:"
+        vared -p '' -c commitMessage        
       fi
 
       workTreeGit add -u . &&

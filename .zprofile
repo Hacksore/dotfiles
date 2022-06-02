@@ -7,7 +7,7 @@ function c {
 
   case $cmd in
     "u"|"update")
-      vared -p 'Enter a commit message' -c commitMessage
+      vared -p 'Enter a commit message: ' -c commitMessage
       workTreeGit add -u . &&
       workTreeGit commit -m "$commitMessage" &&
       workTreeGit push &&

@@ -33,6 +33,7 @@ function c {
       echo "Updated config successfully!"
       ;;
     "p"|"pull"|"sync")
+      workTreeGit submodule update --remote
       workTreeGit pull
       ;;
     "h"|"help")
@@ -45,7 +46,7 @@ function c {
       workTreeGit diff
       ;;
     *)
-      workTreeGit
+      workTreeGit $@
       ;;
   esac
 

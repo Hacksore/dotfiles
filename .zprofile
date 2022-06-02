@@ -33,7 +33,7 @@ function c {
       echo "Updated config successfully!"
       ;;
     "p"|"pull"|"sync")
-      workTreeGit submodule update --remote
+      workTreeGit submodule update --recursive --remote
       workTreeGit pull
       ;;
     "h"|"help")

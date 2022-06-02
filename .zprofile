@@ -11,10 +11,19 @@ function configHelpBanner {
 
 function c {
   local cmd=$1
+  local varargs=${@:2}
 
   case $cmd in
     "u"|"update")
-      vared -p 'Enter a commit message: ' -c commitMessage
+      commitMessage=""
+
+      if [[ $varargs != "" ]]; then
+        commitMessage=$varargs
+        echo "Using message for commit: $varargs"
+      else
+        vared -p 'Enter a commit message:\n' -c commitMessage
+      fi
+
       workTreeGit add -u . &&
       workTreeGit commit -m "$commitMessage" &&
       workTreeGit push &&

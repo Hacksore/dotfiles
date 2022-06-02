@@ -1,8 +1,8 @@
 [submodule "personal"]
-	path = personal
+  path = personal
   branch = master
-	url = git@github.com:Hacksore/dotfiles-personal.git
+  url = git@github.com:Hacksore/dotfiles-personal.git
 [submodule "work"]
-	path = work
+  path = work
   branch = master
-	url = git@github.com:Hacksore/dotfiles-work.git
+  url = git@github.com:Hacksore/dotfiles-work.git

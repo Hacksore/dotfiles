@@ -7,13 +7,16 @@ function c {
 
   case $cmd in
     "u"|"update")
-      workTreeGit add -u .
+      vared -p 'Enter a commit message' -c commitMessage
+      workTreeGit add -u . &&
+      workTreeGit commit -m "$commitMessage" &&
+      workTreeGit push &&
+      echo "Updated config successfully!"
       ;;
     "h"|"help")
-      echo "Help menu"
+      echo "Help menu: TODO implement"
       ;;
     "s"|"status")
-      echo "status"
       workTreeGit status
       ;;
     "d"|"diff")

@@ -3,10 +3,12 @@ export GHREPOS="$HOME/Code"
 alias workTreeGit="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 function configHelpBanner {
-  echo "# CONFIG HELP MENU"
-  echo "u/update - Update your config, will add all changes files, commit, and push";
-  echo "h/help - show the help menu" 
-
+  echo "💻 Config helper"
+  echo "u/update     - Update your config, will add all changes files, commit, and push";
+  echo "h/help       - show the help menu" 
+  echo "p/pull/sync  - pull the latest changes down from remote" 
+  echo "s/status     - get the git status" 
+  echo "d/diff       - get the git diff"
 }
 
 function c {
@@ -29,6 +31,9 @@ function c {
       workTreeGit commit -m "$commitMessage" &&
       workTreeGit push &&
       echo "Updated config successfully!"
+      ;;
+    "p"|"pull"|"sync")
+      configHelpBanner
       ;;
     "h"|"help")
       configHelpBanner

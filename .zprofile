@@ -46,10 +46,23 @@ function p {
   nvim $GHREPOS
 }
 
+
+# useful aliases
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit"
 alias gp="git push"
 alias v="nvim"
 alias emacs="nvim"
+
+# reload the shell to source - might be better to use source command instead to save history
 alias s="zsh"
+
+# creating this function to override the default env so we don't output anything starting with SECRET_ and OP_
+function env {
+  normalOutput=$(command env)
+  
+  echo $normalOutput | awk '$0 !~ /SECRET_|OP_/'
+
+}
+

@@ -2,6 +2,13 @@ export GHREPOS="$HOME/Code"
 
 alias workTreeGit="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
+function configHelpBanner {
+  echo "# CONFIG HELP MENU"
+  echo "u/update - Update your config, will add all changes files, commit, and push";
+  echo "h/help - show the help menu" 
+
+}
+
 function c {
   local cmd=$1
 
@@ -14,7 +21,7 @@ function c {
       echo "Updated config successfully!"
       ;;
     "h"|"help")
-      echo "Help menu: TODO implement"
+      configHelpBanner
       ;;
     "s"|"status")
       workTreeGit status
@@ -23,16 +30,13 @@ function c {
       workTreeGit diff
       ;;
     *)
-
-      git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
-      echo "Option not recognized"
+      workTreeGit
       ;;
   esac
 
 }
 
 alias config="c"
-# CONFIG END FUNCS
 
 function plug {
   nvim $HOME/.config/nvim/lua/plugins.lua

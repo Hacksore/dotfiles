@@ -1,23 +1,42 @@
 export GHREPOS="$HOME/Code"
 
+alias workTreeGit="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+
 function c {
-  config submodule update --remote --init --recursive
+  local cmd=$1
+
+  case $cmd in
+    "u"|"update")
+      workTreeGit add -u .
+      ;;
+    "h"|"help")
+      echo "Help menu"
+      ;;
+    "s"|"status")
+      echo "status"
+      workTreeGit status
+      ;;
+    "d"|"diff")
+      workTreeGit diff
+      ;;
+    *)
+
+      git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+      echo "Option not recognized"
+      ;;
+  esac
+
+}
+
+alias config="c"
+# CONFIG END FUNCS
+
+function plug {
+  nvim $HOME/.config/nvim/lua/plugins.lua
 }
 
 function p {
   nvim $GHREPOS
-}
-
-function config {
-  git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
-}
-
-function cu {
-  config add -u .
-}
-
-function plug {
-  nvim $HOME/.config/nvim/lua/plugins.lua
 }
 
 alias gs="git status"

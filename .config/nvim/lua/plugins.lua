@@ -44,4 +44,7 @@ Plug('airblade/vim-gitgutter')
 -- which key
 Plug('liuchengxu/vim-which-key')
 
+-- comments
+Plug('tpope/vim-commentary')
+
 vim.call('plug#end')

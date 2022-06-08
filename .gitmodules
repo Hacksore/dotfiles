@@ -2,7 +2,3 @@
   path = personal
   branch = master
   url = git@github.com:Hacksore/dotfiles-personal.git
-[submodule "work"]
-  path = work
-  branch = master
-  url = git@github.com:Hacksore/dotfiles-work.git

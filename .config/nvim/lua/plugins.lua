@@ -47,4 +47,7 @@ Plug('liuchengxu/vim-which-key')
 -- comments
 Plug('tpope/vim-commentary')
 
+-- jsdoc
+Plug('heavenshell/vim-jsdoc')
+
 vim.call('plug#end')

@@ -62,6 +62,17 @@ function p {
   nvim $GHREPOS
 }
 
+# 1Password cli helper util
+function sec {
+  who=$(op whoami)
+  
+  # ask for login if no singed in
+  if [[ $? != 0 ]]; then 
+    eval $(op signin)
+  fi
+
+  op run --env-file=$HOME/personal/.env -- $@
+}
 
 # useful aliases
 alias gs="git status"

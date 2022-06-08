@@ -17,7 +17,3 @@ eval $(thefuck --alias)
 
 # profile
 source $HOME/.zprofile
-
-# source personal stuff
-source $HOME/personal/init.sh
-

@@ -1,0 +1,21 @@
+- name: iTerm2
+  community.general.homebrew:
+    name: homebrew/cask/iterm2
+    state: absent 
+- name: Discord
+  community.general.homebrew:
+    name: homebrew/cask/discord
+    state: absent
+- name: Chrome 
+  community.general.homebrew:
+    name: homebrew/cask/chrome
+    state: absent
+- name: Docker 
+  community.general.homebrew:
+    name: homebrew/cask/docker
+    state: absent
+- name: VScode 
+  community.general.homebrew:
+    name: homebrew/cask/vscode
+    state: absent
+

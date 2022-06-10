@@ -51,6 +51,6 @@ Plug('tpope/vim-commentary')
 Plug('heavenshell/vim-jsdoc')
 
 -- copilot
-Plug('github/copilot.vim')
+-- Plug('github/copilot.vim')
 
 vim.call('plug#end')

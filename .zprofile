@@ -45,6 +45,9 @@ function c {
     "d"|"diff")
       workTreeGit diff
       ;;
+    "e"|"edit")
+      nvim $HOME/.zprofile
+      ;;
     *)
       workTreeGit $@
       ;;

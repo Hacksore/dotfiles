@@ -1,7 +1,7 @@
 local M = {}
 
 function M.bind(mode, keys, func, tab)
-    local t = tab == nil and tab or {}
+    local t = tab and tab or {}
     vim.api.nvim_set_keymap(mode, keys, func, t)
 end
 

@@ -48,6 +48,9 @@ function c {
     "e"|"edit")
       nvim $HOME/.zprofile
       ;;
+    "g"|"goto"|"github")
+      open "https://github.com/Hacksore/dotfiles"
+      ;;
     *)
       workTreeGit $@
       ;;

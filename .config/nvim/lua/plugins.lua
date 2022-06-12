@@ -14,6 +14,11 @@ Plug('hrsh7th/nvim-cmp')
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim')
 
+-- formating
+Plug('neovim/nvim-lspconfig')
+Plug('jose-elias-alvarez/null-ls.nvim')
+Plug('MunifTanjim/prettier.nvim')
+
 -- idk
 Plug('hrsh7th/vim-vsnip')
 
@@ -31,6 +36,10 @@ Plug('neovim/nvim-lspconfig')
 -- idk
 Plug('nvim-lualine/lualine.nvim')
 Plug('nvim-treesitter/nvim-treesitter')
+Plug('kyazdani42/nvim-tree.lua')
+
+-- syntax jsx
+Plug('MaxMEllon/vim-jsx-pretty')
 
 -- themes
 Plug('navarasu/onedark.nvim')

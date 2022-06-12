@@ -28,15 +28,23 @@ vim.cmd 'let mapleader = " "'
 vim.cmd 'set noswapfile'
 
 -- telescope gitfules 
-M.normal("<leader>T", ":Telescope git_files<CR>", { noremap = true, silent = true }) 
+M.normal("T", ":Telescope git_files<CR>", { noremap = true, silent = true }) 
+
+
+-- switch buffers TODO:
+-- M.normal("<Tab>", ":Telescope git_files<CR>", { noremap = true, silent = true }) 
+
+-- indent with sane keys
+-- M.insert("<Tab>", ":call >>", { noremap = true, silent = true })
+-- M.insert("<S-Tab>", ":call <<")
 
 -- copilot
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
-vim.g.copilot_tab_fallback = ""
+-- vim.g.copilot_no_tab_map = true
+--vim.g.copilot_assume_mapped = true
+-- vim.g.copilot_tab_fallback = ""
 
 -- copilot active via control+i
-M.insert("<C-i>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
+-- M.insert("<C-i>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
 
 -- Escape leaves input mode in neovim-terminal
 M.terminal("<Esc>","<c-\\><C-n>")

@@ -1,6 +1,7 @@
 require('plugins')
 require('options')
-require('random_api_shit')
 require('lsp')
 require('nvim-cmp')
 require('keymap')
+require('formatting')
+require('misc')

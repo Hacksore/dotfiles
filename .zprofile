@@ -26,8 +26,9 @@ function c {
         echo "Enter a commit message:"
         vared -p '' -c commitMessage        
       fi
-
-      workTreeGit add -u . &&
+      
+      # TODO: this isnt working for some reason
+      workTreeGit add -u "$HOME" &&
       workTreeGit commit -m "$commitMessage" &&
       workTreeGit push &&
       echo "Updated config successfully!"

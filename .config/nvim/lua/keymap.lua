@@ -35,8 +35,9 @@ M.normal("T", ":Telescope git_files<CR>", { noremap = true, silent = true })
 -- M.normal("<Tab>", ":Telescope git_files<CR>", { noremap = true, silent = true }) 
 
 -- indent with sane keys
--- M.insert("<Tab>", ":call >>", { noremap = true, silent = true })
--- M.insert("<S-Tab>", ":call <<")
+--M.insert("<Tab>", "<C-t>", { noremap = true, silent = true })
+M.insert("<S-Tab>", "<C-d>")
+
 
 -- copilot
 -- vim.g.copilot_no_tab_map = true

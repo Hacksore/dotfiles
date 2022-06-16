@@ -1,5 +1,6 @@
 require('plugins')
-require('options')
+-- TODO: this one is breaking vscode
+--require('options')
 require('lsp')
 require('nvim-cmp')
 require('keymap')

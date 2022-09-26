@@ -59,7 +59,4 @@ Plug('tpope/vim-commentary')
 -- jsdoc
 Plug('heavenshell/vim-jsdoc')
 
--- vim presssions discord
-Plug('andweeb/presence.nvim')
-
 vim.call('plug#end')

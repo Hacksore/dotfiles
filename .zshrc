@@ -17,3 +17,13 @@ eval $(thefuck --alias)
 
 # profile
 source $HOME/.zprofile
+
+# add 1p ssh
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/hacksore/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/hacksore/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/hacksore/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/hacksore/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi

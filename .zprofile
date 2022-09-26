@@ -73,12 +73,17 @@ function p {
 function sec {
   who=$(op whoami)
   
-  # ask for login if no singed in
+  # ask for login if no signed in
   if [[ $? != 0 ]]; then 
     eval $(op signin)
   fi
 
-  op run --env-file=$HOME/personal/.env -- $@
+  # Check if we have a file in the PWD first and use that
+  if [[ -f "$PWD/.env" ]]; then
+    op run --env-file=$PWD/.env -- $@
+  else
+    op run --env-file=$HOME/personal/.env -- $@
+  fi  
 }
 
 # useful aliases
@@ -99,4 +104,19 @@ function env {
   echo $normalOutput | awk '$0 !~ /SECRET_|OP_/'
 
 }
+
+function new-rust {
+  randomStr=$(openssl rand -hex 12)
+  randomPath="/tmp/rust/project-$randomStr"
+
+  cargo new "$randomPath"
+
+  cd "$randomPath" && code .
+  code "$randomPath/src/main.rs"
+}
+
+
+
+# Added by Toolbox App
+export PATH="$PATH:/Users/hacksore/Library/Application Support/JetBrains/Toolbox/scripts"
 

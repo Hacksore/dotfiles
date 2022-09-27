@@ -3,6 +3,7 @@
 # Please adapt and uncomment the following lines:
 	name = Sean Boult
 	email = 996134+Hacksore@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhrq1CItzz6SwsZxrnvV9HD85lph+xuyvvQb9xi5/cp
 [submodule]
 	recurse = true
 [init]
@@ -20,3 +21,9 @@
 	external = code --wait --diff $LOCAL $REMOTE
 [help]
 	autocorrect = 10
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true

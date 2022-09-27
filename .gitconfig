@@ -14,3 +14,7 @@
 	required = true
 [push]
 	default = current
+[core]
+  editor = code --wait
+[diff]
+	external = code --wait --diff $LOCAL $REMOTE

@@ -4,11 +4,12 @@ alias workTreeGit="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 function configHelpBanner {
   echo "💻 Config helper"
-  echo "u/update     - Update your config, will add all changes files, commit, and push";
-  echo "h/help       - show the help menu" 
+  echo "u/update     - update your config, will add all changes files, commit, and push"
+  echo "h/help       - show the help menu"
   echo "p/pull/sync  - pull the latest changes down from remote" 
   echo "s/status     - get the git status" 
   echo "d/diff       - get the git diff"
+  echo "g/github     - load the repo in browser"
 }
 
 function c {
@@ -47,7 +48,7 @@ function c {
       workTreeGit diff
       ;;
     "e"|"edit")
-      nvim $HOME/.zprofile
+      code $HOME/.zprofile
       ;;
     "g"|"goto"|"github")
       open "https://github.com/Hacksore/dotfiles"
@@ -62,11 +63,11 @@ function c {
 alias config="c"
 
 function plug {
-  nvim $HOME/.config/nvim/lua/plugins.lua
+  code $HOME/.config/code/lua/plugins.lua
 }
 
 function p {
-  nvim $GHREPOS
+  code $GHREPOS
 }
 
 # 1Password cli helper util
@@ -91,8 +92,8 @@ alias gs="git status"
 alias ga="git add"
 alias gc="git commit"
 alias gp="git push"
-alias v="nvim"
-alias emacs="nvim"
+alias v="code"
+alias emacs="code"
 
 # reload the shell to source - might be better to use source command instead to save history
 alias s="zsh"
@@ -100,14 +101,13 @@ alias s="zsh"
 # creating this function to override the default env so we don't output anything starting with SECRET_ and OP_
 function env {
   normalOutput=$(command env)
-  
   echo $normalOutput | awk '$0 !~ /SECRET_|OP_/'
-
 }
 
-function new-rust {
+# Create testing rust project
+function rust {
   randomStr=$(openssl rand -hex 12)
-  randomPath="/tmp/rust/project-$randomStr"
+  randomPath="/tmp/$USERNAME/sandbox/rust/$randomStr"
 
   cargo new "$randomPath"
 
@@ -115,8 +115,18 @@ function new-rust {
   code "$randomPath/src/main.rs"
 }
 
+# creating testing ts project
+function ts {
+  randomStr=$(openssl rand -hex 12 | head -c 10)
+  randomPath="/tmp/$USERNAME/sandbox/typescript/$randomStr"
 
+  mkdir -p "$randomPath"
 
-# Added by Toolbox App
-export PATH="$PATH:/Users/hacksore/Library/Application Support/JetBrains/Toolbox/scripts"
+  cd "$randomPath" && npx --package typescript tsc --init
+  
+  mkdir -p "$randomPath/src"
+  echo "console.log(69)" >> "$randomPath/src/index.ts"
 
+  code .
+  code "$randomPath/src/index.ts"
+}

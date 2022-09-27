@@ -14,8 +14,7 @@
   community.general.homebrew:
     name: homebrew/cask/docker
     state: absent
-- name: VScode 
+- name: VSCode 
   community.general.homebrew:
     name: homebrew/cask/vscode
     state: absent
-

@@ -18,3 +18,5 @@
   editor = code --wait
 [diff]
 	external = code --wait --diff $LOCAL $REMOTE
+[help]
+	autocorrect = 10

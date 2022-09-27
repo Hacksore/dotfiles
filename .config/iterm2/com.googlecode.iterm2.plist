@@ -927,7 +927,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Menlo-Regular 20</string>
+			<string>JetBrainsMono-Regular 20</string>
 			<key>Open Password Manager Automatically</key>
 			<false/>
 			<key>Option Key Sends</key>

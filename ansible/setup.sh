@@ -1,9 +1,17 @@
 #!/bin/bash
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# installs homebrew if not found
+if ! [ -x "$(command -v brew)" ]; then
+  cd $HOME
+  git clone https://github.com/Homebrew/brew homebrew
+  brew update --force --quiet
+fi
+
+# install ansible
+brew install ansible
 
 # setup the brew mod
 ansible-galaxy collection install community.general
 
-# TODO: test platform to run proper script
-ansible-playbook install-mac.yaml
+# run the install playbook
+ansible-playbook install-mac.yaml --verbose

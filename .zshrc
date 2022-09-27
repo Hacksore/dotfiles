@@ -1,8 +1,8 @@
-# brew?
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="murilasso"
+
+# alias to open this file
+alias profile="code $HOME/.zshrc"
 
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
@@ -14,13 +14,20 @@ export NVM_DIR="$HOME/.nvm"
 export HOMEBREW_PREFIX="$HOME/homebrew"
 
 # eval brew
-eval "$($HOME/homebrew/bin/brew shellenv)"
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# for nvm to work right
+[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # the fuck is pretty cool
 eval $(thefuck --alias)
+
+# add cargo to path
+export PATH="$HOME/.cargo/bin/:$PATH"
+
+# good fuzzy
+source ~/.fzf.zsh
 
 # profile
 source $HOME/.zprofile

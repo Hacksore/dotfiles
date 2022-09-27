@@ -1,8 +1,5 @@
 export GHREPOS="$HOME/Code"
 
-# add cargo to path
-export PATH="$HOME/.cargo/bin/:$PATH"
-
 alias workTreeGit="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 function configHelpBanner {

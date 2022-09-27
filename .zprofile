@@ -1,5 +1,8 @@
 export GHREPOS="$HOME/Code"
 
+# add cargo to path
+export PATH="$HOME/.cargo/bin/:$PATH"
+
 alias workTreeGit="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 function configHelpBanner {
@@ -10,6 +13,36 @@ function configHelpBanner {
   echo "s/status     - get the git status" 
   echo "d/diff       - get the git diff"
   echo "g/github     - load the repo in browser"
+}
+
+function git {
+  local cmd=$1
+  local brewPath=$(brew --prefix)
+  local gitcmd="$brewPath/bin/git"
+  local bold=$(tput bold)
+  local varargs=$@
+
+  case $cmd in
+    "reset")
+      echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
+      echo "🛑     ${bold}YOU ARE ABOUT TO COMMIT DANGER TO THE REPO!      🛑"
+      echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
+
+      if read -q "choice?Press Y/y to continue with the DANGER git reset: "; then
+        echo
+        echo "Continuing with command 'git $varargs' ..."
+        echo 
+        $gitcmd "$@"
+      else
+        echo
+        echo "'$choice' not 'Y' or 'y'. SAVING YOU BRO 😅..."
+      fi
+      ;;
+    *)
+      $gitcmd $@
+      ;;
+  esac
+
 }
 
 function c {
@@ -105,9 +138,9 @@ function env {
 }
 
 # Create testing rust project
-function rust {
-  randomStr=$(openssl rand -hex 12)
-  randomPath="/tmp/$USERNAME/sandbox/rust/$randomStr"
+function new-rust {
+  randomStr=$(openssl rand -hex 8)
+  randomPath="/tmp/$USERNAME/sandbox/rust/p$randomStr"
 
   cargo new "$randomPath"
 
@@ -116,9 +149,9 @@ function rust {
 }
 
 # creating testing ts project
-function ts {
-  randomStr=$(openssl rand -hex 12 | head -c 10)
-  randomPath="/tmp/$USERNAME/sandbox/typescript/$randomStr"
+function new-ts {
+  randomStr=$(openssl rand -hex 12 | head -c 8)
+  randomPath="/tmp/$USERNAME/sandbox/typescript/p$randomStr"
 
   mkdir -p "$randomPath"
 

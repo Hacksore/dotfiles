@@ -14,4 +14,4 @@ brew install ansible
 ansible-galaxy collection install community.general
 
 # run the install playbook
-ansible-playbook install-mac.yaml --ask-become-pass --verbose
+ansible-playbook "$PWD/install-mac.yaml" --ask-become-pass --verbose

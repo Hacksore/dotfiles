@@ -1,0 +1,17 @@
+cli_packages:
+  - awscli
+  - cowsay
+  - htop
+  - nvm
+  - thefuck
+  - tmux
+  - python3
+  - telnet
+  - zsh
+desktop_packages:
+  - discord
+  - slack
+  - iterm2
+  - google-chrome
+  - visual-studio-code
+  - docker

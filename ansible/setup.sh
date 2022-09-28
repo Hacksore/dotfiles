@@ -3,7 +3,9 @@
 # TODO: this wont work without an ssh key
 git clone --bare git@github.com:Hacksore/dotfiles.git $HOME/.cfg
 
-alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@"
+function config {
+  git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+}
 
 config checkout
 

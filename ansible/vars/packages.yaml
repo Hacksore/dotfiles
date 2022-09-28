@@ -1,5 +1,7 @@
-cli_packages:
+packages:
   - awscli
+  # - 1password-cli # cursed?
+  - git
   - cowsay
   - htop
   - nvm
@@ -7,11 +9,33 @@ cli_packages:
   - tmux
   - python3
   - telnet
+  - fzf
+  - ripgrep
   - zsh
-desktop_packages:
+  - awk
+casks:
   - discord
   - slack
+  - 1password
   - iterm2
   - google-chrome
+  - google-drive
   - visual-studio-code
   - docker
+  - ghidra
+  - rectangle
+  - raycast
+  - obs
+  - notion
+  - spotify
+  - suspicious-package
+  # qlplugins
+  - apparency 
+  - quicklookase 
+  - qlvideo
+  - qlcolorcode
+  - qlstephen
+  - qlmarkdown
+  - quicklook-json
+  - qlimagesize
+  - suspicious-package

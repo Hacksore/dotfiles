@@ -9,38 +9,40 @@ function configHelpBanner {
   echo "p/pull/sync  - pull the latest changes down from remote" 
   echo "s/status     - get the git status" 
   echo "d/diff       - get the git diff"
+  echo "pkg/ansoble  - edit my anisble project"
   echo "g/github     - load the repo in browser"
 }
 
-function git {
-  local cmd=$1
-  local brewPath=$(brew --prefix)
-  local gitcmd="$brewPath/bin/git"
-  local bold=$(tput bold)
-  local varargs=$@
+gitcmd=$(which git)
 
-  case $cmd in
-    "reset")
-      echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
-      echo "🛑     ${bold}YOU ARE ABOUT TO COMMIT DANGER TO THE REPO!      🛑"
-      echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
+# function git {
+#   local cmd=$1
+#   local brewPath=$(brew --prefix)
+#   local bold=$(tput bold)
+#   local varargs=$@
 
-      if read -q "choice?Press Y/y to continue with the DANGER git reset: "; then
-        echo
-        echo "Continuing with command 'git $varargs' ..."
-        echo 
-        $gitcmd "$@"
-      else
-        echo
-        echo "'$choice' not 'Y' or 'y'. SAVING YOU BRO 😅..."
-      fi
-      ;;
-    *)
-      $gitcmd $@
-      ;;
-  esac
+#   case $cmd in
+#     "reset")
+#       echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
+#       echo "🛑     ${bold}YOU ARE ABOUT TO COMMIT DANGER TO THE REPO!      🛑"
+#       echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
 
-}
+#       if read -q "choice?Press Y/y to continue with the DANGER git reset: "; then
+#         echo
+#         echo "Continuing with command 'git $varargs' ..."
+#         echo 
+#         $gitcmd "$@"
+#       else
+#         echo
+#         echo "'$choice' not 'Y' or 'y'. SAVING YOU BRO 😅..."
+#       fi
+#       ;;
+#     *)
+#       $gitcmd $@
+#       ;;
+#   esac
+
+# }
 
 function c {
   local cmd=$1
@@ -79,6 +81,10 @@ function c {
       ;;
     "e"|"edit")
       code $HOME/.zprofile
+      ;;
+    "pkg"|"ansible")
+      cd $HOME/ansible
+      code .
       ;;
     "g"|"goto"|"github")
       open "https://github.com/Hacksore/dotfiles"

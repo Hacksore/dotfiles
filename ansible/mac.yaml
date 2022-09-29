@@ -3,5 +3,17 @@
 - connection: local
   hosts: localhost
   tasks:
-    - name: "Do fancy ansible stuff"
-      shell: echo TODO
+    - name: Install ts-node
+      community.general.npm:
+        name: ts-node
+        global: true
+    - name: Install ts language server
+      community.general.npm:
+        name: typescript-language-server
+        global: true
+    - name: Install yarn
+      community.general.npm:
+        name: yarn
+        global: true
+    - name: Remove ql quarantine
+      shell: xattr -d -r com.apple.quarantine ~/Library/QuickLook

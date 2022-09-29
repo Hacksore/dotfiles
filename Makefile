@@ -1,8 +1,12 @@
-.PHONY: install uninstall
+.PHONY: link unlink pkg apps ansible
 
-install:
+link:
 	stow .
-uninstall:
+unlink:
 	stow -D .
-pkg:
-	${HOME}/ansible/run.sh
+apps:
+	brew bundle --file ${HOME}/dotfiles/Brewfile
+ansible:
+	${HOME}/dotfiles/ansible/run.sh
+export:
+	brew bundle dump --file ${HOME}/dotfiles/Brewfile

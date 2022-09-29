@@ -1,0 +1,7 @@
+#!/usr/bin/env ansible-playbook
+
+- connection: local
+  hosts: localhost
+  tasks:
+    - name: "Do fancy ansible stuff"
+      shell: echo TODO

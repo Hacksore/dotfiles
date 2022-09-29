@@ -23,6 +23,9 @@ if [ -d "$HOME/homebrew" ]; then
   # brew just installed let's run our ansible stuff
   bash "$HOME/dotfiles/ansible/run.sh"
 
+  # use brew bundle
+  brew bundle --file "$HOME/dotfiles/Brewfile"
+
 fi
 
 # install the files with stow

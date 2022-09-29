@@ -3,6 +3,11 @@ export GHREPOS="$HOME/Code"
 # alias to open this file
 alias profile="code $HOME/.zshrc"
 
+function dotfiles {
+  cd $HOME/dotfiles
+  echo "You have been moved to dotfiles directory 😎"
+}
+
 # 1Password cli helper util
 function sec {
   who=$(op whoami)

@@ -3,6 +3,10 @@
 - connection: local
   hosts: localhost
   tasks:
+    - name: Create home ~/Applications
+      file:
+        path: ~/Applications
+        state: directory
     - name: Install ts-node
       community.general.npm:
         name: ts-node

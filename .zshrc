@@ -1,9 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="murilasso"
 
-# alias to open this file
-alias profile="code $HOME/.zshrc"
-
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 

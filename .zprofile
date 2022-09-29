@@ -1,110 +1,7 @@
 export GHREPOS="$HOME/Code"
 
-alias workTreeGit="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-
-function configHelpBanner {
-  echo "💻 Config helper"
-  echo "u/update     - update your config, will add all changes files, commit, and push"
-  echo "h/help       - show the help menu"
-  echo "p/pull/sync  - pull the latest changes down from remote" 
-  echo "s/status     - get the git status" 
-  echo "d/diff       - get the git diff"
-  echo "pkg/ansoble  - edit my anisble project"
-  echo "g/github     - load the repo in browser"
-}
-
-gitcmd=$(which git)
-
-# function git {
-#   local cmd=$1
-#   local brewPath=$(brew --prefix)
-#   local bold=$(tput bold)
-#   local varargs=$@
-
-#   case $cmd in
-#     "reset")
-#       echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
-#       echo "🛑     ${bold}YOU ARE ABOUT TO COMMIT DANGER TO THE REPO!      🛑"
-#       echo "🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑"
-
-#       if read -q "choice?Press Y/y to continue with the DANGER git reset: "; then
-#         echo
-#         echo "Continuing with command 'git $varargs' ..."
-#         echo 
-#         $gitcmd "$@"
-#       else
-#         echo
-#         echo "'$choice' not 'Y' or 'y'. SAVING YOU BRO 😅..."
-#       fi
-#       ;;
-#     *)
-#       $gitcmd $@
-#       ;;
-#   esac
-
-# }
-
-function c {
-  local cmd=$1
-  local varargs=${@:2}
-
-  case $cmd in
-    "u"|"update")
-      commitMessage=""
-
-      if [[ $varargs != "" ]]; then
-        commitMessage=$varargs
-        echo "Using message for commit: $varargs"
-      else
-        echo "Enter a commit message:"
-        vared -p '' -c commitMessage        
-      fi
-      
-      # TODO: this isnt working for some reason
-      workTreeGit add -u "$HOME" &&
-      workTreeGit commit -m "$commitMessage" &&
-      workTreeGit push &&
-      echo "Updated config successfully!"
-      ;;
-    "p"|"pull"|"sync")
-      workTreeGit pull
-      workTreeGit submodule update --recursive --remote
-      ;;
-    "h"|"help")
-      configHelpBanner
-      ;;
-    "s"|"status")
-      workTreeGit status
-      ;;
-    "d"|"diff")
-      workTreeGit diff
-      ;;
-    "e"|"edit")
-      code $HOME/.zprofile
-      ;;
-    "pkg"|"ansible")
-      cd $HOME/ansible
-      code .
-      ;;
-    "g"|"goto"|"github")
-      open "https://github.com/Hacksore/dotfiles"
-      ;;
-    *)
-      workTreeGit $@
-      ;;
-  esac
-
-}
-
-alias config="c"
-
-function plug {
-  code $HOME/.config/code/lua/plugins.lua
-}
-
-function p {
-  code $GHREPOS
-}
+# alias to open this file
+alias profile="code $HOME/.zshrc"
 
 # 1Password cli helper util
 function sec {
@@ -165,4 +62,23 @@ function new-ts {
 
   code .
   code "$randomPath/src/index.ts"
+}
+
+# Create testing vite project
+function new-vite {
+  randomStr=$(openssl rand -hex 8 | head -c 8)
+  randomPath="/tmp/$USERNAME/sandbox/vite"
+  fullPath="$randomPath/p$randomStr"
+
+  mkdir -p "$randomPath"
+  
+  cd $randomPath
+  npm create vite@latest "p$randomStr" -- --template react-ts
+
+  cd "$fullPath"
+
+  yarn
+
+  code .
+  code "$fullPath/src/App.tsx"
 }

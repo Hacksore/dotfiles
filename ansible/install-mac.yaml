@@ -1,18 +1,19 @@
 #!/usr/bin/env ansible-playbook
 
-- hosts: localhost
+- connection: local
+  hosts: localhost
   tasks:
-    - name: "add custom homebrew repos"
+    - name: "Add custom homebrew repos"
       community.general.homebrew_tap:
         name:
           - 1password/tap
     - include_vars: packages.yaml
-    - name: Install CLI/Deps
+    - name: "Install CLI/Deps"
       community.general.homebrew:
         name: "{{ packages }}"
         state: "installed"
         path: "{{ lookup('ansible.builtin.env', 'HOMEBREW_PREFIX', default=Undefined) }}/bin"
-    - name: Install Casks
+    - name: "Install Casks"
       community.general.homebrew_cask:
         name: "{{ item }}"
         path: "{{ lookup('ansible.builtin.env', 'HOMEBREW_PREFIX', default=Undefined) }}/bin"

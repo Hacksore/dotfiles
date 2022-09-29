@@ -1,6 +1,6 @@
 packages:
   - awscli
-  # - 1password-cli # cursed?
+  - 1password-cli
   - git
   - cowsay
   - htop
@@ -13,6 +13,8 @@ packages:
   - ripgrep
   - zsh
   - awk
+  - stow
+  - ansible
 casks:
   - discord
   - slack
@@ -29,7 +31,8 @@ casks:
   - notion
   - spotify
   - suspicious-package
-  # qlplugins
+  - vlc
+  # qlplugins which are nice
   - apparency 
   - quicklookase 
   - qlvideo

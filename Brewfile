@@ -10,8 +10,12 @@ brew "fzf"
 brew "git"
 brew "handbrake"
 brew "htop"
+brew "less"
+brew "mas"
+brew "neovim", args: ["HEAD"]
 brew "nvm"
 brew "openjdk"
+brew "railway"
 brew "ripgrep"
 brew "rustup-init"
 brew "stow"
@@ -24,6 +28,7 @@ cask "1password-cli"
 cask "apparency"
 cask "discord"
 cask "docker"
+cask "figma"
 cask "ghidra"
 cask "gimp"
 cask "google-chrome"
@@ -46,3 +51,7 @@ cask "spotify"
 cask "suspicious-package"
 cask "visual-studio-code"
 cask "vlc"
+mas "HP Smart", id: 1474276998
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Twitter", id: 1482454543
+mas "Xcode", id: 497799835

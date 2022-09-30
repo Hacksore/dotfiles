@@ -9,4 +9,4 @@ apps:
 ansible:
 	${HOME}/dotfiles/ansible/run.sh
 export:
-	brew bundle dump --file ${HOME}/dotfiles/Brewfile
+	brew bundle dump --file ${HOME}/dotfiles/Brewfile --force

@@ -10,7 +10,7 @@ export NVM_DIR="$HOME/.nvm"
 # we want things per user
 export HOMEBREW_PREFIX="$HOME/homebrew"
 export HOMEBREW_CELLAR="$HOME/homebrew/Cellar"
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications --fontdir=~/Library/Fonts"
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --fontdir=$HOME/Library/Fonts"
 
 # eval brew
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
@@ -35,13 +35,13 @@ eval $(thefuck --alias)
 export PATH="$HOME/.cargo/bin/:$PATH"
 
 # good fuzzy
-source ~/.fzf.zsh
+source $HOME/.fzf.zsh
 
 # profile
 source $HOME/.zprofile
 
 # add 1p ssh
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # java
 export PATH="/Users/blazing/homebrew/opt/openjdk/bin:$PATH"

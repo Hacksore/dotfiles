@@ -1,7 +1,18 @@
+# TODO: create this into a nice cli tool
+
+function scaffoldRandomString {
+  local projectType=$1
+  randomStr=$(openssl rand -hex 12 | head -c 8)
+  randomPath="$HOME/s/$projectType/p$randomStr"
+
+  mkdir -p "$randomPath"
+
+  echo "$randomPath"
+}
+
 # Create testing rust project
 function new-rust {
-  randomStr=$(openssl rand -hex 8)
-  randomPath="/tmp/$USERNAME/sandbox/rust/p$randomStr"
+  randomPath=$(scaffoldRandomString "rust")
 
   cargo new "$randomPath"
 
@@ -11,8 +22,7 @@ function new-rust {
 
 # creating testing ts project
 function new-ts {
-  randomStr=$(openssl rand -hex 12 | head -c 8)
-  randomPath="/tmp/$USERNAME/sandbox/typescript/p$randomStr"
+  randomPath=$(scaffoldRandomString "ts")
 
   mkdir -p "$randomPath"
 
@@ -27,8 +37,7 @@ function new-ts {
 
 # Create testing vite project
 function new-vite {
-  randomStr=$(openssl rand -hex 8 | head -c 8)
-  randomPath="/tmp/$USERNAME/sandbox/vite"
+  randomPath=$(scaffoldRandomString "vite")
   fullPath="$randomPath/p$randomStr"
 
   mkdir -p "$randomPath"

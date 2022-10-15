@@ -1,4 +1,4 @@
-# TODO: create this into a nice cli tool
+# TODO: create this into a nice cli tool which uses tempaltes from a repo/org
 
 function scaffoldRandomString {
   local projectType=$1

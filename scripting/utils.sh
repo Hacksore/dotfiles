@@ -11,7 +11,12 @@ function d {
     "u"|"unlink")
       cd $HOME/dotfiles
       stow -D .
-      echo "Unlined your dotfiles successfully!"
+      echo "Unlink your dotfiles successfully!"
+      ;;
+    "r"|"reload")
+      cd $HOME/dotfiles
+      stow -D . && stow .
+      echo "Reloaded your dotfiles successfully!"
       ;;
     *)
       echo "Command no known!"

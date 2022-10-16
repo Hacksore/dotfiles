@@ -3,7 +3,6 @@ ZSH_THEME="murilasso"
 
 plugins=(
   git
-  dotenv
   sudo
   web-search
   dirhistory

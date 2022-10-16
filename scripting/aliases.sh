@@ -10,3 +10,6 @@ alias v="code"
 
 # reload the shell to source - might be better to use source command instead to save history
 alias s="zsh"
+
+# flush dns
+alias dnsc="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"

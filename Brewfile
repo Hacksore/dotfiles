@@ -30,6 +30,10 @@ brew "zsh"
 brew "zsh-syntax-highlighting"
 brew "zsh-completions"
 brew "jq"
+brew "gh"
+brew "ruby"
+brew "cocoapods"
+brew "rust-analyzer"
 brew "diff-so-fancy"
 cask "1password"
 cask "1password-cli"
@@ -60,6 +64,11 @@ cask "spotify"
 cask "suspicious-package"
 cask "visual-studio-code"
 cask "vlc"
+cask "font-hack-nerd-font"
+cask "snagit"
+cask "stats"
+cask "postman"
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Twitter", id: 1482454543
 mas "Xcode", id: 497799835
+mas "Dato", id: 1470584107

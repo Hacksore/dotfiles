@@ -1,3 +1,6 @@
+# hard reset path
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/sbin"
+
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="murilasso"
 

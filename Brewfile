@@ -35,6 +35,7 @@ brew "ruby"
 brew "cocoapods"
 brew "rust-analyzer"
 brew "diff-so-fancy"
+brew "tree"
 cask "1password"
 cask "1password-cli"
 cask "apparency"
@@ -71,4 +72,5 @@ cask "postman"
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Twitter", id: 1482454543
 mas "Xcode", id: 497799835
-mas "Dato", id: 1470584107
+# mas "Dato", id: 1470584107
+mas "Hidden Bar", id: 1452453066

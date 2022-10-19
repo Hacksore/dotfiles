@@ -1,11 +1,21 @@
 # hard reset path
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/sbin"
 
+# skip auto update for ohmyzsh
+export DISABLE_AUTO_UPDATE=true
+
+# lazy load nvm
+export NVM_LAZY=1
+
+# no auto update brew
+export HOMEBREW_NO_AUTO_UPDATE="0"
+
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="murilasso"
 
 plugins=(
   git
+  nvm
   sudo
   web-search
   dirhistory
@@ -31,19 +41,6 @@ eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 # no auto update brew
 export HOMEBREW_NO_AUTO_UPDATE="0"
 
-# auto complete for brew
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
-fi
-
-# for nvm to work right
-[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 # the fuck is pretty cool
 eval $(thefuck --alias)
 
@@ -66,9 +63,10 @@ export JAVA_HOME="$HOME/homebrew/Cellar/openjdk/19/libexec/openjdk.jdk/Contents/
 # highling
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# competions
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+# auto complete for brew
+if type brew &>/dev/null
+then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
 
   autoload -Uz compinit
   compinit

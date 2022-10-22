@@ -1,6 +1,3 @@
-# hard reset path
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/sbin"
-
 # skip auto update for ohmyzsh
 export DISABLE_AUTO_UPDATE=true
 
@@ -30,10 +27,15 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/usr/local/sbin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 
-# we want things per user
-export HOMEBREW_PREFIX="$HOME/homebrew"
-export HOMEBREW_CELLAR="$HOME/homebrew/Cellar"
-export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --fontdir=$HOME/Library/Fonts"
+# we want things per user (this seems to be rather sketchy according to Mike)
+# but it makes things annoying to have multiple users and brew install on the same machine
+if [[ $(uname) == "Darwin" ]]; then
+  export HOMEBREW_PREFIX="$HOME/homebrew"
+  export HOMEBREW_CELLAR="$HOME/homebrew/Cellar"
+  export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --fontdir=$HOME/Library/Fonts"
+else
+  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew/bin"
+fi
 
 # eval brew
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"

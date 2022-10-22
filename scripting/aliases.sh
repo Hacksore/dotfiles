@@ -13,3 +13,6 @@ alias s="zsh"
 
 # flush dns
 alias dnsc="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+
+# quick code
+alias c="cd $HOME/Code"

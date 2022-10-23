@@ -65,6 +65,9 @@ export JAVA_HOME="$HOME/homebrew/Cellar/openjdk/19/libexec/openjdk.jdk/Contents/
 # highlighting
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# suggestions 
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
 # auto complete for brew
 if type brew &>/dev/null
 then

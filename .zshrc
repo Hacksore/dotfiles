@@ -34,7 +34,7 @@ if [[ $(uname) == "Darwin" ]]; then
   export HOMEBREW_CELLAR="$HOME/homebrew/Cellar"
   export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --fontdir=$HOME/Library/Fonts"
 else
-  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew/bin"
+  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 fi
 
 # eval brew

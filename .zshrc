@@ -62,7 +62,7 @@ export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t
 export PATH="$HOME/homebrew/opt/openjdk/bin:$PATH"
 export JAVA_HOME="$HOME/homebrew/Cellar/openjdk/19/libexec/openjdk.jdk/Contents/Home"
 
-# highling
+# highlighting
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # auto complete for brew

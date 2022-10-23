@@ -17,9 +17,6 @@ plugins=(
   web-search
   dirhistory
   history
-  # you need to do this for it to work
-  # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh

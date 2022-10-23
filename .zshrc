@@ -35,6 +35,10 @@ if [[ $(uname) == "Darwin" ]]; then
   export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --fontdir=$HOME/Library/Fonts"
 else
   export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+
+  # lazy load on linux is scuffed
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
 fi
 
 # eval brew

@@ -63,12 +63,12 @@ export PATH="$HOME/homebrew/opt/openjdk/bin:$PATH"
 export JAVA_HOME="$HOME/homebrew/Cellar/openjdk/19/libexec/openjdk.jdk/Contents/Home"
 
 # highling
-source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # auto complete for brew
 if type brew &>/dev/null
 then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
+  FPATH=${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}
 
   autoload -Uz compinit
   compinit

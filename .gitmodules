@@ -1,4 +1,0 @@
-[submodule "personal"]
-  path = personal
-  branch = master
-  url = git@github.com:Hacksore/dotfiles-personal.git

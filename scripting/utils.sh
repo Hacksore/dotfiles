@@ -34,3 +34,9 @@ function env {
   normalOutput=$(command env)
   echo $normalOutput | awk '$0 !~ /SECRET_|OP_/'
 }
+
+# nice timeing func
+function timezsh {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}

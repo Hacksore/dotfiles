@@ -13,7 +13,7 @@
 [push]
 	default = current
 [core]
-  editor = code --wait
+  editor = nvim
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [help]
 	autocorrect = 10
@@ -36,3 +36,5 @@
 	whitespace = red reverse
 [pull]
 	rebase = true
+[alias]
+	rekt = clean -dfx -e /node_modules

@@ -49,7 +49,8 @@ function gitclean {
     # Check if the directory contains any non-gitignored files/folders
     if [[ -z $(git ls-files --directory "$dir") ]]; then
       # If the directory contains only gitignored files/folders, remove it
-      rm -r "$dir"
+      echo "removing $dir"
+      rm -rf "$dir"
     fi
   done
 }

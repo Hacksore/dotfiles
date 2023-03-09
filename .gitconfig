@@ -37,4 +37,5 @@
 [pull]
 	rebase = true
 [alias]
+	# this will clean ignored packages expect for the top level node_modules 
 	rekt = clean -dfx -e /node_modules

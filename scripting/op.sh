@@ -10,7 +10,9 @@ function sec {
 
   # Check if we have a file in the PWD first and use that
   if [[ -f "$PWD/.env" ]]; then
+    # echo "Sourcing .env file from $PWD/.env"
     op run --env-file=$PWD/.env -- $@
+  # else fall back to root env file which is kinda wonky
   else
     op run --env-file=$HOME/personal/.env -- $@
   fi  

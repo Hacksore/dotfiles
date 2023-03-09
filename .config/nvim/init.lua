@@ -1,7 +1,0 @@
-require("plugins")
-require("options")
-require("lsp")
-require("nvim-cmp")
-require("keymap")
-require("formatting")
-require("misc")

@@ -16,3 +16,6 @@ alias dnsc="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
 # quick code
 alias c="cd $HOME/Code"
+
+# git pretty log
+alias lg="git lg"

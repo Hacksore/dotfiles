@@ -92,3 +92,6 @@ export EXTENDED_HISTORY="1"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="/Users/hacksore/homebrew/opt/make/libexec/gnubin:$PATH"
+
+# clear the suggestion
+bindkey '^ ' autosuggest-clear

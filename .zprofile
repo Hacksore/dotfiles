@@ -6,7 +6,5 @@ function import {
 }
 
 # can use this to import now
-import "op.sh"
 import "utils.sh"
 import "aliases.sh"
-import "scaffolding.sh"

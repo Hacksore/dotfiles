@@ -1,4 +1,4 @@
--- open tele
+-- TODO:
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader><Tab>", builtin.git_files, {})
 

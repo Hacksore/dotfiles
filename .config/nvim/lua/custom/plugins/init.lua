@@ -1,4 +1,0 @@
-return {
-  "navarasu/onedark.nvim",
-
-}

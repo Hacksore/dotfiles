@@ -19,6 +19,11 @@ return {
       "yamlls",
     },
   },
+  mappings = {
+    n = {
+      ["<leader>ff"] = {"<cmd>Telescope git_files<cr>", desc = "Telescope git files" }
+    },
+  },
   plugins = {
     -- why can't I get this working better™?
     {

@@ -6,6 +6,7 @@ return {
       spell = true, -- Enable spell checking 
     },
   },
+  -- LSP to setup
   lsp = {
     servers = {
       "bashls",
@@ -28,6 +29,11 @@ return {
     {
       "MaxMEllon/vim-jsx-pretty",
       lazy = false
+    },
+    -- add discord presence
+    {
+      "andweeb/presence.nvim",
+      lazy = false,
     },
     -- get tree to shows hidden files
     {

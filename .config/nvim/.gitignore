@@ -2,8 +2,8 @@
 colors/*
 docs
 ginit.vim
-lua/user
 plugin
+.DS_Store
 ftplugin
 spell
 .luarc.json

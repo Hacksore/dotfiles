@@ -12,4 +12,11 @@ return {
     version = "latest",
     branch = "main",
   },
+  lsp = {
+    formatting = {
+      format_on_save = {
+        enabled = false, -- disable format on save
+      },
+    },
+  },
 }

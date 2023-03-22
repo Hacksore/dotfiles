@@ -1,9 +1,4 @@
 return {
-  -- why can't I get this working better™?
-  {
-    "tpope/vim-fugitive",
-    cmd = "Git"
-  },
   -- gives me nice highlighting for jsx
   {
     "MaxMEllon/vim-jsx-pretty",

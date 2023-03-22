@@ -52,7 +52,6 @@ brew "mitmproxy"
 brew "mkcert"
 brew "neofetch"
 brew "neovim", args: ["HEAD"]
-brew "node", link: false
 brew "nvm"
 brew "openjdk@11"
 brew "openssl@3"
@@ -75,6 +74,7 @@ brew "tmux"
 brew "tree"
 brew "watch"
 brew "wget"
+brew "yaml-language-server"
 brew "zsh"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
@@ -133,7 +133,6 @@ mas "1Password for Safari", id: 1569813296
 mas "Dato", id: 1470584107
 mas "Final Cut Pro", id: 424389933
 mas "Hidden Bar", id: 1452453066
-mas "HP Smart", id: 1474276998
 mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Xcode", id: 497799835

@@ -96,3 +96,5 @@ export PATH="/Users/hacksore/homebrew/opt/make/libexec/gnubin:$PATH"
 # clear the suggestion
 bindkey '^ ' autosuggest-clear
 
+test="1"
+

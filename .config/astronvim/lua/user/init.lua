@@ -2,7 +2,6 @@ return {
   -- any custom config
   options = {
     opt = {
-      showtabline = 0, -- don't show tabline
       spell = true, -- Enable spell checking 
     },
   },
@@ -13,6 +12,10 @@ return {
     branch = "main",
   },
   lsp = {
+    servers = {
+      "dockerls",
+      "yamlls"
+    },
     formatting = {
       format_on_save = {
         enabled = false, -- disable format on save

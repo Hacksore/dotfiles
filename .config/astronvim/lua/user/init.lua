@@ -14,7 +14,8 @@ return {
   lsp = {
     servers = {
       "dockerls",
-      "yamlls"
+      "yamlls",
+      "gopls"
     },
     formatting = {
       format_on_save = {

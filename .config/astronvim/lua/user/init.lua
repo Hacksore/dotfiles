@@ -3,6 +3,7 @@ return {
   options = {
     opt = {
       spell = true, -- Enable spell checking 
+      title = true,
     },
   },
   updater = {

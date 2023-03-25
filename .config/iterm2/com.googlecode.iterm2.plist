@@ -116,6 +116,8 @@
 			<true/>
 			<key>ASCII Ligatures</key>
 			<true/>
+			<key>Allow Title Setting</key>
+			<true/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -1085,6 +1087,8 @@
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
+			<key>Title Components</key>
+			<integer>6</integer>
 			<key>Transparency</key>
 			<integer>0</integer>
 			<key>Triggers</key>
@@ -1148,6 +1152,8 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>

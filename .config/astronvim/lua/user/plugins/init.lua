@@ -2,12 +2,12 @@ return {
   -- gives me nice highlighting for jsx
   {
     "MaxMEllon/vim-jsx-pretty",
-    lazy = false
+    event = "User Astrofile"
   },
   -- add discord presence
   {
     "andweeb/presence.nvim",
-    lazy = false,
+    event = "User Astrofile"
   },
   -- get tree to shows hidden files
   {
@@ -16,17 +16,21 @@ return {
     opts = {
       filesystem = {
         filtered_items = {
-          visible = true,
           hide_dotfiles = false,
           hide_by_name = {
-            ".git"
+            ".git",
+            ".DS_Store"
           },
         },
       },
     },
   },
   {
+    "tpope/vim-surround",
+    event = "User Astrofile"
+  },
+  {
     "github/copilot.vim",
-    lazy = false
+    event = "User Astrofile"
   }
 }

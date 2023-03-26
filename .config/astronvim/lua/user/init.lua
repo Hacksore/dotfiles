@@ -1,4 +1,22 @@
 return {
+	polish = function()
+		vim.api.nvim_create_augroup("titlefix", { clear = true })
+		vim.api.nvim_create_autocmd("BufEnter", {
+			desc = "Test to mutate the title",
+			group = "titlefix",
+			callback = function(options)
+				local titleString = vim.opt.titlestring:get()
+				local buffNumber = options.buf
+				local fileType = vim.bo[buffNumber].filetype
+
+				if fileType == "neo-tree" then
+					vim.opt.titlestring = "[In Tree]"
+				else
+					vim.opt.titlestring = "%f"
+				end
+			end,
+		})
+	end,
 	-- any custom config
 	options = {
 		opt = {
@@ -10,7 +28,7 @@ return {
 		channel = "stable",
 		remote = "origin",
 		version = "latest",
-		branch = "main",
+		brnch = "main",
 	},
 	lsp = {
 		servers = {

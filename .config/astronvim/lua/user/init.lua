@@ -38,7 +38,6 @@ return {
 		-- remove tab/shift-tab mappings from cmp
 		config.mapping["<Tab>"] = nil
 		config.mapping["<S-Tab>"] = nil
-		vim.tbl_get()
 		return config
 	end,
 	lsp = {

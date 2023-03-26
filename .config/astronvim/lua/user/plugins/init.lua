@@ -1,12 +1,9 @@
+-- TODO: fix copi
+
 return {
 	-- gives me nice highlighting for jsx
 	{
 		"MaxMEllon/vim-jsx-pretty",
-		event = "User Astrofile",
-	},
-	-- fix comments in jsx?
-	{
-		"nvim-ts-context-commentstring",
 		event = "User Astrofile",
 	},
 	-- add a nice tui thing for commands
@@ -100,8 +97,6 @@ return {
 				status.component.treesitter(),
 				status.component.nav(),
 			}
-
-			-- return the final configuration table
 			return opts
 		end,
 	},

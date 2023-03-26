@@ -12,7 +12,7 @@ return {
 	-- add a nice tui thing for commands
 	{
 		"folke/noice.nvim",
-		lazy = false,
+		event = "User Astrofile",
 		config = function()
 			require("noice").setup({
 				lsp = {
@@ -59,8 +59,27 @@ return {
 	},
 	-- enable github copilot
 	{
-		"github/copilot.vim",
-		event = "User Astrofile",
+		"zbirenbaum/copilot.lua",
+		event = "InsertEnter",
+		config = function()
+			vim.defer_fn(function()
+				require("copilot").setup({
+					filetypes = {
+						javascript = true, -- allow specific filetype
+						typescript = true, -- allow specific filetype
+						["*"] = false, -- disable for all other filetypes and ignore default `filetypes`
+					},
+				})
+			end, 100)
+		end,
+	},
+	-- give nice auto complete
+	{
+		"zbirenbaum/copilot-cmp",
+		after = "copilot",
+		config = function()
+			require("copilot_cmp").setup({})
+		end,
 	},
 	-- configure the status line to include the mode as well
 	{

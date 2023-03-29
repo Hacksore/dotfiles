@@ -1,5 +1,6 @@
 return {
 	polish = function()
+		-- this is kinda scuffed tbh
 		local titleFix = vim.api.nvim_create_augroup("titlefix", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
 			desc = "Test to mutate the title",

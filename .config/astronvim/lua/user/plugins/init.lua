@@ -1,4 +1,5 @@
 -- TODO: fix copi
+-- TODO: fix spell checker
 
 return {
 	-- gives me nice highlighting for jsx
@@ -23,12 +24,56 @@ return {
 			})
 		end,
 	},
+	{
+		"laytan/cloak.nvim",
+		event = "user astrofile",
+		config = function()
+			require("cloak").setup({
+				enabled = true,
+				cloak_character = "*",
+				-- The applied highlight group (colors) on the cloaking, see `:h highlight`.
+				highlight_group = "Comment",
+				patterns = {
+					{
+						-- Match any file starting with ".env".
+						-- This can be a table to match multiple file patterns.
+						file_pattern = {
+							".env*",
+							"wrangler.toml",
+							".dev.vars",
+						},
+						-- Match an equals sign and any character after it.
+						-- This can also be a table of patterns to cloak,
+						-- example: cloak_pattern = { ":.+", "-.+" } for yaml files.
+						cloak_pattern = "=.+",
+					},
+				},
+			})
+		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		event = "User Astrofile",
+	},
+	-- This allows for JSX comments 
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		event = "user astrofile",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				context_commentstring = {
+					enable = true,
+					enable_autocmd = false,
+				},
+			})
+		end,
+	},
 	-- add discord presence
 	{
 		"andweeb/presence.nvim",
 		event = "User Astrofile",
 	},
-	-- get tree to shows hidden files
+	-- Config the tree to shows hidden files
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		cmd = "Neotree",
@@ -44,12 +89,6 @@ return {
 			},
 		},
 	},
-	-- make comments better?
-	{
-		"tpope/vim-commentary",
-		event = "User Astrofile",
-	},
-	-- vim surround is amazing for cutting in/around chars
 	{
 		"tpope/vim-surround",
 		event = "User Astrofile",

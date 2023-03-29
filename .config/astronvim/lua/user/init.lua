@@ -1,9 +1,16 @@
 return {
 	polish = function()
-		vim.api.nvim_create_augroup("titlefix", { clear = true })
+		-- fix comment plugin
+		require("nvim-treesitter.configs").setup({
+			context_commentstring = {
+				enable = true,
+			},
+		})
+
+		local titleFix = vim.api.nvim_create_augroup("titlefix", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
 			desc = "Test to mutate the title",
-			group = "titlefix",
+			group = titleFix,
 			callback = function(options)
 				local buffNumber = options.buf
 				local fileType = vim.bo[buffNumber].filetype
@@ -24,8 +31,9 @@ return {
 			copilot_tab_fallback = "",
 		},
 		opt = {
-			spell = true, -- Enable spell checking
-			title = true, -- Allow nvim to update the term title
+			spell = true,  -- Enable spell checking
+			swapfile = false, -- Disble swap files
+			title = true,  -- Allow nvim to update the term title
 		},
 	},
 	updater = {
@@ -34,12 +42,6 @@ return {
 		version = "latest",
 		brnch = "main",
 	},
-	cmp = function(config)
-		-- remove tab/shift-tab mappings from cmp
-		config.mapping["<Tab>"] = nil
-		config.mapping["<S-Tab>"] = nil
-		return config
-	end,
 	lsp = {
 		servers = {
 			"tsserver",

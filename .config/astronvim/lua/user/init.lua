@@ -1,12 +1,5 @@
 return {
 	polish = function()
-		-- fix comment plugin
-		require("nvim-treesitter.configs").setup({
-			context_commentstring = {
-				enable = true,
-			},
-		})
-
 		local titleFix = vim.api.nvim_create_augroup("titlefix", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
 			desc = "Test to mutate the title",
@@ -32,7 +25,7 @@ return {
 		},
 		opt = {
 			spell = true,  -- Enable spell checking
-			swapfile = false, -- Disble swap files
+			swapfile = false, -- Disable swap files
 			title = true,  -- Allow nvim to update the term title
 		},
 	},

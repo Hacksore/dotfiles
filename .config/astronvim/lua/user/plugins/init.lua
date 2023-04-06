@@ -54,5 +54,6 @@ return {
 	{
 		"nvim-notify",
 		opts = { stages = "fade", render = "compact" },
+		enabled = false,
 	},
 }

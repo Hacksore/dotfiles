@@ -1,5 +1,5 @@
 return {
-	-- enable github copilot
+	-- enable github copilot tab completion with a community plugin
 	{ import = "astrocommunity.completion.copilot-lua-cmp" },
 	-- TODO: can this work to get autocomplete for copilot working in completion
 	{

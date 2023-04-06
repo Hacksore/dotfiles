@@ -1,7 +1,7 @@
--- TODO: fix copi
 -- TODO: fix spell checker
 
 return {
+	{ "AstroNvim/astrocommunity" },
 	-- gives me nice highlighting for jsx
 	{
 		"MaxMEllon/vim-jsx-pretty",
@@ -90,33 +90,10 @@ return {
 			},
 		},
 	},
+	-- this gives nice motions around things
 	{
 		"tpope/vim-surround",
 		event = "User Astrofile",
-	},
-	-- enable github copilot
-	{
-		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
-		config = function()
-			vim.defer_fn(function()
-				require("copilot").setup({
-					filetypes = {
-						javascript = true, -- allow specific filetype
-						typescript = true, -- allow specific filetype
-						["*"] = false, -- disable for all other filetypes and ignore default `filetypes`
-					},
-				})
-			end, 100)
-		end,
-	},
-	-- give nice auto complete
-	{
-		"zbirenbaum/copilot-cmp",
-		after = "copilot",
-		config = function()
-			require("copilot_cmp").setup({})
-		end,
 	},
 	-- configure the status line to include the mode as well
 	{
@@ -145,27 +122,4 @@ return {
 		event = "User Astrofile",
 		opts = { stages = "fade", render = "compact" },
 	},
-	-- TODO: do i need to do this?
-	-- {
-	-- 	"jay-babu/mason-null-ls.nvim",
-	-- 	config = function(_, opts)
-	-- 		local mason_null_ls = require("mason-null-ls")
-	-- 		local null_ls = require("null-ls")
-	--
-	-- 		mason_null_ls.setup(opts) -- run setup
-	-- 		mason_null_ls.setup_handlers({
-	-- 			-- setup custom handlers
-	-- 			prettier = function()
-	-- 				null_ls.register(null_ls.builtins.formatting.prettier.with({
-	-- 					condition = function(utils)
-	-- 						return utils.root_has_file("package.json")
-	-- 								or utils.root_has_file(".prettierrc")
-	-- 								or utils.root_has_file(".prettierrc.json")
-	-- 								or utils.root_has_file(".prettierrc.js")
-	-- 					end,
-	-- 				}))
-	-- 			end,
-	-- 		})
-	-- 	end,
-	-- },
 }

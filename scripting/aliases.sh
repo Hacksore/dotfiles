@@ -19,3 +19,5 @@ alias c="cd $HOME/Code"
 
 # git pretty log
 alias lg="git lg"
+
+alias os="cd $HOME/Code/opensource"

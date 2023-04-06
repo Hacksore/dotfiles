@@ -26,7 +26,7 @@ return {
 	},
 	{
 		"laytan/cloak.nvim",
-		event = "user astrofile",
+		event = "User Astrofile",
 		config = function()
 			require("cloak").setup({
 				enabled = true,
@@ -51,11 +51,12 @@ return {
 			})
 		end,
 	},
+	-- vim doge for nice JSDocs
 	{
-		"numToStr/Comment.nvim",
+		"kkoomen/vim-doge",
 		event = "User Astrofile",
 	},
-	-- This allows for JSX comments 
+	-- This allows for JSX comments
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		event = "user astrofile",
@@ -139,4 +140,32 @@ return {
 			return opts
 		end,
 	},
+	{
+		"nvim-notify",
+		event = "User Astrofile",
+		opts = { stages = "fade", render = "compact" },
+	},
+	-- TODO: do i need to do this?
+	-- {
+	-- 	"jay-babu/mason-null-ls.nvim",
+	-- 	config = function(_, opts)
+	-- 		local mason_null_ls = require("mason-null-ls")
+	-- 		local null_ls = require("null-ls")
+	--
+	-- 		mason_null_ls.setup(opts) -- run setup
+	-- 		mason_null_ls.setup_handlers({
+	-- 			-- setup custom handlers
+	-- 			prettier = function()
+	-- 				null_ls.register(null_ls.builtins.formatting.prettier.with({
+	-- 					condition = function(utils)
+	-- 						return utils.root_has_file("package.json")
+	-- 								or utils.root_has_file(".prettierrc")
+	-- 								or utils.root_has_file(".prettierrc.json")
+	-- 								or utils.root_has_file(".prettierrc.js")
+	-- 					end,
+	-- 				}))
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 }

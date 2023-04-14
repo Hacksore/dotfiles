@@ -56,4 +56,21 @@ return {
 		opts = { stages = "fade", render = "compact" },
 		enabled = false,
 	},
+	-- fix bad perf with treesitter and large files
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = "User Astrofile",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				highlight = {
+					enable = true,
+					disable = function(_, bufnr)
+						-- neovim get size of buffer
+						local file_size = vim.fn.getfsize(vim.fn.bufname(bufnr))
+						return file_size > 5000
+					end,
+				},
+			})
+		end,
+	},
 }

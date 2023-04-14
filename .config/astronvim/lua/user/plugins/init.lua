@@ -64,10 +64,12 @@ return {
 			require("nvim-treesitter.configs").setup({
 				highlight = {
 					enable = true,
-					disable = function(_, bufnr)
-						-- neovim get size of buffer
-						local file_size = vim.fn.getfsize(vim.fn.bufname(bufnr))
-						return file_size > 5000
+					disable = function(_, buf)
+						local max_filesize = 5000
+						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+						if ok and stats and stats.size > max_filesize then
+							return true
+						end
 					end,
 				},
 			})

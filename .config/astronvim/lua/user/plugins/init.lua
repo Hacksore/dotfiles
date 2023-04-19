@@ -1,5 +1,4 @@
 return {
-	{ "AstroNvim/astrocommunity" },
 	-- gives me nice highlighting for jsx
 	{
 		"MaxMEllon/vim-jsx-pretty",

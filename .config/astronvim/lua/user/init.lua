@@ -51,6 +51,7 @@ return {
 		brnch = "main",
 	},
 	lsp = {
+		-- TODO: i need to make this load all the mason and treesitter goodies so I don't have
 		servers = {
 			"tsserver",
 			"cssls",

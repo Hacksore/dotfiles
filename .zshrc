@@ -95,3 +95,7 @@ export PATH="/Users/hacksore/homebrew/opt/make/libexec/gnubin:$PATH"
 
 # clear the suggestion
 bindkey '^ ' autosuggest-clear
+
+# op cli plugins
+source "$HOME/.config/op/plugins.sh"
+

@@ -10,7 +10,9 @@ return {
 					auto_trigger = true,
 					debounce = 150,
 					keymap = {
+						-- Nice key to accept so it wont interfere with autocomplete
 						accept = "<C-j>",
+						-- Nice to dismiss it
 						dismiss = "<C-k>",
 					},
 				},

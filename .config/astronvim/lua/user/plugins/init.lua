@@ -56,6 +56,8 @@ return {
 		enabled = false,
 	},
 	-- fix bad perf with treesitter and large files
+	-- TODO: this can be removed with the latet release of astro
+	-- as it was patched from the issue I opened as a nice sensible default
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "User Astrofile",

@@ -55,9 +55,15 @@ return {
 		opts = { stages = "fade", render = "compact" },
 		enabled = false,
 	},
+	-- add plugin for todo highlighting
+	{
+		"folke/todo-comments.nvim",
+		event = "User Astrofile",
+		config = function()
+			require("todo-comments").setup({})
+		end,
+	},
 	-- fix bad perf with treesitter and large files
-	-- TODO: this can be removed with the latet release of astro
-	-- as it was patched from the issue I opened as a nice sensible default
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "User Astrofile",
@@ -66,7 +72,7 @@ return {
 				highlight = {
 					enable = true,
 					disable = function(_, buf)
-						local max_filesize = 5000
+						local max_filesize = 1000
 						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 						if ok and stats and stats.size > max_filesize then
 							return true

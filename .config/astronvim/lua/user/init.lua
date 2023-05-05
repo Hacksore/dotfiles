@@ -41,7 +41,8 @@ return {
 		opt = {
 			spell = true, -- Enable spell checking
 			swapfile = false, -- Disable swap files
-			title = true, -- Allow nvim to update the term title
+			title = true, -- Allow nvim to update the term titlerelativenumber
+			relativenumber = false, -- Diable relative line numbers
 		},
 	},
 	updater = {

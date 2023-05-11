@@ -56,7 +56,6 @@ return {
 		enabled = false,
 	},
 	-- add plugin for todo highlighting
-	-- TODO: testing this thing
 	{
 		"folke/todo-comments.nvim",
 		event = "User Astrofile",

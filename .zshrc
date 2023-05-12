@@ -8,11 +8,13 @@ ZSH_THEME="murilasso"
 plugins=(
   git
   nvm
-  sudo
-  web-search
-  dirhistory
   history
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
+
+# load brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # load zsh
 source $ZSH/oh-my-zsh.sh
@@ -23,46 +25,10 @@ source $HOME/.fzf.zsh
 # profile
 source $HOME/.zprofile
 
-# auto complete for brew
-if type brew &>/dev/null
-then
-  FPATH=${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}
-
-  autoload -Uz compinit
-  compinit
-fi
-
-# we want things per user (this seems to be rather sketchy according to Mike)
-# but it makes things annoying to have multiple users and brew install on the same machine
-if [[ $(uname) == "Darwin" ]]; then
-  export HOMEBREW_PREFIX="$HOME/homebrew"
-  export HOMEBREW_CELLAR="$HOME/homebrew/Cellar"
-  export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --fontdir=$HOME/Library/Fonts"
-else
-  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-fi
-
 # load nvm
-[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
-
-# eval brew
-eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-
-# highlighting
-source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# suggestions 
-source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-# load the fuck
-eval $(thefuck --alias)
-
-# load exported vars last
-# skip auto update for ohmyzsh
-export DISABLE_AUTO_UPDATE=true
-
-export PATH="/usr/local/sbin:$PATH"
 export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # no auto update brew
 export HOMEBREW_NO_AUTO_UPDATE="1"
@@ -91,9 +57,7 @@ export EXTENDED_HISTORY="1"
 # load fzf for fuzzy
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="/Users/hacksore/homebrew/opt/make/libexec/gnubin:$PATH"
-
-# clear the suggestion
+# clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
 
 # op cli plugins

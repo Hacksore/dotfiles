@@ -7,9 +7,10 @@ return {
 	-- add a nice tui thing for commands
 	{
 		"folke/noice.nvim",
-		event = "User Astrofile",
+		event = "VeryLazy",
 		config = function()
 			require("noice").setup({
+				messages = { view_search = false },
 				views = {
 					cmdline_popup = {
 						position = {
@@ -17,6 +18,12 @@ return {
 							col = "50%",
 						},
 					},
+				},
+				routes = {
+					{ filter = { event = "msg_show", find = "%d+L,%s%d+B" },        opts = { skip = true } }, -- skip save notifications
+					{ filter = { event = "msg_show", find = "^%d+ more lines$" },   opts = { skip = true } }, -- skip paste notifications
+					{ filter = { event = "msg_show", find = "^%d+ fewer lines$" },  opts = { skip = true } }, -- skip delete notifications
+					{ filter = { event = "msg_show", find = "^%d+ lines yanked$" }, opts = { skip = true } }, -- skip yank notifications
 				},
 				lsp = {
 					hover = {

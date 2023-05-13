@@ -10,6 +10,14 @@ return {
 		event = "User Astrofile",
 		config = function()
 			require("noice").setup({
+				views = {
+					cmdline_popup = {
+						position = {
+							row = 4,
+							col = "50%",
+						},
+					},
+				},
 				lsp = {
 					hover = {
 						enabled = false,

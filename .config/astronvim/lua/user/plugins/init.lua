@@ -20,9 +20,9 @@ return {
 					},
 				},
 				routes = {
-					{ filter = { event = "msg_show", find = "%d+L,%s%d+B" },        opts = { skip = true } }, -- skip save notifications
-					{ filter = { event = "msg_show", find = "^%d+ more lines$" },   opts = { skip = true } }, -- skip paste notifications
-					{ filter = { event = "msg_show", find = "^%d+ fewer lines$" },  opts = { skip = true } }, -- skip delete notifications
+					{ filter = { event = "msg_show", find = "%d+L,%s%d+B" }, opts = { skip = true } }, -- skip save notifications
+					{ filter = { event = "msg_show", find = "^%d+ more lines$" }, opts = { skip = true } }, -- skip paste notifications
+					{ filter = { event = "msg_show", find = "^%d+ fewer lines$" }, opts = { skip = true } }, -- skip delete notifications
 					{ filter = { event = "msg_show", find = "^%d+ lines yanked$" }, opts = { skip = true } }, -- skip yank notifications
 				},
 				lsp = {
@@ -77,5 +77,12 @@ return {
 		config = function()
 			require("todo-comments").setup({})
 		end,
+	},
+	"sigmasd/deno-nvim", -- add lsp plugin
+	{
+		"williamboman/mason-lspconfig.nvim",
+		opts = {
+			ensure_installed = { "denols" }, -- automatically install lsp
+		},
 	},
 }

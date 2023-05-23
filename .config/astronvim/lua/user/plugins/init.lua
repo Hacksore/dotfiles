@@ -77,18 +77,5 @@ return {
 		config = function()
 			require("todo-comments").setup({})
 		end,
-	},
-	"sigmasd/deno-nvim", -- add lsp plugin
-	{
-		"williamboman/mason-lspconfig.nvim",
-		opts = {
-			ensure_installed = { "denols" }, -- automatically install lsp
-		},
-	},
-	-- {
-	-- 	"jay-babu/mason-nvim-dap.nvim",
-	-- 	opts = {
-	-- 		ensure_installed = { "js" },
-	-- 	},
-	-- },
+	}
 }

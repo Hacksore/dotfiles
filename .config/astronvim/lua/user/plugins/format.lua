@@ -4,7 +4,8 @@ return {
     handlers = {
       -- for prettier
       prettier = function()
-        require("null-ls").register(require("null-ls").builtins.formatting.prettier.with({
+        local nullLs = require("null-ls")
+        nullLs.register(nullLs.builtins.formatting.prettier.with({
           condition = function(utils)
             return utils.root_has_file("package.json")
                 or utils.root_has_file(".prettierrc")

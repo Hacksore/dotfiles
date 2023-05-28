@@ -57,7 +57,7 @@ return {
 	-- add discord presence
 	{
 		"andweeb/presence.nvim",
-		event = "User Astrofile",
+		event = "VeryLazy",
 	},
 	-- this gives nice motions around things
 	{

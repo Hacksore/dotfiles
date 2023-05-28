@@ -3,6 +3,7 @@ return {
 	dependencies = { "zbirenbaum/copilot.lua" },
 	opts = function(_, opts)
 		local cmp, copilot = require("cmp"), require("copilot.suggestion")
+
 		local snip_status_ok, luasnip = pcall(require, "luasnip")
 		if not snip_status_ok then
 			return
@@ -14,10 +15,9 @@ return {
 		if not opts.mapping then
 			opts.mapping = {}
 		end
+
 		opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-			if copilot.is_visible() then
-				copilot.accept()
-			elseif cmp.visible() then
+			if cmp.visible() then
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
@@ -52,12 +52,6 @@ return {
 			end
 		end)
 
-		opts.mapping["<C-down>"] = cmp.mapping(function()
-			if copilot.is_visible() then
-				copilot.accept_line()
-			end
-		end)
-
 		opts.mapping["<C-j>"] = cmp.mapping(function()
 			if copilot.is_visible() then
 				copilot.accept_line()
@@ -69,6 +63,11 @@ return {
 				copilot.dismiss()
 			end
 		end)
+
+		-- make the first item selected by default
+		opts.completion = {
+			completeopt = "menu,menuone,noinsert"
+		}
 
 		return opts
 	end,

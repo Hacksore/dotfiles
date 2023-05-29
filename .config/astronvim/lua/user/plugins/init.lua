@@ -9,6 +9,7 @@ return {
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		config = function()
+			-- TODO: should this be merging the table too?
 			require("noice").setup({
 				messages = { view_search = false },
 				views = {
@@ -37,14 +38,15 @@ return {
 		end,
 	},
 	-- vim doge for nice JSDocs
+	-- TODO: i need to learn how to use this
 	{
 		"kkoomen/vim-doge",
-		event = "User Astrofile",
+		event = "VeryLazy",
 	},
 	-- this allows for JSX comments
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		event = "User Astrofile",
+		event = "VeryLazy",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				context_commentstring = {
@@ -62,18 +64,17 @@ return {
 	-- this gives nice motions around things
 	{
 		"tpope/vim-surround",
-		event = "User Astrofile",
+		event = "VeryLazy",
 	},
-	-- disable the movement and make the toasts compact
+	-- disable this plug 
 	{
 		"nvim-notify",
-		opts = { stages = "fade", render = "compact" },
 		enabled = false,
 	},
 	-- add plugin for todo highlighting
 	{
 		"folke/todo-comments.nvim",
-		event = "User Astrofile",
+		event = "VeryLazy",
 		config = function()
 			require("todo-comments").setup({})
 		end,
@@ -82,7 +83,7 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		opts = function(_, opts)
-			require("astronvim.utils").extend_tbl(opts, {
+			return require("astronvim.utils").extend_tbl(opts, {
 				filesystem = {
 					filtered_items = {
 						visible = true,

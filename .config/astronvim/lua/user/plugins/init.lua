@@ -81,17 +81,17 @@ return {
 	-- tweaks to neo-tree
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		config = function()
-			require("neo-tree").setup({
+		opts = function(_, opts)
+			require("astronvim.utils").extend_tbl(opts, {
 				filesystem = {
 					filtered_items = {
 						visible = true,
 						hide_dotfiles = false,
 						hide_gitignored = true,
 					},
-					source_selector = {
-						winbar = false,
-					},
+				},
+				source_selector = {
+					winbar = false,
 				},
 			})
 		end,

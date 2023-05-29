@@ -94,6 +94,18 @@ return {
 					protocol = "inspector",
 				},
 				{
+					type = "pwa-node",
+					name = "debug: npm start",
+					request = "launch",
+					program = "npm",
+					args = { "start" },
+					cwd = "${workspaceFolder}",
+					runtimeArgs = { "--inspect" },
+					skipFiles = { "${workspaceFolder}/node_modules/**/*.js", "<node_internals>/**/*.js" },
+					console = "integratedTerminal",
+					protocol = "inspector",
+				},
+				{
 					name = "Next.Js: debug client",
 					type = "chrome",
 					request = "launch",

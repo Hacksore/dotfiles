@@ -10,9 +10,9 @@ return {
 	},
 	options = {
 		opt = {
-			spell = true,        -- Enable spell checking
-			swapfile = false,    -- Disable swap files
-			title = true,        -- Allow nvim to update the term titlerelativenumber
+			spell = true, -- Enable spell checking
+			swapfile = false, -- Disable swap files
+			title = true, -- Allow nvim to update the term titlerelativenumber
 			relativenumber = false, -- Disable relative line numbers
 		},
 	},
@@ -22,5 +22,8 @@ return {
 				enabled = false, -- disable format on save
 			},
 		},
+	},
+	updater = {
+		channel = "nightly",
 	},
 }

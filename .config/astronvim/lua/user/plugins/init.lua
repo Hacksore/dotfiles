@@ -79,22 +79,12 @@ return {
 			require("todo-comments").setup({})
 		end,
 	},
-	-- tweaks to neo-tree
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		opts = function(_, opts)
-			return require("astronvim.utils").extend_tbl(opts, {
-				filesystem = {
-					filtered_items = {
-						visible = true,
-						hide_dotfiles = false,
-						hide_gitignored = true,
-					},
-				},
-				source_selector = {
-					winbar = false,
-				},
-			})
-		end,
-	},
+	-- -- tweaks to neo-tree
+	-- {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	opts = function(_, opts)
+	-- 		return require("astronvim.utils").extend_tbl(opts, {
+	-- 		})
+	-- 	end,
+	-- },
 }

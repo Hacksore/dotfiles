@@ -24,6 +24,6 @@ return {
 		},
 	},
 	updater = {
-		channel = "nightly",
+		channel = "stable",
 	},
 }

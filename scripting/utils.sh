@@ -54,3 +54,7 @@ function gitclean {
     fi
   done
 }
+
+# Bind a key to invoke the custom function
+bindkey -s ^f "tmux-sessionizer\n"
+

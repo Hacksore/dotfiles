@@ -63,3 +63,5 @@ bindkey '^ ' autosuggest-clear
 # op cli plugins
 source "$HOME/.config/op/plugins.sh"
 
+# add bins to path
+export PATH="$HOME/bin:$PATH"

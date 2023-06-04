@@ -1,27 +1,26 @@
--- Why is this not built into nvim lol
-function find_index(value, tbl)
-	for i, v in ipairs(tbl) do
-		if v == value then
-			return i
-		end
-	end
-	return nil
-end
+local utils = require("user.utils")
 
 -- TODO: it's a bit scuffed but it works
 local function switch_tmux_session(direction)
 	local current_session = vim.fn.systemlist("tmux display-message -p '#S'")[1]
 	local sessions = vim.fn.systemlist("tmux list-sessions -F '#S'")
 
-	local current_session_index = find_index(current_session, sessions)
+	local current_session_index = utils.find_index(current_session, sessions)
 	local next_session_index = current_session_index + direction
+
+	-- handle overflow
 	if next_session_index > #sessions then
 		next_session_index = 1
 	end
 
+	-- handle underflow
+	if next_session_index < 1 then
+		next_session_index = #sessions
+	end
+
 	local new_tmux_index = sessions[next_session_index]
-	-- switch to the index of the session
-	vim.fn.system("tmux switch-client -t " .. new_tmux_index)
+	local command_to_switch = string.format("tmux switch-client -t %s", new_tmux_index)
+	vim.fn.system(command_to_switch)
 end
 
 return {
@@ -41,6 +40,11 @@ return {
 				switch_tmux_session(-1)
 			end,
 			desc = "Switch tmux session back",
+		},
+		-- unbind control+f
+		["<C-f>"] = {
+			function()
+			end,
 		},
 	},
 }

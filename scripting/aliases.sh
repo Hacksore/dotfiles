@@ -23,3 +23,5 @@ alias c="cd $HOME/Code"
 alias lg="git lg"
 
 alias os="cd $HOME/Code/opensource"
+
+alias ts="tmux-sessionizer"

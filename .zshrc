@@ -57,11 +57,25 @@ export EXTENDED_HISTORY="1"
 # load fzf for fuzzy
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# clear the suggestion with ctrl + space
-bindkey '^ ' autosuggest-clear
-
 # op cli plugins
 source "$HOME/.config/op/plugins.sh"
 
 # add bins to path
 export PATH="$HOME/bin:$PATH"
+
+# clear the suggestion with ctrl + space
+bindkey '^ ' autosuggest-clear
+
+# allow switching tmux windows with ctrl + p and ctrl + n
+function switch_tmux_window_prev {
+  tmux switchc -t $(tmux lsw -F '#{window_id}') -p
+}
+
+function switch_tmux_window_next {
+  tmux switchc -t $(tmux lsw -F '#{window_id}') -n
+}
+
+zle -N switch_tmux_window_prev
+zle -N switch_tmux_window_next
+bindkey '^p' switch_tmux_window_prev
+bindkey '^n' switch_tmux_window_next

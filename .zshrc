@@ -66,13 +66,23 @@ export PATH="$HOME/bin:$PATH"
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
 
-# allow switching tmux windows with ctrl + p and ctrl + n
+# allow switching tmux sessions with ctrl + p and ctrl + n
 function switch_tmux_window_prev {
-  tmux switchc -t $(tmux lsw -F '#{window_id}') -p
+  if [[ -n "$TMUX" ]]; then
+    # Switch to the next session
+    tmux switch-client -n
+  else
+    echo "Not inside a tmux session."
+  fi
 }
 
 function switch_tmux_window_next {
-  tmux switchc -t $(tmux lsw -F '#{window_id}') -n
+ if [[ -n "$TMUX" ]]; then
+    # Switch to the next session
+    tmux switch-client -n
+  else
+    echo "Not inside a tmux session."
+  fi
 }
 
 zle -N switch_tmux_window_prev

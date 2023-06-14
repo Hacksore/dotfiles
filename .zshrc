@@ -77,7 +77,7 @@ function switch_tmux_window_prev {
 }
 
 function switch_tmux_window_next {
- if [[ -n "$TMUX" ]]; then
+  if [[ -n "$TMUX" ]]; then
     # Switch to the next session
     tmux switch-client -n
   else

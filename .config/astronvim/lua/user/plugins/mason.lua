@@ -22,6 +22,7 @@ return {
       ensure_installed = {
         "eslint_d",
         "prettier",
+        "beautysh"
       },
     },
   }

@@ -21,6 +21,17 @@ return {
 					end,
 				}))
 			end,
+			-- beautysh
+			beautysh = function()
+				local nullLs = require("null-ls")
+				nullLs.register(nullLs.builtins.formatting.beautysh.with({
+					args = {
+						"--indent-size",
+						"2",
+						"$FILENAME",
+					},
+				}))
+			end,
 		},
 	},
 }

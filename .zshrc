@@ -89,3 +89,18 @@ zle -N switch_tmux_window_prev
 zle -N switch_tmux_window_next
 bindkey '^p' switch_tmux_window_prev
 bindkey '^n' switch_tmux_window_next
+
+# bind control-t to make a tmux session and switch to it
+function new_tmux_session {
+  if [[ -n "$TMUX" ]]; then
+    # create new tmux detached session then switch to it
+    sessionUnixDateName="Untitled ($(date +%s))"
+    tmux new-session -d -s "$sessionUnixDateName"
+    tmux switch-client -t "$sessionUnixDateName"
+  else
+    echo "Not inside a tmux session."
+  fi
+}
+
+zle -N new_tmux_session
+bindkey '^t' new_tmux_session

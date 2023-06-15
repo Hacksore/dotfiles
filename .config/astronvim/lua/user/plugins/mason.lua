@@ -11,7 +11,7 @@ return {
         "jsonls",
         "rust_analyzer",
         "tsserver",
-        "voler",
+        "vuels",
         "yamlls",
       },
     },

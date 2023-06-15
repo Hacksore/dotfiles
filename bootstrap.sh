@@ -14,11 +14,8 @@ if [ -d "$HOME/homebrew" ]; then
   brew update --force --quiet
   chmod -R go-w "$(brew --prefix)/share/zsh"
 
-  # install ansible and stow for configuration
-  brew install ansible stow
-
-  # setup the brew mod
-  ansible-galaxy collection install community.general
+  # install stow for configuration
+  brew install stow
 
   # brew just installed let's run our ansible stuff
   bash "$HOME/dotfiles/ansible/run.sh"

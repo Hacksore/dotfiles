@@ -9,6 +9,7 @@ return {
         "dockerls",
         "html",
         "jsonls",
+        "marksman",
         "rust_analyzer",
         "tsserver",
         "vuels",

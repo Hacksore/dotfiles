@@ -18,7 +18,8 @@ return {
       "ini",
       "astro",
       "vue",
-      "yaml"
+      "yaml",
+      "ruby",
     }
   }
 }

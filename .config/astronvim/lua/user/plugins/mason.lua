@@ -11,6 +11,8 @@ return {
         "jsonls",
         "marksman",
         "rust_analyzer",
+        "ruby_ls",
+        "jdtls",
         "tsserver",
         "vuels",
         "yamlls",

@@ -5,10 +5,9 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="murilasso"
 
 # Load any cool plugins
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins#plugins
 plugins=(
-  git
   nvm
-  history
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -24,11 +23,6 @@ source $HOME/.fzf.zsh
 
 # profile
 source $HOME/.zprofile
-
-# load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # no auto update brew
 export HOMEBREW_NO_AUTO_UPDATE="1"
@@ -55,7 +49,7 @@ export INC_APPEND_HISTORY_TIME="1"
 export EXTENDED_HISTORY="1"
 
 # load fzf for fuzzy
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # op cli plugins
 source "$HOME/.config/op/plugins.sh"
@@ -66,41 +60,3 @@ export PATH="$HOME/bin:$PATH"
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
 
-# allow switching tmux sessions with ctrl + p and ctrl + n
-function switch_tmux_window_prev {
-  if [[ -n "$TMUX" ]]; then
-    # Switch to the next session
-    tmux switch-client -n
-  else
-    echo "Not inside a tmux session."
-  fi
-}
-
-function switch_tmux_window_next {
-  if [[ -n "$TMUX" ]]; then
-    # Switch to the next session
-    tmux switch-client -n
-  else
-    echo "Not inside a tmux session."
-  fi
-}
-
-zle -N switch_tmux_window_prev
-zle -N switch_tmux_window_next
-bindkey '^p' switch_tmux_window_prev
-bindkey '^n' switch_tmux_window_next
-
-# bind control-t to make a tmux session and switch to it
-function new_tmux_session {
-  if [[ -n "$TMUX" ]]; then
-    # create new tmux detached session then switch to it
-    sessionUnixDateName="Untitled ($(date +%s))"
-    tmux new-session -d -s "$sessionUnixDateName"
-    tmux switch-client -t "$sessionUnixDateName"
-  else
-    echo "Not inside a tmux session."
-  fi
-}
-
-zle -N new_tmux_session
-bindkey '^t' new_tmux_session

@@ -19,6 +19,6 @@ return {
 		-- open the fuzzy menu for finding projects
 		["<C-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<cr>", desc = "Open tmux sessionizer" },
 		-- unbind control+t
-		["<C-t>"] = { "<cmd>silent !new_tmux_session<cr>", desc = "Open an new tmux session" },
+		["<C-t>"] = { "<cmd>silent !tmux neww new_tmux_session<cr>", desc = "Open an new tmux session" },
 	},
 }

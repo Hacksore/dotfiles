@@ -1,6 +1,5 @@
 function d {
   local cmd=$1
-  local varargs=${@:2}
 
   case $cmd in
     "l"|"link")

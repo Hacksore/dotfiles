@@ -15,7 +15,7 @@ plugins=(
 # load brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# load zsh
+# load ohmyzsh
 source $ZSH/oh-my-zsh.sh
 
 # good fuzzy

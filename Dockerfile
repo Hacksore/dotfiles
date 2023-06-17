@@ -1,6 +1,5 @@
 FROM nginx:alpine
 
-COPY mime.types /usr/share/nginx/mime.types
-COPY mime.types /etc/nginx/mime.types
+COPY default.conf /etc/nginx/conf.d/
 
 COPY bootstrap.sh /usr/share/nginx/html/index.html

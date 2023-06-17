@@ -1,15 +1,19 @@
 #!/bin/bash
 
+if [ -x "$(command -v apt-get)" ]; then
+  apt-get update 
+fi
+
 # install git 
 if [ ! -x "$(command -v git)" ]; then
   echo "Installing git..."
-  sudo apt-get install -y git
+  apt-get install -y git
 fi
 
 # install curl
 if [ ! -x "$(command -v curl)" ]; then
   echo "Installing curl..."
-  sudo apt-get install -y curl
+  apt-get install -y curl
 fi
 
 # clone the repo with dotfiles if not exists

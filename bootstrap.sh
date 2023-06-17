@@ -2,31 +2,27 @@
 
 # clone the repo with dotfiles if not exists
 if [ -d "$HOME/dotfiles" ]; then
-  git clone --recursive git@github.com:Hacksore/dotfiles.git "$HOME/dotfiles"
+  # on first clone you prolly don't have ssh keys setup let's use https
+  git clone https://github.com/Hacksore/dotfiles.git "$HOME/dotfiles"
 fi
 
-if [ -d "$HOME/homebrew" ]; then
-  git clone https://github.com/Homebrew/brew "$HOME/homebrew"
-
-  cd $HOME
-  eval "$(homebrew/bin/brew shellenv)"
-
-  brew update --force --quiet
-  chmod -R go-w "$(brew --prefix)/share/zsh"
+if [ ! -d "$HOME/homebrew" ]; then
+  # install unattended
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   # install stow for configuration
   brew install stow
 
-  # brew just installed let's run our ansible stuff
-  bash "$HOME/dotfiles/ansible/run.sh"
-
   # use brew bundle
   brew bundle --file "$HOME/dotfiles/Brewfile"
-
 fi
 
 # install the files with stow
 stow .
+
+# reset the url for dotiles to use ssh
+cd "$HOME/dotfiles"
+git remote set-url origin git@github.com:Hacksore/dotfiles.git
 
 # done
 echo "All config files have been linked..."

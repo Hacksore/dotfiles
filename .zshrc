@@ -59,4 +59,3 @@ export PATH="$HOME/bin:$PATH"
 
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
-

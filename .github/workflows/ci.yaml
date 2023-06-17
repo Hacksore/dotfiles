@@ -13,5 +13,4 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      # write a shell check action to validate the scripts
-
+      # TODO: something here? 

@@ -40,6 +40,10 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: bootstrap
+      - name: test
+        run: ls -hal
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2 
+        with:
+          artifact_name: bootstrap

@@ -8,6 +8,18 @@ return {
 		GitChange = "",
 		GitDelete = "",
 	},
+	highlights = {
+		init = function()
+			local utils = require("user.utils")
+			local red = 0xe06c75
+			local green = 0x04260f
+
+			return {
+				DiffAdd = { bg = utils.dim(green) },
+				DiffDelete = { bg = utils.dim(red) },
+			}
+		end,
+	},
 	options = {
 		opt = {
 			spell = true, -- Enable spell checking

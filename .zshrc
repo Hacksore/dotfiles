@@ -34,8 +34,8 @@ export PATH="$HOME/.cargo/bin/:$PATH"
 export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # java
-export JAVA_HOME="$HOME/homebrew/Cellar/openjdk/11/libexec/openjdk.jdk/Contents/Home"
-export PATH="$HOME/homebrew/opt/openjdk@11/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
+export PATH="$JAVA_HOME/homebrew/opt/openjdk@17/bin:$PATH"
 
 # hist settings
 export HISTSIZE=1000000

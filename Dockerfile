@@ -1,5 +1,7 @@
-FROM nginx:alpine
+FROM node
 
-COPY default.conf /etc/nginx/conf.d/
+WORKDIR /app
 
-COPY bootstrap.sh /usr/share/nginx/html/index.html
+COPY docs . 
+
+RUN npm ci

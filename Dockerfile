@@ -4,4 +4,6 @@ WORKDIR /app
 
 COPY docs . 
 
-RUN npm ci
+RUN yarn
+
+RUN yarn build

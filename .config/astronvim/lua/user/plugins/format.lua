@@ -2,15 +2,15 @@ return {
 	"jay-babu/mason-null-ls.nvim",
 	opts = {
 		handlers = {
-			eslint_d = function()
-				local nullLs = require("null-ls")
-				nullLs.register(nullLs.builtins.diagnostics.eslint_d.with({
-					condition = function(utils)
-						local files = { "eslintrc", ".eslintrc.json", ".eslintrc.js" }
-						return utils.root_has_file(files)
-					end,
-				}))
-			end,
+			-- eslint_d = function()
+			-- 	local nullLs = require("null-ls")
+			-- 	nullLs.register(nullLs.builtins.diagnostics.eslint_d.with({
+			-- 		condition = function(utils)
+			-- 			local files = { "eslintrc", ".eslintrc.json", ".eslintrc.js" }
+			-- 			return utils.root_has_file(files)
+			-- 		end,
+			-- 	}))
+			-- end,
 			-- for prettier
 			prettier = function()
 				local nullLs = require("null-ls")

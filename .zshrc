@@ -12,6 +12,9 @@ plugins=(
   zsh-syntax-highlighting
 )
 
+# allowing for use of .config dir
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # load brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 

@@ -1,0 +1,11 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - default
+os:
+  editPreset: '' # see 'Configuring File Editing' section
+  edit: 'nvim'
+  editAtLine: ''
+  editAtLineAndWait: ''
+  open: ''
+  openLink: ''

@@ -1,11 +1,6 @@
 gui:
   theme:
     selectedLineBgColor:
-      - default
+      - reverse 
 os:
-  editPreset: '' # see 'Configuring File Editing' section
-  edit: 'nvim'
-  editAtLine: ''
-  editAtLineAndWait: ''
-  open: ''
-  openLink: ''
+  editPreset: 'nvim' # see 'Configuring File Editing' section

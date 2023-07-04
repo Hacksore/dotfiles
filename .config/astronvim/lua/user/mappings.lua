@@ -3,6 +3,10 @@ return {
 		["<leader>ff"] = { "<cmd>Telescope git_files<cr>", desc = "Telescope git files" },
 		["<leader>1"] = { "<cmd>bprevious<cr>", desc = "Switch buffer backwards" },
 		["<leader>2"] = { "<cmd>bnext<cr>", desc = "Switch buffer forward" },
+		["<leader>h"] = {
+			function()
+			end,
+		},
 		-- NOTE: this is a bunch of stuff for tmux
 		["<C-n>"] = {
 			function()

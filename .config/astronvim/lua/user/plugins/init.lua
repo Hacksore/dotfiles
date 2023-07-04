@@ -4,6 +4,10 @@ return {
 		"MaxMEllon/vim-jsx-pretty",
 		event = "User Astrofile",
 	},
+	{
+		"tpope/vim-fugitive",
+		event = "VeryLazy",
+	},
 	-- vim doge for nice JSDocs
 	-- TODO: i need to learn how to use this
 	{

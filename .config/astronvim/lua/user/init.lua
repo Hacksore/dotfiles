@@ -22,14 +22,15 @@ return {
 	},
 	options = {
 		opt = {
-			spell = true, -- Enable spell checking
-			swapfile = false, -- Disable swap files
-			title = true, -- Allow nvim to update the term titlerelativenumber
+			spell = true,        -- Enable spell checking
+			swapfile = false,    -- Disable swap files
+			title = true,        -- Allow nvim to update the term titlerelativenumber
 			relativenumber = false, -- Disable relative line numbers
 		},
 	},
 	lsp = {
 		formatting = {
+			timeout_ms = 5000,
 			format_on_save = {
 				enabled = false, -- disable format on save
 			},

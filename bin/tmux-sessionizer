@@ -3,7 +3,14 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(fd . ~/code/opensource ~ --hidden -d 1 | sed "s|^$HOME|~|" | fzf)
+  # find all directories 
+  path_to_open=$(fd . ~/code/opensource ~ --hidden -d 1 | sed "s|^$HOME|~|")
+
+  # remove trailing slash from each line of fd output
+  path_to_open=$(echo "$path_to_open" | sed 's|/$||')
+
+  # mark selected list and pass to fzf
+  selected=$(echo "$path_to_open" | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -13,13 +20,19 @@ fi
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
+# tmux wont parse the tilda
+real_path=$(echo "$selected" | sed "s|^~|$HOME|" )
+
+# remove trailing slash
+real_path=${real_path%/}
+
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-  tmux new-session -s $selected_name -c $selected
+  tmux new-session -s "$selected_name" -c "$real_path"
   exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-  tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+  tmux new-session -ds "$selected_name" -c "$real_path"
 fi
 
-tmux switch-client -t $selected_name
+tmux switch-client -t "$selected_name"

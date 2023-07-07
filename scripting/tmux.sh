@@ -4,7 +4,7 @@
 function switch_tmux_window_prev {
   if [[ -n "$TMUX" ]]; then
     # Switch to the next session
-    tmux switch-client -n
+    tmux switch-client -p
   else
     echo "Not inside a tmux session."
   fi

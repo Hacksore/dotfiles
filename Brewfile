@@ -32,6 +32,7 @@ brew "diff-so-fancy"
 brew "docker", link: false
 brew "dotnet"
 brew "emacs"
+brew "fd"
 brew "fzf"
 brew "gh"
 brew "git"

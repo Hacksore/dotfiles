@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(find ~/code/opensource ~ -mindepth 1 -maxdepth 1 -type d | fzf)
+  selected=$(fd . ~/code/opensource ~ --hidden -d 1 | sed "s|^$HOME|~|" | fzf)
 fi
 
 if [[ -z $selected ]]; then

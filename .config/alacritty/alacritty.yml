@@ -3,34 +3,31 @@ font:
     family: JetbrainsMono Nerd Font
     style: Regular
   size: 20
-# github Alacritty Colors
+
 colors:
-  # Default colors
   primary:
     background: '0x21252b'
     foreground: '0xabb2bf'
 
-  # Normal colors
   normal:
-    black:   '0x21252b'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xe5c07b'
-    blue:    '0x61afef'
+    black: '0x21252b'
+    red: '0xe06c75'
+    green: '0x98c379'
+    yellow: '0xe5c07b'
+    blue: '0x61afef'
     magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xabb2bf'
+    cyan: '0x56b6c2'
+    white: '0xabb2bf'
 
-  # Bright colors
   bright:
-    black:   '0x767676'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xe5c07b'
-    blue:    '0x61afef'
+    black: '0x767676'
+    red: '0xe06c75'
+    green: '0x98c379'
+    yellow: '0xe5c07b'
+    blue: '0x61afef'
     magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xabb2bf'
+    cyan: '0x56b6c2'
+    white: '0xabb2bf'
 
   indexed_colors:
     - { index: 16, color: '0xd18616' }
@@ -39,3 +36,14 @@ colors:
 # tmux 256 color support
 env:
   TERM: xterm-256color
+
+# Enable URL launcher
+urls:
+  # Custom URL launcher command
+  launcher: open %s
+  enabled: true
+
+# map keys to do things
+key_bindings:
+  - { key: Right, mods: Alt, chars: "\eF" }
+  - { key: Left, mods: Alt, chars: "\eB" }

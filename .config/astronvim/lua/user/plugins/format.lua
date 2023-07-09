@@ -7,7 +7,7 @@ return {
 				local nullLs = require("null-ls")
 				nullLs.register(nullLs.builtins.diagnostics.eslint_d.with({
 					condition = function(utils)
-						local files = { "eslintrc", ".eslintrc.json", ".eslintrc.js" }
+						local files = { "eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" }
 						return utils.root_has_file(files)
 					end,
 				}))
@@ -17,7 +17,8 @@ return {
 				local nullLs = require("null-ls")
 				nullLs.register(nullLs.builtins.formatting.prettier.with({
 					condition = function(utils)
-						local files = { "package.json", ".prettierrc", ".prettierrc.json", ".prettierrc.js", ".prettierrc.cjs" }
+						local files =
+						{ "package.json", ".prettierrc", ".prettierrc.json", ".prettierrc.js", ".prettierrc.cjs" }
 						return utils.root_has_file(files)
 					end,
 				}))

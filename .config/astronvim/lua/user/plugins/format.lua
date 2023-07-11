@@ -2,7 +2,6 @@ return {
 	"jay-babu/mason-null-ls.nvim",
 	opts = {
 		handlers = {
-			-- TODO: this is breaking eslint maybe it is core now?
 			eslint_d = function()
 				local nullLs = require("null-ls")
 				nullLs.register(nullLs.builtins.diagnostics.eslint_d.with({
@@ -17,8 +16,14 @@ return {
 				local nullLs = require("null-ls")
 				nullLs.register(nullLs.builtins.formatting.prettier.with({
 					condition = function(utils)
-						local files =
-						{ "package.json", ".prettierrc", ".prettierrc.json", ".prettierrc.js", ".prettierrc.cjs" }
+						local files = {
+							"package.json",
+							".prettierrc",
+							".prettierrc.json",
+							".prettierrc.js",
+							"prettier.config.cjs",
+							".prettierrc.cjs",
+						}
 						return utils.root_has_file(files)
 					end,
 				}))

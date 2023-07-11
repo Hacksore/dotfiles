@@ -50,8 +50,22 @@ return {
 			require("todo-comments").setup({})
 		end,
 	},
-	-- {
-	-- 	dir = "~/code/opensource/astrotheme",
-	-- 	lazy = false
-	-- },
+	{
+		"nvim-telescope/telescope.nvim",
+		event = "VeryLazy",
+		opts = {
+			defaults = {
+				hidden = true,
+				file_ignore_patterns = {
+					"%.git/",
+					"node_modules/",
+					"coverage/",
+					"__pycache__/",
+					"%.o",
+					"client/graphql/",
+					"**/generatedTypesAndHooks.ts",
+				},
+			}
+		}
+	}
 }

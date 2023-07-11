@@ -1,6 +1,12 @@
 return {
+	v = {
+		-- stop making the pasted text go into my clipboard buffer
+		p = {
+			[["_dP]] -- this goes to narnia (aka the void)
+		}
+	},
 	n = {
-		["<leader>ff"] = { "<cmd>Telescope git_files<cr>", desc = "Telescope git files" },
+		["<leader>ff"] = { "<cmd>Telescope find_files hidden=true<cr>", desc = "Telescope find files" },
 		["<leader>1"] = { "<cmd>bprevious<cr>", desc = "Switch buffer backwards" },
 		["<leader>2"] = { "<cmd>bnext<cr>", desc = "Switch buffer forward" },
 		["<leader>h"] = false,

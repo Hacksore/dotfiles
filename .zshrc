@@ -36,6 +36,9 @@ export PATH="$HOME/.cargo/bin/:$PATH"
 # add 1p ssh agent
 export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
+# add ruby to path
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
 # java
 export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 export PATH="$JAVA_HOME/homebrew/opt/openjdk@17/bin:$PATH"
@@ -62,3 +65,4 @@ export PATH="$HOME/bin:$PATH"
 
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
+

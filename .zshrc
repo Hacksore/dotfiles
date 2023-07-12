@@ -4,6 +4,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # good zsh theme
 ZSH_THEME="murilasso"
 
+# reset this so it works with astro new theme
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696C76"
+
 # Load any cool plugins
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins#plugins
 plugins=(

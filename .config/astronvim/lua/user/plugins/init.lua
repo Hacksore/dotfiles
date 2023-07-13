@@ -67,5 +67,9 @@ return {
 				},
 			}
 		}
+	},
+	{
+		"AstroNvim/astrotheme",
+		tag = "v1.7.0",
 	}
 }

@@ -39,4 +39,5 @@ return {
 	updater = {
 		channel = "stable",
 	},
+	colorscheme = "astrotheme"
 }

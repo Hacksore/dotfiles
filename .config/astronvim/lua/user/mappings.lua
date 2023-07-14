@@ -7,6 +7,8 @@ return {
 	},
 	n = {
 		["<leader>ff"] = { "<cmd>Telescope find_files hidden=true<cr>", desc = "Telescope find files" },
+		["<leader>gg"] = { "<cmd>silent !tmux neww lazygit<cr>", desc = "Open lazygit" },
+		-- TODO: I really should stop this and use Telescope and or harpoon 
 		["<leader>1"] = { "<cmd>bprevious<cr>", desc = "Switch buffer backwards" },
 		["<leader>2"] = { "<cmd>bnext<cr>", desc = "Switch buffer forward" },
 		["<leader>h"] = false,

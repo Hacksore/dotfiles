@@ -7,6 +7,7 @@ return {
 	},
 	n = {
 		["<leader>ff"] = { "<cmd>Telescope find_files hidden=true<cr>", desc = "Telescope find files" },
+		-- TODO: make this support non-tmux mode so that I can somehow use when not in tmux
 		["<leader>gg"] = { "<cmd>silent !tmux neww lazygit<cr>", desc = "Open lazygit" },
 		-- TODO: I really should stop this and use Telescope and or harpoon 
 		["<leader>1"] = { "<cmd>bprevious<cr>", desc = "Switch buffer backwards" },
@@ -27,7 +28,9 @@ return {
 		},
 		-- open the fuzzy menu for finding projects
 		["<C-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<cr>", desc = "Open tmux sessionizer" },
-		-- unbind control+t
-		["<C-t>"] = { "<cmd>silent !tmux neww new_tmux_session<cr>", desc = "Open an new tmux session" },
+		-- open a new tmux window
+		["<C-t>"] = { "<cmd>silent !tmux neww zsh<cr>", desc = "Open a new tmux window" },
+		-- open a new tmux session
+		["<C-i>"] = { "<cmd>silent !tmux neww new-tmux-session<cr>", desc = "Open a new tmux session" },
 	},
 }

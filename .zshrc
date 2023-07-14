@@ -60,6 +60,9 @@ export EXTENDED_HISTORY="1"
 # load fzf for fuzzy
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
+# fix the color for autosuggest
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+
 # op cli plugins
 source "$HOME/.config/op/plugins.sh"
 

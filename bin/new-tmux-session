@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# make a random name for the session based on timestamp
+random_name="tmux-$(date +%s)"
+tmux_running=$(pgrep tmux)
+real_path="$HOME"
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  tmux new-session -s "$random_name" -c "$real_path"
+  exit 0
+fi
+
+if ! tmux has-session -t="$random_name" 2> /dev/null; then
+  tmux new-session -ds "$random_name" -c "$real_path"
+fi
+
+tmux switch-client -t "$random_name"

@@ -4,6 +4,10 @@ return {
 		cmd = "Copilot",
 		event = "InsertEnter",
 		config = function()
+			if vim.fn.hostname() ~= "eloy" then
+				return
+			end
+
 			require("copilot").setup({
 				suggestion = {
 					enabled = true,

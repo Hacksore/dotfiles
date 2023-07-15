@@ -47,3 +47,9 @@ urls:
 key_bindings:
   - { key: Right, mods: Alt, chars: "\eF" }
   - { key: Left, mods: Alt, chars: "\eB" }
+
+# add left padding
+window:
+  padding:
+   x: 8
+   y: 2

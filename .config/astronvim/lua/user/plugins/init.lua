@@ -42,6 +42,11 @@ return {
 		"nvim-notify",
 		enabled = false,
 	},
+	-- disable this plug
+	{
+		"aerial.nvim",
+		enabled = false,
+	},
 	-- add plugin for todo highlighting
 	{
 		"folke/todo-comments.nvim",

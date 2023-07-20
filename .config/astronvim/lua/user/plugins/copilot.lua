@@ -4,7 +4,7 @@ return {
 		cmd = "Copilot",
 		event = "InsertEnter",
 		config = function()
-			if vim.fn.hostname() ~= "eloy" then
+			if vim.fn.hostname() ~= "eloy.local" then
 				return
 			end
 

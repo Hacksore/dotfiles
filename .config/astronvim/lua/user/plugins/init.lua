@@ -13,6 +13,7 @@ return {
 	{
 		"kkoomen/vim-doge",
 		event = "VeryLazy",
+		build = ':call doge#install()'
 	},
 	-- this allows for JSX comments
 	{

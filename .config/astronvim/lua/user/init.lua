@@ -39,8 +39,6 @@ return {
 			tailwindcss = {
 				on_attach = function(client, bufnr)
 					local tw_highlight = require("tailwind-highlight")
-					print("on attach for tw")
-
 					tw_highlight.setup(client, bufnr, {
 						single_column = false,
 						mode = "background",

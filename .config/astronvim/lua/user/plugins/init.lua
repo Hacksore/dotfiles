@@ -76,5 +76,8 @@ return {
 	{
 		"AstroNvim/astrotheme",
 		tag = "v1.7.0",
+	},
+	{
+		"lrincejoogie/tailwind-highlight.nvim",
 	}
 }

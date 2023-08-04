@@ -51,7 +51,7 @@ return {
 	{
 		"AstroNvim/astrotheme",
 		-- pinning this to a specific tag to preserve the old colorscheme
-		tag = "v1.7.0"
+		-- tag = "v1.7.0"
 	},
 	-- add tw highlight for colors
 	{

@@ -108,7 +108,7 @@ return {
 			return colors
 		end
 		opts.statusline = {
-			hl = { fg = "fg", bg = "black" },
+			hl = { fg = "fg", bg = "bg" },
 			status.component.mode({
 				mode_text = { icon = { kind = "VimIcon", padding = { right = 1, left = 1 } }, padding = { right = 1 } },
 			}),

@@ -48,11 +48,13 @@ return {
 			}
 		}
 	},
-	-- tailwind highlight
+	{
+		"AstroNvim/astrotheme",
+		-- pinning this to a specific tag to preserve the old colorscheme
+		tag = "v1.7.0"
+	},
+	-- add tw highlight for colors
 	{
 		"princejoogie/tailwind-highlight.nvim",
-	},
-	{
-		"projekt0n/github-nvim-theme"
 	}
 }

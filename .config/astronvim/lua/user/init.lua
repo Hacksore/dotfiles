@@ -67,5 +67,5 @@ return {
 	updater = {
 		channel = "stable",
 	},
-	colorscheme = "github_dark_tritanopia",
+	colorscheme = "astrodark",
 }

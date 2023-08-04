@@ -1,3 +1,14 @@
+local function add_missing_imports()
+	vim.api.nvim_create_user_command('TSAddMissingImports', function()
+		vim.lsp.buf.code_action({
+			apply = true,
+			context = {
+				only = { "source.addMissingImports" }
+			}
+		})
+	end, {})
+end
+
 return {
 	-- add new user interface icon
 	icons = {
@@ -8,6 +19,10 @@ return {
 		GitChange = "",
 		GitDelete = "",
 	},
+	polish = function()
+		-- TODO:: this should work better but now it takes npm packaes first then aliases
+		add_missing_imports()
+	end,
 	highlights = {
 		init = function()
 			local utils = require("user.utils")
@@ -36,6 +51,7 @@ return {
 			},
 		},
 		config = {
+			-- TODO: move this is a file?
 			tailwindcss = {
 				on_attach = function(client, bufnr)
 					local tw_highlight = require("tailwind-highlight")
@@ -46,11 +62,10 @@ return {
 					})
 				end
 			}
-
 		}
 	},
 	updater = {
 		channel = "stable",
 	},
-	colorscheme = "astrotheme"
+	colorscheme = "github_dark_tritanopia",
 }

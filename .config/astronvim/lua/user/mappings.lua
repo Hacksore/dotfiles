@@ -29,8 +29,10 @@ return {
 		-- open the fuzzy menu for finding projects
 		["<C-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<cr>", desc = "Open tmux sessionizer" },
 		-- open a new tmux window
-		["<C-t>"] = { "<cmd>silent !tmux neww zsh<cr>", desc = "Open a new tmux window" },
-		-- open a new tmux session
-		["<C-i>"] = { "<cmd>silent !tmux neww new-tmux-session<cr>", desc = "Open a new tmux session" },
+		-- TODO: i have to figure this out
+		-- ["<C-t>"] = { "<cmd>silent !tmux neww zsh<cr>", desc = "Open a new tmux window" },
+		-- -- open a new tmux session
+		-- BUG: this will open when pressing tab :(
+		-- ["<C-i>"] = { "<cmd>silent !tmux neww new-tmux-session<cr>", desc = "Open a new tmux session" },
 	},
 }

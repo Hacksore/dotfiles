@@ -48,11 +48,11 @@ return {
 			}
 		}
 	},
+	-- tailwind highlight
 	{
-		"AstroNvim/astrotheme",
-		tag = "v1.7.0",
+		"princejoogie/tailwind-highlight.nvim",
 	},
 	{
-		"lrincejoogie/tailwind-highlight.nvim",
+		"projekt0n/github-nvim-theme"
 	}
 }

@@ -4,9 +4,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # good zsh theme
 ZSH_THEME="murilasso"
 
-# reset this so it works with astro new theme
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696C76"
-
 # Load any cool plugins
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins#plugins
 plugins=(
@@ -60,8 +57,8 @@ export EXTENDED_HISTORY="1"
 # load fzf for fuzzy
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-# fix the color for autosuggest
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+# reset this so it works with astro new theme
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696C76"
 
 # op cli plugins
 source "$HOME/.config/op/plugins.sh"

@@ -45,7 +45,7 @@ return {
 	},
 	lsp = {
 		formatting = {
-			timeout_ms = 10000,
+			timeout_ms = 15000,
 			format_on_save = {
 				enabled = false, -- disable format on save
 			},

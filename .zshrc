@@ -58,7 +58,7 @@ export EXTENDED_HISTORY="1"
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # reset this so it works with astro new theme
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696C76"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 
 # op cli plugins
 source "$HOME/.config/op/plugins.sh"
@@ -68,4 +68,7 @@ export PATH="$HOME/bin:$PATH"
 
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
+
+# the fuck
+eval $(thefuck --alias)
 

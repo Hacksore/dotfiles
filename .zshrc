@@ -31,7 +31,7 @@ source $HOME/.zprofile
 export HOMEBREW_NO_AUTO_UPDATE="1"
 
 # add cargo to path
-export PATH="$HOME/.cargo/bin/:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # add 1p ssh agent
 export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
@@ -57,8 +57,8 @@ export EXTENDED_HISTORY="1"
 # load fzf for fuzzy
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-# reset this so it works with astro new theme
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+# make new astro theme work
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5e5e5e"
 
 # op cli plugins
 source "$HOME/.config/op/plugins.sh"

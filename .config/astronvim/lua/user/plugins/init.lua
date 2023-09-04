@@ -56,5 +56,5 @@ return {
 	-- add tw highlight for colors
 	{
 		"princejoogie/tailwind-highlight.nvim",
-	}
+	},
 }

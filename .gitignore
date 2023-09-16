@@ -2,4 +2,12 @@
 node_modules
 
 .config/nvim
+.config/lazygit/state.yml
 Brewfile.lock.json
+
+bin/docker-compose
+bin/docker-credential-osxkeychain
+bin/kubectl
+bin/orb
+bin/orbctl
+

@@ -44,13 +44,11 @@ return {
 			return {
 				type = "pwa-node",
 				request = "launch",
-				name = ("js-debug: Launch Current File (ts-node%s)"):format(
-					args and (" " .. table.concat(args, " ")) or ""
-				),
+				name = "js-debug: Launch Current File (tsx%s)",
 				program = "${file}",
 				cwd = "${workspaceFolder}",
-				runtimeExecutable = "ts-node",
-				runtimeArgs = args,
+				runtimeExecutable = "node",
+				runtimeArgs = {"--loader", "tsx"},
 				sourceMaps = true,
 				protocol = "inspector",
 				console = "integratedTerminal",
@@ -78,7 +76,7 @@ return {
 		for _, language in ipairs({ "typescript", "typescriptreact" }) do
 			dap.configurations[language] = {
 				typescript(),
-				typescript({ "--esm" }),
+				-- typescript({ "--esm" }),
 				-- NOTE: testing the nodejs debug setup and works for API and initial SSR
 				{
 					type = "pwa-node",

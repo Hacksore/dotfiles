@@ -10,6 +10,7 @@ plugins=(
   nvm
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-vi-mode
 )
 
 # allowing for use of .config dir
@@ -71,4 +72,3 @@ bindkey '^ ' autosuggest-clear
 
 # the fuck
 eval $(thefuck --alias)
-

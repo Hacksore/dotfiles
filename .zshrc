@@ -10,7 +10,7 @@ plugins=(
   nvm
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-vi-mode
+  # zsh-vi-mode
 )
 
 # allowing for use of .config dir

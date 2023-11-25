@@ -21,6 +21,7 @@ return {
 							".prettierrc",
 							".prettierrc.json",
 							".prettierrc.js",
+							"prettier.config.js",
 							"prettier.config.cjs",
 							".prettierrc.cjs",
 						}

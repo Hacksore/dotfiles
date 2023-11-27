@@ -23,7 +23,7 @@ return {
     "jay-babu/mason-null-ls.nvim",
     opts = {
       ensure_installed = {
-        "eslint_d",
+        -- "eslint_d",
         "prettier",
         "beautysh"
       },

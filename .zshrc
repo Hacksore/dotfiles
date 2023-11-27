@@ -14,6 +14,7 @@ plugins=(
 )
 
 # allowing for use of .config dir
+# NOTE: this is to fix lazygit but where it wont load the config otherwise
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # load brew

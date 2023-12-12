@@ -2,7 +2,5 @@ gui:
   theme:
     selectedLineBgColor:
       - reverse
-git:
-  overrideGpg: true
 os:
   editPreset: "nvim" # see 'Configuring File Editing' section

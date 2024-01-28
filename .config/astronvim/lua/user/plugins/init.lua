@@ -28,7 +28,11 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		event = "VeryLazy",
-		opts = {}
+		opts = {
+			keywords = {
+				BLOCKER = { icon = " ", color = "error" },
+			}
+		}
 	},
 	{
 		"nvim-telescope/telescope.nvim",

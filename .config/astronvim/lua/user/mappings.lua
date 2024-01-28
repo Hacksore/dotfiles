@@ -20,6 +20,12 @@ return {
 			end,
 			desc = "Switch tmux session forward",
 		},
+		["<leader>ll"] = {
+			function()
+				vim.lsp.buf.code_action({ context = { only = { 'source.addMissingImports' }, triggerKind = 1 }, apply = true })
+			end,
+			desc = "test null code",
+		},
 		["<C-p>"] = {
 			function()
 				vim.fn.system("tmux switch-client -p")

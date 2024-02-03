@@ -50,10 +50,6 @@ chars = "\u001BB"
 key = "Left"
 mods = "Alt"
 
-[urls]
-enabled = true
-launcher = "open %s"
-
 [window.padding]
 x = 8
 y = 2

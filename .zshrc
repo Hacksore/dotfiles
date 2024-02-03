@@ -73,3 +73,11 @@ bindkey '^ ' autosuggest-clear
 
 # the fuck
 eval $(thefuck --alias)
+
+# add aws autocomplet
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+complete -C '/opt/homebrew/bin/aws_completer' aws
+
+# allow alias to be expanded
+setopt completealiases

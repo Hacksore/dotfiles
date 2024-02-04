@@ -118,6 +118,7 @@ brew "tursodatabase/tap/turso"
 brew "withgraphite/tap/graphite"
 cask "1password"
 cask "1password-cli"
+cask "alacritty"
 cask "apparency"
 cask "arc"
 cask "audacity"
@@ -181,10 +182,12 @@ cask "vlc"
 cask "wezterm"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
+mas "Blurred", id: 1497527363
 mas "Dato", id: 1470584107
 mas "Final Cut Pro", id: 424389933
+mas "GarageBand", id: 682658836
 mas "Hidden Bar", id: 1452453066
-mas "HP Smart", id: 1474276998
+mas "iBlurred", id: 1667815215
 mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Motion", id: 434290957

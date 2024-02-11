@@ -76,9 +76,6 @@ export PATH="$HOME/bin:$PATH"
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
 
-# the fuck
-eval "$(thefuck --alias)"
-
 # add aws autocomplet
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit

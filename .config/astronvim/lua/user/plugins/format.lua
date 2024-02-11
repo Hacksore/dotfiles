@@ -1,35 +1,18 @@
 return {
-  "jay-babu/mason-null-ls.nvim",
-  opts = {
-    handlers = {
-      -- for prettier
-      prettier = function()
-        local nullLs = require("null-ls")
-        nullLs.register(nullLs.builtins.formatting.prettier.with({
-          condition = function(utils)
-            local files = {
-              "package.json",
-              ".prettierrc",
-              ".prettierrc.json",
-              ".prettierrc.js",
-              "prettier.config.js",
-              "prettier.config.cjs",
-              ".prettierrc.cjs",
-            }
-            return utils.root_has_file(files)
-          end,
-        }))
-      end,
-      beautysh = function()
-        local nullLs = require("null-ls")
-        nullLs.register(nullLs.builtins.formatting.beautysh.with({
-          args = {
-            "--indent-size",
-            "2",
-            "$FILENAME",
-          },
-        }))
-      end,
-    },
-  },
+  "jose-elias-alvarez/null-ls.nvim",
+  opts = function(_, opts)
+    local null_ls = require "null-ls"
+    vim.inspect(null_ls.builtins.formatting)
+
+    opts.sources = {
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.rustfmt,
+      null_ls.builtins.formatting.shfmt.with {
+        args = { "-i", "2" },
+      },
+    }
+    return opts
+  end,
+	event = "User Astrofile",
 }

@@ -13,8 +13,16 @@ return {
         "rust_analyzer",
         "ruby_ls",
         "jdtls",
+        "tailwindcss",
         "tsserver",
         "vuels",
+        "astro",
+        "docker_compose_language_service",
+        "eslint",
+        "gopls",
+        "graphql",
+        "prismals",
+        "pylsp",
         "yamlls",
       },
     },
@@ -23,9 +31,8 @@ return {
     "jay-babu/mason-null-ls.nvim",
     opts = {
       ensure_installed = {
-        -- "eslint_d",
         "prettier",
-        "beautysh"
+        "shfmt"
       },
     },
   }

@@ -45,13 +45,12 @@ return {
 	},
 	lsp = {
 		formatting = {
-			timeout_ms = 25000,
 			format_on_save = {
 				enabled = false, -- disable format on save
 			},
 		},
 		config = {
-			-- TODO: move this is a file?
+			-- highlight tailwind classes 
 			tailwindcss = {
 				on_attach = function(client, bufnr)
 					local tw_highlight = require("tailwind-highlight")

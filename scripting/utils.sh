@@ -1,19 +1,21 @@
+# shellcheck disable=SC2207
+
 function d {
   local cmd=$1
 
   case $cmd in
     "l"|"link")
-      cd $HOME/dotfiles
+      cd "$HOME/dotfiles" || exit 1
       stow_wrapper .
       echo "🔒 Linked your dotfiles successfully!"
       ;;
     "u"|"unlink")
-      cd $HOME/dotfiles
+      cd "$HOME/dotfiles" || exit 1
       stow_wrapper -D .
       echo "🔓 Unlinked your dotfiles successfully!"
       ;;
     "r"|"reload")
-      cd $HOME/dotfiles
+      cd "$HOME/dotfiles" || exit 1
       stow_wrapper -D . && stow_wrapper .
       echo "♻️  Reloaded your dotfiles successfully!"
       ;;
@@ -34,7 +36,7 @@ function stow_wrapper {
 }
 
 function dotfiles {
-  cd $HOME/dotfiles
+  cd "$HOME/dotfiles" || exit 1
   echo "You have been moved to dotfiles directory 😎"
 }
 
@@ -47,13 +49,13 @@ function env {
 # nice timeing func
 function timezsh {
   shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+  for _i in $(seq 1 10); do /usr/bin/time "$shell" -i -c exit; done
 }
 
 # very useful command for monorepos where you switch branch a lot and old dirs are left behind
 function gitclean {
   # Find all directories that are not ignored by git and store them in an array
-  ignored_dirs=($(git ls-files --others --exclude-standard --directory))
+  ignored_dirs=($("git ls-files --others --exclude-standard --directory"))
   # Loop through all directories that are not ignored by git
   for dir in "${ignored_dirs[@]}"; do
     # Check if the directory contains any non-gitignored files/folders
@@ -66,6 +68,6 @@ function gitclean {
 }
 
 function astro {
-  cd "$HOME/dotfiles/.config/astronvim"
+  cd "$HOME/dotfiles/.config/astronvim" || exit 1
   nvim .
 }

@@ -1,3 +1,5 @@
+# shellcheck disable=SC2139
+
 # alias to open this file
 alias profile="code $HOME/.zshrc"
 

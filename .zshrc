@@ -1,3 +1,7 @@
+# disable shell cheeck
+# shellcheck disable=SC2034
+# shellcheck disable=SC1091
+
 # Set up zsh
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -10,6 +14,7 @@ plugins=(
   nvm
   zsh-autosuggestions
   zsh-syntax-highlighting
+  # TODO: maybe if i could toggle this on with a hotkey it'd be nice?
   # zsh-vi-mode
 )
 
@@ -21,13 +26,13 @@ export XDG_CONFIG_HOME="$HOME/.config"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # load ohmyzsh
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # good fuzzy
-source $HOME/.fzf.zsh
+source "$HOME/.fzf.zsh"
 
 # profile
-source $HOME/.zprofile
+source "$HOME/.zprofile"
 
 # no auto update brew
 export HOMEBREW_NO_AUTO_UPDATE="1"
@@ -57,7 +62,7 @@ export INC_APPEND_HISTORY_TIME="1"
 export EXTENDED_HISTORY="1"
 
 # load fzf for fuzzy
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 # make new astro theme work
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5e5e5e"
@@ -72,7 +77,7 @@ export PATH="$HOME/bin:$PATH"
 bindkey '^ ' autosuggest-clear
 
 # the fuck
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 
 # add aws autocomplet
 autoload bashcompinit && bashcompinit

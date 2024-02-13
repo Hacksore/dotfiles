@@ -32,6 +32,8 @@ return {
 			return {
 				DiffAdd = { bg = utils.dim(green) },
 				DiffDelete = { bg = utils.dim(red) },
+				-- thse is bad spell
+				SpellBad = { sp = red, undercurl = true },
 			}
 		end,
 	},

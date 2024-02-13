@@ -37,7 +37,9 @@ return {
 	},
 	options = {
 		opt = {
-			spell = true,        -- Enable spell checking
+			spell = true, -- Enable spell checking
+			wrap = true,
+			spellfile = vim.fn.expand("~/.config/astronvim/spell/en.utf-8.add"),
 			swapfile = false,    -- Disable swap files
 			title = true,        -- Allow nvim to update the term titlerelativenumber
 			relativenumber = false, -- Disable relative line numbers
@@ -50,7 +52,7 @@ return {
 			},
 		},
 		config = {
-			-- highlight tailwind classes 
+			-- highlight tailwind classes
 			tailwindcss = {
 				on_attach = function(client, bufnr)
 					local tw_highlight = require("tailwind-highlight")

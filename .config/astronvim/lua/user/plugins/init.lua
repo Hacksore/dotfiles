@@ -30,7 +30,12 @@ return {
 		event = "VeryLazy",
 		opts = {
 			keywords = {
+				-- NOTE: this is a test
 				BLOCKER = { icon = " ", color = "error" },
+				NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+			},
+			colors = {
+				hint = { "#10B981" },
 			}
 		}
 	},

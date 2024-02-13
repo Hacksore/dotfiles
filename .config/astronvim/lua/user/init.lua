@@ -20,7 +20,7 @@ return {
 		GitDelete = "",
 	},
 	polish = function()
-		-- TODO:: this should work better but now it takes npm packaes first then aliases
+		-- TODO:: this should work better but now it takes npm packages first then aliases
 		add_missing_imports()
 	end,
 	highlights = {
@@ -41,7 +41,7 @@ return {
 			wrap = true,
 			spellfile = vim.fn.expand("~/.config/astronvim/spell/en.utf-8.add"),
 			swapfile = false,    -- Disable swap files
-			title = true,        -- Allow nvim to update the term titlerelativenumber
+			title = true,        -- Allow nvim to update the term title
 			relativenumber = false, -- Disable relative line numbers
 		},
 	},

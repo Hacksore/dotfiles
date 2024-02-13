@@ -1,5 +1,4 @@
 return function()
-  -- FileType
   vim.filetype.add {
     extension = {
       mdx = "markdown",

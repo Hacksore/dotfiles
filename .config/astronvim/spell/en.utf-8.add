@@ -29,3 +29,6 @@ pcall
 tostring
 dotfyle
 opensource
+lsp
+treesitter
+eslint

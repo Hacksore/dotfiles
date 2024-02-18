@@ -32,7 +32,6 @@ return {
 			return {
 				DiffAdd = { bg = utils.dim(green) },
 				DiffDelete = { bg = utils.dim(red) },
-				-- thse is bad spell
 				SpellBad = { sp = red, undercurl = true },
 			}
 		end,
@@ -49,6 +48,7 @@ return {
 	},
 	lsp = {
 		formatting = {
+			timeout = 30000,
 			format_on_save = {
 				enabled = false, -- disable format on save
 			},

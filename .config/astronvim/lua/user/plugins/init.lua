@@ -2,6 +2,8 @@ return {
 
 	{
 		"creativenull/dotfyle-metadata.nvim",
+		-- NOTE: for local development
+		-- dir = "~/code/opensource/dotfyle-metadata.nvim",
 		config = function()
 			local augroup = vim.api.nvim_create_augroup("DotfyleMetadataGroup", {})
 			vim.api.nvim_create_autocmd("User", {

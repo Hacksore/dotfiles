@@ -36,11 +36,11 @@ config.font = wezterm.font({
   family = "JetBrainsMono Nerd Font",
 })
 
-config.font_size = 18.0
+config.font_size = 20.0
 config.line_height = 1.1
 
 config.window_close_confirmation = "AlwaysPrompt"
-config.dpi = 144
+-- config.dpi = 144
 
 config.enable_tab_bar = false;
 
@@ -48,8 +48,25 @@ config.enable_tab_bar = false;
 config.window_padding = {
   left = "0cell",
   right = "0cell",
-  top = "0.5cell",
+  top = "0.4cell",
   bottom = "0cell",
+}
+
+-- the option scripture for good option keys™
+config.send_composed_key_when_left_alt_is_pressed = true
+
+-- keys
+config.keys = {
+  {
+    key = "LeftArrow",
+    mods = "OPT",
+    action = wezterm.action { SendString = "\x1bb" }
+  },
+  {
+    key = "RightArrow",
+    mods = "OPT",
+    action = wezterm.action { SendString = "\x1bf" }
+  },
 }
 
 return config

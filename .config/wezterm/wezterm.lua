@@ -34,21 +34,17 @@ config.colors = {
 -- Font
 config.font = wezterm.font({
   family = "JetBrainsMono Nerd Font",
+  weight = "Bold"
 })
-
 config.font_size = 20.0
-config.line_height = 1.1
-
-config.window_close_confirmation = "AlwaysPrompt"
--- config.dpi = 144
-
-config.enable_tab_bar = false;
 
 -- Window
+config.window_close_confirmation = "AlwaysPrompt"
+config.enable_tab_bar = false;
 config.window_padding = {
   left = "0cell",
   right = "0cell",
-  top = "0.4cell",
+  top = "0cell",
   bottom = "0cell",
 }
 

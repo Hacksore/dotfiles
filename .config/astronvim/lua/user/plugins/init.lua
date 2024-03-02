@@ -83,4 +83,17 @@ return {
 	{
 		"princejoogie/tailwind-highlight.nvim",
 	},
+	{
+		"f-person/auto-dark-mode.nvim",
+		config = {
+			update_interval = 1000,
+			set_dark_mode = function()
+				vim.cmd("colorscheme astrodark")
+			end,
+			set_light_mode = function()
+				vim.cmd("colorscheme astrolight")
+			end,
+		},
+		event = "VeryLazy",
+	}
 }

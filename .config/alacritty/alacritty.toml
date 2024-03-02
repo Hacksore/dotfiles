@@ -50,6 +50,9 @@ chars = "\u001BB"
 key = "Left"
 mods = "Alt"
 
+[window]
+dynamic_padding = true
+
 [window.padding]
 x = 8
 y = 2

@@ -43,3 +43,9 @@ div
 Devtools
 Tauri
 Boult
+struct
+tauri
+js
+shellcheck
+SC2034
+zsh

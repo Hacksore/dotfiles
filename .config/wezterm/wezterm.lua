@@ -34,7 +34,7 @@ config.colors = {
 -- Font
 config.font = wezterm.font({
   family = "JetBrainsMono Nerd Font",
-  weight = "Medium"
+  weight = "DemiBold",
 })
 config.font_size = 20.0
 

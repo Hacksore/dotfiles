@@ -99,26 +99,7 @@
     "zbirenbaum/copilot.lua"
   ],
   "pluginManager": "lazy.nvim",
-  "treesitterParsers": [
-    "astro",
-    "bash",
-    "css",
-    "diff",
-    "dockerfile",
-    "html",
-    "ini",
-    "javascript",
-    "json",
-    "lua",
-    "python",
-    "ruby",
-    "rust",
-    "toml",
-    "tsx",
-    "typescript",
-    "vue",
-    "yaml"
-  ],
+  "treesitterParsers": [],
   "lspServers": [
     "astro",
     "bashls",

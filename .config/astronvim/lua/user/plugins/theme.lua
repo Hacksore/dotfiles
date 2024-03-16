@@ -1,5 +1,5 @@
 return {
-  "astronvim/astrotheme",
+  "AstroNvim/astrotheme",
   opts = {
     palettes = {
       astrodark = {

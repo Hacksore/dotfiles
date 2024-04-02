@@ -15,9 +15,9 @@ return {
 			},
 			timeout_ms = 1000,
 		},
-    ---@diagnostic disable-next-line: missing-fields
+		---@diagnostic disable-next-line: missing-fields
 		config = {
-    	---@diagnostic disable-next-line: missing-fields
+			---@diagnostic disable-next-line: missing-fields
 			tailwindcss = {
 				enabled = true,
 				on_attach = function(client, bufnr)

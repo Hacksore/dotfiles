@@ -15,7 +15,6 @@ return {
 					dotfyle_metadata.generate({})
 					-- make it look nice
 					local format_cmd = string.format("!npx prettier --write %s", dotfyle_metadata.dotfyle_path)
-					print("format_cmd", format_cmd)
 					vim.cmd(format_cmd)
 				end,
 			})

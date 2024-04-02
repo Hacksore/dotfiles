@@ -25,7 +25,7 @@ return {
 			"yaml",
 			"ruby",
 		},
-		context_commentstring = {
+		ts_context_commentstring = {
 			enable = true,
 			enable_autocmd = false,
 		},

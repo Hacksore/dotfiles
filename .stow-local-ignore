@@ -3,7 +3,6 @@ README.md
 .github
 Brewfile
 Brewfile.lock.json
-.config/nvim
 
 Library/CloudStorage
 

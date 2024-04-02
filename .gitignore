@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 
-.config/nvim
 .config/lazygit/state.yml
 Brewfile.lock.json
 

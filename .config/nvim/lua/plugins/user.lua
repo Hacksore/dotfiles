@@ -15,8 +15,8 @@ return {
 					dotfyle_metadata.generate({})
 					local home = vim.fn.getenv("HOME")
 					vim.cmd("!npx prettier --write " .. dotfyle_metadata.dotfyle_path)
-					local move_dir_string = string.format("!mv %s %s", dotfyle_metadata.dotfyle_path,
-						home .. "/.config/astronvim/lua/user")
+					local move_dir_string =
+						string.format("!mv %s %s", dotfyle_metadata.dotfyle_path, home .. "/.config/nvim/lua/user")
 					vim.cmd(move_dir_string)
 				end,
 			})
@@ -36,7 +36,7 @@ return {
 	{
 		"kkoomen/vim-doge",
 		event = "VeryLazy",
-		build = ':call doge#install()'
+		build = ":call doge#install()",
 	},
 	-- add discord presence
 	{
@@ -58,8 +58,8 @@ return {
 			},
 			colors = {
 				hint = { "#10B981" },
-			}
-		}
+			},
+		},
 	},
 	{
 		"nvim-telescope/telescope.nvim",
@@ -76,8 +76,8 @@ return {
 					"client/graphql/",
 					"**/generatedTypesAndHooks.ts",
 				},
-			}
-		}
+			},
+		},
 	},
 	-- add tw highlight for colors
 	{

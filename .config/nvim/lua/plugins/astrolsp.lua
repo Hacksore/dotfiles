@@ -88,11 +88,16 @@ return {
 				},
 			},
 		},
-		-- A custom `on_attach` function to be run after the default `on_attach` function
-		-- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
 		on_attach = function(client, bufnr)
-			-- this would disable semanticTokensProvider for all clients
-			-- client.server_capabilities.semanticTokensProvider = nil
+			-- only do when tailwind lsp attached
+			if client.name == "tailwindcss" then
+				local tw_highlight = require("tailwind-highlight")
+				tw_highlight.setup(client, bufnr, {
+					single_column = false,
+					mode = "background",
+					debounce = 200,
+				})
+			end
 		end,
 	},
 }

@@ -15,8 +15,11 @@ return {
 					dotfyle_metadata.generate({})
 					local home = vim.fn.getenv("HOME")
 					vim.cmd("!npx prettier --write " .. dotfyle_metadata.dotfyle_path)
-					local move_dir_string =
-						string.format("!mv %s %s", dotfyle_metadata.dotfyle_path, home .. "/.config/nvim/lua/user")
+					local move_dir_string = string.format(
+						"!mv %s %s",
+						dotfyle_metadata.dotfyle_path,
+						home .. "/.config/nvim/lua/dotfyle.json"
+					)
 					vim.cmd(move_dir_string)
 				end,
 			})

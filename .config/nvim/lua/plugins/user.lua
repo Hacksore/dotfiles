@@ -13,6 +13,7 @@ return {
 				callback = function()
 					local dotfyle_metadata = require("dotfyle_metadata")
 					dotfyle_metadata.generate({})
+					-- make it look nice
 					vim.cmd("!npx prettier --write " .. dotfyle_metadata.dotfyle_path)
 				end,
 			})

@@ -83,3 +83,5 @@ complete -C '/opt/homebrew/bin/aws_completer' aws
 
 # allow alias to be expanded
 setopt completealiases
+
+export PATH="$PATH:$HOME/go/bin"

@@ -1,5 +1,5 @@
 {
-  "distribution": "custom",
+  "distribution": "AstroNvim",
   "masonTools": [
     "astro-ls",
     "bash-language-server",

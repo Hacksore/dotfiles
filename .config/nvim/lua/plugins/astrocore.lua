@@ -21,7 +21,6 @@ return {
         relativenumber = false, -- Disable relative line numbers
       },
     },
-    -- mappings to be set up on attaching of a language server
     mappings = {
       v = {
         -- stop making the pasted text go into my clipboard buffer

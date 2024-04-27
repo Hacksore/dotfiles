@@ -1,8 +1,8 @@
 vim.filetype.add({
-  extension = {
-    mdx = "markdown",
-  },
-  filename = {
-    [".zshrc"] = "sh",
-  },
+	extension = {
+		mdx = "markdown",
+	},
+	filename = {
+		[".zshrc"] = "sh",
+	},
 })

@@ -29,11 +29,11 @@ return {
 				},
 			},
 			n = {
-				["<leader>ff"] = { "<cmd>Telescope find_files hidden=true<cr>", desc = "Telescope find files" },
-				["<leader>gg"] = { "<cmd>silent !tmux neww lazygit<cr>", desc = "Open lazygit" },
-				["<leader>1"] = { "<cmd>bprevious<cr>", desc = "Switch buffer backwards" },
-				["<leader>2"] = { "<cmd>bnext<cr>", desc = "Switch buffer forward" },
-				["<leader>h"] = false,
+				["<Leader>ff"] = { "<cmd>Telescope find_files hidden=true<cr>", desc = "Telescope find files" },
+				["<Leader>gg"] = { "<cmd>silent !tmux neww lazygit<cr>", desc = "Open lazygit" },
+				["<Leader>1"] = { "<cmd>bprevious<cr>", desc = "Switch buffer backwards" },
+				["<Leader>2"] = { "<cmd>bnext<cr>", desc = "Switch buffer forward" },
+				["<Leader>h"] = false,
 				-- NOTE: this is a bunch of stuff for tmux
 				["<C-n>"] = {
 					function()
@@ -50,7 +50,7 @@ return {
 				-- open the fuzzy menu for finding projects
 				["<C-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<cr>", desc = "Open tmux sessionizer" },
 				-- test auto import
-				["<leader>ll"] = {
+				["<Leader>ll"] = {
 					function()
 						vim.lsp.buf.code_action({
 							context = { only = { "source.addMissingImports" }, triggerKind = 1 },

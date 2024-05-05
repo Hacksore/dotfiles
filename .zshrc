@@ -76,6 +76,9 @@ export PATH="$HOME/bin:$PATH"
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
 
+# clear the suggestion with ctrl + space
+bindkey '^j' autosuggest-accept
+
 # add aws autocomplet
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit

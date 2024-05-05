@@ -139,6 +139,7 @@
     "marksman",
     "prismals",
     "pylsp",
+    "ruby_lsp",
     "rust_analyzer",
     "tailwindcss",
     "tsserver",

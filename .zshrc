@@ -11,11 +11,11 @@ ZSH_THEME="murilasso"
 # Load any cool plugins
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins#plugins
 plugins=(
-  nvm
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  # TODO: maybe if i could toggle this on with a hotkey it'd be nice?
-  # zsh-vi-mode
+	nvm
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	# TODO: maybe if i could toggle this on with a hotkey it'd be nice?
+	# zsh-vi-mode
 )
 
 # allowing for use of .config dir
@@ -76,7 +76,7 @@ export PATH="$HOME/bin:$PATH"
 # clear the suggestion with ctrl + space
 bindkey '^ ' autosuggest-clear
 
-# clear the suggestion with ctrl + space
+# accept the suggestion with ctrl + j
 bindkey '^j' autosuggest-accept
 
 # add aws autocomplet

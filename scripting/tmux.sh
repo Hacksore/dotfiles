@@ -25,4 +25,4 @@ bindkey '^p' switch_tmux_window_prev
 bindkey '^n' switch_tmux_window_next
 
 # Bind a key to invoke the custom function
-bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^f "tmux-sessionizer\r\n"

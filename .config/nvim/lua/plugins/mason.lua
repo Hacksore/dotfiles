@@ -15,7 +15,7 @@ return {
 				"jsonls",
 				"marksman",
 				"rust_analyzer",
-				"ruby_ls",
+				"ruby_lsp",
 				"jdtls",
 				"tailwindcss",
 				"tsserver",

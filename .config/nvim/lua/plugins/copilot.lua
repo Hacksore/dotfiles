@@ -4,6 +4,7 @@ return {
 		cmd = "Copilot",
 		-- event = "InsertEnter",
 		config = function()
+			vim.notify("Setting up copilot", vim.log.levels.INFO)
 			require("copilot").setup({
 				suggestion = {
 					enabled = true,

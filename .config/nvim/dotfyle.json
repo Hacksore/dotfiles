@@ -26,6 +26,7 @@
     "vscode-eslint-language-server",
     "vscode-html-language-server",
     "vscode-json-language-server",
+    "xmlformat",
     "yaml-language-server"
   ],
   "plugins": [
@@ -100,6 +101,7 @@
   "treesitterParsers": [
     "astro",
     "bash",
+    "bash",
     "c",
     "css",
     "diff",
@@ -109,8 +111,10 @@
     "javascript",
     "json",
     "lua",
+    "lua",
     "markdown",
     "markdown_inline",
+    "python",
     "python",
     "query",
     "ruby",

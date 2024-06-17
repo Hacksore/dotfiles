@@ -23,7 +23,9 @@
     "vscode-eslint-language-server",
     "vscode-html-language-server",
     "vscode-json-language-server",
-    "yaml-language-server"
+    "yaml-language-server",
+    "yamlfix",
+    "yamlfmt"
   ],
   "plugins": [
     "AstroNvim/AstroNvim",
@@ -55,7 +57,6 @@
     "hrsh7th/nvim-cmp",
     "jay-babu/mason-null-ls.nvim",
     "jay-babu/mason-nvim-dap.nvim",
-    "jose-elias-alvarez/null-ls.nvim",
     "kevinhwang91/nvim-ufo",
     "kevinhwang91/promise-async",
     "kkoomen/vim-doge",

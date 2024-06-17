@@ -3,8 +3,6 @@
   "masonTools": [
     "astro-ls",
     "bash-language-server",
-    "debugpy",
-    "debugpy-adapter",
     "docker-compose-langserver",
     "docker-langserver",
     "gopls",
@@ -18,7 +16,6 @@
     "ruby-lsp",
     "rust-analyzer",
     "shfmt",
-    "stylua",
     "tailwindcss-language-server",
     "typescript-language-server",
     "vls",
@@ -26,7 +23,6 @@
     "vscode-eslint-language-server",
     "vscode-html-language-server",
     "vscode-json-language-server",
-    "xmlformat",
     "yaml-language-server"
   ],
   "plugins": [
@@ -59,6 +55,7 @@
     "hrsh7th/nvim-cmp",
     "jay-babu/mason-null-ls.nvim",
     "jay-babu/mason-nvim-dap.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
     "kevinhwang91/nvim-ufo",
     "kevinhwang91/promise-async",
     "kkoomen/vim-doge",
@@ -133,6 +130,7 @@
     "cssls",
     "docker_compose_language_service",
     "dockerls",
+    "eslint",
     "gopls",
     "graphql",
     "html",

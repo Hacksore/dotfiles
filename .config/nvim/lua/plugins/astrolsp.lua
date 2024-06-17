@@ -13,7 +13,7 @@ return {
 			format_on_save = {
 				enabled = false,
 			},
-			timeout_ms = 1000,
+			timeout_ms = 30000,
 		},
 		---@diagnostic disable-next-line: missing-fields
 		config = {

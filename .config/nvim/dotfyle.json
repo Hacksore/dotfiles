@@ -24,7 +24,6 @@
     "vscode-html-language-server",
     "vscode-json-language-server",
     "yaml-language-server",
-    "yamlfix",
     "yamlfmt"
   ],
   "plugins": [

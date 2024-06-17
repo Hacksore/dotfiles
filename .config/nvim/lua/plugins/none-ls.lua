@@ -10,9 +10,8 @@ return {
 		config.sources = {
 			null_ls.builtins.formatting.stylua,
 			null_ls.builtins.formatting.prettier,
-			-- yaml formatting 🥳
-			null_ls.builtins.formatting.yamlfmt,
 		}
+
 		return config -- return final config table
 	end,
 }

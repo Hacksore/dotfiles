@@ -4,5 +4,6 @@ vim.filetype.add({
 	},
 	filename = {
 		[".zshrc"] = "sh",
+		[".gitconfig-personal"] = "gitconfig",
 	},
 })

@@ -23,8 +23,7 @@
     "vscode-eslint-language-server",
     "vscode-html-language-server",
     "vscode-json-language-server",
-    "yaml-language-server",
-    "yamlfmt"
+    "yaml-language-server"
   ],
   "plugins": [
     "AstroNvim/AstroNvim",

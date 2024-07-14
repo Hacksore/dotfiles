@@ -28,7 +28,7 @@ return {
 			opt = { -- vim.opt.<key>
 				spell = true, -- Enable spell checking
 				wrap = true,
-				spellfile = vim.fn.expand("~/.config/astronvim/spell/en.utf-8.add"),
+				spellfile = vim.fn.expand("~/.config/nvim/spell/en.utf-8.add"),
 				swapfile = false, -- Disable swap files
 				title = true, -- Allow nvim to update the term title
 				relativenumber = false, -- Disable relative line numbers

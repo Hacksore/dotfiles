@@ -3,7 +3,9 @@ tap "cloudflare/cloudflare"
 tap "espanso/espanso"
 tap "fsouza/prettierd"
 tap "homebrew/bundle"
+tap "homebrew/cask"
 tap "homebrew/cask-fonts"
+tap "homebrew/core"
 tap "homebrew/services"
 tap "libsql/sqld"
 tap "oven-sh/bun"
@@ -31,6 +33,7 @@ brew "libxcb"
 brew "libx11"
 brew "openjdk@11"
 brew "bazel"
+brew "btop"
 brew "caddy"
 brew "clip"
 brew "cloudflared"
@@ -45,7 +48,6 @@ brew "diff-so-fancy"
 brew "docker", link: false
 brew "dotnet"
 brew "elixir"
-brew "emacs", link: false
 brew "fd"
 brew "ffmpeg"
 brew "flyctl"
@@ -94,6 +96,7 @@ brew "railway"
 brew "rancher-cli"
 brew "recode"
 brew "ripgrep"
+brew "ripgrep-all", args: ["HEAD"]
 brew "rust-analyzer"
 brew "rustup-init"
 brew "shellcheck"
@@ -138,7 +141,6 @@ cask "db-browser-for-sqlite"
 cask "discord"
 cask "docker"
 cask "elgato-stream-deck"
-cask "emacs"
 cask "epic-games"
 cask "espanso"
 cask "figma"
@@ -201,19 +203,6 @@ cask "wezterm"
 cask "xquartz"
 cask "zed"
 cask "zoom"
-mas "1Password for Safari", id: 1569813296
-mas "Blurred", id: 1497527363
-mas "Dato", id: 1470584107
-mas "Final Cut Pro", id: 424389933
-mas "GarageBand", id: 682658836
-mas "Hidden Bar", id: 1452453066
-mas "iBlurred", id: 1667815215
-mas "Keynote", id: 409183694
-mas "Microsoft Remote Desktop", id: 1295203466
-mas "Motion", id: 434290957
-mas "Numbers", id: 409203825
-mas "WhatsApp", id: 1147396723
-mas "Xcode", id: 497799835
 vscode "1password.op-vscode"
 vscode "abronan.capnproto-syntax"
 vscode "adpyke.codesnap"
@@ -283,6 +272,7 @@ vscode "simonsiefke.svg-preview"
 vscode "statelyai.stately-vscode"
 vscode "stephanvs.dot"
 vscode "streetsidesoftware.code-spell-checker"
+vscode "svelte.svelte-vscode"
 vscode "tamasfe.even-better-toml"
 vscode "tauri-apps.tauri-vscode"
 vscode "toba.vsfire"

@@ -29,6 +29,7 @@ return {
 				spell = true, -- Enable spell checking
 				wrap = true,
 				spellfile = vim.fn.expand("~/.config/nvim/spell/en.utf-8.add"),
+				shiftwidth = 2,
 				swapfile = false, -- Disable swap files
 				title = true, -- Allow nvim to update the term title
 				relativenumber = false, -- Disable relative line numbers

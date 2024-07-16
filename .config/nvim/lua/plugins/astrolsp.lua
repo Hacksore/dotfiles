@@ -28,6 +28,14 @@ return {
 					})
 				end,
 			},
+			---@diagnostic disable-next-line: missing-fields
+			rust_analyzer = {
+				enabled = true,
+				on_attach = function()
+					-- FUCK you rust analyzer, i want two spaces
+					vim.opt.shiftwidth = 2
+				end,
+			},
 		},
 	},
 }

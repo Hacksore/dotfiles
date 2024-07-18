@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local act = wezterm.action
 
--- Colours
 config.colors = {
   selection_bg = "#3e4452",
   selection_fg = "#abb2bf",
@@ -62,6 +62,15 @@ config.keys = {
     key = "RightArrow",
     mods = "OPT",
     action = wezterm.action({ SendString = "\x1bf" }),
+  },
+  -- shell to redraw its prompt
+  {
+    key = "k",
+    mods = "SUPER",
+    action = act.Multiple {
+      act.ClearScrollback "ScrollbackAndViewport",
+      act.SendKey { key = "L", mods = "CTRL" },
+    },
   },
 }
 

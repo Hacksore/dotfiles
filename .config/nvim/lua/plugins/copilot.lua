@@ -2,9 +2,8 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		-- event = "InsertEnter",
+		event = "InsertEnter",
 		config = function()
-			vim.notify("Setting up copilot", vim.log.levels.INFO)
 			require("copilot").setup({
 				suggestion = {
 					enabled = true,

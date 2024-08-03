@@ -11,9 +11,9 @@ return {
 					debounce = 150,
 					keymap = {
 						-- Nice key to accept so it wont interfere with autocomplete
-						accept = "<C-j>",
+						accept = "<C-J>",
 						-- Nice to dismiss it
-						dismiss = "<C-k>",
+						dismiss = "<C-K>",
 					},
 				},
 			})

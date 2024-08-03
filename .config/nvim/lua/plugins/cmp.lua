@@ -8,13 +8,13 @@ return {
 			opts.mapping = {}
 		end
 
-		opts.mapping["<C-j>"] = cmp.mapping(function()
+		opts.mapping["<C-J>"] = cmp.mapping(function()
 			if copilot.is_visible() then
 				copilot.accept()
 			end
-		end)
+    end, { "i", "s" })
 
-		opts.mapping["<C-k>"] = cmp.mapping(function()
+		opts.mapping["<C-K>"] = cmp.mapping(function()
 			if copilot.is_visible() then
 				copilot.dismiss()
 			end

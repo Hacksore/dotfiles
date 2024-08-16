@@ -1,8 +1,11 @@
 # Fix these for nvim
 - format on save in typescript files (caused by pack?)
-- files the have strange amounts of JSX will break prettier formatting
+  - pack: https://github.com/AstroNvim/astrocommunity/tree/main/lua/astrocommunity/pack/typescript
+- files the have strange amounts of JSX will break prettier formatting and cause weird angle brace indents
+    - strangely when auto format happens it's fine it's just when using <Leader>lf
 - control+o/i should reopen a closed buffer
-- using `ctrl+f` should work in neotree
+  - tracked via https://github.com/neovim/neovim/issues:set jumpoptions-=unload/28968
+- using `ctrl+f` should work in neotree but as of now it does nothing (probably conflicting keybind)
 - big json files still halt the editor
-- fix the wonky formatting with angle braces in JSX/TSX files
-  - strangely when auto format happens it's fine it's just <Leader>lf
+  - astro seems to have some optimizations that suck cause it still makes the edit crawl
+- no longer can i control+hjkl to close toggle term

@@ -30,9 +30,10 @@ return {
 				},
 			},
 			t = {
-				["<C-j>"] = function()
-					handle_toggleterm_suggestion_accept()
-				end,
+				["<C-H>"] = { "<Cmd>wincmd h<CR>", desc = "Terminal left window navigation" },
+				["<C-J>"] = { "<Cmd>wincmd j<CR>", desc = "Terminal down window navigation" },
+				["<C-K>"] = { "<Cmd>wincmd k<CR>", desc = "Terminal up window navigation" },
+				["<C-L>"] = { "<Cmd>wincmd l<CR>", desc = "Terminal right window navigation" },
 			},
 			n = {
 				["<Leader>ff"] = { "<cmd>Telescope find_files hidden=true<cr>", desc = "Telescope find files" },

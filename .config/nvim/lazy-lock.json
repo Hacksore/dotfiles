@@ -35,7 +35,6 @@
   "mini.bufremove": { "branch": "main", "commit": "e6044aa28e61d4dd9ec86194d6f81743eced0c1c" },
   "neo-tree.nvim": { "branch": "main", "commit": "8c75e8a2949cd6cd35525799200a8d34471ee9eb" },
   "neoconf.nvim": { "branch": "main", "commit": "a6e09d22fda3ee5ce472e135a0df9b96d26706a7" },
-  "neodev.nvim": { "branch": "main", "commit": "1f4ebcc10852518166ce165e57d425a4265a10d4" },
   "noice.nvim": { "branch": "main", "commit": "448bb9c524a7601035449210838e374a30153172" },
   "none-ls.nvim": { "branch": "main", "commit": "cfa65d86e21eeb60544d5e823f6db43941322a53" },
   "nui.nvim": { "branch": "main", "commit": "a0fd35fcbb4cb479366f1dc5f20145fd718a3733" },

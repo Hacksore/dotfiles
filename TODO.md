@@ -5,7 +5,6 @@
     - strangely when auto format happens it's fine it's just when using <Leader>lf
 - control+o/i should reopen a closed buffer
   - tracked via https://github.com/neovim/neovim/issues:set jumpoptions-=unload/28968
-- using `ctrl+f` should work in neotree but as of now it does nothing (probably conflicting keybind)
 - big json files still halt the editor
   - astro seems to have some optimizations that suck cause it still makes the edit crawl
-- no longer can i control+hjkl to close toggle term
+

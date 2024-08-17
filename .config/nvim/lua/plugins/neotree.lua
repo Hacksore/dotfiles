@@ -14,6 +14,11 @@ return {
 		},
 		window = { position = "right", width = 100 },
 		filesystem = {
+			window = {
+				mappings = {
+					["<C-f>"] = "<cmd>silent !tmux neww tmux-sessionizer<cr>"
+				},
+			},
 			filtered_items = {
 				hide_dotfiles = false,
 				hide_gitignored = true,

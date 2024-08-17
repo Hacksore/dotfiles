@@ -1,8 +1,8 @@
 # Fix these for nvim
-- files the have strange amounts of JSX will break prettier formatting and cause weird angle brace indents
-  - strangely when auto format happens it's fine it's just when using <Leader>lf
 
 ### Notes
+- files the have strange amounts of JSX will break prettier formatting and cause weird angle brace indents
+  - I think this is fixed now 😳
 - big json files still halt the editor
   - tweaked this by tuning the buffer and line size
 - control+o/i should reopen a closed buffer [tracked via this issue](https://github.com/neovim/neovim/issues/28968)

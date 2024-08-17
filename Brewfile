@@ -1,7 +1,6 @@
 tap "1password/tap"
 tap "cloudflare/cloudflare"
 tap "espanso/espanso"
-tap "fsouza/prettierd"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"

@@ -1,4 +1,7 @@
 # Fix these for nvim
+- treesitter typescript and tsx are bugged with `type`
+  - https://github.com/tree-sitter/tree-sitter-typescript/issues/276
+  - https://github.com/AstroNvim/AstroNvim/issues/1316
 - make buffer change hotkey respect order in UI
 - git gutter should always auto reload and not get cached
 

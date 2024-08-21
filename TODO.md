@@ -1,4 +1,6 @@
 # Fix these for nvim
+- make buffer change hotkey respect order in UI
+- git gutter should always auto reload and not get cached
 
 ### Notes
 - files the have strange amounts of JSX will break prettier formatting and cause weird angle brace indents

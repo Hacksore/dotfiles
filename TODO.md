@@ -2,6 +2,8 @@
 - treesitter typescript and tsx are bugged with `type`
   - https://github.com/tree-sitter/tree-sitter-typescript/issues/276
   - https://github.com/AstroNvim/AstroNvim/issues/1316
+  - ![image](https://github.com/user-attachments/assets/028da36b-7151-4147-9046-57132cfb4c8d)
+
 - make buffer change hotkey respect order in UI
 - git gutter should always auto reload and not get cached
 

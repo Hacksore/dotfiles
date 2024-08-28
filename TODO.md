@@ -5,7 +5,10 @@
   - ![image](https://github.com/user-attachments/assets/028da36b-7151-4147-9046-57132cfb4c8d)
 
 - make buffer change hotkey respect order in UI
+  - currency the UI lays them out as FIFO but when navigating via the hotkey they are out of order?
 - git gutter should always auto reload and not get cached
+- files should just update if the buffer changes on the filesystem
+- learn how to use undo tree 😂
 
 ### Notes
 - files the have strange amounts of JSX will break prettier formatting and cause weird angle brace indents

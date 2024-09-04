@@ -22,3 +22,8 @@ end, {
 keymap.set("n", "<Leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "ToggleTerm float" })
 keymap.set("n", "<Leader>th", "<Cmd>ToggleTerm size=10 direction=horizontal<CR>", { desc = "ToggleTerm horiz" })
 keymap.set("n", "<Leader>tv", "<Cmd>ToggleTerm size=80 direction=vertical<CR>", { desc = "ToggleTerm vert" })
+
+keymap.set("t", "<C-H>", "<Cmd>wincmd h<CR>", { desc = "Terminal left window navigation" })
+keymap.set("t", "<C-J>", "<Cmd>wincmd j<CR>", { desc = "Terminal down window navigation" })
+keymap.set("t", "<C-K>", "<Cmd>wincmd k<CR>", { desc = "Terminal up window navigation" })
+keymap.set("t", "<C-L>", "<Cmd>wincmd l<CR>", { desc = "Terminal right window navigation" })

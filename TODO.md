@@ -1,5 +1,16 @@
+# NEW CONFIG CAN MABYE FIX ALL OF THESE THINGS
+
+action items
+
+- get toggle term working
+- fix all keybinds
+
+---
+
 # Fix these for nvim
+
 - treesitter typescript and tsx are bugged with `type`
+
   - https://github.com/tree-sitter/tree-sitter-typescript/issues/276
   - https://github.com/AstroNvim/AstroNvim/issues/1316
   - ![image](https://github.com/user-attachments/assets/028da36b-7151-4147-9046-57132cfb4c8d)
@@ -11,6 +22,7 @@
 - learn how to use undo tree 😂
 
 ### Notes
+
 - files the have strange amounts of JSX will break prettier formatting and cause weird angle brace indents
   - I think this is fixed now 😳
 - big json files still halt the editor

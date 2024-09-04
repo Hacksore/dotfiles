@@ -15,3 +15,8 @@ keymap.set("n", "<Leader>o", function()
 end, {
 	desc = "Toggle Explorer Focus",
 })
+
+-- toggle term keys
+keymap.set("n", "<Leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "ToggleTerm float" })
+keymap.set("n", "<Leader>th", "<Cmd>ToggleTerm size=10 direction=horizontal<CR>", { desc = "ToggleTerm horiz" })
+keymap.set("n", "<Leader>tf", "<Cmd>ToggleTerm size=80 direction=vertical<CR>", { desc = "ToggleTerm vert" })

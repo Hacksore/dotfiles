@@ -5,6 +5,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
+		{ "princejoogie/tailwind-highlight.nvim" },
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -63,11 +64,20 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		local tw_highlight = require("tailwind-highlight")
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
+					on_attach = function(client, bufnr)
+						-- rest of you config
+						tw_highlight.setup(client, bufnr, {
+							single_column = false,
+							mode = "background",
+							debounce = 200,
+						})
+					end,
 				})
 			end,
 			["graphql"] = function()

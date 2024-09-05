@@ -8,6 +8,7 @@ keymap.set("n", "<Leader>gg", "<cmd>silent !tmux neww lazygit<cr>", { desc = "Op
 keymap.set("n", "<C-n>", function()
 	vim.fn.system("tmux switch-client -n")
 end, { desc = "Switch tmux session forward" })
+keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>", { desc = "Open tmux sessionizer" })
 
 keymap.set("n", "<C-p>", function()
 	vim.fn.system("tmux switch-client -p")

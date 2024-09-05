@@ -2,9 +2,7 @@
 
 action items
 
-- neotree should open at the file you are in
 - toggleterm colors are awful 🤮
-- canceling a search should unset the hlsearch or maybe i just disable hlsearch
 
 ---
 

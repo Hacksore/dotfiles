@@ -17,6 +17,7 @@ return {
 		},
 		window = { position = "right", width = 100 },
 		filesystem = {
+			follow_current_file = { enabled = true },
 			window = {
 				mappings = {
 					["<C-f>"] = "<cmd>silent !tmux neww tmux-sessionizer<cr>",

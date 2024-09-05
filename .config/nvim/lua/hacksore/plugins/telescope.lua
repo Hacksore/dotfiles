@@ -44,6 +44,7 @@ return {
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 
+		keymap.set("n", "<Leader>b", "<cmd>Telescope buffers<cr>", { desc = "Telescope buffers" })
 		keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files hidden=true<cr>", { desc = "Telescope find files" })
 		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
 		keymap.set("n", "<Leader>fw", function()

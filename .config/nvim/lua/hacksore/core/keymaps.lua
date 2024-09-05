@@ -48,3 +48,7 @@ end, { desc = "Hover diagnostics" })
 
 -- random things
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- navigation
+keymap.set("n", "<Leader>n", "<Cmd>bnext<CR>", { desc = "Next buffer" })
+keymap.set("n", "<Leader>p", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })

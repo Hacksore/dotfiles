@@ -55,9 +55,12 @@ return {
 				theme = my_lualine_theme,
 			},
 			sections = {
-
-				lualine_x = {},
-				lualine_y = {},
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = { "filename" },
+				lualine_x = { "encoding", "fileformat", "filetype" },
+				lualine_y = { "progress" },
+				lualine_z = { "location" },
 			},
 		})
 	end,

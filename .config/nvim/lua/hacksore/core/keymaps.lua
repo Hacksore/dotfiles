@@ -39,3 +39,8 @@ keymap.set("t", "<C-L>", "<Cmd>wincmd l<CR>", { desc = "Terminal right window na
 keymap.set("n", "<Leader>lf", function()
 	vim.lsp.buf.format()
 end, { desc = "Format buffer" })
+
+-- lsp things
+keymap.set("n", "<Leader>ld", function()
+	vim.diagnostic.open_float()
+end, { desc = "Hover diagnostics" })

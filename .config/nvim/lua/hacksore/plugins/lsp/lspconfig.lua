@@ -101,7 +101,6 @@ return {
         })
       end,
       ["biome"] = function()
-        -- FIXME: not working yet
         lspconfig["biome"].setup({
           capabilities = capabilities,
           filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }

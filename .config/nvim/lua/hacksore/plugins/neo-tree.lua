@@ -15,7 +15,13 @@ return {
         end,
       },
     },
-    window = { position = "right", width = 100 },
+    window = {
+      position = "right",
+      width = 100,
+      mappings = {
+        O = "system_open",
+      },
+    },
     filesystem = {
       follow_current_file = { enabled = true },
       window = {
@@ -41,6 +47,11 @@ return {
           return name
         end,
       },
+      commands = {
+        system_open = function(state)
+          vim.ui.open(state.tree:get_node():get_id())
+        end,
+      }
     },
     source_selector = {
       winbar = false,

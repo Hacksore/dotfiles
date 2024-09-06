@@ -4,12 +4,13 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim",                   opts = {} },
+    { "folke/neodev.nvim", opts = {} },
     { "princejoogie/tailwind-highlight.nvim" },
   },
   config = function()
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
+    lspconfig.sourcekit.setup { {} }
 
     -- import mason_lspconfig plugin
     local mason_lspconfig = require("mason-lspconfig")

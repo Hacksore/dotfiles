@@ -113,6 +113,12 @@ return {
           settings = {
             Lua = {
               -- make the language server recognize "vim" global
+              format = {
+                enable = true,
+                defaultConfig = {
+                  align_array_table = "false",
+                }
+              },
               diagnostics = {
                 globals = { "vim" },
               },

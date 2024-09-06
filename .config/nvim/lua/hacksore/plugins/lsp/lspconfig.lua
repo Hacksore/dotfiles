@@ -70,21 +70,34 @@ return {
       function(server_name)
         lspconfig[server_name].setup({
           capabilities = capabilities,
+        })
+      end,
+      ["graphql"] = function()
+        lspconfig["graphql"].setup({
+          capabilities = capabilities,
+          filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
+        })
+      end,
+      ["rust_analyzer"] = function()
+        lspconfig["rust_analyzer"].setup({
+          capabilities = capabilities,
+          on_attach = function()
+            -- TODO: allow parsing the closes file rustfmt.toml and parse out tab_spaces=<number>
+            vim.opt.shiftwidth = 2
+          end
+        })
+      end,
+      ["tailwindcss"] = function()
+        lspconfig["tailwindcss"].setup({
+          capabilities = capabilities,
           on_attach = function(client, bufnr)
-            -- rest of you config
+            local tw_highlight = require("tailwind-highlight")
             tw_highlight.setup(client, bufnr, {
               single_column = false,
               mode = "background",
               debounce = 200,
             })
           end,
-        })
-      end,
-      ["graphql"] = function()
-        -- configure graphql language server
-        lspconfig["graphql"].setup({
-          capabilities = capabilities,
-          filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
         })
       end,
       ["biome"] = function()
@@ -95,7 +108,6 @@ return {
         })
       end,
       ["lua_ls"] = function()
-        -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
           capabilities = capabilities,
           settings = {

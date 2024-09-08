@@ -17,7 +17,7 @@ return {
     },
     window = {
       position = "right",
-      width = 100,
+      width = 70,
       mappings = {
         O = "system_open",
       },

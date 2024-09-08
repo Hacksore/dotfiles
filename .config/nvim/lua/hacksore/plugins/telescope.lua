@@ -24,9 +24,16 @@ return {
     })
 
     telescope.setup({
+      pickers = {
+        live_grep = {
+          additional_args = function()
+            return { "--hidden" }
+          end
+        },
+      },
       defaults = {
         path_display = { "smart" },
-        file_ignore_patterns = { "node_modules", ".git" },
+        file_ignore_patterns = { "node_modules/", ".git/" },
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -50,12 +57,5 @@ return {
     keymap.set("n", "<Leader>fw", function()
       require("telescope.builtin").live_grep()
     end, { desc = "Find words" })
-    keymap.set("n", "<Leader>fW", function()
-      require("telescope.builtin").live_grep({
-        additional_args = function(args)
-          return vim.list_extend(args, { "--hidden", "--no-ignore" })
-        end,
-      })
-    end, { desc = "Find words in all files" })
   end,
 }

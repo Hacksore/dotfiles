@@ -2,7 +2,6 @@
 
 action items
 
-- toggleterm colors are awful 🤮
 - toggleterm should open where neotree is opened at
 - rust should scan for a rustfmt.toml so that it can intepret
 - create new bufffer split commands

@@ -88,3 +88,5 @@ complete -C '/opt/homebrew/bin/aws_completer' aws
 setopt completealiases
 
 export PATH="$PATH:$HOME/go/bin"
+
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib"   

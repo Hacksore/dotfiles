@@ -1,11 +1,9 @@
 [user]
 	name = Sean Boult
 	email = 996134+Hacksore@users.noreply.github.com
-	signingkey = 6E7BA400D9590E88
-[includeIf "gitdir:~/work/"]
+	signingkey = ~/.ssh/id_rsa.pub 
+[includeIf "gitdir:~/work*/**"]
     path = ~/.gitconfig-work
-[commit]
-	gpgsign = true
 [submodule]
 	recurse = true
 [init]
@@ -45,3 +43,9 @@
 [alias]
 	# this will clean ignored packages expect for the top level node_modules 
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers

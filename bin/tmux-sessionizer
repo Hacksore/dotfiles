@@ -4,7 +4,7 @@ if [[ $# -eq 1 ]]; then
   selected=$1
 else
   # find all directories 
-  path_to_open=$(fd . ~/code/opensource ~/ ~/code/repro ~/code/interview ~/work --hidden -d 1 | sed "s|^$HOME|~|")
+  path_to_open=$(fd . ~/code ~/ ~/repro ~/workplace ~/work --hidden -d 1 | sed "s|^$HOME|~|")
 
   # remove trailing slash from each line of fd output
   path_to_open=$(echo "$path_to_open" | sed 's|/$||')

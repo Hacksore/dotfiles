@@ -48,6 +48,7 @@ end, { desc = "Hover diagnostics" })
 
 -- random things
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+keymap.set("n", "fn", "<Cmd>enew<CR>", { desc = "Open a new window" })
 
 -- navigation
 keymap.set("n", "<Leader>n", "<Cmd>bnext<CR>", { desc = "Next buffer" })

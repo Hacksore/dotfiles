@@ -38,7 +38,7 @@ return {
         "jsonls",
         "docker_compose_language_service",
         "biome",
-        "astro",
+        "astro-language-server",
         "yamlls",
         "graphql",
         "prismals",

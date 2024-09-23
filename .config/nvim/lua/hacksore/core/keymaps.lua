@@ -6,24 +6,24 @@ local keymap = vim.keymap
 keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files hidden=true<cr>", { desc = "Telescope find files" })
 keymap.set("n", "<Leader>gg", "<cmd>silent !tmux neww lazygit<cr>", { desc = "Open lazygit in tmux" })
 keymap.set("n", "<C-n>", function()
-	vim.fn.system("tmux switch-client -n")
+  vim.fn.system("tmux switch-client -n")
 end, { desc = "Switch tmux session forward" })
 keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>", { desc = "Open tmux sessionizer" })
 
 keymap.set("n", "<C-p>", function()
-	vim.fn.system("tmux switch-client -p")
+  vim.fn.system("tmux switch-client -p")
 end, { desc = "Switch tmux session back" })
 
 -- neotree
 keymap.set("n", "<Leader>e", "<Cmd>Neotree toggle<CR>", { desc = "Toggle Explorer" })
 keymap.set("n", "<Leader>o", function()
-	if vim.bo.filetype == "neo-tree" then
-		vim.cmd.wincmd("p")
-	else
-		vim.cmd.Neotree("focus")
-	end
+  if vim.bo.filetype == "neo-tree" then
+    vim.cmd.wincmd("p")
+  else
+    vim.cmd.Neotree("focus")
+  end
 end, {
-	desc = "Toggle Explorer Focus",
+  desc = "Toggle Explorer Focus",
 })
 
 -- toggle term keys
@@ -38,17 +38,19 @@ keymap.set("t", "<C-L>", "<Cmd>wincmd l<CR>", { desc = "Terminal right window na
 
 -- format
 keymap.set("n", "<Leader>lf", function()
-	vim.lsp.buf.format()
+  vim.lsp.buf.format()
 end, { desc = "Format buffer" })
 
 -- lsp things
 keymap.set("n", "<Leader>ld", function()
-	vim.diagnostic.open_float()
+  vim.diagnostic.open_float()
 end, { desc = "Hover diagnostics" })
 
 -- random things
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 keymap.set("n", "fn", "<Cmd>enew<CR>", { desc = "Open a new window" })
+-- stop pasted text from writing the text into clipboard buffer
+keymap.set("v", "p", [["_dP]], { desc = "Paste without yanking" })
 
 -- navigation
 keymap.set("n", "<Leader>n", "<Cmd>bnext<CR>", { desc = "Next buffer" })

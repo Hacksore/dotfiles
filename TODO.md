@@ -2,6 +2,7 @@
 
 ### action items
 
+- p1 remove snippets
 - toggleterm should open where neotree is opened at
 - create new bufffer split commands for now i can use split and vsplit
 - prollly need some perf guards for large files on a single line to not kill tree sitter or an lsp

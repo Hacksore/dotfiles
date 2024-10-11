@@ -45,17 +45,25 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(),    -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<C-J>"] = cmp.mapping(function(fallback)
+          if is_visible(cmp) then
+            cmp.select_next_item()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<C-K>"] = cmp.mapping(function(fallback)
+          if is_visible(cmp) then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
           if is_visible(cmp) then
             cmp.select_next_item()
-          elseif
-              vim.api.nvim_get_mode().mode ~= "c"
-              and vim.snippet
-              and vim.snippet.active({ direction = 1 })
-          then
-            vim.schedule(function()
-              vim.snippet.jump(1)
-            end)
           elseif has_words_before() then
             cmp.complete()
           else
@@ -65,14 +73,6 @@ return {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if is_visible(cmp) then
             cmp.select_prev_item()
-          elseif
-              vim.api.nvim_get_mode().mode ~= "c"
-              and vim.snippet
-              and vim.snippet.active({ direction = -1 })
-          then
-            vim.schedule(function()
-              vim.snippet.jump(-1)
-            end)
           else
             fallback()
           end

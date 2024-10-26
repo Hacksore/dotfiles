@@ -45,6 +45,12 @@ end, { desc = "Format buffer" })
 keymap.set("n", "<Leader>ld", function()
   vim.diagnostic.open_float()
 end, { desc = "Hover diagnostics" })
+keymap.set("n", "<Leader>ln", function()
+  vim.diagnostic.goto_next()
+end, { desc = "Next error" })
+keymap.set("n", "<Leader>ln", function()
+  vim.diagnostic.goto_prev()
+end, { desc = "prev error" })
 
 -- random things
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")

@@ -3,7 +3,6 @@
 ### action items
 
 - prollly need some perf guards for large files on a single line to not kill tree sitter or an lsp
-- need to have a way to yank file/folder names in neotree
 - rust should scan for a rustfmt.toml so that it can intepret
 
 HACK: if i use nvim@HEAD i can use `jumpoptions=view` to get around this for now

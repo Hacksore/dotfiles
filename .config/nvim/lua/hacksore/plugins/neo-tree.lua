@@ -20,6 +20,7 @@ return {
       width = 70,
       mappings = {
         O = "system_open",
+        Y = "copy_selector",
       },
     },
     filesystem = {
@@ -51,10 +52,42 @@ return {
         system_open = function(state)
           vim.ui.open(state.tree:get_node():get_id())
         end,
+        copy_selector = function(state)
+          local node = state.tree:get_node()
+          local filepath = node:get_id()
+          local filename = node.name
+          local modify = vim.fn.fnamemodify
+
+          local vals = {
+            ["EXTENSION"] = modify(filename, ":e"),
+            ["URI"] = vim.uri_from_fname(filepath),
+            ["PATH"] = filepath,
+            ["PATH (CWD)"] = modify(filepath, ":."),
+            ["PATH (HOME)"] = modify(filepath, ":~"),
+            ["FILENAME"] = filename,
+            ["BASENAME"] = modify(filename, ":r"),
+          }
+
+          local options = vim.tbl_filter(function(val) return vals[val] ~= "" end, vim.tbl_keys(vals))
+          if vim.tbl_isempty(options) then
+            return
+          end
+          table.sort(options)
+          vim.ui.select(options, {
+            prompt = "Choose to copy to clipboard:",
+            format_item = function(item) return ("%s: %s"):format(item, vals[item]) end,
+          }, function(choice)
+            local result = vals[choice]
+            if result then
+              vim.fn.setreg("+", result)
+            end
+          end)
+        end,
       }
     },
     source_selector = {
       winbar = false,
     },
   },
+
 }

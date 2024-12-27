@@ -53,6 +53,7 @@ return {
 
     keymap.set("n", "<Leader>b", "<cmd>Telescope buffers<cr>", { desc = "Telescope buffers" })
     keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files hidden=true<cr>", { desc = "Telescope find files" })
+    keymap.set("n", "<Leader>fc", function() require("telescope.builtin").grep_string() end, {desc = "Find word under cursor" })
     keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
     keymap.set("n", "<Leader>fw", function()
       require("telescope.builtin").live_grep()

@@ -40,12 +40,13 @@ config.font_size = 20.0
 
 -- Window
 config.window_close_confirmation = "AlwaysPrompt"
+config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 config.window_padding = {
-  left = "0cell",
-  right = "0cell",
-  top = "0cell",
-  bottom = "0cell",
+  left = "0.5cell",
+  right = "0.5cell",
+  top = "0.5cell",
+  bottom = "0.5cell",
 }
 
 -- the option scripture for good option keys™
@@ -78,10 +79,6 @@ local function center_window_once(window)
   wezterm.GLOBAL.windows_centered = wezterm.GLOBAL.windows_centered or {}
 
   local window_id = window:window_id() .. ""
-  if wezterm.GLOBAL.windows_centered[window_id] then
-    return
-  end
-
   local screen = wezterm.gui.screens().active
 
   local width = screen.width * 0.85

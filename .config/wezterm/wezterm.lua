@@ -64,6 +64,12 @@ config.keys = {
     mods = "OPT",
     action = wezterm.action({ SendString = "\x1bf" }),
   },
+  -- allow control + k to move up
+  {
+    key = "K",
+    mods = "CTRL",
+    action = wezterm.action.SendKey { key = "K", mods = "CTRL" }
+  },
   -- shell to redraw its prompt
   {
     key = "k",

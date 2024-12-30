@@ -79,9 +79,6 @@ local function center_window_once(window)
   wezterm.GLOBAL.windows_centered = wezterm.GLOBAL.windows_centered or {}
 
   local window_id = window:window_id() .. ""
-
-  -- NOTE: this will make sure to only center the window once but has some bugs
-  -- where if you spam it it will not center the windows after some amount of spawned windows
   if wezterm.GLOBAL.windows_centered[window_id] then
     return
   end

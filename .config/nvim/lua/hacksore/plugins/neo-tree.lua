@@ -60,7 +60,6 @@ return {
 
           local vals = {
             ["EXTENSION"] = modify(filename, ":e"),
-            ["URI"] = vim.uri_from_fname(filepath),
             ["PATH"] = filepath,
             ["PATH (CWD)"] = modify(filepath, ":."),
             ["PATH (HOME)"] = modify(filepath, ":~"),
@@ -72,7 +71,9 @@ return {
           if vim.tbl_isempty(options) then
             return
           end
-          table.sort(options)
+
+          table.sort(options, function(a, b) return a < b end)
+
           vim.ui.select(options, {
             prompt = "Choose to copy to clipboard:",
             format_item = function(item) return ("%s: %s"):format(item, vals[item]) end,

@@ -1,8 +1,17 @@
 gui:
   theme:
+    inactiveBorderColor:
+      - '#707070'
+    activeBorderColor:
+      - "#ffffff"
     selectedLineBgColor:
-      - reverse
+      - 'black'
+  authorColors:
+      'Sean Boult': 'red'
+  showBottomLine: false
+  showCommandLog: false
 git:
   overrideGpg: true
 os:
   editPreset: "nvim" # see 'Configuring File Editing' section
+

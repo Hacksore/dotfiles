@@ -1,5 +1,5 @@
-require("hacksore.core")
 require("hacksore.lazy")
+require("hacksore.core")
 
 -- NOTE: allows for yank highlight
 vim.api.nvim_create_autocmd("TextYankPost", {

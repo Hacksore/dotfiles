@@ -1,3 +1,5 @@
+local utils = require("hacksore.core.utils")
+
 vim.g.mapleader = " "
 
 local keymap = vim.keymap
@@ -61,3 +63,11 @@ keymap.set("v", "p", [["_dP]], { desc = "Paste without yanking" })
 -- navigation
 keymap.set("n", "<Leader>n", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 keymap.set("n", "<Leader>p", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
+
+-- quick key to switch themes
+keymap.set("n", "<Leader>0", function() utils.switch_theme(1) end, { desc = "Next theme" })
+keymap.set("n", "<Leader>9", function() utils.switch_theme(-1) end, { desc = "Prev theme" })
+
+-- quick key to toggle theme from light to dark
+keymap.set("n", "<Leader>ll", function() utils.toggle_theme() end, { desc = "Toggle theme light/dark" })
+

@@ -11,34 +11,36 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
-    local transform_mod = require("telescope.actions.mt").transform_mod
-
-    local trouble = require("trouble")
+    local builtin = require("telescope.builtin")
     local trouble_telescope = require("trouble.sources.telescope")
-
-    -- or create your custom action
-    local custom_actions = transform_mod({
-      open_trouble_qflist = function(prompt_bufnr)
-        trouble.toggle("quickfix")
-      end,
-    })
 
     telescope.setup({
       pickers = {
+        grep_string = {
+          additional_args = { "--hidden" }
+        },
         live_grep = {
-          additional_args = function()
-            return { "--hidden" }
-          end
+          additional_args = { "--hidden" }
+        },
+        find_files = {
+          find_command = {
+            "fd",
+            "--hidden",
+            "--type", "f",
+            "--follow",
+            "--exclude", ".git/",
+            "--exclude", "dist/",
+            "--exclude", "build/",
+            "--exclude", "node_modules/",
+          }
         },
       },
       defaults = {
         path_display = { "smart" },
-        file_ignore_patterns = { "node_modules/", ".git/" },
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
             ["<C-j>"] = actions.move_selection_next,     -- move to next result
-            ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
             ["<C-t>"] = trouble_telescope.open,
           },
         },
@@ -51,12 +53,10 @@ return {
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
-    keymap.set("n", "<Leader>b", "<cmd>Telescope buffers<cr>", { desc = "Telescope buffers" })
-    keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files hidden=true<cr>", { desc = "Telescope find files" })
-    keymap.set("n", "<Leader>fc", function() require("telescope.builtin").grep_string() end, {desc = "Find word under cursor" })
+    keymap.set("n", "<Leader>b", builtin.buffers, { desc = "Telescope buffers" })
+    keymap.set("n", "<Leader>ff", builtin.find_files, { desc = "Telescope find files" })
+    keymap.set("n", "<Leader>fc", builtin.grep_string, { desc = "Find word under cursor" })
     keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
-    keymap.set("n", "<Leader>fw", function()
-      require("telescope.builtin").live_grep()
-    end, { desc = "Find words" })
+    keymap.set("n", "<Leader>fw", builtin.live_grep, { desc = "Find words" })
   end,
 }

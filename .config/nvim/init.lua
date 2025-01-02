@@ -1,3 +1,6 @@
+-- set this before lazy and core load
+vim.g.mapleader = " "
+
 require("hacksore.lazy")
 require("hacksore.core")
 

@@ -1,11 +1,8 @@
 local utils = require("hacksore.core.utils")
 
-vim.g.mapleader = " "
-
 local keymap = vim.keymap
 
--- tmux and lazygit
-keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files hidden=true<cr>", { desc = "Telescope find files" })
+-- tmux
 keymap.set("n", "<Leader>gg", "<cmd>silent !tmux neww lazygit<cr>", { desc = "Open lazygit in tmux" })
 keymap.set("n", "<C-n>", function()
   vim.fn.system("tmux switch-client -n")

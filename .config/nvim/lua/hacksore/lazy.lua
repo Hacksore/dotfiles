@@ -1,3 +1,4 @@
+local utils = require("hacksore.core.utils")
 if os.getenv("CI") then
   vim.opt.more = false
 end
@@ -25,12 +26,18 @@ require("lazy").setup({ { import = "hacksore.plugins" }, { import = "hacksore.pl
   },
 })
 
-vim.notify("All Lazy.nvim plugins loaded!", vim.log.levels.INFO)
 -- if in CI close the nvim after lazy is done loading
 if os.getenv("CI") then
-  -- send the enter key
+  local has_errors = utils.has_errors_in_messages()
+
+  -- send the enter key so it's non-interactive
   vim.api.nvim_input("<CR>")
   vim.defer_fn(function()
+    if has_errors then
+      -- write to std out there was an error
+      vim.api.nvim_out_write("testn")
+      return os.exit(1)
+    end
     os.exit(0)
   end, 0)
 end

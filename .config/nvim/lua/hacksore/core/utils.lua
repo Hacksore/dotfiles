@@ -32,7 +32,7 @@ M.get_all_colorschemes = function()
 end
 
 M.toggle_theme = function()
-  local active_theme = vim.fn.execute("colorscheme"):match( "^%s*(.-)%s*$" )
+  local active_theme = vim.fn.execute("colorscheme"):match("^%s*(.-)%s*$")
   if active_theme == "github_dark_default" or active_theme == "" then
     vim.cmd("colorscheme github_light_default")
   else
@@ -58,6 +58,21 @@ M.switch_theme = function(direction)
   end
 
   vim.cmd("colorscheme " .. themes[theme_index])
+end
+
+M.has_errors_in_messages = function()
+  -- Get the contents of the messages buffer
+  local messages_buffer = vim.api.nvim_get_current_buf()
+  local messages_lines = vim.api.nvim_buf_get_lines(messages_buffer, 0, -1, false)
+
+  -- Check for error messages (adjust the pattern as needed)
+  for _, line in ipairs(messages_lines) do
+    if string.match(line, "error") or string.match(line, "Error") then
+      return true
+    end
+  end
+
+  return false
 end
 
 return M

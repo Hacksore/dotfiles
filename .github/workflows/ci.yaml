@@ -21,4 +21,6 @@ jobs:
           curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
           chmod u+x nvim.appimage
       - name: Run neovim
-        run: CI_TEST=1 ./nvim.appimage
+        run: ./nvim.appimage
+        env: 
+          CI_TEST: 1

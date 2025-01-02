@@ -20,3 +20,11 @@ require("lazy").setup({ { import = "hacksore.plugins" }, { import = "hacksore.pl
     notify = false,
   },
 })
+
+vim.notify("All Lazy.nvim plugins loaded!", vim.log.levels.INFO)
+-- if in CI_TEST close the nvim after lazy is done loading
+if os.getenv("CI_TEST") then
+  vim.defer_fn(function()
+    os.exit(0)
+  end, 0)
+end

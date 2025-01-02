@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Install libfuse
+        run: sudo apt install libfuse2 -y
       - name: Link nvim config
         run: ln -s .config/nvim ~/.config/nvim
       - name: Install neovim@HEAD

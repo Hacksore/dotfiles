@@ -12,4 +12,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-    # TODO: something here?
+      - name: Link nvim config
+        run: ln -s .config/nvim ~/.config/nvim
+      - name: Install neovim@HEAD
+        run: |
+          curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+          chmod u+x nvim.appimage
+      - name: Run neovim
+        run: CI_TEST=1 ./nvim.appimage

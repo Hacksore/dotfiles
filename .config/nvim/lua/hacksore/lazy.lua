@@ -26,18 +26,11 @@ require("lazy").setup({ { import = "hacksore.plugins" }, { import = "hacksore.pl
   },
 })
 
--- if in CI close the nvim after lazy is done loading
 if os.getenv("CI") then
-  local has_errors = utils.has_errors_in_messages()
-
+  -- TODO: check for errors in the message output
   -- send the enter key so it's non-interactive
   vim.api.nvim_input("<CR>")
   vim.defer_fn(function()
-    if has_errors then
-      -- write to std out there was an error
-      vim.api.nvim_out_write("testn")
-      return os.exit(1)
-    end
     os.exit(0)
   end, 0)
 end

@@ -19,7 +19,7 @@ jobs:
           whoami
           pwd
           ls -hal
-          ln -s ~/dotfiles/dotfiles/.config/nvim ~/.config/nvim
+          ln -s /home/runner/work/dotfiles/dotfiles/nvim ~/.config/nvim
           ls -hal ~/.config/nvim
       - name: Install neovim@nightly
         run: |

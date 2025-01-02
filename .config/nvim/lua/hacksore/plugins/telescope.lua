@@ -14,14 +14,17 @@ return {
     local builtin = require("telescope.builtin")
     local trouble_telescope = require("trouble.sources.telescope")
 
+    local telescope_config = require("telescope.config")
+    local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
+    table.insert(vimgrep_arguments, "--hidden")
+    table.insert(vimgrep_arguments, "--glob")
+    table.insert(vimgrep_arguments, "!.git/*")
+    table.insert(vimgrep_arguments, "--trim")
+    table.insert(vimgrep_arguments, "--sort")
+    table.insert(vimgrep_arguments, "path")
+
     telescope.setup({
       pickers = {
-        grep_string = {
-          additional_args = { "--hidden" }
-        },
-        live_grep = {
-          additional_args = { "--hidden" }
-        },
         find_files = {
           find_command = {
             "fd",
@@ -37,6 +40,7 @@ return {
       },
       defaults = {
         path_display = { "smart" },
+        vimgrep_arguments = vimgrep_arguments,
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -57,6 +61,6 @@ return {
     keymap.set("n", "<Leader>ff", builtin.find_files, { desc = "Telescope find files" })
     keymap.set("n", "<Leader>fc", builtin.grep_string, { desc = "Find word under cursor" })
     keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
-    keymap.set("n", "<Leader>fw", builtin.live_grep, { desc = "Find words" })
+    keymap.set("n", "<Leader>fw", builtin.live_grep, { desc = "Find word under cursor" })
   end,
 }

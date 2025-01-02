@@ -7,7 +7,7 @@ on:
 env:
   NODE_VERSION: "18"
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -16,7 +16,7 @@ jobs:
         run: sudo apt install libfuse2 -y
       - name: Link nvim config
         run: ln -s .config/nvim ~/.config/nvim
-      - name: Install neovim@HEAD
+      - name: Install neovim@nightly
         run: |
           curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
           chmod u+x nvim.appimage

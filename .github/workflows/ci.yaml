@@ -15,12 +15,12 @@ jobs:
       - name: Install libfuse
         run: sudo apt install libfuse2 -y
       - name: Link nvim config
-        run: ln -s .config/nvim ~/.config/nvim
+        run: ln -s ./dotfiles/.config/nvim ~/.config/nvim
       - name: Install neovim@nightly
         run: |
-          curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-          chmod u+x nvim.appimage
+          curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+          tar xzvf nvim-linux64.tar.gz
       - name: Run neovim
-        run: ./nvim.appimage
+        run: ./nvim-linux64/bin/nvim
         env: 
           CI_TEST: 1

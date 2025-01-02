@@ -17,7 +17,7 @@ jobs:
       - name: Link nvim config
         run: |
           whoami
-          ln -s ./dotfiles/.config/nvim ~/.config/nvim
+          ln -s .config/nvim ~/.config/nvim
           ls -hal ~/.config/nvim
       - name: Install neovim@nightly
         run: |

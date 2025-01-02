@@ -12,16 +12,14 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-        with:
-          path: /tmp/dotfiles
       - name: Install native deps 
         run: sudo apt install curl git make cmake gcc fd-find ripgrep nodejs fzf -y
       - name: Link nvim config
         run: |
           whoami
           pwd
-          ls -hal /tmp/dotfiles
-          ln -s /tmp/dotfiles/.config/nvim ~/.config/nvim
+          ls -hal /home/runner/work/dotfiles/dotfiles
+          ln -s /home/runner/work/dotfiles/dotfiles/.config/nvim ~/.config/nvim
           echo "test link"
           ls -hal ~/.config/nvim
       - name: Install neovim@nightly

@@ -1,5 +1,5 @@
 if os.getenv("CI") then
-  vim.opt.pager = ""
+  vim.opt.more = false
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -28,6 +28,8 @@ require("lazy").setup({ { import = "hacksore.plugins" }, { import = "hacksore.pl
 vim.notify("All Lazy.nvim plugins loaded!", vim.log.levels.INFO)
 -- if in CI close the nvim after lazy is done loading
 if os.getenv("CI") then
+  -- send the enter key
+  vim.api.nvim_input("<CR>")
   vim.defer_fn(function()
     os.exit(0)
   end, 0)

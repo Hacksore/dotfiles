@@ -12,4 +12,4 @@ cd dofiles
 ln -s /dotfiles/.config/nvim ~/.config/nvim
 curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
 tar xzvf nvim-linux64.tar.gz
-CI_TEST=1 ./nvim-linux64/bin/nvim
+CI=1 ./nvim-linux64/bin/nvim

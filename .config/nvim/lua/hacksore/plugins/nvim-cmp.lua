@@ -23,16 +23,13 @@ return {
         completeopt = "menu,menuone,noinsert",
       },
       mapping = cmp.mapping.preset.insert({
-        ["<C-j>"] = cmp.mapping(function()
-          if copilot.is_visible() then
-            copilot.accept()
-          end
-        end),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<C-J>"] = cmp.mapping(function(fallback)
-          if is_visible(cmp) then
+        ["<C-j>"] = cmp.mapping(function(fallback)
+          if copilot.is_visible() then
+            copilot.accept()
+          elseif is_visible(cmp) then
             cmp.select_next_item()
           elseif has_words_before() then
             cmp.complete()

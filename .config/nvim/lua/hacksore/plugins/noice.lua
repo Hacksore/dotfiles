@@ -2,7 +2,7 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   config = function()
-    -- TODO: should this be merging the table too?
+    ---@diagnostic disable-next-line: missing-fields
     require("noice").setup({
       messages = { view_search = false },
       views = {
@@ -14,14 +14,14 @@ return {
         },
       },
       routes = {
-        { filter = { event = "msg_show", find = "%d+L,%s%d+B" },        opts = { skip = true } }, -- skip save notifications
-        { filter = { event = "msg_show", find = "^%d+ more lines$" },   opts = { skip = true } }, -- skip paste notifications
-        { filter = { event = "msg_show", find = "^%d+ fewer lines$" },  opts = { skip = true } }, -- skip delete notifications
+        { filter = { event = "msg_show", find = "%d+L,%s%d+B" }, opts = { skip = true } },        -- skip save notifications
+        { filter = { event = "msg_show", find = "^%d+ more lines$" }, opts = { skip = true } },   -- skip paste notifications
+        { filter = { event = "msg_show", find = "^%d+ fewer lines$" }, opts = { skip = true } },  -- skip delete notifications
         { filter = { event = "msg_show", find = "^%d+ lines yanked$" }, opts = { skip = true } }, -- skip yank notifications
       },
       lsp = {
         hover = {
-          enabled = false,
+          enabled = true,
         },
         signature = {
           enabled = false,

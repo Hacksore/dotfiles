@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Install libfuse
-        run: sudo apt install libfuse2 -y
+      - name: Install native deps 
+        run: sudo apt install curl git make cmake gcc fd-find ripgrep nodejs fzf -y
       - name: Link nvim config
         run: ln -s ./dotfiles/.config/nvim ~/.config/nvim
       - name: Install neovim@nightly

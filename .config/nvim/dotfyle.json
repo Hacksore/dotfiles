@@ -45,6 +45,7 @@
     "kevinhwang91/nvim-ufo",
     "kevinhwang91/promise-async",
     "kylechui/nvim-surround",
+    "laytan/cloak.nvim",
     "lewis6991/gitsigns.nvim",
     "luukvbaal/statuscol.nvim",
     "neovim/nvim-lspconfig",

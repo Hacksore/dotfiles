@@ -1,11 +1,12 @@
 name: CI
 on:
   workflow_dispatch:
-  push:
+  schedule:
+    - cron: "0 0 * * *"
 env:
   NODE_VERSION: "18"
 jobs:
-  test:
+  nightly:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -19,4 +20,7 @@ jobs:
           curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
           tar xzvf nvim-linux64.tar.gz
       - name: Run neovim
-        run: ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'
+        run: | 
+          # remove the lock file so we get latest deps
+          rm ~/.config/nvim/lazy-lock.json
+          ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'

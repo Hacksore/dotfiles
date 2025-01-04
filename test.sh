@@ -13,5 +13,7 @@ ln -s /dotfiles/.config/nvim ~/.config/nvim
 curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
 tar xzvf nvim-linux64.tar.gz
 
+rm /dotfiles/.config/nvim/lazy-lock.json
+
 # run in headless mode
-FORCE_UPDATE_LAZY=1 CI=1 ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'
+CI=1 ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'

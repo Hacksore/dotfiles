@@ -27,10 +27,7 @@ require("lazy").setup({ { import = "hacksore.plugins" }, { import = "hacksore.pl
 })
 
 -- TODO: do i need this
-if os.getenv("CI") and os.getenv("FORCE_UPDATE_LAZY") then
-  -- run a lazy update
-  vim.cmd("LazyUpdate")
-
+if os.getenv("CI") then
   vim.api.nvim_input("<CR>")
   vim.defer_fn(function()
     os.exit(0)

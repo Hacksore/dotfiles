@@ -1,0 +1,16 @@
+brew "diff-so-fancy"
+brew "fd"
+brew "fzf"
+brew "jq"
+brew "lazygit"
+brew "utf8proc", args: ["HEAD"]
+brew "neovim", args: ["HEAD"]
+brew "nvm"
+brew "ripgrep"
+brew "pnpm"
+brew "stow"
+brew "tmux"
+brew "zsh"
+brew "zsh-autosuggestions"
+brew "zsh-completions"
+brew "zsh-syntax-highlighting"

@@ -8,31 +8,36 @@ export ZSH="$HOME/.oh-my-zsh"
 # good zsh theme
 ZSH_THEME="murilasso"
 
-# Load any cool plugins
-# https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins#plugins
-plugins=(
-	nvm
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	# TODO: maybe if i could toggle this on with a hotkey it'd be nice?
-	# zsh-vi-mode
-)
-
-# allowing for use of .config dir
-# NOTE: this is to fix lazygit but where it wont load the config otherwise
+# some programs require this for ~/.config
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# make path either linux or mac for brew
+if [ -d "/opt/homebrew/bin" ]; then
+	export HOMEBREW_PATH="/opt/homebrew"
+else 
+	export HOMEBREW_PATH="/home/linuxbrew/.linuxbrew"
+fi
+
 # load brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$($HOMEBREW_PATH/bin/brew shellenv)"
 
 # load ohmyzsh
 source "$ZSH/oh-my-zsh.sh"
 
 # good fuzzy
-source "$HOME/.fzf.zsh"
+source <(fzf --zsh)
+
+# load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$HOMEBREW_PATH/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PATH/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # profile
 source "$HOME/.zprofile"
+
+# load zsh plugins 
+source "$HOMEBREW_PATH/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOMEBREW_PATH/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # no auto update brew
 export HOMEBREW_NO_AUTO_UPDATE="1"
@@ -40,14 +45,19 @@ export HOMEBREW_NO_AUTO_UPDATE="1"
 # add cargo to path
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# add 1p ssh agent
-export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+# add 1p goodies for mac only
+if [ "$(uname)" = "Darwin" ]; then
+  export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+  # op cli plugins
+  source "$HOME/.config/op/plugins.sh"
+fi
 
 # add ruby to path
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="$HOMEBREW_PATH/opt/ruby/bin:$PATH"
 
 # java
-export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
+export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 export PATH="$JAVA_HOME/homebrew/opt/openjdk@17/bin:$PATH"
 
 # hist settings
@@ -61,14 +71,8 @@ export HIST_REDUCE_BLANKS="1"
 export INC_APPEND_HISTORY_TIME="1"
 export EXTENDED_HISTORY="1"
 
-# load fzf for fuzzy
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
-
 # make new astro theme work
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5e5e5e"
-
-# op cli plugins
-source "$HOME/.config/op/plugins.sh"
 
 # add bins to path
 export PATH="$HOME/bin:$PATH"
@@ -82,11 +86,11 @@ bindkey '^j' autosuggest-accept
 # add aws autocomplet
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-complete -C '/opt/homebrew/bin/aws_completer' aws
+complete -C "$HOMEBREW_PATH/bin/aws_completer" aws
 
 # allow alias to be expanded
 setopt completealiases
 
 export PATH="$PATH:$HOME/go/bin"
 
-export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib"   
+export LIBRARY_PATH="$LIBRARY_PATH:$HOMEBREW_PATH/lib"   

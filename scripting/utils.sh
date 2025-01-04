@@ -17,7 +17,7 @@ function d {
 	"r" | "reload")
 		cd "$HOME/dotfiles" || exit 1
 		stow_wrapper -D . && stow_wrapper .
-		echo "♻️  Reloaded your dotfiles successfully!"
+		echo "🔃 Reloaded your dotfiles successfully!"
 		;;
 	*)
 		echo "[dotfiles] 🤔 Command not found!"
@@ -54,22 +54,16 @@ function timezsh {
 
 # very useful command for monorepos where you switch branch a lot and old dirs are left behind
 function gitclean {
-	# Find all directories that are not ignored by git and store them in an array
-	ignored_dirs=($("git ls-files --others --exclude-standard --directory"))
-	# Loop through all directories that are not ignored by git
-	for dir in "${ignored_dirs[@]}"; do
-		# Check if the directory contains any non-gitignored files/folders
-		if [[ -z $(git ls-files --directory "$dir") ]]; then
-			# If the directory contains only gitignored files/folders, remove it
-			echo "removing $dir"
-			rm -rf "$dir"
-		fi
-	done
-}
+  # Use command substitution to capture the output of the git command
+  ignored_dirs=($(git ls-files --others --exclude-standard --directory)) 
 
-function astro {
-	cd "$HOME/dotfiles/.config/astronvim" || exit 1
-	nvim .
+  for dir in "${ignored_dirs[@]}"; do
+    # Check if the directory contains any non-gitignored files/folders
+    if [[ -z $(git ls-files --directory "$dir") ]]; then
+      echo "removing $dir"
+      rm -rf "$dir"
+    fi
+  done
 }
 
 function canary {

@@ -25,4 +25,4 @@ jobs:
         run: | 
           # remove the lock file so we get latest deps
           rm ~/.config/nvim/lazy-lock.json
-          ./nvim-linux64/bin/nvim --headless -eS -c "q!"
+          ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'

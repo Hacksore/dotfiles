@@ -31,10 +31,7 @@ return {
             "--hidden",
             "--type", "f",
             "--follow",
-            "--no-ignore-vcs",
-            -- NOTE: this is good for allow me to find .env files
-            -- but it means this list will become crazy, maybe i need to have
-            -- another hotkey to search over exlucded files or something?
+            -- TODO: figure out how i can override the vsc to include specific things like .env files
             "--exclude", ".git/",
             "--exclude", "dist/",
             "--exclude", "build/",

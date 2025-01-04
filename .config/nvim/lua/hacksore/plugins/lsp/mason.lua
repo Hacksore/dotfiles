@@ -40,11 +40,11 @@ return {
         "docker_compose_language_service",
         "biome",
         "astro",
-        "denols",
         "pylsp",
         "yamlls",
         "bashls",
         "graphql",
+        "mdx_analyzer",
         "prismals",
       },
     })

@@ -1,7 +1,7 @@
 -- set this before lazy and core load
 vim.g.mapleader = " "
 
-arequire("hacksore.lazy")
+require("hacksore.lazy")
 require("hacksore.core")
 
 -- NOTE: allows for yank highlight

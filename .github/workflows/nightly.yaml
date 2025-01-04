@@ -1,25 +1,25 @@
-# TODO: how can i have this run LazyUpdate?
-# probably need a new env var like FORCE_LAZY_UPDATE and in CI mode it will force an update methinks
-# name: CI
-# on:
-#   workflow_dispatch:
-#   schedule:
-#     - cron: "0 0 * * *"
-# env:
-#   NODE_VERSION: "18"
-# jobs:
-#   nightly:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repo
-#         uses: actions/checkout@v4
-#       - name: Install native deps 
-#         run: sudo apt install curl git make cmake gcc fd-find ripgrep nodejs fzf -y
-#       - name: Link nvim config
-#         run: ln -s /home/runner/work/dotfiles/dotfiles/.config/nvim ~/.config/nvim
-#       - name: Install neovim@nightly
-#         run: |
-#           curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-#           tar xzvf nvim-linux64.tar.gz
-#       - name: Run neovim
-#         run: ./nvim-linux64/bin/nvim --headless -eS -c "q!"
+name: CI
+on:
+  # TODO: remove this after it works
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+env:
+  NODE_VERSION: "18"
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Install native deps 
+        run: sudo apt install curl git make cmake gcc fd-find ripgrep nodejs fzf -y
+      - name: Link nvim config
+        run: ln -s /home/runner/work/dotfiles/dotfiles/.config/nvim ~/.config/nvim
+      - name: Install neovim@nightly
+        run: |
+          curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+          tar xzvf nvim-linux64.tar.gz
+      - name: Run neovim
+        run: ./nvim-linux64/bin/nvim --headless -eS -c "q!"

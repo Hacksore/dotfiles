@@ -14,4 +14,4 @@ curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux6
 tar xzvf nvim-linux64.tar.gz
 
 # run in headless mode
-CI=1 ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'
+FORCE_UPDATE_LAZY=1 CI=1 ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'

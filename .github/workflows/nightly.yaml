@@ -1,7 +1,5 @@
 name: CI
 on:
-  # TODO: remove this after it works
-  push:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"

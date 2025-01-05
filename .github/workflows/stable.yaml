@@ -20,8 +20,6 @@ jobs:
         run: |
           curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
           tar xzf nvim-linux64.tar.gz
-      - name: Run neovim original lockfile
-        run: ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'
       - name: Run neovim updated lockfile
         run: | 
           # remove the lock file so we get latest deps
@@ -31,3 +29,16 @@ jobs:
           # diff the original and the generated lazy-lock.json
           echo "lazy diff lazy-lock.original.json -> lazy-lock.json"
           diff -u --color=always ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json && echo $? || true
+      - name: Run neovim original lockfile
+        run: |
+          # clear all neovim caches 
+          rm -rf ~/.local/share/nvim
+          rn -rf ~/.local/state/nvim
+          rm -rf ~/.cache/nvim
+
+          # remove the lock file from the run before
+          rm ~/.config/nvim/lazy-lock.json 
+
+          # run neovim with the original lockfile
+          mv ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json 
+          ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'

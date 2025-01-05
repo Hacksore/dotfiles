@@ -29,9 +29,9 @@ cd ~/dotfiles && stow .
 
 # source nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PATH/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PATH/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$HOMEBREW_PATH/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PATH/opt/nvm/nvm.sh" # This loads nvm
 
-# inject the cred helper?
+# Remove the ssh signing as github has some stuff to handle it via gpg
 git config --global credential.helper=/.codespaces/bin/gitcredential_github.sh
 git config --global --unset user.signingkey
 git config --global --unset commit.gpgsign
@@ -39,5 +39,3 @@ git config --global --unset gpg.format
 
 # install node
 nvm install 20 --lts
-
-# test

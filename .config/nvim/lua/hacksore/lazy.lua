@@ -1,4 +1,3 @@
-local utils = require("hacksore.core.utils")
 if os.getenv("CI") then
   vim.opt.more = false
 end

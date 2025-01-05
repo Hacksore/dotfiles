@@ -1,13 +1,24 @@
 #!/bin/bash
 
+set -e
+
 mkdir -p ~/.config
 git clone https://github.com/Hacksore/dotfiles.git /app/dotfiles
 
 cd dotfiles || exit
 
-ln -s /app/dotfiles/.config/nvim ~/.config/nvim
+# if LOCAL env set use the /app/localdotfiles folder
+if [ -n "$LOCAL" ]; then
+  echo "Testing using local dotfiles"
+  DOTFILES_PATH="/app/localdotfiles/.config"
+else
+  DOTFILES_PATH="/app/dotfiles/.config"
+fi
+
+ln -s "$DOTFILES_PATH/nvim" ~/.config/nvim
 
 echo "Testing nvim version: $1"
+echo "Dotfiles path: $DOTFILES_PATH"
 
 NVIM_VERSION=$1
 

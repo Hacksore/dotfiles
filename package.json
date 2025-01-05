@@ -1,0 +1,17 @@
+{
+  "name": "dotfiles",
+  "description": "utils for my dotties",
+  "scripts": {
+    "test": "tsx tasks.ts"
+  },
+  "type": "module",
+  "author": "Hacksore",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "20",
+    "tsx": "^4.19.2"
+  },
+  "dependencies": {
+    "commander": "^13.0.0"
+  }
+}

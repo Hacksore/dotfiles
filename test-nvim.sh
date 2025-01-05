@@ -20,7 +20,7 @@ ln -s "$DOTFILES_PATH/nvim" ~/.config/nvim
 echo "Testing nvim version: $1"
 echo "Dotfiles path: $DOTFILES_PATH"
 
-NVIM_VERSION=$1
+NVIM_VERSION="$1"
 
 # chose stable or nightly based on env var
 if [ "$NVIM_VERSION" = "nightly" ]; then
@@ -36,6 +36,7 @@ mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.original.json
 # run in headless mode
 CI=1 ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'
 
-# # diff the original and the generated lazy-lock.json
-echo "lazy diff lazy-lock.original.json -> lazy-lock.json"
+# diff the original and the generated lazy-lock.json
+echo -e "\n---\n"
+
 diff -u --color ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json && echo $? || true

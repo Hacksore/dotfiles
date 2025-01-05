@@ -7,7 +7,7 @@ cd dotfiles || exit
 
 ln -s /app/dotfiles/.config/nvim ~/.config/nvim
 curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-tar xzvf nvim-linux64.tar.gz
+tar xzf nvim-linux64.tar.gz
 
 rm /app/dotfiles/.config/nvim/lazy-lock.json
 

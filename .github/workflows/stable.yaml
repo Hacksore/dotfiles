@@ -33,7 +33,7 @@ jobs:
         run: |
           # clear all neovim caches 
           rm -rf ~/.local/share/nvim
-          rn -rf ~/.local/state/nvim
+          rm -rf ~/.local/state/nvim
           rm -rf ~/.cache/nvim
 
           # remove the lock file from the run before

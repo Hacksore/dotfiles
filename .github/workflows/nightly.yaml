@@ -22,5 +22,9 @@ jobs:
       - name: Run neovim
         run: | 
           # remove the lock file so we get latest deps
-          rm ~/.config/nvim/lazy-lock.json
+          mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.original.json
           ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'
+
+          # diff the original and the generated lazy-lock.json
+          echo "lazy diff lazy-lock.original.json -> lazy-lock.json"
+          diff ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json 

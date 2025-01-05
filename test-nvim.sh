@@ -6,7 +6,18 @@ git clone https://github.com/Hacksore/dotfiles.git /app/dotfiles
 cd dotfiles || exit
 
 ln -s /app/dotfiles/.config/nvim ~/.config/nvim
-curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+
+echo "Testing nvim version: $1"
+
+NVIM_VERSION=$1
+
+# chose stable or nightly based on env var
+if [ "$NVIM_VERSION" = "nightly" ]; then
+  curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+elif [ "$NVIM_VERSION" = "stable" ]; then
+  curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+fi
+
 tar xzf nvim-linux64.tar.gz
 
 mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.original.json

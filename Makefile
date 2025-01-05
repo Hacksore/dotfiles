@@ -7,4 +7,6 @@ export:
 build:
 	@docker build --platform linux/amd64 --progress=plain . -t hacksore/nvim
 test: build
-	@docker run --platform linux/amd64 --rm -it hacksore/nvim
+	@docker run --platform linux/amd64 --rm -it hacksore/nvim "nightly"
+test-stable: build
+	@docker run --platform linux/amd64 --rm -it hacksore/nvim "stable"

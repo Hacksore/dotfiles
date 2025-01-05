@@ -24,19 +24,25 @@ NVIM_VERSION="$1"
 
 # chose stable or nightly based on env var
 if [ "$NVIM_VERSION" = "nightly" ]; then
-  curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+  curl -sLO --create-dirs --output-dir /app/nvim https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
 elif [ "$NVIM_VERSION" = "stable" ]; then
-  curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+  curl -sLO --create-dirs --output-dir /app/nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 fi
 
-tar xzf nvim-linux64.tar.gz
+
+# extract and link neovim bin
+tar xzf /app/nvim/nvim-linux64.tar.gz -C /app/nvim 
+ln -s /app/nvim/nvim-linux64/bin/nvim /usr/bin
 
 mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.original.json
 
 # run in headless mode
-CI=1 ./nvim-linux64/bin/nvim --headless -c 'exe !!v:errmsg."cquit"'
+CI=1 nvim --headless -c 'exe !!v:errmsg."cquit"'
 
 # diff the original and the generated lazy-lock.json
-echo -e "\n---\n"
+echo -e "\n\n---\n"
 
-diff -u --color ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json && echo $? || true
+diff -u --color=always ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json && echo $? || true
+
+echo -e "Tested on nvim version:\n"
+nvim -V1 -v

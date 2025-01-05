@@ -17,7 +17,7 @@ async function runCommand(command: string) {
 }
 
 await runCommand(
-  "docker build --platform linux/amd64 --progress=plain . -t hacksore/nvim",
+  "docker build --platform linux/amd64 . -t hacksore/nvim",
 );
 
 await runCommand(

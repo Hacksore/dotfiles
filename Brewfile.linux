@@ -8,6 +8,8 @@ brew "neovim", args: ["HEAD"]
 brew "nvm"
 brew "ripgrep"
 brew "pnpm"
+brew "ruby"
+brew "python"
 brew "stow"
 brew "tmux"
 brew "zsh"

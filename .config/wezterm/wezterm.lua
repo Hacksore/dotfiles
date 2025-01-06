@@ -91,14 +91,13 @@ local function center_window_once(window)
 
   local screen = wezterm.gui.screens().active
 
-  if not screen then
-    return
-  end
 
   local width = screen.width * 0.85
   local height = screen.height * 0.85
 
-  window:set_inner_size(width, height)
+  if screen and window then
+    window:set_inner_size(width, height)
+  end
 
   local dimensions = window:get_dimensions()
   local x = (screen.width - dimensions.pixel_width) * 0.5

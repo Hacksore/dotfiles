@@ -1,8 +1,23 @@
 README.md
 .git
 .github
+.devcontainer
+.vscode
 Brewfile
+Brewfile.linux
 Brewfile.lock.json
+biome.json
+bootstrap.sh
+tasks.ts
+test-nvim.sh
+pnpm-lock.yaml
+package.json
+node_modules
+README.md
+TODO.md
+LICENSE
+Makefile
+Dockerfile
 
 Library/CloudStorage
 

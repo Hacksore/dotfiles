@@ -167,7 +167,6 @@ mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
 mas "Motion", id: 434290957
 mas "Xcode", id: 497799835
-mas "‎WhatsApp", id: 310633997
 vscode "astro-build.astro-vscode"
 vscode "dbaeumer.vscode-eslint"
 vscode "esbenp.prettier-vscode"

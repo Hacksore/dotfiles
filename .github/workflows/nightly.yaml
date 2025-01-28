@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Install
-        uses: ./.github/run-neovim.yaml
+      - name: Run Neovim
+        uses: .github/run-neovim.yaml
         with:
           channel: stable

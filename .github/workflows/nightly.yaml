@@ -19,7 +19,9 @@ jobs:
       - name: Install neovim@nightly
         run: |
           curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-          tar xzf nvim-linux64.tar.gz
+          tar xvzf nvim-linux64.tar.gz
+      - name: Validate nvim binary
+        run: ./nvim-linux64/bin/nvim --version
       - name: Run neovim updated lockfile
         run: | 
           # remove the lock file so we get latest deps

@@ -2,4 +2,4 @@
 
 my setup for neovim, tmux, zsh, wezterm, and moar!
 
-<img width="2048" alt="Dotfiles" src="https://github.com/user-attachments/assets/81306529-a8c4-43b0-a05f-2f55ecb0d1ef" />
+![image](https://github.com/user-attachments/assets/7965c6c4-aca8-4847-a1f7-8f3e76a6745a)

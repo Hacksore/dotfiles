@@ -1,33 +1,34 @@
-name: Nightly
+name: Run Neovim
 description: "Configure and run neovim config"
 inputs:
   channel:
     description: "The neovim channel to install"
     required: true
     default: "stable"
-env:
-  NODE_VERSION: "18"
 
-rurns:
+runs:
   using: composite
   steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v4
     - name: Install native deps 
+      shell: bash
       run: sudo apt install curl git make cmake gcc fd-find ripgrep nodejs fzf -y
     - name: Link nvim config
+      shell: bash
       run: ln -s /home/runner/work/dotfiles/dotfiles/.config/nvim ~/.config/nvim
     - name: Install neovim@nightly
       if: ${{ inputs.channel }} == "nightly"
+      shell: bash
       run: |
         curl -sLO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
         tar xzf nvim-linux64.tar.gz
     - name: Install neovim@stable
+      shell: bash
       if: ${{ inputs.channel }} == "stable"
       run: |
         curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
         tar xzf nvim-linux64.tar.gz
     - name: Run neovim updated lockfile
+      shell: bash
       run: | 
         # remove the lock file so we get latest deps
         mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.original.json
@@ -37,6 +38,7 @@ rurns:
         echo "lazy diff lazy-lock.original.json -> lazy-lock.json"
         diff -u --color=always ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json && echo $? || true
     - name: Run neovim original lockfile
+      shell: bash
       run: |
         # clear all neovim caches 
         rm -rf ~/.local/share/nvim

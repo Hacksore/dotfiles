@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
-env:
-  NODE_VERSION: "18"
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,4 +14,4 @@ jobs:
       - name: Run Neovim
         uses: ./.github/run-neovim
         with:
-          channel: stable
+          channel: nightly

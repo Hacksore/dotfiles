@@ -3,7 +3,6 @@ description: "Configure and run neovim config"
 inputs:
   channel:
     description: "The neovim channel to install"
-    required: true
     default: "stable"
 
 runs:

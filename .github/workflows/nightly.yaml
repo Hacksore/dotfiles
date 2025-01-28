@@ -11,6 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Neovim
-        uses: .github/run-neovim.yaml
+        uses: ./.github/run-neovim
         with:
           channel: stable

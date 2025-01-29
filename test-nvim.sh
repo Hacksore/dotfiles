@@ -28,7 +28,7 @@ mkdir -p /app/nvim
 if [ "$NVIM_VERSION" = "nightly" ]; then
   wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz -O /app/nvim/nvim.tar.gz
 elif [ "$NVIM_VERSION" = "stable" ]; then
-  wget -q https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz -O /app/nvim/nvim.tar.gz
+  wget -q https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz -O /app/nvim/nvim.tar.gz
 fi
 
 # extract and link neovim bin
@@ -37,7 +37,7 @@ tar xzf /app/nvim/nvim.tar.gz -C /app/nvim
 if [ "$NVIM_VERSION" = "nightly" ]; then
   ln -s /app/nvim/nvim-linux-x86_64/bin/nvim /usr/bin
 else
-  ln -s /app/nvim/nvim-linux64/bin/nvim /usr/bin
+  ln -s /app/nvim/nvim-linux-x86_64/bin/nvim /usr/bin
 fi
 
 mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.original.json

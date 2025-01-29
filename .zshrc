@@ -57,8 +57,8 @@ fi
 export PATH="$HOMEBREW_PATH/opt/ruby/bin:$PATH"
 
 # java
-export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
-export PATH="$JAVA_HOME/homebrew/opt/openjdk@17/bin:$PATH"
+export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+export PATH="$JAVA_HOME/homebrew/opt/openjdk@21/bin:$PATH"
 
 # hist settings
 export HISTSIZE=1000000

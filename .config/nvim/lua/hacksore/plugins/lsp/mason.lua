@@ -37,6 +37,7 @@ return {
         "rust_analyzer",
         "dockerls",
         "jsonls",
+        "jdtls",
         "docker_compose_language_service",
         "biome",
         "astro",

@@ -21,7 +21,7 @@ jobs:
           curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
           tar xzf nvim-linux-x86_64.tar.gz
       - name: Link neovim
-        run: sudo ln -s ./nvim-linux-x86_64/bin/nvim /usr/bin
+        run: sudo ln -s ./nvim-linux-x86_64/bin/nvim /usr/bin/nvim
       - name: Run neovim updated lockfile
         run: | 
           # remove the lock file so we get latest deps

@@ -22,6 +22,8 @@ jobs:
           tar xzf nvim-linux-x86_64.tar.gz
       - name: Link neovim
         run: echo "$PWD/nvim-linux-x86_64/bin" >> $GITHUB_PATH
+      - name: Validate neovim version
+        run: nvim --version
       - name: Run neovim updated lockfile
         run: | 
           # remove the lock file so we get latest deps

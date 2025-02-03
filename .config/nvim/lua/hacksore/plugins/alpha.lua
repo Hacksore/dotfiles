@@ -15,7 +15,7 @@ local function create_new_ts_project()
 
   vim.notify("Creating new TS project: " .. ts_project_path)
   vim.cmd("silent cd " .. ts_project_path)
-  vim.cmd("silent !npx -y create-vite-app@latest . --template react-ts")
+  vim.cmd("silent !npx -y create-vite@latest . --template react-ts")
 
   -- open the app tsx in a new buffer
   vim.cmd("e src/App.tsx")

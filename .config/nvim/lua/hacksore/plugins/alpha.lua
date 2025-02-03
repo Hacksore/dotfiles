@@ -63,10 +63,9 @@ return {
 
     -- Set menu
     dashboard.section.buttons.val = {
-      dashboard.button("wr", "󰁯  > Restore Session", "<cmd>SessionRestore<CR>"),
+      dashboard.button("r", "󰁯  > Restore Session", "<cmd>SessionRestore<CR>"),
+      dashboard.button("p", "  > New Vite Project", "<cmd>NewTSProject<CR>"),
       dashboard.button("n", "  > New TS File", "<cmd>NewTSFile<CR>"),
-      dashboard.button("nts", "  > New TS Project", "<cmd>NewTSProject<CR>"),
-      dashboard.button("ee", "  > Toggle file explorer", "<cmd>Neotree toggle<CR>"),
       dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
     }
 

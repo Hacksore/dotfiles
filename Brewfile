@@ -64,8 +64,7 @@ brew "maven"
 brew "mkcert"
 brew "mysql"
 brew "neofetch"
-brew "utf8proc", args: ["HEAD"]
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "nvm"
 brew "ollama"
 brew "openjdk@11"
@@ -87,6 +86,7 @@ brew "shellcheck"
 brew "shfmt"
 brew "starship"
 brew "stow"
+brew "utf8proc", args: ["HEAD"]
 brew "subversion"
 brew "telnet"
 brew "temporal"
@@ -160,6 +160,7 @@ cask "steam"
 cask "suspicious-package"
 cask "visual-studio-code"
 cask "wezterm"
+cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "Dato", id: 1470584107
 mas "Final Cut Pro", id: 424389933

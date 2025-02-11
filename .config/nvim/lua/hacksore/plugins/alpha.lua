@@ -9,8 +9,9 @@ end
 vim.api.nvim_create_user_command("NewTSFile", create_new_ts_file, {})
 
 local function create_new_ts_project()
+  local home = vim.fn.getenv("HOME")
   local ts_project_name = os.date("%Y-%m-%d-%H-%M-%S")
-  local ts_project_path = "/tmp/ts-sandbox/" .. ts_project_name
+  local ts_project_path = home .. "/sandbox/" .. ts_project_name
   vim.cmd("silent !mkdir -p " .. ts_project_path)
 
   vim.notify("Creating new TS project: " .. ts_project_path)
@@ -33,7 +34,7 @@ local function create_new_ts_project()
       vim.notify("TS Sandbox setup completed!", "info")
 
       -- give it some gitties
-      vim.cmd("silent !git init")
+      vim.cmd("silent !git init -b main")
       vim.cmd("silent !git add .")
       vim.cmd("silent !git commit -m 'Initial commit'")
     end,

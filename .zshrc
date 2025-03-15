@@ -94,3 +94,4 @@ setopt completealiases
 export PATH="$PATH:$HOME/go/bin"
 
 export LIBRARY_PATH="$LIBRARY_PATH:$HOMEBREW_PATH/lib"   
+export PATH="$HOME/.govm/shim:$PATH"

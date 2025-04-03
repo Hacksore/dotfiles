@@ -55,7 +55,7 @@ return {
         "shellcheck",
         "prettier", -- prettier formatter
         "stylua",   -- lua formatter
-        "eslint-lsp",
+        "eslint",
       },
     })
   end,

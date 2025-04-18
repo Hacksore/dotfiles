@@ -9,7 +9,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/node": "20",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.2"
   },
   "dependencies": {
     "commander": "^13.0.0"

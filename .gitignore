@@ -4,6 +4,9 @@ node_modules
 .config/lazygit/state.yml
 .config/op
 .config/brazil
+.config/cr
+.config/karabiner
+.config/raycast
 Brewfile.lock.json
 
 bin/docker-compose

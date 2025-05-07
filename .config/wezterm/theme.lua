@@ -3,6 +3,7 @@ local wezterm = require("wezterm")
 local M = {}
 
 local colors = {
+  -- TODO: add light theme
   dark = {
     selection_bg = "#3e4452",
     selection_fg = "#abb2bf",
@@ -11,24 +12,24 @@ local colors = {
     foreground = "#abb2bf",
     background = "#0D1117",
     ansi = {
-      "#4D4D4D",
-      "#e06c75",
-      "#98c379",
-      "#e5c07b",
-      "#61afef",
-      "#c678dd",
-      "#56b6c2",
-      "#abb2bf",
+      "#4D4D4D",  -- black
+      "#e06c75",  -- red
+      "#98c379",  -- green
+      "#e5c07b",  -- yellow
+      "#61afef",  -- blue
+      "#c678dd",  -- magenta
+      "#56b6c2",  -- cyan
+      "#abb2bf",  -- white
     },
     brights = {
-      "#4D4D4D",
-      "#e06c75",
-      "#98c379",
-      "#e5c07b",
-      "#61afef",
-      "#c678dd",
-      "#56b6c2",
-      "#abb2bf",
+      "#4D4D4D",  -- bright black (same as regular black)
+      "#e06c75",  -- bright red
+      "#98c379",  -- bright green
+      "#e5c07b",  -- bright yellow
+      "#61afef",  -- bright blue
+      "#c678dd",  -- bright magenta
+      "#56b6c2",  -- bright cyan
+      "#ffffff",  -- bright white
     },
   },
 }
@@ -64,17 +65,16 @@ function M.apply_to_config(c, opts)
   -- default options
   local defaults = {
     sync = false,
-    color_overrides = { dark = {}, light = {} },
-    token_overrides = { dark = {}, light = {} },
+    color_overrides = { dark = {} },
+    token_overrides = { dark = {} },
   }
 
   local o = tableMerge(defaults, opts)
   local palette = tableMerge(colors, o.color_overrides)
 
-  -- Create color schemes for both dark and light modes
+  -- Create color schemes
   local color_schemes = {
-    ["Dark Theme"] = palette.dark,
-    ["Light Theme"] = palette.light
+    ["Dark Theme"] = palette.dark
   }
 
   if c.color_schemes == nil then
@@ -85,7 +85,7 @@ function M.apply_to_config(c, opts)
   if opts.sync then
     c.color_scheme = select_for_appearance(wezterm.gui.get_appearance(), {
       dark = "Dark Theme",
-      light = "Light Theme",
+      light = "Dark Theme",
     })
   else
     c.color_scheme = "Dark Theme"

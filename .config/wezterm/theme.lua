@@ -11,7 +11,7 @@ local colors = {
     foreground = "#abb2bf",
     background = "#0D1117",
     ansi = {
-      "#2c313a",
+      "#4D4D4D",
       "#e06c75",
       "#98c379",
       "#e5c07b",
@@ -21,7 +21,7 @@ local colors = {
       "#abb2bf",
     },
     brights = {
-      "#2c313a",
+      "#4D4D4D",
       "#e06c75",
       "#98c379",
       "#e5c07b",
@@ -31,34 +31,6 @@ local colors = {
       "#abb2bf",
     },
   },
-  light = {
-    selection_bg = "#3e4452",
-    selection_fg = "#abb2bf",
-    cursor_bg = "#abb2bf",
-    cursor_fg = "black",
-    foreground = "#abb2bf",
-    background = "#0D1117",
-    ansi = {
-      "#2c313a",
-      "#e06c75",
-      "#98c379",
-      "#e5c07b",
-      "#61afef",
-      "#c678dd",
-      "#56b6c2",
-      "#abb2bf",
-    },
-    brights = {
-      "#2c313a",
-      "#e06c75",
-      "#98c379",
-      "#e5c07b",
-      "#61afef",
-      "#c678dd",
-      "#56b6c2",
-      "#abb2bf",
-    },
-  }
 }
 
 local function select_for_appearance(appearance, options)

@@ -1,36 +1,9 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
+local theme = require("theme")
 
-config.colors = {
-  selection_bg = "#3e4452",
-  selection_fg = "#abb2bf",
-  cursor_bg = "#abb2bf",
-  cursor_fg = "black",
-  foreground = "#abb2bf",
-  background = "#0D1117",
-  ansi = {
-    "#21252b",
-    "#e06c75",
-    "#98c379",
-    "#e5c07b",
-    "#61afef",
-    "#c678dd",
-    "#56b6c2",
-    "#abb2bf",
-  },
-  brights = {
-    "#21252b",
-    "#e06c75",
-    "#98c379",
-    "#e5c07b",
-    "#61afef",
-    "#c678dd",
-    "#56b6c2",
-    "#abb2bf",
-  },
-}
-
+theme.apply_to_config(config)
 -- Font
 config.font = wezterm.font({
   family = "JetBrainsMono Nerd Font",

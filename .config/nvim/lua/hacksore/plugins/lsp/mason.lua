@@ -59,41 +59,37 @@ return {
     })
 
     -- Configure each LSP server
-    for _, server in ipairs(LSP_LIST) do
-      if server == "rust_analyzer" then
-        lspconfig[server].setup({
-          on_attach = function()
-            -- TODO: allow parsing the closest file rustfmt.toml and parse out tab_spaces=<number>
-            -- TODO: is there a way to tell the rust LSP this instead of setting it for neovim overall
-            vim.opt.shiftwidth = 2
-          end
-        })
-      elseif server == "biome" then
-        lspconfig[server].setup({
-          filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }
-        })
-      elseif server == "lua_ls" then
-        lspconfig[server].setup({
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" }
-              },
-            }
-          }
-        })
-      elseif server == "tailwindcss" then
-        lspconfig[server].setup({
-          on_attach = function(client, bufnr)
-            local tw_highlight = require("tailwind-highlight")
-            tw_highlight.setup(client, bufnr, {
-              single_column = false,
-              mode = "background",
-              debounce = 200,
-            })
-          end,
-        })
+    lspconfig.rust_analyzer.setup({
+      on_attach = function()
+        -- TODO: allow parsing the closest file rustfmt.toml and parse out tab_spaces=<number>
+        -- TODO: is there a way to tell the rust LSP this instead of setting it for neovim overall
+        vim.opt.shiftwidth = 2
       end
-    end
+    })
+
+    lspconfig.biome.setup({
+      filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }
+    })
+
+    lspconfig.lua_ls.setup({
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" }
+          },
+        }
+      }
+    })
+
+    lspconfig.tailwindcss.setup({
+      on_attach = function(client, bufnr)
+        local tw_highlight = require("tailwind-highlight")
+        tw_highlight.setup(client, bufnr, {
+          single_column = false,
+          mode = "background",
+          debounce = 200,
+        })
+      end,
+    })
   end
 }

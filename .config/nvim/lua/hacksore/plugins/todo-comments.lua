@@ -1,3 +1,4 @@
+-- NOTE: testing
 return {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },
@@ -5,6 +6,9 @@ return {
   config = function()
     local todo_comments = require("todo-comments")
     todo_comments.setup({
+      keywords = {
+        NOTE = { icon = " ", color = "warning" },
+      },
       search = {
         command = "rg",
         args = {

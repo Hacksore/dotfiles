@@ -2,24 +2,23 @@ return {
   "mbbill/undotree",
   lazy = false,
   config = function()
-    vim.cmd [[
-        let g:undotree_WindowLayout=2
-            let g:undotree_DiffpanelHeight=8
+    -- Set options directly in Lua
+    vim.g.undotree_WindowLayout = 2
+    vim.g.undotree_DiffpanelHeight = 8
 
-            if has("persistent_undo")
-                let target_path = expand('~/.undodir')
+    if vim.fn.has("persistent_undo") == 1 then
+      local target_path = vim.fn.expand("~/.undodir")
 
-                " create the directory and any parent directories
-                " if the location does not exist.
-                if !isdirectory(target_path)
-                    call mkdir(target_path, "p", 0700)
-                endif
+      -- Create the directory and any parent directories
+      -- if the location does not exist.
+      if not vim.fn.isdirectory(target_path) == 1 then
+        vim.fn.mkdir(target_path, "p", 0700)
+      end
 
-                let &undodir=target_path
-                set undofile
-            endif
-        ]]
+      vim.opt.undodir = target_path
+      vim.opt.undofile = true
+    end
 
-    vim.keymap.set('n', '<leader>tu', vim.cmd.UndotreeToggle, {})
+    vim.keymap.set('n', '<leader>tu', function() vim.api.nvim_command('UndotreeToggle') end, {})
   end,
 }

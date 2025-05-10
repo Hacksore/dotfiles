@@ -1,4 +1,4 @@
-name: Stable
+name: CI 
 on:
   workflow_dispatch:
   pull_request:
@@ -10,7 +10,7 @@ on:
 env:
   NODE_VERSION: "18"
 jobs:
-  test:
+  stable:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo

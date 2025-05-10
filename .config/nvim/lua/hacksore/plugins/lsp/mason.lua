@@ -25,6 +25,7 @@ return {
   dependencies = {
     "mason-org/mason.nvim",
     "neovim/nvim-lspconfig",
+    "princejoogie/tailwind-highlight.nvim"
   },
   config = function()
     local mason_lspconfig = require("mason-lspconfig")
@@ -71,15 +72,16 @@ return {
       filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }
     })
 
-    lspconfig.lua_ls.setup({
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" }
-          },
-        }
-      }
-    })
+    -- TODO: i guess this does not work for global vim so im using lazydev
+    -- lspconfig.lua_ls.setup({
+    --   settings = {
+    --     Lua = {
+    --       diagnostic = {
+    --         globals = { "vim" }
+    --       },
+    --     }
+    --   }
+    -- })
 
     lspconfig.tailwindcss.setup({
       on_attach = function(client, bufnr)

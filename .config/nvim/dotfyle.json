@@ -71,6 +71,7 @@
     "nvim-tree/nvim-web-devicons",
     "nvim-treesitter/nvim-treesitter",
     "onsails/lspkind.nvim",
+    "princejoogie/tailwind-highlight",
     "projekt0n/github-nvim-theme",
     "rmagatti/auto-session",
     "roobert/tailwindcss-colorizer-cmp.nvim",
@@ -105,6 +106,6 @@
     "vimdoc",
     "yaml"
   ],
-  "lspServers": ["biome", "lua_ls", "rust_analyzer"],
+  "lspServers": ["biome", "lua_ls", "rust_analyzer", "tailwindcss"],
   "leaderKey": "<Space>"
 }

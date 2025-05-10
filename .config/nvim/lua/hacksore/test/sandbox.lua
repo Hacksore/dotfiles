@@ -17,6 +17,7 @@ function TestTypeScriptLSP()
   -- Wait for LSP to attach and diagnostics to appear
   local function check_lsp_status()
     -- Check if TypeScript LSP is attached
+    -- FIXME: this needs to be updated with the new method
     local clients = vim.lsp.get_active_clients({ bufnr = 0 })
     local is_attached = false
     for _, client in ipairs(clients) do

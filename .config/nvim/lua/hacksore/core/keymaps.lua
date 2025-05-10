@@ -44,12 +44,10 @@ end, { desc = "Format buffer" })
 keymap.set("n", "<Leader>ld", function()
   vim.diagnostic.open_float()
 end, { desc = "Hover diagnostics" })
-keymap.set("n", "<Leader>ln", function()
-  vim.diagnostic.goto_next()
-end, { desc = "Next error" })
-keymap.set("n", "<Leader>ln", function()
-  vim.diagnostic.goto_prev()
-end, { desc = "prev error" })
+
+keymap.set("n", "gd", function()
+  vim.lsp.buf.definition()
+end, { desc = "Show LSP definition" })
 
 -- random things
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -67,4 +65,3 @@ keymap.set("n", "<Leader>9", function() utils.switch_theme(-1) end, { desc = "Pr
 
 -- quick key to toggle theme from light to dark
 keymap.set("n", "<Leader>ll", function() utils.toggle_theme() end, { desc = "Toggle theme light/dark" })
-

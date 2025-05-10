@@ -13,9 +13,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # make path either linux or mac for brew
 if [ -d "/opt/homebrew/bin" ]; then
-	export HOMEBREW_PATH="/opt/homebrew"
-else 
-	export HOMEBREW_PATH="/home/linuxbrew/.linuxbrew"
+  export HOMEBREW_PATH="/opt/homebrew"
+else
+  export HOMEBREW_PATH="/home/linuxbrew/.linuxbrew"
 fi
 
 # load brew
@@ -29,13 +29,13 @@ source <(fzf --zsh)
 
 # load nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PATH/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PATH/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$HOMEBREW_PATH/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PATH/opt/nvm/nvm.sh"                                       # This loads nvm
+[ -s "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # profile
 source "$HOME/.zprofile"
 
-# load zsh plugins 
+# load zsh plugins
 source "$HOMEBREW_PATH/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOMEBREW_PATH/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
@@ -93,5 +93,5 @@ setopt completealiases
 
 export PATH="$PATH:$HOME/go/bin"
 
-export LIBRARY_PATH="$LIBRARY_PATH:$HOMEBREW_PATH/lib"   
+export LIBRARY_PATH="$LIBRARY_PATH:$HOMEBREW_PATH/lib"
 export PATH="$HOME/.govm/shim:$PATH"

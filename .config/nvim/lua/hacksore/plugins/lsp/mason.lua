@@ -72,6 +72,11 @@ return {
       filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }
     })
 
+    lspconfig.bashls.setup({
+      -- allow attching when .zshrc
+      filetypes = { "sh", "zsh" }
+    })
+
     -- TODO: i guess this does not work for global vim so im using lazydev
     -- lspconfig.lua_ls.setup({
     --   settings = {

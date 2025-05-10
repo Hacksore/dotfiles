@@ -1,6 +1,33 @@
 {
   "distribution": "custom",
-  "masonTools": [],
+  "masonTools": [
+    "astro-ls",
+    "bash-language-server",
+    "biome",
+    "docker-compose-langserver",
+    "docker-langserver",
+    "emmet-ls",
+    "gopls",
+    "graphql-lsp",
+    "jdtls",
+    "lua-language-server",
+    "mdx-language-server",
+    "prettier",
+    "prisma-language-server",
+    "pylsp",
+    "ruby-lsp",
+    "rust-analyzer",
+    "shellcheck",
+    "stylua",
+    "tailwindcss-language-server",
+    "typescript-language-server",
+    "vscode-css-language-server",
+    "vscode-eslint-language-server",
+    "vscode-html-language-server",
+    "vscode-json-language-server",
+    "yaml-language-server",
+    "yamlfix"
+  ],
   "plugins": [
     "HakonHarnes/img-clip.nvim",
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -78,6 +105,6 @@
     "vimdoc",
     "yaml"
   ],
-  "lspServers": [],
+  "lspServers": ["biome", "lua_ls", "rust_analyzer"],
   "leaderKey": "<Space>"
 }

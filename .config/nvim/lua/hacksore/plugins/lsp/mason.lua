@@ -27,10 +27,10 @@ return {
     "neovim/nvim-lspconfig",
   },
   config = function()
-    local mason_lspconfig = require('mason-lspconfig')
-    local lspconfig = require('lspconfig')
+    local mason_lspconfig = require("mason-lspconfig")
+    local lspconfig = require("lspconfig")
 
-    require('mason').setup()
+    require("mason").setup()
     mason_lspconfig.setup({
       ensure_installed = LSP_LIST,
       automatic_enable = LSP_LIST

@@ -77,17 +77,6 @@ return {
       filetypes = { "sh", "zsh" }
     })
 
-    -- TODO: i guess this does not work for global vim so im using lazydev
-    -- lspconfig.lua_ls.setup({
-    --   settings = {
-    --     Lua = {
-    --       diagnostic = {
-    --         globals = { "vim" }
-    --       },
-    --     }
-    --   }
-    -- })
-
     lspconfig.tailwindcss.setup({
       on_attach = function(client, bufnr)
         local tw_highlight = require("tailwind-highlight")

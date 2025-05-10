@@ -1,7 +1,10 @@
 return {
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
-  dependencies = { "rafamadriz/friendly-snippets" },
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+    "giuxtaposition/blink-cmp-copilot",
+  },
   -- use a release tag to download pre-built binaries
   build = "cargo +nightly build --release",
 
@@ -16,6 +19,7 @@ return {
       ["<C-Space>"] = { "show", "fallback" },
       ["<C-j>"] = { "select_next", "fallback" },
       ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-l>"] = { "hide", "fallback" },
     },
 
     appearance = {

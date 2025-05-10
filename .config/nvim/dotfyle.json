@@ -42,6 +42,7 @@
     "folke/noice.nvim",
     "folke/todo-comments.nvim",
     "folke/trouble.nvim",
+    "giuxtaposition/blink-cmp-copilot",
     "goolord/alpha-nvim",
     "kdheepak/lazygit.nvim",
     "kevinhwang91/nvim-ufo",
@@ -98,6 +99,6 @@
     "vimdoc",
     "yaml"
   ],
-  "lspServers": ["biome", "rust_analyzer", "tailwindcss"],
+  "lspServers": ["bashls", "biome", "rust_analyzer", "tailwindcss"],
   "leaderKey": "<Space>"
 }

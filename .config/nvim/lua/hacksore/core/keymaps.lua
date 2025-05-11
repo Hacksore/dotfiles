@@ -45,6 +45,11 @@ keymap.set("n", "<Leader>ld", function()
   vim.diagnostic.open_float()
 end, { desc = "Hover diagnostics" })
 
+keymap.set("n", "<Leader>lr", function()
+  -- rename symbol via the lsp
+  vim.lsp.buf.rename()
+end, { desc = "Hover diagnostics" })
+
 keymap.set("n", "gd", function()
   vim.lsp.buf.definition()
 end, { desc = "Show LSP definition" })

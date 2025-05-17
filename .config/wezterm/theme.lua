@@ -107,4 +107,4 @@ function M.apply_to_config(c, opts)
   c.window_frame = tableMerge(c.window_frame, window_frame)
 end
 
-return M 
+return M

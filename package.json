@@ -3,7 +3,7 @@
   "description": "utils for my dotties",
   "scripts": {
     "test": "tsx tasks.ts",
-    "lint": "luacheck .config/nvim"
+    "lint": "luacheck .config"
   },
   "type": "module",
   "author": "Hacksore",

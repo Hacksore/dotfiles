@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Setup Luacheck
-        uses: lunarmodules/luacheck@v1.2.0
       - name: Lint
-        run: luacheck .config/nvim
+        uses: lunarmodules/luacheck@v1.2.0
+        with:
+          args: .config
   stable:
     runs-on: ubuntu-latest
     steps:

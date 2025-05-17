@@ -25,7 +25,7 @@ eval "$($HOMEBREW_PATH/bin/brew shellenv)"
 source "$ZSH/oh-my-zsh.sh"
 
 # good fuzzy
-source <(fzf --zsh)
+eval "$(fzf --zsh)"
 
 # load nvm
 export NVM_DIR="$HOME/.nvm"

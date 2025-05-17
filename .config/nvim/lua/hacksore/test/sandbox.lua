@@ -1,8 +1,13 @@
 -- Function to test TypeScript LSP attachment and diagnostics
-function TestTypeScriptLSP()
+local function TestTypeScriptLSP()
   -- Create a temporary TypeScript file with intentional errors
   local test_file = os.tmpname() .. '.ts'
   local file = io.open(test_file, 'w')
+  if (not file) then
+    print("Error: Unable to create test file")
+    return
+  end
+
   file:write([[
     // File with intentional TypeScript errors
     const x: number = "string";  // Type mismatch

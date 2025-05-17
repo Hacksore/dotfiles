@@ -22,16 +22,16 @@ local function create_new_ts_project()
   vim.cmd("e src/App.tsx")
 
   -- install the deps with pnpm
-  vim.notify("TS Sandbox installing deps with pnpm", "info", {})
+  vim.notify("TS Sandbox installing deps with pnpm", vim.log.levels.INFO, {})
 
   vim.fn.jobstart("pnpm i", {
     on_exit = function(_, exit_code)
       if exit_code ~= 0 then
-        vim.notify("TS Sandbox failed to install deps", "error")
+        vim.notify("TS Sandbox failed to install deps", vim.log.levels.ERROR)
         return
       end
 
-      vim.notify("TS Sandbox setup completed!", "info")
+      vim.notify("TS Sandbox setup completed!", vim.log.levels.INFO)
 
       -- give it some gitties
       vim.cmd("silent !git init -b main")

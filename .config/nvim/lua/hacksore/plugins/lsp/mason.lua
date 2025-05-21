@@ -77,6 +77,16 @@ return {
       filetypes = { "sh", "zsh" }
     })
 
+    lspconfig.yamlls.setup({
+      settings = {
+        yaml = {
+          format = {
+            enable = true
+          },
+        }
+      }
+    })
+
     lspconfig.tailwindcss.setup({
       on_attach = function(client, bufnr)
         local tw_highlight = require("tailwind-highlight")

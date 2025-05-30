@@ -1,4 +1,5 @@
 local LSP_LIST = {
+  "denols",
   "ts_ls",
   "html",
   "cssls",
@@ -34,7 +35,6 @@ return {
     require("mason").setup()
     mason_lspconfig.setup({
       ensure_installed = LSP_LIST,
-      automatic_enable = LSP_LIST
     })
 
     -- Configure diagnostic signs using the new approach
@@ -95,6 +95,28 @@ return {
           mode = "background",
           debounce = 200,
         })
+      end,
+    })
+
+    -- setup deno first
+    lspconfig.denols.setup({
+      root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock"),
+      single_file_support = false,
+      settings = {},
+    })
+
+    -- force ts lsp to only if tsconfig.json is present and not in a deno project
+    lspconfig.ts_ls.setup({
+      root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json"),
+      single_file_support = false,
+      settings = {},
+      on_attach = function(client, bufnr)
+        print("ts_ls attached to " .. vim.api.nvim_buf_get_name(bufnr))
+        vim.notify("ts_ls attached to " .. vim.api.nvim_buf_get_name(bufnr), vim.log.levels.INFO)
+        local denoRootDir = lspconfig.util.root_pattern("deno.json", "deno.lock", "deno.jsonc")(vim.api.nvim_buf_get_name(bufnr))
+        if denoRootDir then
+          client.stop() -- Force stop the client if we detect we're in a Deno project
+        end
       end,
     })
   end

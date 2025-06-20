@@ -10,6 +10,15 @@ on:
 env:
   NODE_VERSION: "18"
 jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Lint
+        uses: lunarmodules/luacheck@v1.2.0
+        with:
+          args: .config
   stable:
     runs-on: ubuntu-latest
     steps:

@@ -11,8 +11,8 @@ return {
 
       -- Create the directory and any parent directories
       -- if the location does not exist.
-      if not vim.fn.isdirectory(target_path) == 1 then
-        vim.fn.mkdir(target_path, "p", 0700)
+      if vim.fn.isdirectory(target_path) == 0 then
+        vim.fn.mkdir(target_path, "p", "0700")
       end
 
       vim.opt.undodir = target_path

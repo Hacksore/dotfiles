@@ -2,7 +2,8 @@
   "name": "dotfiles",
   "description": "utils for my dotties",
   "scripts": {
-    "test": "tsx tasks.ts"
+    "test": "tsx tasks.ts",
+    "lint": "luacheck .config"
   },
   "type": "module",
   "author": "Hacksore",

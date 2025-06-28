@@ -99,6 +99,15 @@
     "vimdoc",
     "yaml"
   ],
-  "lspServers": ["bashls", "biome", "rust_analyzer", "tailwindcss"],
+  "lspServers": [
+    "bashls",
+    "biome",
+    "denols",
+    "jsonls",
+    "rust_analyzer",
+    "tailwindcss",
+    "ts_ls",
+    "yamlls"
+  ],
   "leaderKey": "<Space>"
 }

@@ -31,6 +31,7 @@ M.get_all_colorschemes = function()
   return colors
 end
 
+-- toggle between light and dark themes
 M.toggle_theme = function()
   local active_theme = vim.fn.execute("colorscheme"):match("^%s*(.-)%s*$")
   if active_theme == "github_dark_default" or active_theme == "" then

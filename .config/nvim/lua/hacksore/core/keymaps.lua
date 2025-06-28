@@ -1,5 +1,4 @@
 local utils = require("hacksore.core.utils")
-
 local keymap = vim.keymap
 
 -- tmux
@@ -36,23 +35,12 @@ keymap.set("t", "<C-K>", "<Cmd>wincmd k<CR>", { desc = "Terminal up window navig
 keymap.set("t", "<C-L>", "<Cmd>wincmd l<CR>", { desc = "Terminal right window navigation" })
 
 -- format
-keymap.set("n", "<Leader>lf", function()
-  vim.lsp.buf.format()
-end, { desc = "Format buffer" })
+keymap.set("n", "<Leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
 
 -- lsp things
-keymap.set("n", "<Leader>ld", function()
-  vim.diagnostic.open_float()
-end, { desc = "Hover diagnostics" })
-
-keymap.set("n", "<Leader>la", function()
-  vim.lsp.buf.code_action()
-end, { desc = "Hover diagnostics" })
-
-keymap.set("n", "<Leader>lr", function()
-  -- rename symbol via the lsp
-  vim.lsp.buf.rename()
-end, { desc = "Hover diagnostics" })
+keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Hover diagnostics" })
+keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { desc = "Hover diagnostics" })
+keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "Hover diagnostics" })
 
 keymap.set("n", "gd", function()
   vim.lsp.buf.definition({
@@ -68,6 +56,7 @@ end, { desc = "Goto LSP definition" })
 -- random things
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 keymap.set("n", "fn", "<Cmd>enew<CR>", { desc = "Open a new window" })
+
 -- stop pasted text from writing the text into clipboard buffer
 keymap.set("v", "p", [["_dP]], { desc = "Paste without yanking" })
 

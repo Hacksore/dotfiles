@@ -6,6 +6,8 @@ return {
     "giuxtaposition/blink-cmp-copilot",
   },
   -- use a release tag to download pre-built binaries
+  -- This means you have to install and configure rust nightly
+  -- rustup install nightly
   build = "cargo +nightly build --release",
 
   ---@module "blink.cmp"

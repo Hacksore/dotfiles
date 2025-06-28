@@ -25,7 +25,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Install native deps 
-        run: sudo apt install curl git make cmake gcc fd-find ripgrep nodejs fzf -y
+        run: |
+          sudo apt update
+          sudo apt install curl git make cmake gcc fd-find ripgrep nodejs fzf -y
       - name: Link nvim config
         run: ln -s /home/runner/work/dotfiles/dotfiles/.config/nvim ~/.config/nvim
       - name: Install neovim@stable

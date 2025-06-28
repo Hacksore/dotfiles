@@ -1,3 +1,4 @@
+local utils = require("hacksore.core.utils")
 return {
   "projekt0n/github-nvim-theme",
   priority = 1000,
@@ -7,6 +8,6 @@ return {
         terminal_colors = false,
       },
     })
-    vim.cmd("colorscheme github_dark_default")
+    utils.set_theme(utils.Theme.dark)
   end,
 }

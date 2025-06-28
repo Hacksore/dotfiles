@@ -55,8 +55,15 @@ keymap.set("n", "<Leader>lr", function()
 end, { desc = "Hover diagnostics" })
 
 keymap.set("n", "gd", function()
-  vim.lsp.buf.definition()
-end, { desc = "Show LSP definition" })
+  vim.lsp.buf.definition({
+    on_list = function(t)
+      -- I like to jump directly to the file instead of doing a split buffer
+      local file = t.items[1]
+      vim.lsp.util.show_document(file.user_data, "utf-8", { focus = true })
+    end
+
+  })
+end, { desc = "Goto LSP definition" })
 
 -- random things
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")

@@ -12,11 +12,13 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-    # build the devcontainer from .devcontainer.json
+      # build the devcontainer from .devcontainer.json
       - name: Build devcontainer
         uses: devcontainers/ci@v0.3
         with:
+          # if it uses the devcontainer json file why do i have to set this lmao
           imageName: mcr.microsoft.com/devcontainers/base
           imageTag: jammy
           runCmd: |
             echo all done 😊
+          push: false

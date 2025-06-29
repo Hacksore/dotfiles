@@ -1,6 +1,9 @@
 -- set this before lazy and core load
 vim.g.mapleader = " "
 
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+
 require("hacksore.lazy")
 require("hacksore.core")
 

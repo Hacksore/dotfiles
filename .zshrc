@@ -21,6 +21,10 @@ fi
 # load brew
 eval "$($HOMEBREW_PATH/bin/brew shellenv)"
 
+# force utf8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # load ohmyzsh
 source "$ZSH/oh-my-zsh.sh"
 

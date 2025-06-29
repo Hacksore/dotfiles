@@ -19,6 +19,7 @@ jobs:
       - name: Build devcontainer
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/Hacksore/devcontainer
+          imageName: mcr.microsoft.com/devcontainers/base
+          imageTag: jammy
           runCmd: |
             ./.devcontainer/install.sh

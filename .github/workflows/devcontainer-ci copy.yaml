@@ -21,4 +21,4 @@ jobs:
           imageTag: jammy
           runCmd: |
             echo all done 😊
-          push: false
+          push: never

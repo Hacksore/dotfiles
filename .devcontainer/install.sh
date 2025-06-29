@@ -39,3 +39,13 @@ git config --global --unset gpg.format
 
 # install node
 nvm install 20 --lts
+
+# install rust up
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# source the rust env
+. "$HOME/.cargo/env"
+
+# install stable+nightly
+rustup install stable
+rustup install nightly

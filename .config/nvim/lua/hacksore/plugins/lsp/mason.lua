@@ -21,6 +21,8 @@ local LSP_LIST = {
   "prismals",
 }
 
+local rust_utils = require("hacksore.core.rust-utils")
+
 return {
   "mason-org/mason-lspconfig.nvim",
   dependencies = {
@@ -75,11 +77,36 @@ return {
 
     -- Configure each LSP server
     lspconfig.rust_analyzer.setup({
-      on_attach = function()
-        -- TODO: allow parsing the closest file rustfmt.toml and parse out tab_spaces=<number>
-        -- TODO: is there a way to tell the rust LSP this instead of setting it for neovim overall
-        vim.opt.shiftwidth = 2
-      end
+      on_attach = function(client, bufnr)
+        -- Parse rustfmt.toml to get tab_spaces setting
+        local current_file = vim.api.nvim_buf_get_name(bufnr)
+        local current_dir = vim.fn.fnamemodify(current_file, ":h")
+        local rustfmt_path = rust_utils.find_rustfmt_toml(current_dir)
+
+        local tab_spaces = 2 -- default value
+        if rustfmt_path then
+          local parsed_tab_spaces = rust_utils.parse_rustfmt_toml(rustfmt_path)
+          if parsed_tab_spaces then
+            tab_spaces = parsed_tab_spaces
+          end
+        end
+
+        -- Configure buffer-local settings for this Rust file
+        vim.api.nvim_set_option_value('shiftwidth', tab_spaces, { buf = bufnr })
+        vim.api.nvim_set_option_value('tabstop', tab_spaces, { buf = bufnr })
+        vim.api.nvim_set_option_value('softtabstop', tab_spaces, { buf = bufnr })
+
+        -- Configure rust-analyzer settings
+        client.server_capabilities.documentFormattingProvider = true
+        client.server_capabilities.documentRangeFormattingProvider = true
+      end,
+      settings = {
+        ["rust-analyzer"] = {
+          rustfmt = {
+            extraArgs = { "--config-path", vim.fn.getcwd() .. "/rustfmt.toml" }
+          }
+        }
+      }
     })
 
     lspconfig.biome.setup({

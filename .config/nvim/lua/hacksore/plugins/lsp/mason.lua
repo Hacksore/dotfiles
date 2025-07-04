@@ -1,5 +1,6 @@
 local LSP_LIST = {
-  "denols",
+  -- TODO: get this only to enable in a deno project
+  -- "denols",
   "ts_ls",
   "html",
   "cssls",
@@ -125,15 +126,14 @@ return {
       end,
     })
 
-    vim.lsp.config("denols", {
-      single_file_support = false,
-      filetypes = {},
-      settings = {},
-    })
+    -- vim.lsp.config("denols", {
+    --   single_file_support = false,
+    --   filetypes = {},
+    --   settings = {},
+    -- })
 
     vim.lsp.config("ts_ls", {
       single_file_support = false,
-      filetypes = {},
       settings = {},
     })
 

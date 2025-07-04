@@ -96,19 +96,13 @@ end
 
 wezterm.on("update-status", function(window)
   -- Add error handling around the function call
-  local ok, err = pcall(center_window_once, window)
-  if not ok then
-    -- Silently ignore errors in update-status to avoid spam
-  end
+  pcall(center_window_once, window)
 end)
 
 wezterm.on("gui-startup", function()
   local _, _, window = wezterm.mux.spawn_window({})
   -- Add error handling around the function call
-  local ok, err = pcall(center_window_once, window)
-  if not ok then
-    -- Silently ignore errors in gui-startup to avoid startup issues
-  end
+  pcall(center_window_once, window)
 end)
 
 return config

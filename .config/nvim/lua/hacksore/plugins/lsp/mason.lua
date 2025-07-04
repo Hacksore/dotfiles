@@ -1,5 +1,5 @@
 local LSP_LIST = {
-  -- "denols",
+  "denols",
   "ts_ls",
   "html",
   "cssls",
@@ -33,9 +33,22 @@ return {
     local lspconfig = require("lspconfig")
 
     require("mason").setup()
+
+    local filtered_lsp_list = {}
+    local lsps_to_skip = {
+      "denols",
+      "ts_ls",
+    }
+
+    for _, lsp in ipairs(LSP_LIST) do
+      if not vim.tbl_contains(lsps_to_skip, lsp) then
+        table.insert(filtered_lsp_list, lsp)
+      end
+    end
+
     mason_lspconfig.setup({
       ensure_installed = LSP_LIST,
-      automatic_enable = LSP_LIST
+      automatic_enable = filtered_lsp_list
     })
 
     -- Configure diagnostic signs using the new approach
@@ -99,15 +112,26 @@ return {
       end,
     })
 
-    -- setup deno first
-    -- lspconfig.denols.setup({
-    --   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock"),
-    --   single_file_support = false,
-    --   settings = {},
-    -- })
+    lspconfig.denols.setup({
+      root_dir = function(fname)
+        return lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock")(fname)
+      end,
+      filetypes = {},
+      single_file_support = false,
+      settings = {},
+    })
 
-    -- force ts lsp to only if tsconfig.json is present and not in a deno project
     lspconfig.ts_ls.setup({
+      root_dir = function(fname)
+        local deno_root = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock")(fname)
+        if deno_root then
+          return nil
+        end
+
+        return lspconfig.util.root_pattern("tsconfig.json", "package.json")(fname)
+      end,
+      filetypes = {},
+      single_file_support = false,
       settings = {},
     })
   end

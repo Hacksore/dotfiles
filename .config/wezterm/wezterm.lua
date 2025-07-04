@@ -55,6 +55,11 @@ config.keys = {
 }
 
 local function center_window_once(window)
+  -- Early return if window is nil
+  if not window then
+    return
+  end
+
   wezterm.GLOBAL.windows_centered = wezterm.GLOBAL.windows_centered or {}
 
   local window_id = window:window_id() .. ""
@@ -64,11 +69,16 @@ local function center_window_once(window)
 
   local screen = wezterm.gui.screens().active
 
+  -- Early return if screen is nil
+  if not screen then
+    return
+  end
 
   local width = screen.width * 0.85
   local height = screen.height * 0.85
 
-  if screen and window then
+  -- Check if window has the required methods before calling them
+  if window.set_inner_size then
     window:set_inner_size(width, height)
   end
 
@@ -78,16 +88,27 @@ local function center_window_once(window)
 
   wezterm.GLOBAL.windows_centered[window_id] = true
 
-  window:set_position(x, y)
+  -- Check if window has set_position method before calling it
+  if window.set_position then
+    window:set_position(x, y)
+  end
 end
 
 wezterm.on("update-status", function(window)
-  center_window_once(window)
+  -- Add error handling around the function call
+  local ok, err = pcall(center_window_once, window)
+  if not ok then
+    -- Silently ignore errors in update-status to avoid spam
+  end
 end)
 
 wezterm.on("gui-startup", function()
   local _, _, window = wezterm.mux.spawn_window({})
-  center_window_once(window)
+  -- Add error handling around the function call
+  local ok, err = pcall(center_window_once, window)
+  if not ok then
+    -- Silently ignore errors in gui-startup to avoid startup issues
+  end
 end)
 
 return config

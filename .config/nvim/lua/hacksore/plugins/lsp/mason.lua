@@ -1,4 +1,4 @@
-local LSP_LIST = {
+local LANGUAGE_SERVERS = {
   "denols",
   "ts_ls",
   "html",
@@ -23,60 +23,47 @@ local LSP_LIST = {
 
 local rust_utils = require("hacksore.core.rust-utils")
 
+--- Setup the diagnostics configuration for Neovim LSP
+local configure_dianostics = function()
+  -- Configure diagnostic signs using the new approach
+  vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = " ",
+        [vim.diagnostic.severity.WARN] = " ",
+        [vim.diagnostic.severity.HINT] = "󰠠 ",
+        [vim.diagnostic.severity.INFO] = " ",
+      },
+      numhl = {
+        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      },
+    },
+    virtual_text = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+  })
+end
+
 return {
-  "mason-org/mason-lspconfig.nvim",
+  "mason-org/mason.nvim",
   dependencies = {
-    "mason-org/mason.nvim",
+    { "mason-org/mason.nvim", opts = {} },
     "neovim/nvim-lspconfig",
     "princejoogie/tailwind-highlight.nvim"
   },
   config = function()
-    local mason_lspconfig = require("mason-lspconfig")
-    local lspconfig = require("lspconfig")
-
     require("mason").setup()
-
-    local filtered_lsp_list = {}
-    local lsps_to_skip = {
-      "denols",
-      "ts_ls",
-    }
-
-    for _, lsp in ipairs(LSP_LIST) do
-      if not vim.tbl_contains(lsps_to_skip, lsp) then
-        table.insert(filtered_lsp_list, lsp)
-      end
-    end
-
-    mason_lspconfig.setup({
-      ensure_installed = LSP_LIST,
-      automatic_enable = filtered_lsp_list
+    require("mason-lspconfig").setup({
+      ensure_installed = LANGUAGE_SERVERS,
     })
 
-    -- Configure diagnostic signs using the new approach
-    vim.diagnostic.config({
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = " ",
-          [vim.diagnostic.severity.WARN] = " ",
-          [vim.diagnostic.severity.HINT] = "󰠠 ",
-          [vim.diagnostic.severity.INFO] = " ",
-        },
-        numhl = {
-          [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-          [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-          [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-          [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-        },
-      },
-      virtual_text = true,
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-    })
+    configure_dianostics()
 
-    -- Configure each LSP server
-    lspconfig.rust_analyzer.setup({
+    vim.lsp.config("rust_analyzer", {
       on_attach = function(client, bufnr)
         -- Parse rustfmt.toml to get tab_spaces setting
         local current_file = vim.api.nvim_buf_get_name(bufnr)
@@ -109,16 +96,15 @@ return {
       }
     })
 
-    lspconfig.biome.setup({
+    vim.lsp.config("biome", {
       filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }
     })
 
-    lspconfig.bashls.setup({
-      -- allow attching when .zshrc
+    vim.lsp.config("bashls", {
       filetypes = { "sh", "zsh" }
     })
 
-    lspconfig.yamlls.setup({
+    vim.lsp.config("yamlls", {
       settings = {
         yaml = {
           format = {
@@ -128,7 +114,7 @@ return {
       }
     })
 
-    lspconfig.tailwindcss.setup({
+    vim.lsp.config("tailwindcss", {
       on_attach = function(client, bufnr)
         local tw_highlight = require("tailwind-highlight")
         tw_highlight.setup(client, bufnr, {
@@ -139,27 +125,18 @@ return {
       end,
     })
 
-    lspconfig.denols.setup({
-      root_dir = function(fname)
-        return lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock")(fname)
-      end,
-      filetypes = {},
-      single_file_support = false,
-      settings = {},
+    vim.lsp.config("denols", {
+      root_markers = { "deno.json", "deno.jsonc", "deno.lock" },
+      workspace_required = true,
     })
 
-    lspconfig.ts_ls.setup({
-      root_dir = function(fname)
-        local deno_root = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock")(fname)
-        if deno_root then
-          return nil
-        end
-
-        return lspconfig.util.root_pattern("tsconfig.json", "package.json")(fname)
-      end,
-      filetypes = {},
-      single_file_support = false,
-      settings = {},
+    vim.lsp.config("ts_ls", {
+      root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
+      workspace_required = true,
     })
+
+    for _, lsp in ipairs(LANGUAGE_SERVERS) do
+      vim.lsp.enable(lsp)
+    end
   end
 }

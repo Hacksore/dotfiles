@@ -1,4 +1,4 @@
-local ENABLED_LANGUAGE_SERVERS = {
+local LANGUAGE_SERVERS = {
   "denols",
   "ts_ls",
   "html",
@@ -23,6 +23,7 @@ local ENABLED_LANGUAGE_SERVERS = {
 
 local rust_utils = require("hacksore.core.rust-utils")
 
+--- Setup the diagnostics configuration for Neovim LSP
 local configure_dianostics = function()
   -- Configure diagnostic signs using the new approach
   vim.diagnostic.config({
@@ -57,10 +58,9 @@ return {
   config = function()
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = ENABLED_LANGUAGE_SERVERS,
+      ensure_installed = LANGUAGE_SERVERS,
     })
 
-    -- Configure each LSP server using native vim.lsp.configure
     configure_dianostics()
 
     vim.lsp.config("rust_analyzer", {
@@ -135,7 +135,7 @@ return {
       workspace_required = true,
     })
 
-    for _, lsp in ipairs(ENABLED_LANGUAGE_SERVERS) do
+    for _, lsp in ipairs(LANGUAGE_SERVERS) do
       vim.lsp.enable(lsp)
     end
   end

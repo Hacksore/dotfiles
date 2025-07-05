@@ -1,6 +1,5 @@
-local LSP_LIST = {
-  -- TODO: get this only to enable in a deno project
-  -- "denols",
+local ENABLED_LANGUAGE_SERVERS = {
+  "denols",
   "ts_ls",
   "html",
   "cssls",
@@ -58,7 +57,7 @@ return {
   config = function()
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = LSP_LIST,
+      ensure_installed = ENABLED_LANGUAGE_SERVERS,
     })
 
     -- Configure each LSP server using native vim.lsp.configure
@@ -126,18 +125,17 @@ return {
       end,
     })
 
-    -- vim.lsp.config("denols", {
-    --   single_file_support = false,
-    --   filetypes = {},
-    --   settings = {},
-    -- })
-
-    vim.lsp.config("ts_ls", {
-      single_file_support = false,
-      settings = {},
+    vim.lsp.config("denols", {
+      root_markers = { "deno.json", "deno.jsonc", "deno.lock" },
+      workspace_required = true,
     })
 
-    for _, lsp in ipairs(LSP_LIST) do
+    vim.lsp.config("ts_ls", {
+      root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
+      workspace_required = true,
+    })
+
+    for _, lsp in ipairs(ENABLED_LANGUAGE_SERVERS) do
       vim.lsp.enable(lsp)
     end
   end

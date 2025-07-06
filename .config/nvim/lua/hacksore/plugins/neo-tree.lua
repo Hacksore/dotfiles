@@ -25,11 +25,6 @@ return {
     },
     filesystem = {
       follow_current_file = { enabled = true },
-      window = {
-        mappings = {
-          ["<C-f>"] = "<cmd>silent !tmux neww tmux-sessionizer<cr>",
-        },
-      },
       filtered_items = {
         hide_dotfiles = false,
         hide_gitignored = true,

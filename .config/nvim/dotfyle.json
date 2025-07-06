@@ -20,6 +20,7 @@
     "vscode-css-language-server",
     "vscode-html-language-server",
     "vscode-json-language-server",
+    "vue-language-server",
     "yaml-language-server"
   ],
   "plugins": [
@@ -45,7 +46,6 @@
     "laytan/cloak.nvim",
     "lewis6991/gitsigns.nvim",
     "luukvbaal/statuscol.nvim",
-    "mason-org/mason-lspconfig.nvim",
     "mason-org/mason.nvim",
     "mbbill/undotree",
     "mfussenegger/nvim-jdtls",
@@ -67,6 +67,7 @@
     "sindrets/diffview.nvim",
     "stevearc/conform.nvim",
     "tpope/vim-fugitive",
+    "williamboman/mason-lspconfig.nvim",
     "windwp/nvim-ts-autotag",
     "zbirenbaum/copilot.lua"
   ],
@@ -93,13 +94,6 @@
     "vimdoc",
     "yaml"
   ],
-  "lspServers": [
-    "bashls",
-    "biome",
-    "rust_analyzer",
-    "tailwindcss",
-    "ts_ls",
-    "yamlls"
-  ],
+  "lspServers": [],
   "leaderKey": "<Space>"
 }

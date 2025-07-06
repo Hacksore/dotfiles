@@ -4,6 +4,6 @@
 apps:
 	brew bundle --file ${HOME}/dotfiles/Brewfile
 export:
-	brew bundle dump --file ${HOME}/dotfiles/Brewfile --force
+	brew bundle dump --no-vscode --file ${HOME}/dotfiles/Brewfile --force
 test:
 	@pnpm test

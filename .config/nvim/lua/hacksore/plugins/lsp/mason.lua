@@ -6,6 +6,7 @@ local LANGUAGE_SERVERS = {
   "cssls",
   "tailwindcss",
   "ruby_lsp",
+  "prettier",
   "lua_ls",
   "rust_analyzer",
   "dockerls",

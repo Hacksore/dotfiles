@@ -1,6 +1,7 @@
 local LANGUAGE_SERVERS = {
   "denols",
   "ts_ls",
+  "eslint",
   "html",
   "cssls",
   "tailwindcss",

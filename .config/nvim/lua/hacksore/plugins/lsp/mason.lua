@@ -18,7 +18,6 @@ local LANGUAGE_SERVERS = {
   "yamlls",
   "bashls",
   "graphql",
-  "prettier",
   "mdx_analyzer",
   "prismals",
 }

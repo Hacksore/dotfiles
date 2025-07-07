@@ -19,6 +19,7 @@ local LANGUAGE_SERVERS = {
   "yamlls",
   "bashls",
   "graphql",
+  "prettier",
   "mdx_analyzer",
   "prismals",
 }
@@ -61,6 +62,7 @@ return {
     "princejoogie/tailwind-highlight.nvim"
   },
   config = function()
+    require("mason").setup({})
     require("mason-lspconfig").setup({
       ensure_installed = LANGUAGE_SERVERS,
     })

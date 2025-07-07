@@ -49,14 +49,16 @@ local configure_dianostics = function()
 end
 
 return {
-  "mason-org/mason.nvim",
+  "mason-org/mason-lspconfig.nvim",
+  opts = {
+    ensure_installed = LANGUAGE_SERVERS
+  },
   dependencies = {
     { "mason-org/mason.nvim", opts = {} },
     "neovim/nvim-lspconfig",
     "princejoogie/tailwind-highlight.nvim"
   },
   config = function()
-    require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = LANGUAGE_SERVERS,
     })

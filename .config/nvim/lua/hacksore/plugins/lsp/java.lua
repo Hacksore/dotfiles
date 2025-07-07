@@ -1,11 +1,15 @@
 local utils = require("hacksore.core.utils")
 
+-- FIXME: figure out how to make this work for new lsp + mason 
+-- right now it will work but we don't want to use the legacy mason-lspconfig.nvim
 return {
   {
     "mfussenegger/nvim-jdtls",
     ft = { "java" },
+    enabled = false,
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      -- TODO: this is old
+      -- "williamboman/mason-lspconfig.nvim",
     },
     opts = function(_, opts)
       -- use this function notation to build some variables

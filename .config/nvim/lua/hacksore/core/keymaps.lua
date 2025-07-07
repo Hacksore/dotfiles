@@ -42,16 +42,6 @@ keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Hover diagnos
 keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { desc = "Hover diagnostics" })
 keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "Hover diagnostics" })
 
-keymap.set("n", "<Leader>lg", function()
-  vim.lsp.buf.code_action({
-    context = {
-      diagnostics = {},
-      only = { "source.organizeImports" }
-    },
-    apply = true
-  })
-end, { desc = "Organize Import" })
-
 keymap.set("n", "gd", function()
   vim.lsp.buf.definition({
     on_list = function(t)

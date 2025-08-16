@@ -1,9 +1,32 @@
 {
   "distribution": "custom",
-  "masonTools": [],
+  "masonTools": [
+    "astro-ls",
+    "bash-language-server",
+    "biome",
+    "deno",
+    "docker-compose-langserver",
+    "docker-langserver",
+    "graphql-lsp",
+    "jdtls",
+    "lua-language-server",
+    "mdx-language-server",
+    "prisma-language-server",
+    "pylsp",
+    "ruby-lsp",
+    "rust-analyzer",
+    "tailwindcss-language-server",
+    "typescript-language-server",
+    "vscode-css-language-server",
+    "vscode-html-language-server",
+    "vscode-json-language-server",
+    "vue-language-server",
+    "yaml-language-server"
+  ],
   "plugins": [
     "JoosepAlviste/nvim-ts-context-commentstring",
     "MunifTanjim/nui.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "akinsho/bufferline.nvim",
     "akinsho/toggleterm.nvim",
     "b0o/schemastore.nvim",
@@ -25,9 +48,9 @@
     "laytan/cloak.nvim",
     "lewis6991/gitsigns.nvim",
     "luukvbaal/statuscol.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "mason-org/mason.nvim",
     "mbbill/undotree",
-    "mfussenegger/nvim-jdtls",
     "neovim/nvim-lspconfig",
     "numToStr/Comment.nvim",
     "nvim-lua/plenary.nvim",
@@ -72,6 +95,6 @@
     "vimdoc",
     "yaml"
   ],
-  "lspServers": ["jsonls"],
+  "lspServers": [],
   "leaderKey": "<Space>"
 }

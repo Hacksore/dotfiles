@@ -6,6 +6,7 @@ return {
     "cormacrelf/dark-notify",
     config = function()
       require("dark_notify").run({
+        -- HACK: THIS is required to make the plugin work for my theme
         schemes = {
           light = { colorscheme = utils.Theme.light },
           dark  = { colorscheme = utils.Theme.dark },

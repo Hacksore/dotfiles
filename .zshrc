@@ -95,9 +95,10 @@ complete -C "$HOMEBREW_PATH/bin/aws_completer" aws
 # allow alias to be expanded
 setopt completealiases
 
-export PATH="$PATH:$HOME/go/bin"
-
 export LIBRARY_PATH="$LIBRARY_PATH:$HOMEBREW_PATH/lib"
+
+# path adds
+export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.govm/shim:$PATH"
-export PATH="/Users/hacksore/.deno/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export PATH="$HOME/.deno/bin:$PATH"
+export PATH="$HOMEBREW_PATH/opt/postgresql@16/bin:$PATH"

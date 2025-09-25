@@ -102,3 +102,11 @@ export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.govm/shim:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/postgresql@16/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

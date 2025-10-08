@@ -16,6 +16,8 @@
     "pylsp",
     "ruby-lsp",
     "rust-analyzer",
+    "shellcheck",
+    "stylua",
     "tailwindcss-language-server",
     "typescript-language-server",
     "vscode-css-language-server",

@@ -28,31 +28,6 @@ local FORMATTERS = {
 
 local rust_utils = require("hacksore.core.rust-utils")
 
---- Setup the diagnostics configuration for Neovim LSP
-local configure_dianostics = function()
-  -- Configure diagnostic signs using the new approach
-  vim.diagnostic.config({
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = " ",
-        [vim.diagnostic.severity.WARN] = " ",
-        [vim.diagnostic.severity.HINT] = "󰠠 ",
-        [vim.diagnostic.severity.INFO] = " ",
-      },
-      numhl = {
-        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-      },
-    },
-    virtual_text = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-  })
-end
-
 return {
   "mason-org/mason-lspconfig.nvim",
   opts = {
@@ -77,7 +52,7 @@ return {
       ensure_installed = FORMATTERS,
     })
 
-    configure_dianostics()
+    vim.diagnostic.config({ signs = { text = { " ", " ", " ", " " } } })
 
     vim.lsp.config("rust_analyzer", {
       on_attach = function(client, bufnr)

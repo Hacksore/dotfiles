@@ -3,6 +3,7 @@ tap "cloudflare/cloudflare"
 tap "cormacrelf/tap"
 tap "haimgel/tools"
 tap "rfidresearchgroup/proxmark3"
+tap "withgraphite/tap"
 brew "act"
 brew "ansifilter"
 brew "xz"
@@ -88,6 +89,7 @@ brew "telnet"
 brew "tmate"
 brew "tmux"
 brew "tree"
+brew "typescript-language-server"
 brew "uv"
 brew "watch"
 brew "websocat"
@@ -99,6 +101,7 @@ brew "zsh-syntax-highlighting"
 brew "cormacrelf/tap/dark-notify"
 brew "haimgel/tools/display_switch"
 brew "rfidresearchgroup/proxmark3/proxmark3", args: ["HEAD", "with-generic"]
+brew "withgraphite/tap/graphite"
 cask "1password"
 cask "1password-cli"
 cask "android-platform-tools"
@@ -106,6 +109,7 @@ cask "android-studio"
 cask "apparency"
 cask "arduino-ide"
 cask "audacity"
+cask "autodesk-fusion"
 cask "bambu-studio"
 cask "betterdisplay"
 cask "chromium"
@@ -176,5 +180,6 @@ mas "Final Cut Pro", id: 424389933
 mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
 mas "Motion", id: 434290957
+mas "NexiGo Webcam Settings", id: 1568831522
 mas "Windows App", id: 1295203466
 mas "Xcode", id: 497799835

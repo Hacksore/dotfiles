@@ -59,7 +59,7 @@ async function handleTest({
 
   try {
     await runCommand(
-      `docker run --platform linux/amd64 -e LOCAL=1 -e FROZEN_LOCKFILE=${frozenLockfile} --rm ${IMAGE_NAME} ${channel}`,
+      `docker run -e LOCAL=1 -e FROZEN_LOCKFILE=${frozenLockfile} --rm ${IMAGE_NAME} ${channel}`,
     );
     console.log("Test completed successfully");
   } catch (error) {

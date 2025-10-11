@@ -39,7 +39,11 @@ async function handleTest({
   channel,
   frozenLock,
 }: { channel: string; frozenLock: boolean }) {
+  const frozenLockfile = frozenLock ? "1" : "0";
+
+  console.log(`Running test with channel: ${channel} and frozenLock: ${frozenLockfile}`);
+
   await runCommand(
-    `docker run --platform linux/amd64 -e LOCAL=1 --rm ${IMAGE_NAME} ${channel}`,
+    `docker run --platform linux/amd64 -e LOCAL=1 -e FRONZENED_LOCKFILE=${frozenLockfile} --rm ${IMAGE_NAME} ${channel}`,
   );
 }

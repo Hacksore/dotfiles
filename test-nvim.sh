@@ -57,8 +57,13 @@ esac
 tar xzf "$NVIM_TAR" -C "$NVIM_DIR"
 ln -s "$NVIM_BIN_DIR/nvim" /usr/bin
 
-# Backup original lazy-lock.json and run nvim
-mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
+# Handle lazy-lock.json based on FROZEN_LOCKFILE env var
+if [ -n "$FROZEN_LOCKFILE" ]; then
+  echo "FROZEN_LOCKFILE is set - using existing lockfile without modification"
+else
+  echo "FROZEN_LOCKFILE not set - backing up original lazy-lock.json for comparison"
+  mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
+fi
 
 # Create TypeScript test project for LSP testing
 TEST_DIR="/tmp/ts-lsp-test"
@@ -75,11 +80,16 @@ echo "Testing TypeScript LSP loading..."
 # Run nvim with TypeScript LSP test using ValidateLSP command
 # CI=1 nvim --headless -c "ValidateLSP" -c "quit" __tests__/typescript/simple.ts
 cat /app/__tests__/typescript/simple.ts
-CI=1 nvim --headless -c "ValidateLSP" -c "quit" "/app/__tests__/typescript/simple.ts"
+CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
-# Compare original and generated lazy-lock.json
-echo -e "\n\n---\n"
-diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
+# Compare original and generated lazy-lock.json (only if not using frozen lockfile)
+if [ -z "$FROZEN_LOCKFILE" ]; then
+  echo -e "\n\n---\n"
+  diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
+else
+  echo -e "\n\n---\n"
+  echo "Skipping lockfile comparison (FROZEN_LOCKFILE is set)"
+fi
 
 echo -e "Tested on nvim version:\n"
 nvim -V1 -v

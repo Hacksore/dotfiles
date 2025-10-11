@@ -39,9 +39,9 @@ local function validate_lsp()
         end
       end
 
+      -- TODO: what is is_attached
       if is_relevant and client.is_attached then
         return true
-      elseif is_relevant and not client.is_attached then
       end
     end
 

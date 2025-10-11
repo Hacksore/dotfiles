@@ -10,18 +10,14 @@ local function validate_lsp()
   
   print("Current file: " .. current_file)
   print("Filetype: " .. filetype)
+  print("Buffer number: " .. current_buf)
   
   -- Check if we're in CI/headless mode
   local is_ci = vim.env.CI == "1"
-  if is_ci then
-    print("CI mode detected - using relaxed LSP validation")
-  end
-  
   -- Wait for LSP to initialize
   print("Waiting for LSP to initialize...")
   
   if is_ci then
-    print("CI mode: triggering LSP attachment...")
     -- Force LSP attachment by triggering diagnostics
     vim.cmd("doautocmd BufEnter")
     vim.cmd("doautocmd FileType")
@@ -36,24 +32,16 @@ local function validate_lsp()
     -- Check if we have a relevant LSP client that is actually attached
     for _, client in ipairs(clients) do
       local is_relevant = false
+      
       if filetype == "typescript" or filetype == "typescriptreact" or filetype == "javascript" or filetype == "javascriptreact" then
-        if client.name == "ts_ls" or client.name == "denols" then
+        if client.name == "ts_ls" then
           is_relevant = true
         end
-      elseif filetype == "rust" and client.name == "rust_analyzer" then
-        is_relevant = true
-      elseif filetype == "lua" and client.name == "lua_ls" then
-        is_relevant = true
-      elseif filetype == "python" and client.name == "pylsp" then
-        is_relevant = true
-      else
-        -- For other filetypes, any LSP is considered relevant
-        is_relevant = true
       end
       
       if is_relevant and client.is_attached then
-        print("Found relevant LSP: " .. client.name .. " (attached: " .. tostring(client.is_attached) .. ")")
         return true
+      elseif is_relevant and not client.is_attached then
       end
     end
     

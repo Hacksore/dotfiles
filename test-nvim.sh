@@ -41,16 +41,16 @@ echo "Dotfiles path: $DOTFILES_PATH"
 mkdir -p "$NVIM_DIR"
 
 case "$NVIM_VERSION" in
-  "nightly")
-    wget -q "$NIGHTLY_URL" -O "$NVIM_TAR"
-    ;;
-  "stable")
-    wget -q "$STABLE_URL" -O "$NVIM_TAR"
-    ;;
-  *)
-    echo "Invalid nvim version: $NVIM_VERSION. Use 'stable' or 'nightly'"
-    exit 1
-    ;;
+"nightly")
+  wget -q "$NIGHTLY_URL" -O "$NVIM_TAR"
+  ;;
+"stable")
+  wget -q "$STABLE_URL" -O "$NVIM_TAR"
+  ;;
+*)
+  echo "Invalid nvim version: $NVIM_VERSION. Use 'stable' or 'nightly'"
+  exit 1
+  ;;
 esac
 
 # Extract and link nvim binary
@@ -64,6 +64,15 @@ else
   echo "FROZEN_LOCKFILE not set - backing up original lazy-lock.json for comparison"
   mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
 fi
+
+# install rust and nighlyl
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+source "$HOME/.cargo/env"
+
+# add cargo to PATH
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
+
+echo cargo --version
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
 # CI=1 nvim --headless -c "ValidateLSP" -c "quit" __tests__/typescript/simple.ts

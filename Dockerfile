@@ -1,12 +1,12 @@
-FROM ubuntu:24.04
+FROM node:trixie-slim
 
 WORKDIR /app
 
 # native deps
 RUN apt update -y && apt install -y \
-  curl wget git file make cmake gcc clang \
+  curl unzip wget git file make cmake gcc clang \
   pkg-config build-essential \
-  fd-find ripgrep nodejs fzf \
+  fd-find ripgrep fzf \
   libstdc++6 libc-dev
 
 # copy configs

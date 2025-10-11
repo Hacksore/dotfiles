@@ -11,12 +11,12 @@ program
 program
   .command("test")
   .description("test the nvim config in the docker image")
-  .option("-c, --channel [channel]", "channel to install", "stable")
   .option(
-    "-f, --frozen-lock",
-    "if it should use the existing commit lock file",
+    "--frozen-lock",
+    "if it should use the existing commit lazy lock file",
     false,
   )
+  .option("-c, --channel [channel]", "channel to install", "stable")
   .action(handleTest);
 
 program.parse();
@@ -49,17 +49,15 @@ async function handleBuild() {
   }
 }
 
-async function handleTest({
-  channel,
-  frozenLock,
-}: { channel: string; frozenLock: boolean }) {
+async function handleTest(options: { channel: string; frozenLock: boolean }) {
+  const { channel, frozenLock } = options;
   const frozenLockfile = frozenLock ? "1" : "0";
 
-  console.log(`Running test with channel: ${channel} and frozenLock: ${frozenLockfile}`);
+  console.log({ frozenLock, channel, options });
 
   try {
     await runCommand(
-      `docker run -e LOCAL=1 -e FROZEN_LOCKFILE=${frozenLockfile} --rm ${IMAGE_NAME} ${channel}`,
+      `docker run -e LOCAL=1 -e FROZEN_LOCKFILE="${frozenLockfile}" --rm ${IMAGE_NAME} ${channel}`,
     );
     console.log("Test completed successfully");
   } catch (error) {

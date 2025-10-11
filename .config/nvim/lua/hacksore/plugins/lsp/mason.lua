@@ -1,4 +1,4 @@
-local LANGUAGE_SERVERS = {
+local AUTO_INSTALL_LANGUAGE_SERVERS = {
   "denols",
   "ts_ls",
   "eslint",
@@ -27,7 +27,7 @@ local rust_utils = require("hacksore.core.rust-utils")
 return {
   "mason-org/mason-lspconfig.nvim",
   opts = {
-    ensure_installed = LANGUAGE_SERVERS
+    ensure_installed = AUTO_INSTALL_LANGUAGE_SERVERS
   },
   dependencies = {
     { "mason-org/mason.nvim", opts = {} },
@@ -35,8 +35,13 @@ return {
     "princejoogie/tailwind-highlight.nvim",
   },
   config = function()
+    local is_ci = vim.env.CI == "1"
+    local language_servers = is_ci and AUTO_INSTALL_LANGUAGE_SERVERS or {}
+
     require("mason").setup({})
-    require("mason-lspconfig").setup({})
+    require("mason-lspconfig").setup({
+      ensure_installed = language_servers,
+    })
 
     vim.diagnostic.config({ signs = { text = { " ", " ", " ", " " } } })
 
@@ -112,7 +117,7 @@ return {
       workspace_required = true,
     })
 
-    for _, lsp in ipairs(LANGUAGE_SERVERS) do
+    for _, lsp in ipairs(AUTO_INSTALL_LANGUAGE_SERVERS) do
       vim.lsp.enable(lsp)
     end
   end

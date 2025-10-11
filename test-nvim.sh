@@ -36,6 +36,8 @@ ln -s "$DOTFILES_PATH/nvim" "$NVIM_CONFIG"
 
 echo "Testing nvim version: $NVIM_VERSION"
 echo "Dotfiles path: $DOTFILES_PATH"
+echo "Frozen Lockfile: $FROZEN_LOCKFILE"
+echo "Local: $LOCAL"
 
 # Download and install nvim
 mkdir -p "$NVIM_DIR"
@@ -57,33 +59,30 @@ esac
 tar xzf "$NVIM_TAR" -C "$NVIM_DIR"
 ln -s "$NVIM_BIN_DIR/nvim" /usr/bin
 
-# Handle lazy-lock.json based on FROZEN_LOCKFILE env var
-if [ -n "$FROZEN_LOCKFILE" ]; then
-  echo "FROZEN_LOCKFILE is set - using existing lockfile without modification"
+if [[ "$FROZEN_LOCKFILE" == "1" ]]; then
+  echo "FROZEN_LOCKFILE (ON): using existing lockfile without modification"
 else
-  echo "FROZEN_LOCKFILE not set - backing up original lazy-lock.json for comparison"
+  echo "FROZEN_LOCKFILE (OFF): backing up original lazy-lock.json for comparison"
   mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
 fi
 
 # install rust and nighlyl
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
-. "$HOME/.cargo/env"  
-
-# add cargo to PATH
-echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
+# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+# . "$HOME/.cargo/env"  
+#
+# # add cargo to PATH
+# echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
 CI=1 nvim --headless +"MasonInstall typescript-language-server" +q
 CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)
-if [ -z "$FROZEN_LOCKFILE" ]; then
-  echo -e "\n\n---\n"
+if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
   diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
-else
-  echo -e "\n\n---\n"
-  echo "Skipping lockfile comparison (FROZEN_LOCKFILE is set)"
 fi
+
+ls -hal
 
 echo -e "Tested on nvim version:\n"
 nvim -V1 -v

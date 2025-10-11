@@ -1,10 +1,25 @@
 import { spawn } from "node:child_process";
 import { program } from "commander";
 
-program.option("-c, --channel [channel]", "channel to install", "stable");
-program.parse();
+const IMAGE_NAME = "hacksore/nvim";
 
-const options = program.opts();
+program
+  .command("build")
+  .description("build the docker image")
+  .action(handleBuild);
+
+program
+  .command("test")
+  .description("test the nvim config in the docker image")
+  .option("-c, --channel [channel]", "channel to install", "stable")
+  .option(
+    "-f, --frozen-lock",
+    "if it should use the existing commit lock file",
+    false,
+  )
+  .action(handleTest);
+
+program.parse();
 
 async function runCommand(command: string) {
   const child = spawn(command, { shell: true, stdio: "inherit" });
@@ -16,10 +31,15 @@ async function runCommand(command: string) {
   });
 }
 
-await runCommand(
-  "docker build --platform linux/amd64 . -t hacksore/nvim",
-);
+async function handleBuild() {
+  await runCommand(`docker build --platform linux/amd64 . -t ${IMAGE_NAME}`);
+}
 
-await runCommand(
-  `docker run --platform linux/amd64 -e LOCAL=1 --rm hacksore/nvim ${options.channel}`,
-);
+async function handleTest({
+  channel,
+  frozenLock,
+}: { channel: string; frozenLock: boolean }) {
+  await runCommand(
+    `docker run --platform linux/amd64 -e LOCAL=1 --rm ${IMAGE_NAME} ${channel}`,
+  );
+}

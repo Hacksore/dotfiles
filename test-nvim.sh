@@ -60,8 +60,20 @@ ln -s "$NVIM_BIN_DIR/nvim" /usr/bin
 # Backup original lazy-lock.json and run nvim
 mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
 
-# Run nvim in headless mode
-CI=1 nvim --headless -c 'exe !!v:errmsg."cquit"'
+# Create TypeScript test project for LSP testing
+TEST_DIR="/tmp/ts-lsp-test"
+mkdir -p "$TEST_DIR"
+
+# Copy test files from __tests__ directory
+cp -r "/app/__tests__/typescript"/* "$TEST_DIR/"
+
+cd "$TEST_DIR"
+
+echo "Created TypeScript test project at: $TEST_DIR"
+echo "Testing TypeScript LSP loading..."
+
+# Run nvim with TypeScript LSP test using ValidateLSP command
+CI=1 nvim --headless -c "edit simple.ts" -c "ValidateLSP" -c "quit"
 
 # Compare original and generated lazy-lock.json
 echo -e "\n\n---\n"
@@ -69,3 +81,7 @@ diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? |
 
 echo -e "Tested on nvim version:\n"
 nvim -V1 -v
+
+# Cleanup test project
+echo -e "\nCleaning up TypeScript test project..."
+rm -rf "$TEST_DIR"

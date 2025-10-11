@@ -75,8 +75,6 @@ echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
 echo cargo --version
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
-# CI=1 nvim --headless -c "ValidateLSP" -c "quit" __tests__/typescript/simple.ts
-cat /app/__tests__/typescript/simple.ts
 CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)

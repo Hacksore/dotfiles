@@ -1,7 +1,4 @@
 {
   "name": "ts-lsp-test",
-  "type": "module",
-  "devDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "type": "module"
 }

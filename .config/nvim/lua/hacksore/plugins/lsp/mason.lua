@@ -38,6 +38,7 @@ return {
   config = function()
     local is_ci = vim.env.CI == "1"
     local language_servers = is_ci and AUTO_INSTALL_LANGUAGE_SERVERS or {}
+    local lsputil = require("lspconfig.util")
 
     require("mason").setup({})
     require("mason-lspconfig").setup({
@@ -114,8 +115,27 @@ return {
     })
 
     vim.lsp.config("ts_ls", {
-      root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
-      workspace_required = true,
+      root_dir = function(bufnr, on_dir)
+        local denoRootDir = lsputil.root_pattern("deno.json", "deno.json")(bufnr)
+        if denoRootDir then
+          return nil
+        end
+
+        local root_markers = {
+          "package-lock.json",
+          "yarn.lock",
+          "pnpm-lock.yaml",
+          "bun.lockb",
+          "bun.lock",
+        }
+
+        local project_root = vim.fs.root(bufnr, root_markers)
+        if not project_root then
+          return
+        end
+
+        on_dir(project_root)
+      end,
     })
 
     vim.lsp.config("jsonls", {

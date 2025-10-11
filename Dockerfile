@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM debian
 
 WORKDIR /app
 

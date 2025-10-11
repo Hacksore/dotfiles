@@ -24,15 +24,29 @@ program.parse();
 async function runCommand(command: string) {
   const child = spawn(command, { shell: true, stdio: "inherit" });
 
-  await new Promise((resolve) => {
+  await new Promise((resolve, reject) => {
     child.on("close", (code) => {
-      resolve(code);
+      if (code === 0) {
+        resolve(code);
+      } else {
+        reject(new Error(`Command failed with exit code ${code}`));
+      }
+    });
+    
+    child.on("error", (error) => {
+      reject(error);
     });
   });
 }
 
 async function handleBuild() {
-  await runCommand(`docker build --platform linux/amd64 . -t ${IMAGE_NAME}`);
+  try {
+    await runCommand(`docker build --platform linux/amd64 . -t ${IMAGE_NAME}`);
+    console.log("Build completed successfully");
+  } catch (error) {
+    console.error("Build failed:", error.message);
+    process.exit(1);
+  }
 }
 
 async function handleTest({
@@ -43,7 +57,13 @@ async function handleTest({
 
   console.log(`Running test with channel: ${channel} and frozenLock: ${frozenLockfile}`);
 
-  await runCommand(
-    `docker run --platform linux/amd64 -e LOCAL=1 -e FRONZENED_LOCKFILE=${frozenLockfile} --rm ${IMAGE_NAME} ${channel}`,
-  );
+  try {
+    await runCommand(
+      `docker run --platform linux/amd64 -e LOCAL=1 -e FROZEN_LOCKFILE=${frozenLockfile} --rm ${IMAGE_NAME} ${channel}`,
+    );
+    console.log("Test completed successfully");
+  } catch (error) {
+    console.error("Test failed:", error.message);
+    process.exit(1);
+  }
 }

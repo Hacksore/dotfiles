@@ -58,7 +58,7 @@ local function validate_lsp()
   
   if #clients == 0 then
     print("❌ ERROR: No LSP clients attached to current buffer")
-    -- vim.cmd("cquit 1")
+    vim.cmd("cquit 1")
     return
   end
   
@@ -93,7 +93,7 @@ local function validate_lsp()
   
   if not has_relevant_lsp then
     print("❌ ERROR: No relevant LSP found for filetype: " .. filetype)
-    -- vim.cmd("cquit 1")
+    vim.cmd("cquit 1")
     return
   end
   

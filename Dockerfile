@@ -1,9 +1,9 @@
-FROM debian
+FROM debian:10-slim
 
 WORKDIR /app
 
 # native deps
-RUN apt update -y && apt install curl wget git file make cmake gcc fd-find ripgrep nodejs fzf -y
+RUN apt update -y && apt install curl wget git file make cmake gcc fd-find ripgrep nodejs fzf build-essential libstdc++6 -y
 
 # we can use this to allow testing changes from the local working changes
 COPY ./.config ./localdotfiles/.config

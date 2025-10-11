@@ -32,6 +32,7 @@ return {
   dependencies = {
     { "mason-org/mason.nvim", opts = {} },
     "neovim/nvim-lspconfig",
+    "b0o/schemastore.nvim",
     "princejoogie/tailwind-highlight.nvim",
   },
   config = function()
@@ -115,6 +116,15 @@ return {
     vim.lsp.config("ts_ls", {
       root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
       workspace_required = true,
+    })
+
+    vim.lsp.config("jsonls", {
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+          validate = { enable = true },
+        },
+      },
     })
 
     for _, lsp in ipairs(AUTO_INSTALL_LANGUAGE_SERVERS) do

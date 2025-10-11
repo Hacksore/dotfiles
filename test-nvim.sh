@@ -66,12 +66,12 @@ else
   mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
 fi
 
-# install rust and nighlyl
-# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
-# . "$HOME/.cargo/env"  
-#
-# # add cargo to PATH
-# echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
+# install rust and cargo
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+. "$HOME/.cargo/env"
+
+# add cargo to PATH
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
 CI=1 nvim --headless +"MasonInstall typescript-language-server" +q

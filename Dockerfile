@@ -3,9 +3,13 @@ FROM ubuntu:24.04
 WORKDIR /app
 
 # native deps
-RUN apt update -y && apt install curl wget git file make cmake gcc fd-find ripgrep nodejs fzf build-essential libstdc++6 -y
+RUN apt update -y && apt install -y \
+  curl wget git file make cmake gcc clang \
+  pkg-config build-essential \
+  fd-find ripgrep nodejs fzf \
+  libstdc++6 libc-dev
 
-# we can use this to allow testing changes from the local working changes
+# copy configs
 COPY ./.config ./localdotfiles/.config
 
 # add in the test script and test files

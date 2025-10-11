@@ -65,18 +65,6 @@ else
   mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
 fi
 
-# Create TypeScript test project for LSP testing
-TEST_DIR="/tmp/ts-lsp-test"
-mkdir -p "$TEST_DIR"
-
-# Copy test files from __tests__ directory
-cp -r "/app/__tests__/typescript"/* "$TEST_DIR/"
-
-cd "$TEST_DIR"
-
-echo "Created TypeScript test project at: $TEST_DIR"
-echo "Testing TypeScript LSP loading..."
-
 # Run nvim with TypeScript LSP test using ValidateLSP command
 # CI=1 nvim --headless -c "ValidateLSP" -c "quit" __tests__/typescript/simple.ts
 cat /app/__tests__/typescript/simple.ts
@@ -93,7 +81,3 @@ fi
 
 echo -e "Tested on nvim version:\n"
 nvim -V1 -v
-
-# Cleanup test project
-echo -e "\nCleaning up TypeScript test project..."
-rm -rf "$TEST_DIR"

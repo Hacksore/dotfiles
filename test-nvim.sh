@@ -67,12 +67,10 @@ fi
 
 # install rust and nighlyl
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
-source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"  
 
 # add cargo to PATH
 echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
-
-echo cargo --version
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
 CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"

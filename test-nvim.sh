@@ -2,53 +2,70 @@
 
 set -e
 
-mkdir -p ~/.config
-git clone https://github.com/Hacksore/dotfiles.git /app/dotfiles
+# Constants
+DOTFILES_REPO="https://github.com/Hacksore/dotfiles.git"
+APP_DIR="/app"
+NVIM_DIR="$APP_DIR/nvim"
+NVIM_BIN_DIR="$NVIM_DIR/nvim-linux-x86_64/bin"
+NVIM_TAR="$NVIM_DIR/nvim.tar.gz"
+CONFIG_DIR="$HOME/.config"
+NVIM_CONFIG="$CONFIG_DIR/nvim"
+LAZY_LOCK_ORIGINAL="$NVIM_CONFIG/lazy-lock.original.json"
+LAZY_LOCK_GENERATED="$NVIM_CONFIG/lazy-lock.json"
 
-cd dotfiles || exit
+# URLs for different nvim versions
+NIGHTLY_URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz"
+STABLE_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 
-# if LOCAL env set use the /app/localdotfiles folder
+# Get nvim version from first argument
+NVIM_VERSION="${1:-stable}"
+
+# Setup dotfiles
+mkdir -p "$CONFIG_DIR"
+git clone "$DOTFILES_REPO" "$APP_DIR/dotfiles"
+
+# Determine dotfiles path based on LOCAL env var
 if [ -n "$LOCAL" ]; then
   echo "Testing using local dotfiles"
-  DOTFILES_PATH="/app/localdotfiles/.config"
+  DOTFILES_PATH="$APP_DIR/localdotfiles/.config"
 else
-  DOTFILES_PATH="/app/dotfiles/.config"
+  DOTFILES_PATH="$APP_DIR/dotfiles/.config"
 fi
 
-ln -s "$DOTFILES_PATH/nvim" ~/.config/nvim
+ln -s "$DOTFILES_PATH/nvim" "$NVIM_CONFIG"
 
-echo "Testing nvim version: $1"
+echo "Testing nvim version: $NVIM_VERSION"
 echo "Dotfiles path: $DOTFILES_PATH"
 
-NVIM_VERSION="$1"
+# Download and install nvim
+mkdir -p "$NVIM_DIR"
 
-mkdir -p /app/nvim
+case "$NVIM_VERSION" in
+  "nightly")
+    wget -q "$NIGHTLY_URL" -O "$NVIM_TAR"
+    ;;
+  "stable")
+    wget -q "$STABLE_URL" -O "$NVIM_TAR"
+    ;;
+  *)
+    echo "Invalid nvim version: $NVIM_VERSION. Use 'stable' or 'nightly'"
+    exit 1
+    ;;
+esac
 
-# chose stable or nightly based on env var
-if [ "$NVIM_VERSION" = "nightly" ]; then
-  wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz -O /app/nvim/nvim.tar.gz
-elif [ "$NVIM_VERSION" = "stable" ]; then
-  wget -q https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz -O /app/nvim/nvim.tar.gz
-fi
+# Extract and link nvim binary
+tar xzf "$NVIM_TAR" -C "$NVIM_DIR"
+ln -s "$NVIM_BIN_DIR/nvim" /usr/bin
 
-# extract and link neovim bin
-tar xzf /app/nvim/nvim.tar.gz -C /app/nvim
+# Backup original lazy-lock.json and run nvim
+mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
 
-if [ "$NVIM_VERSION" = "nightly" ]; then
-  ln -s /app/nvim/nvim-linux-x86_64/bin/nvim /usr/bin
-else
-  ln -s /app/nvim/nvim-linux-x86_64/bin/nvim /usr/bin
-fi
-
-mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.original.json
-
-# run in headless mode
+# Run nvim in headless mode
 CI=1 nvim --headless -c 'exe !!v:errmsg."cquit"'
 
-# diff the original and the generated lazy-lock.json
+# Compare original and generated lazy-lock.json
 echo -e "\n\n---\n"
-
-diff -u --color=always ~/.config/nvim/lazy-lock.original.json ~/.config/nvim/lazy-lock.json && echo $? || true
+diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
 
 echo -e "Tested on nvim version:\n"
 nvim -V1 -v

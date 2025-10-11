@@ -25,13 +25,3 @@ require("lazy").setup({ { import = "hacksore.plugins" }, { import = "hacksore.pl
   },
 })
 
-if os.getenv("CI") then
-  print("All lazy plugins:")
-  local home = vim.fn.getenv("HOME")
-  local file = io.open(home .. "/.config/nvim/lazy-lock.json", "r")
-  if not file then
-    return
-  end
-
-  print(file:read("*a"))
-end

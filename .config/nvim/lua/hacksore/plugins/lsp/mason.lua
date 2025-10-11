@@ -1,5 +1,5 @@
 local AUTO_INSTALL_LANGUAGE_SERVERS = {
-  -- "denols",
+  "denols",
   "ts_ls",
   "eslint",
   "html",
@@ -109,10 +109,10 @@ return {
       end,
     })
 
-    -- vim.lsp.config("denols", {
-    --   root_markers = { "deno.json", "deno.jsonc", "deno.lock" },
-    --   workspace_required = true,
-    -- })
+    vim.lsp.config("denols", {
+      root_markers = { "deno.json", "deno.jsonc", "deno.lock" },
+      workspace_required = true,
+    })
 
     vim.lsp.config("ts_ls", {
       root_dir = function(bufnr, on_dir)

@@ -73,6 +73,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --defaul
 echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
+CI=1 nvim --headless +"MasonInstall typescript-language-server" +q
 CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)

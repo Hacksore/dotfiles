@@ -42,15 +42,15 @@ return {
   config = function()
     require("mason").setup({})
     require("mason-lspconfig").setup({
-      ensure_installed = LANGUAGE_SERVERS,
+      -- ensure_installed = LANGUAGE_SERVERS,
     })
 
     -- FIXME: find a way to do this natively cause this is wonky
     -- so either we use this workaround or hte package below
     -- https://github.com/mason-org/mason-lspconfig.nvim/issues/113#issuecomment-1471346816
-    require("mason-tool-installer").setup({
-      ensure_installed = FORMATTERS,
-    })
+    -- require("mason-tool-installer").setup({
+    --   -- ensure_installed = FORMATTERS,
+    -- })
 
     vim.diagnostic.config({ signs = { text = { " ", " ", " ", " " } } })
 

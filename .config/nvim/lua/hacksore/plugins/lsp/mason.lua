@@ -1,4 +1,4 @@
-local LANGUAGE_SERVERS = {
+local AUTO_INSTALL_LANGUAGE_SERVERS = {
   "denols",
   "ts_ls",
   "eslint",
@@ -22,34 +22,26 @@ local LANGUAGE_SERVERS = {
   "prismals",
 }
 
-local FORMATTERS = {
-  "prettier",
-}
-
 local rust_utils = require("hacksore.core.rust-utils")
 
 return {
   "mason-org/mason-lspconfig.nvim",
   opts = {
-    ensure_installed = LANGUAGE_SERVERS
+    ensure_installed = AUTO_INSTALL_LANGUAGE_SERVERS
   },
   dependencies = {
     { "mason-org/mason.nvim", opts = {} },
     "neovim/nvim-lspconfig",
+    "b0o/schemastore.nvim",
     "princejoogie/tailwind-highlight.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
+    local is_ci = vim.env.CI == "1"
+    local language_servers = is_ci and AUTO_INSTALL_LANGUAGE_SERVERS or {}
+
     require("mason").setup({})
     require("mason-lspconfig").setup({
-      ensure_installed = LANGUAGE_SERVERS,
-    })
-
-    -- FIXME: find a way to do this natively cause this is wonky
-    -- so either we use this workaround or hte package below
-    -- https://github.com/mason-org/mason-lspconfig.nvim/issues/113#issuecomment-1471346816
-    require("mason-tool-installer").setup({
-      ensure_installed = FORMATTERS,
+      ensure_installed = language_servers,
     })
 
     vim.diagnostic.config({ signs = { text = { " ", " ", " ", " " } } })
@@ -126,7 +118,16 @@ return {
       workspace_required = true,
     })
 
-    for _, lsp in ipairs(LANGUAGE_SERVERS) do
+    vim.lsp.config("jsonls", {
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+          validate = { enable = true },
+        },
+      },
+    })
+
+    for _, lsp in ipairs(AUTO_INSTALL_LANGUAGE_SERVERS) do
       vim.lsp.enable(lsp)
     end
   end

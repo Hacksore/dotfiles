@@ -73,7 +73,7 @@ echo "Created TypeScript test project at: $TEST_DIR"
 echo "Testing TypeScript LSP loading..."
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
-CI=1 nvim --headless -c "edit simple.ts" -c "ValidateLSP" -c "quit"
+CI=1 nvim --headless -c "ValidateLSP" -c "quit" "__tests__/typescript/simple.ts"
 
 # Compare original and generated lazy-lock.json
 echo -e "\n\n---\n"

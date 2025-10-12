@@ -1,6 +1,5 @@
 local M = {}
 
--- Get current buffer information
 local function get_buffer_info()
   local current_buf = vim.api.nvim_get_current_buf()
   local current_file = vim.api.nvim_buf_get_name(current_buf)
@@ -13,7 +12,6 @@ local function get_buffer_info()
   }
 end
 
--- Wait for LSP to initialize
 local function wait_for_lsp_initialization(buf_info)
   print("Waiting for LSP to initialize...")
 
@@ -37,7 +35,7 @@ local function wait_for_lsp_initialization(buf_info)
   end, 200)
 end
 
-local function validate_lsp()
+local function test_typescript_lsp()
   print("⌛ Starting LSP validation...")
 
   -- Get current buffer info
@@ -54,19 +52,21 @@ local function validate_lsp()
   end
 
   print("diagnostics found: " .. #diagnostics)
-
-  -- Check for specific TypeScript error
   print("error one: " .. diagnostics[1].message)
 
+  -- NOTE: we are using assert to check the LSP gives the same error we expect
+  -- TODO: would be nice to have some fn to do expectd instead of assert, in case for some reason the
+  -- error message changes slightly in the future
   assert(diagnostics[1].message == "Type 'number' is not assignable to type 'string'.")
 
   print("✅ LSP validation completed successfully!")
   print("")
 end
 
--- Create the user command
 M.setup = function()
-  vim.api.nvim_create_user_command("TestTypescriptLSP", validate_lsp, {})
+  vim.api.nvim_create_user_command("TestTypescriptLSP", test_typescript_lsp, {})
+
+  -- TODO: int he future we could add more commands to test other LSPs
 end
 
 return M

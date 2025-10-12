@@ -82,3 +82,13 @@ echo "Typescript LSP should be installed now, running validation test..."
 
 # run the lsp validation test
 CI=1 nvim --headless -e -c "TestTypescriptLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
+
+# Compare original and generated lazy-lock.json (only if not using frozen lockfile)
+if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
+  echo -e "📝 Lazy lock diff.\n"
+  diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
+fi
+
+echo -e "\n"
+echo -e "💻 Nvim version\n"
+nvim -V1 -v

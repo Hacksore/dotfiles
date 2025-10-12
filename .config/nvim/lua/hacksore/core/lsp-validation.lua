@@ -27,7 +27,7 @@ local function wait_for_lsp_initialization(buf_info)
     end
 
     for _, client in ipairs(clients) do
-      -- TODO: this property seems undocumented
+      -- TODO: this `is_attached` property seems undocumented and not sure if i should be using it 😂
       if client.name == "ts_ls" and client.is_attached then
         return true
       end
@@ -35,49 +35,6 @@ local function wait_for_lsp_initialization(buf_info)
 
     return false
   end, 200)
-end
-
-local function validate_lsp_clients(buf_info)
-  local clients = vim.lsp.get_clients({ bufnr = buf_info.buf })
-
-  if #clients == 0 then
-    print("❌ ERROR: No LSP clients attached to current buffer")
-    vim.cmd("cquit 1")
-    return false
-  end
-
-  local has_relevant_lsp = false
-
-  for _, client in ipairs(clients) do
-    if client.name == "ts_ls" then
-      has_relevant_lsp = true
-    end
-  end
-
-  if not has_relevant_lsp then
-    print("❌ ERROR: No relevant LSP found for filetype: " .. buf_info.filetype)
-    vim.cmd("cquit 1")
-    return false
-  end
-
-  return true, clients
-end
-
-local function process_diagnostics(buf_info)
-  local diagnostics = vim.diagnostic.get(buf_info.buf)
-  print("Diagnostics found: " .. #diagnostics)
-
-  for _, diag in ipairs(diagnostics) do
-    local severity = "INFO"
-    if diag.severity == vim.diagnostic.severity.ERROR then
-      severity = "ERROR"
-    elseif diag.severity == vim.diagnostic.severity.WARN then
-      severity = "WARN"
-    elseif diag.severity == vim.diagnostic.severity.HINT then
-      severity = "HINT"
-    end
-    print("- Line " .. (diag.lnum + 1) .. " [" .. severity .. "]: " .. diag.message)
-  end
 end
 
 local function validate_lsp()
@@ -89,14 +46,17 @@ local function validate_lsp()
   -- Wait for LSP to initialize
   wait_for_lsp_initialization(buf_info)
 
-  -- Validate LSP clients
-  local success = validate_lsp_clients(buf_info)
-  if not success then
+  local diagnostics = vim.diagnostic.get(buf_info.buf)
+  if #diagnostics == 0 then
+    print("❌ ERROR: No diagnostics found. LSP might not be working correctly.")
+    vim.cmd("cquit 1")
     return
   end
 
-  -- Process diagnostics
-  process_diagnostics(buf_info)
+  print("diagnostics found: " .. #diagnostics)
+  for _, diag in ipairs(diagnostics) do
+    print(string.format(" - [%s] %s", diag.severity, diag.message))
+  end
 
   print("✅ LSP validation completed successfully!")
   print("")

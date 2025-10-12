@@ -54,9 +54,11 @@ local function validate_lsp()
   end
 
   print("diagnostics found: " .. #diagnostics)
-  for _, diag in ipairs(diagnostics) do
-    print(string.format(" - [%s] %s", diag.severity, diag.message))
-  end
+
+  -- Check for specific TypeScript error
+  print("error one: " .. diagnostics[1].message)
+
+  assert(diagnostics[1].message == "Type 'number' is not assignable to type 'string'.")
 
   print("✅ LSP validation completed successfully!")
   print("")

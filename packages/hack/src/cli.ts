@@ -26,7 +26,7 @@ program
     false,
   )
   .option("-s, --skip-cargo [value]", "weahter to skip cargo install", false)
-  .option("-n, --nightly", "use nightly for bleeding edge neovim", "stable")
+  .option("-n, --nightly", "use nightly for bleeding edge neovim")
   .allowUnknownOption()
   .action(handleTest);
 

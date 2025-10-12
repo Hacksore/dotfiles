@@ -1,6 +1,7 @@
-#!/usr/bin/env -S npx tsx
+#!/usr/bin/env -S pnpx tsx
 import { spawn } from "node:child_process";
 import { program } from "commander";
+import { version as npmVersion } from "../package.json";
 
 const IMAGE_NAME = "hacksore/nvim";
 
@@ -22,7 +23,18 @@ program
   .allowUnknownOption()
   .action(handleTest);
 
-program.parse();
+program
+  .name("hack")
+  .description("CLI to manage various things for building my neovim config")
+  .option("-v, --version", "output the current version")
+  .action((options) => {
+    if (options.version) {
+      console.log(`Hack CLI version ${npmVersion}`);
+      process.exit(0);
+    }
+    program.outputHelp();
+  })
+  .parse();
 
 async function runCommand(command: string) {
   const child = spawn(command, { shell: true, stdio: "inherit" });
@@ -35,7 +47,7 @@ async function runCommand(command: string) {
         reject(new Error(`Command failed with exit code ${code}`));
       }
     });
-    
+
     child.on("error", (error) => {
       reject(error);
     });

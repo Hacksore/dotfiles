@@ -45,14 +45,13 @@ program
   .parse();
 
 async function handleBuild() {
-  console.log("🔧 Hack build");
-  const spinner = ora("Building Docker image...").start();
+  const spinner = ora("🏗️ Starting hack build").start();
 
   try {
     const result = await runCommandWithOutput(`docker build --platform linux/amd64 . -t ${IMAGE_NAME}`);
 
     if (result.success) {
-      spinner.succeed("Build completed successfully");
+      spinner.stopAndPersist({ symbol: "✅", text: "Build succeeded" });
     } else {
       spinner.fail("Build failed");
       console.error("\nBuild output:");

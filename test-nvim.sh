@@ -22,23 +22,24 @@ NVIM_VERSION="${1:-stable}"
 
 # Setup dotfiles
 mkdir -p "$CONFIG_DIR"
-git clone "$DOTFILES_REPO" "$APP_DIR/dotfiles"
 
-# Determine dotfiles path based on LOCAL env var
-if [ -n "$LOCAL" ]; then
-  echo "Testing using local dotfiles"
-  DOTFILES_PATH="$APP_DIR/localdotfiles/.config"
-else
-  DOTFILES_PATH="$APP_DIR/dotfiles/.config"
-fi
-
-ln -s "$DOTFILES_PATH/nvim" "$NVIM_CONFIG"
-
-echo "Testing nvim version: $NVIM_VERSION"
+echo "Nvim channel: $NVIM_VERSION"
 echo "Dotfiles path: $DOTFILES_PATH"
 echo "Frozen Lockfile: $FROZEN_LOCKFILE"
 echo "Local: $LOCAL"
 echo "Skip Cargo: $SKIP_CARGO"
+
+# Determine dotfiles path based on LOCAL env var
+if [[ "$LOCAL" == "1" ]]; then
+  echo "Testing using local dotfiles"
+  DOTFILES_PATH="$APP_DIR/localdotfiles/.config"
+else
+  git clone "$DOTFILES_REPO" "$APP_DIR/dotfiles"
+  DOTFILES_PATH="$APP_DIR/dotfiles/.config"
+fi
+
+# link the dotfiles nvim config
+ln -s "$DOTFILES_PATH/nvim" "$NVIM_CONFIG"
 
 # Download and install nvim
 mkdir -p "$NVIM_DIR"
@@ -76,10 +77,15 @@ if [[ "$SKIP_CARGO" == "0" ]]; then
   echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>"$HOME/.bashrc"
 fi
 
+echo -e "Starting LSP test on nvim version:\n"
+nvim -V1 -v
+
 # Run nvim with TypeScript LSP test using ValidateLSP command
 # FIXME: this is a hack and we can't use auto installed cause it wont work in headless mode
 # https://github.com/mason-org/mason-lspconfig.nvim/issues/456
 CI=1 nvim --headless +"MasonInstall typescript-language-server" +q
+
+echo "Typescript LSP should be installed now, running validation test..."
 
 # run the lsp validation test
 CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
@@ -88,6 +94,3 @@ CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests_
 if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
   diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
 fi
-
-echo -e "Tested on nvim version:\n"
-nvim -V1 -v

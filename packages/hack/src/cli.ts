@@ -1,7 +1,7 @@
 #!/usr/bin/env -S pnpx tsx
-import { spawn } from "node:child_process";
 import { program } from "commander";
 import { version as npmVersion } from "../package.json";
+import { runCommand } from "./utils.js";
 
 const IMAGE_NAME = "hacksore/nvim";
 
@@ -35,24 +35,6 @@ program
     program.outputHelp();
   })
   .parse();
-
-async function runCommand(command: string) {
-  const child = spawn(command, { shell: true, stdio: "inherit" });
-
-  await new Promise((resolve, reject) => {
-    child.on("close", (code) => {
-      if (code === 0) {
-        resolve(code);
-      } else {
-        reject(new Error(`Command failed with exit code ${code}`));
-      }
-    });
-
-    child.on("error", (error) => {
-      reject(error);
-    });
-  });
-}
 
 async function handleBuild() {
   try {

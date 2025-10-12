@@ -70,9 +70,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run tests with nightly channel (frozen)
-        run: pnpx tsx tasks.ts build --channel nightly --frozen-lock
+        run: pnpm hack build --channel nightly --frozen-lock
       - name: Run tests with nightly channel
-        run: pnpx tsx tasks.ts test --channel nightly
+        run: pnpm hack test --channel nightly
 
   stable:
     runs-on: ubuntu-latest
@@ -110,8 +110,8 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Run tests with stable channel (frozen)
-        run: pnpx tsx tasks.ts test --channel stable --frozen-lock
+        run: pnpm hack test --channel stable --frozen-lock
       - name: Run tests with stable channel
-        run: pnpx tsx tasks.ts test --channel stable
+        run: pnpm hack test --channel stable

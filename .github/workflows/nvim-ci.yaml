@@ -56,13 +56,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build Docker image for nightly
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: false
           tags: hacksore/nvim:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+      - name: debug
+        run: docker image inspect hacksore/nvim
       - name: Move Docker cache
         run: |
           rm -rf /tmp/.buildx-cache

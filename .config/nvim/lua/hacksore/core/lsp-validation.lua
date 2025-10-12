@@ -57,7 +57,10 @@ local function test_typescript_lsp()
   -- NOTE: we are using assert to check the LSP gives the same error we expect
   -- TODO: would be nice to have some fn to do expectd instead of assert, in case for some reason the
   -- error message changes slightly in the future
-  assert(diagnostics[1].message == "Type 'number' is not assignable to type 'string'.")
+  assert(
+    diagnostics[1].message == "Type 'number' is not assignable to type 'string'.",
+    "❌ ERROR: Unexpected diagnostic message from LSP."
+  )
 
   print("✅ LSP validation completed successfully!")
   print("")

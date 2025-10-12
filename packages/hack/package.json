@@ -1,0 +1,13 @@
+{
+  "name": "@hack/cli",
+  "description": "CLI",
+  "version": "0.1.0",
+  "bin": {
+    "hack": "./src/cli.ts"
+  },
+  "type": "module",
+  "author": "Hacksore",
+  "dependencies": {
+    "commander": "^13.0.0"
+  }
+}

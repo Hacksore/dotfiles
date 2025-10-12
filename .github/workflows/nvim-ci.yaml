@@ -56,11 +56,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build Docker image for nightly
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: false
-          tags: hacksore/nvim:latest
+          load: true
+          tags: hacksore/nvim
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
       - name: Move Docker cache
@@ -68,11 +69,11 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Run tests with nightly channel (frozen)
-        run: pnpm test -- --channel nightly --frozen-lock
+        run: pnpm hack test --channel nightly --frozen-lock
       - name: Run tests with nightly channel
-        run: pnpm test -- --channel nightly
+        run: pnpm hack test --channel nightly
 
   stable:
     runs-on: ubuntu-latest
@@ -102,6 +103,7 @@ jobs:
         with:
           context: .
           push: false
+          load: true
           tags: hacksore/nvim:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
@@ -110,8 +112,8 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Run tests with stable channel (frozen)
-        run: pnpm test -- --channel stable --frozen-lock
+        run: pnpm hack test --channel stable --frozen-lock
       - name: Run tests with stable channel
-        run: pnpm test -- --channel stable
+        run: pnpm hack test --channel stable

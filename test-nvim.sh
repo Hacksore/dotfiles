@@ -79,10 +79,10 @@ fi
 # Run nvim with TypeScript LSP test using ValidateLSP command
 # FIXME: this is a hack and we can't use auto installed cause it wont work in headless mode
 # https://github.com/mason-org/mason-lspconfig.nvim/issues/456
-nvim --headless +"MasonInstall typescript-language-server" +q
+CI=1 nvim --headless +"MasonInstall typescript-language-server" +q
 
 # run the lsp validation test
-nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
+CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)
 if [[ "$FROZEN_LOCKFILE" == "0" ]]; then

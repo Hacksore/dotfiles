@@ -98,6 +98,3 @@ CI=1 nvim --headless -e -c "TestTypescriptLSP" -c 'exe !!v:errmsg."cquit"' "/app
 
 echo -e "💻 Nvim version"
 nvim -V1 -v
-
-# give the checkhealth output in case it's usefuul to review
-nvim --headless -c "checkhealt mason" +'w! /dev/stdout' +qa

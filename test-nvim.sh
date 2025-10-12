@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# TODO: one thing to think about is could i make this all into a node script
+# would allow me to easily write more complext logic like saving the diff result
+# and creating some kind of upload to a static site or something
+# but for now this is working and i want to keep it simple
+
 set -e
 
 # Constants
@@ -80,15 +85,19 @@ CI=1 nvim --headless -e -c "MasonInstall typescript-language-server" -c 'exe !!v
 
 echo "Typescript LSP should be installed now, running validation test..."
 
-# run the lsp validation test
-CI=1 nvim --headless -e -c "TestTypescriptLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
-
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)
 if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
   echo -e "📝 Lazy lock diff.\n"
   diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
+  
+  # save diff result
 fi
 
-echo -e "\n"
-echo -e "💻 Nvim version\n"
+# run the lsp validation test
+CI=1 nvim --headless -e -c "TestTypescriptLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
+
+echo -e "💻 Nvim version"
 nvim -V1 -v
+
+# give the checkhealth output in case it's usefuul to review
+nvim --headless -c "checkhealt mason" +'w! /dev/stdout' +qa

@@ -18,6 +18,19 @@ jobs:
         uses: lunarmodules/luacheck@v1.2.0
         with:
           args: .config
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+      - name: Install
+        run: pnpm install
+      - name: Check format
+        run: pnpm check:format
 
   nightly:
     runs-on: ubuntu-latest

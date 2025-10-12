@@ -4,7 +4,7 @@ return {
     version = "*",
     opts = {
       float_opts = {
-        border = "curved"
+        border = "curved",
       },
       highlights = {
         Normal = { link = "Normal" },

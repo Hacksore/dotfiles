@@ -18,7 +18,7 @@ M.get_all_colorschemes = function()
   -- if lazy is available, extend the colors list with unloaded colorschemes
   local lazy = package.loaded["lazy.core.util"]
   if lazy and lazy.get_unloaded_rtp then
-    local paths = lazy.get_unloaded_rtp ""
+    local paths = lazy.get_unloaded_rtp("")
     local all_files = vim.fn.globpath(table.concat(paths, ","), "colors/*", true, true)
     for _, f in ipairs(all_files) do
       local color = vim.fn.fnamemodify(f, ":t:r")
@@ -37,7 +37,7 @@ local Theme = {
   dark = "github_dark_default",
 }
 
-M.Theme = Theme;
+M.Theme = Theme
 
 ---@param theme Theme
 M.set_theme = function(theme)

@@ -62,16 +62,22 @@ return {
             ["BASENAME"] = modify(filename, ":r"),
           }
 
-          local options = vim.tbl_filter(function(val) return vals[val] ~= "" end, vim.tbl_keys(vals))
+          local options = vim.tbl_filter(function(val)
+            return vals[val] ~= ""
+          end, vim.tbl_keys(vals))
           if vim.tbl_isempty(options) then
             return
           end
 
-          table.sort(options, function(a, b) return a < b end)
+          table.sort(options, function(a, b)
+            return a < b
+          end)
 
           vim.ui.select(options, {
             prompt = "Choose to copy to clipboard:",
-            format_item = function(item) return ("%s: %s"):format(item, vals[item]) end,
+            format_item = function(item)
+              return ("%s: %s"):format(item, vals[item])
+            end,
           }, function(choice)
             local result = vals[choice]
             if result then
@@ -79,11 +85,10 @@ return {
             end
           end)
         end,
-      }
+      },
     },
     source_selector = {
       winbar = false,
     },
   },
-
 }

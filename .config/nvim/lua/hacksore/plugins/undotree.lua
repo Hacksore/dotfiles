@@ -19,6 +19,8 @@ return {
       vim.opt.undofile = true
     end
 
-    vim.keymap.set('n', '<leader>tu', function() vim.api.nvim_command('UndotreeToggle') end, {})
+    vim.keymap.set("n", "<leader>tu", function()
+      vim.api.nvim_command("UndotreeToggle")
+    end, {})
   end,
 }

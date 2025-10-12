@@ -29,14 +29,19 @@ return {
           find_command = {
             "fd",
             "--hidden",
-            "--type", "f",
+            "--type",
+            "f",
             "--follow",
             -- TODO: figure out how i can override the vsc to include specific things like .env files
-            "--exclude", ".git/",
-            "--exclude", "dist/",
-            "--exclude", "build/",
-            "--exclude", "node_modules/",
-          }
+            "--exclude",
+            ".git/",
+            "--exclude",
+            "dist/",
+            "--exclude",
+            "build/",
+            "--exclude",
+            "node_modules/",
+          },
         },
       },
       defaults = {
@@ -45,7 +50,7 @@ return {
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-            ["<C-j>"] = actions.move_selection_next,     -- move to next result
+            ["<C-j>"] = actions.move_selection_next, -- move to next result
             ["<C-t>"] = trouble_telescope.open,
           },
         },

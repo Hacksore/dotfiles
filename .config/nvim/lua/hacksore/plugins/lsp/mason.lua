@@ -27,7 +27,7 @@ local rust_utils = require("hacksore.core.rust-utils")
 return {
   "mason-org/mason-lspconfig.nvim",
   opts = {
-    ensure_installed = AUTO_INSTALL_LANGUAGE_SERVERS
+    ensure_installed = AUTO_INSTALL_LANGUAGE_SERVERS,
   },
   dependencies = {
     { "mason-org/mason.nvim", opts = {} },
@@ -63,9 +63,9 @@ return {
         end
 
         -- Configure buffer-local settings for this Rust file
-        vim.api.nvim_set_option_value('shiftwidth', tab_spaces, { buf = bufnr })
-        vim.api.nvim_set_option_value('tabstop', tab_spaces, { buf = bufnr })
-        vim.api.nvim_set_option_value('softtabstop', tab_spaces, { buf = bufnr })
+        vim.api.nvim_set_option_value("shiftwidth", tab_spaces, { buf = bufnr })
+        vim.api.nvim_set_option_value("tabstop", tab_spaces, { buf = bufnr })
+        vim.api.nvim_set_option_value("softtabstop", tab_spaces, { buf = bufnr })
 
         -- Configure rust-analyzer settings
         client.server_capabilities.documentFormattingProvider = true
@@ -74,28 +74,40 @@ return {
       settings = {
         ["rust-analyzer"] = {
           rustfmt = {
-            extraArgs = { "--config-path", vim.fn.getcwd() .. "/rustfmt.toml" }
-          }
-        }
-      }
+            extraArgs = { "--config-path", vim.fn.getcwd() .. "/rustfmt.toml" },
+          },
+        },
+      },
     })
 
     vim.lsp.config("biome", {
-      filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "typescript",
+        "typescript.tsx",
+        "typescriptreact",
+        "astro",
+        "svelte",
+        "vue",
+        "css",
+      },
     })
 
     vim.lsp.config("bashls", {
-      filetypes = { "sh", "zsh" }
+      filetypes = { "sh", "zsh" },
     })
 
     vim.lsp.config("yamlls", {
       settings = {
         yaml = {
           format = {
-            enable = true
+            enable = true,
           },
-        }
-      }
+        },
+      },
     })
 
     vim.lsp.config("tailwindcss", {
@@ -150,5 +162,5 @@ return {
     for _, lsp in ipairs(AUTO_INSTALL_LANGUAGE_SERVERS) do
       vim.lsp.enable(lsp)
     end
-  end
+  end,
 }

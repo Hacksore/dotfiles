@@ -17,11 +17,11 @@ return {
       local root_dir = require("jdtls.setup").find_root(root_markers)
       -- calculate workspace dir
       local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-      local workspace_dir = vim.fn.stdpath "data" .. "/site/java/workspace-root/" .. project_name
+      local workspace_dir = vim.fn.stdpath("data") .. "/site/java/workspace-root/" .. project_name
       vim.fn.mkdir(workspace_dir, "p")
 
       -- validate operating system
-      if not (vim.fn.has "mac" == 1 or vim.fn.has "unix" == 1 or vim.fn.has "win32" == 1) then
+      if not (vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 or vim.fn.has("win32") == 1) then
         print("jdtls: Could not detect valid OS", vim.log.levels.ERROR)
       end
 

@@ -33,7 +33,12 @@ local function validate_lsp()
     for _, client in ipairs(clients) do
       local is_relevant = false
 
-      if filetype == "typescript" or filetype == "typescriptreact" or filetype == "javascript" or filetype == "javascriptreact" then
+      if
+        filetype == "typescript"
+        or filetype == "typescriptreact"
+        or filetype == "javascript"
+        or filetype == "javascriptreact"
+      then
         if client.name == "ts_ls" then
           is_relevant = true
         end
@@ -72,11 +77,16 @@ local function validate_lsp()
     end
 
     -- Check for TypeScript/JavaScript LSP
-    if filetype == "typescript" or filetype == "typescriptreact" or filetype == "javascript" or filetype == "javascriptreact" then
+    if
+      filetype == "typescript"
+      or filetype == "typescriptreact"
+      or filetype == "javascript"
+      or filetype == "javascriptreact"
+    then
       if client.name == "ts_ls" or client.name == "denols" then
         has_relevant_lsp = true
       end
-      -- Check for other language-specific LSPs
+    -- Check for other language-specific LSPs
     elseif filetype == "rust" and client.name == "rust_analyzer" then
       has_relevant_lsp = true
     elseif filetype == "lua" and client.name == "lua_ls" then

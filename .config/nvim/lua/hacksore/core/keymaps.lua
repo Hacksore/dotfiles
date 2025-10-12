@@ -48,8 +48,7 @@ keymap.set("n", "gd", function()
       -- I like to jump directly to the file instead of doing a split buffer
       local file = t.items[1]
       vim.lsp.util.show_document(file.user_data, "utf-8", { focus = true })
-    end
-
+    end,
   })
 end, { desc = "Goto LSP definition" })
 
@@ -65,8 +64,14 @@ keymap.set("n", "<Leader>n", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 keymap.set("n", "<Leader>p", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
 
 -- quick key to switch themes
-keymap.set("n", "<Leader>0", function() utils.switch_theme(1) end, { desc = "Next theme" })
-keymap.set("n", "<Leader>9", function() utils.switch_theme(-1) end, { desc = "Prev theme" })
+keymap.set("n", "<Leader>0", function()
+  utils.switch_theme(1)
+end, { desc = "Next theme" })
+keymap.set("n", "<Leader>9", function()
+  utils.switch_theme(-1)
+end, { desc = "Prev theme" })
 
 -- quick key to toggle theme from light to dark
-keymap.set("n", "<Leader>ll", function() utils.toggle_theme() end, { desc = "Toggle theme light/dark" })
+keymap.set("n", "<Leader>ll", function()
+  utils.toggle_theme()
+end, { desc = "Toggle theme light/dark" })

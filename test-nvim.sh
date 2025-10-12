@@ -38,6 +38,7 @@ echo "Testing nvim version: $NVIM_VERSION"
 echo "Dotfiles path: $DOTFILES_PATH"
 echo "Frozen Lockfile: $FROZEN_LOCKFILE"
 echo "Local: $LOCAL"
+echo "Skip Cargo: $SKIP_CARGO"
 
 # Download and install nvim
 mkdir -p "$NVIM_DIR"
@@ -66,23 +67,27 @@ else
   mv "$LAZY_LOCK_GENERATED" "$LAZY_LOCK_ORIGINAL"
 fi
 
-# install rust and cargo
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
-. "$HOME/.cargo/env"
+if [[ "$SKIP_CARGO" == "0" ]]; then
+  # install rust and cargo
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+  . "$HOME/.cargo/env"
 
-# add cargo to PATH
-echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$HOME/.bashrc"
+  # add cargo to PATH
+  echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>"$HOME/.bashrc"
+fi
 
 # Run nvim with TypeScript LSP test using ValidateLSP command
-CI=1 nvim --headless +"MasonInstall typescript-language-server" +q
-CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
+# FIXME: this is a hack and we can't use auto installed cause it wont work in headless mode
+# https://github.com/mason-org/mason-lspconfig.nvim/issues/456
+nvim --headless +"MasonInstall typescript-language-server" +q
+
+# run the lsp validation test
+nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)
 if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
   diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
 fi
-
-ls -hal
 
 echo -e "Tested on nvim version:\n"
 nvim -V1 -v

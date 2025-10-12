@@ -19,6 +19,12 @@ program
     "if it should use the existing commit lazy lock file",
     false,
   )
+  .option(
+    "-l, --local",
+    "use the local dotfiles instead of cloning from github",
+    true,
+  )
+  .option("-s, --skip-cargo", "weahter to skip cargo install", false)
   .option("-c, --channel [channel]", "channel to install", "stable")
   .allowUnknownOption()
   .action(handleTest);
@@ -47,13 +53,24 @@ async function handleBuild() {
   }
 }
 
-async function handleTest(options: { channel: string; frozenLock: boolean }) {
-  const { channel, frozenLock } = options;
+async function handleTest(options: {
+  channel: string;
+  frozenLock: boolean;
+  local: boolean;
+  skipCargo: boolean;
+}) {
+  const { channel, frozenLock, local, skipCargo } = options;
   const frozenLockfile = frozenLock ? "1" : "0";
+  const useLocal = local ? "1" : "0";
+  const useCargo = skipCargo ? "1" : "0";
+
+  console.log({ options })
 
   try {
+    // TODO: i hate that we nave to use env vars to pass args to docker
+    // we could pass to stdin but that would be more complex to handle
     await runCommand(
-      `docker run -e LOCAL=1 -e FROZEN_LOCKFILE="${frozenLockfile}" --rm ${IMAGE_NAME} ${channel}`,
+      `docker run -e SKIP_CARGO=${useCargo} -e LOCAL=${useLocal} -e FROZEN_LOCKFILE="${frozenLockfile}" --rm ${IMAGE_NAME} ${channel}`,
     );
     console.log("Test completed successfully");
   } catch (error) {

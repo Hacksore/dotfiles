@@ -23,7 +23,7 @@ program
   .option(
     "-r, --remote",
     "use the remote dotfiles from github default branch",
-    true,
+    false,
   )
   .option("-s, --skip-cargo [value]", "weahter to skip cargo install", false)
   .option("-n, --nightly", "use nightly for bleeding edge neovim", "stable")

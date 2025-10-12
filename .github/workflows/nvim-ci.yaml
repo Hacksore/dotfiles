@@ -27,6 +27,8 @@ jobs:
         with:
           node-version: "20"
           cache: "pnpm"
+      - name: Install
+        run: pnpm install
       - name: Check format
         run: pnpm check:format
 

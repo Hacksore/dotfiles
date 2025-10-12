@@ -10,6 +10,7 @@
   "dependencies": {
     "commander": "^13.0.0",
     "figlet": "^1.9.3",
-    "ora": "^8.0.1"
+    "ora": "^8.0.1",
+    "picocolors": "^1.1.1"
   }
 }

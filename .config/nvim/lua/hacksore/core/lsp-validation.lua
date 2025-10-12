@@ -1,6 +1,5 @@
 local M = {}
 
--- NOTE: do i need this
 require("plenary.busted")
 
 local function get_buffer_info()

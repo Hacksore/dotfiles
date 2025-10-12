@@ -23,15 +23,9 @@ NVIM_VERSION="${1:-stable}"
 # Setup dotfiles
 mkdir -p "$CONFIG_DIR"
 
-echo "Nvim channel: $NVIM_VERSION"
-echo "Dotfiles path: $DOTFILES_PATH"
-echo "Frozen Lockfile: $FROZEN_LOCKFILE"
-echo "Local: $LOCAL"
-echo "Skip Cargo: $SKIP_CARGO"
-
 # Determine dotfiles path based on LOCAL env var
 if [[ "$LOCAL" == "1" ]]; then
-  echo "Testing using local dotfiles"
+  echo "🏠 Testing using local dotfiles"
   DOTFILES_PATH="$APP_DIR/localdotfiles/.config"
 else
   git clone "$DOTFILES_REPO" "$APP_DIR/dotfiles"
@@ -77,9 +71,6 @@ if [[ "$SKIP_CARGO" == "0" ]]; then
   echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>"$HOME/.bashrc"
 fi
 
-echo -e "Starting LSP test on nvim version:\n"
-nvim -V1 -v
-
 # Run nvim with TypeScript LSP test using ValidateLSP command
 # FIXME: this is a hack and we can't use auto installed cause it wont work in headless mode
 # https://github.com/mason-org/mason-lspconfig.nvim/issues/456
@@ -92,5 +83,10 @@ CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests_
 
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)
 if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
+  echo -e "📝 Lazy lock diff.\n"
   diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
 fi
+
+echo -e "\n"
+echo -e "💻 Nvim version\n"
+nvim -V1 -v

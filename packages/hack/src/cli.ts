@@ -1,7 +1,8 @@
 #!/usr/bin/env -S pnpx tsx
 import { program } from "commander";
 import { version as npmVersion } from "../package.json";
-import { parseBooleanEnvVar, runCommand } from "./utils.js";
+import { parseFlagToBoolean, runCommand, runCommandWithOutput } from "./utils.js";
+import ora from "ora";
 
 const IMAGE_NAME = "hacksore/nvim";
 
@@ -44,10 +45,24 @@ program
   .parse();
 
 async function handleBuild() {
+  console.log("🔧 Hack build");
+  const spinner = ora("Building Docker image...").start();
+
   try {
-    await runCommand(`docker build --platform linux/amd64 . -t ${IMAGE_NAME}`);
-    console.log("Build completed successfully");
+    const result = await runCommandWithOutput(`docker build --platform linux/amd64 . -t ${IMAGE_NAME}`);
+
+    if (result.success) {
+      spinner.succeed("Build completed successfully");
+    } else {
+      spinner.fail("Build failed");
+      console.error("\nBuild output:");
+      console.error(result.output);
+      console.error("\nError output:");
+      console.error(result.error);
+      process.exit(1);
+    }
   } catch (error) {
+    spinner.fail("Build failed");
     console.error("Build failed:", error.message);
     process.exit(1);
   }
@@ -60,11 +75,11 @@ async function handleTest(options: {
   skipCargo: boolean;
 }) {
   const { channel, frozenLock, local, skipCargo } = options;
-  const frozenLockfile = parseBooleanEnvVar(frozenLock) ? "1" : "0";
-  const useLocal = parseBooleanEnvVar(local) ? "1" : "0";
-  const useCargo = parseBooleanEnvVar(skipCargo) ? "1" : "0";
+  const frozenLockfile = parseFlagToBoolean(frozenLock) ? "1" : "0";
+  const useLocal = parseFlagToBoolean(local) ? "1" : "0";
+  const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
 
-  console.log({ options })
+  console.log(options)
 
   try {
     // TODO: i hate that we nave to use env vars to pass args to docker
@@ -72,7 +87,6 @@ async function handleTest(options: {
     await runCommand(
       `docker run -e SKIP_CARGO="${useCargo}" -e LOCAL="${useLocal}" -e FROZEN_LOCKFILE="${frozenLockfile}" --rm ${IMAGE_NAME} ${channel}`,
     );
-    console.log("Test completed successfully");
   } catch (error) {
     console.error("Test failed:", error.message);
     process.exit(1);

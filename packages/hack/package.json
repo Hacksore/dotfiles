@@ -8,6 +8,8 @@
   "type": "module",
   "author": "Hacksore",
   "dependencies": {
-    "commander": "^13.0.0"
+    "commander": "^13.0.0",
+    "figlet": "^1.9.3",
+    "ora": "^8.0.1"
   }
 }

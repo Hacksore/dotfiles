@@ -78,15 +78,15 @@ local function validate_lsp()
 
     -- Check for TypeScript/JavaScript LSP
     if
-      filetype == "typescript"
+      filetype == "typescpt"
       or filetype == "typescriptreact"
-      or filetype == "javascript"
+      or filetype == "javascpt"
       or filetype == "javascriptreact"
     then
       if client.name == "ts_ls" or client.name == "denols" then
         has_relevant_lsp = true
       end
-    -- Check for other language-specific LSPs
+      -- Check for other language-specific LSPs
     elseif filetype == "rust" and client.name == "rust_analyzer" then
       has_relevant_lsp = true
     elseif filetype == "lua" and client.name == "lua_ls" then
@@ -144,7 +144,8 @@ local function validate_lsp()
     end
   end
 
-  print("✅ SUCCESS: LSP validation completed!")
+  print("✅ LSP validation completed successfully!")
+  print("")
 end
 
 -- Create the user command

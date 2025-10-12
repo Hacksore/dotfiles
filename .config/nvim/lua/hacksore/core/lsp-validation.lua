@@ -13,8 +13,6 @@ local function get_buffer_info()
 end
 
 local function wait_for_lsp_initialization(buf_info)
-  print("Waiting for LSP to initialize...")
-
   vim.cmd("doautocmd BufEnter")
   vim.cmd("doautocmd FileType")
 
@@ -36,13 +34,15 @@ local function wait_for_lsp_initialization(buf_info)
 end
 
 local function test_typescript_lsp()
-  print("⌛ Starting LSP validation...")
+  print("⌛ Starting typescript LSP validation...")
 
   -- Get current buffer info
   local buf_info = get_buffer_info()
 
   -- Wait for LSP to initialize
   wait_for_lsp_initialization(buf_info)
+
+  print("🫡 Typescript LSP ready...")
 
   local diagnostics = vim.diagnostic.get(buf_info.buf)
   if #diagnostics == 0 then
@@ -51,8 +51,10 @@ local function test_typescript_lsp()
     return
   end
 
-  print("diagnostics found: " .. #diagnostics)
-  print("error one: " .. diagnostics[1].message)
+  print("📊 Typescript diagnostics found: " .. #diagnostics)
+  for id, diag in ipairs(diagnostics) do
+    print("  [" .. id .. "] " .. diag.message)
+  end
 
   -- NOTE: we are using assert to check the LSP gives the same error we expect
   -- TODO: would be nice to have some fn to do expectd instead of assert, in case for some reason the
@@ -62,14 +64,13 @@ local function test_typescript_lsp()
     "❌ ERROR: Unexpected diagnostic message from LSP."
   )
 
-  print("✅ LSP validation completed successfully!")
-  print("")
+  print("✅ LSP validation completed successfully!\n")
 end
 
 M.setup = function()
   vim.api.nvim_create_user_command("TestTypescriptLSP", test_typescript_lsp, {})
 
-  -- TODO: int he future we could add more commands to test other LSPs
+  -- TODO: in the future we could add more commands to test other LSPs
 end
 
 return M

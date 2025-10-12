@@ -5,6 +5,7 @@
     "test": "npm-run-all --serial image:*",
     "image:build": "tsx tasks.ts build",
     "image:test": "tsx tasks.ts test",
+    "check:format": "stylua --check .config/nvim/lua",
     "format": "stylua .config/nvim/lua",
     "lint": "luacheck .config/nvim"
   },

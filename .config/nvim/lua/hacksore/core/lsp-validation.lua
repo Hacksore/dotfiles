@@ -1,7 +1,7 @@
 local M = {}
 
--- TODO: this is cracked but should i used busted instead
-local assert = require("luassert")
+-- NOTE: do i need this
+require("plenary.busted")
 
 local function get_buffer_info()
   local current_buf = vim.api.nvim_get_current_buf()
@@ -61,7 +61,7 @@ local function test_typescript_lsp()
 
   -- TODO: would be nice to have some fn to do expectd instead of assert, in case for some reason the
   -- error message changes slightly in the future
-  assert.is_equal(diagnostics[1].message, "Type 'number' not assignable to type 'string'.")
+  assert.is_equal(diagnostics[1].message, "Type 'number' is not assignable to type 'string'.")
 
   print("✅ LSP validation completed successfully!\n")
 end

@@ -89,8 +89,8 @@ echo "Typescript LSP should be installed now, running validation test..."
 if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
   echo -e "📝 Lazy lock diff.\n"
   diff -u --color=always "$LAZY_LOCK_ORIGINAL" "$LAZY_LOCK_GENERATED" && echo $? || true
-  
-  # save diff result
+
+  # TODO: save diff result
 fi
 
 # run the lsp validation test

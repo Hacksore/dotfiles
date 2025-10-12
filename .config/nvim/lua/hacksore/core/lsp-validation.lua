@@ -150,7 +150,7 @@ end
 
 -- Create the user command
 M.setup = function()
-  vim.api.nvim_create_user_command("ValidateLSP", validate_lsp, {})
+  vim.api.nvim_create_user_command("TestTypescriptLSP", validate_lsp, {})
 end
 
 return M

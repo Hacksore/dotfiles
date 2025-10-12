@@ -71,15 +71,17 @@ if [[ "$SKIP_CARGO" == "0" ]]; then
   echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>"$HOME/.bashrc"
 fi
 
-# Run nvim with TypeScript LSP test using ValidateLSP command
+# Run nvim with TypeScript LSP test using TestTypescriptLSP command
 # FIXME: this is a hack and we can't use auto installed cause it wont work in headless mode
 # https://github.com/mason-org/mason-lspconfig.nvim/issues/456
-CI=1 nvim --headless +"MasonInstall typescript-language-server" +q
+# NOTE: this will catch breaking lua changes for neovim and exit with non-zero code
+# and it should print out the error in the logs
+CI=1 nvim --headless -e -c "MasonInstall typescript-language-server" -c 'exe !!v:errmsg."cquit"'
 
 echo "Typescript LSP should be installed now, running validation test..."
 
 # run the lsp validation test
-CI=1 nvim --headless -c "ValidateLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
+CI=1 nvim --headless -e -c "TestTypescriptLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
 # Compare original and generated lazy-lock.json (only if not using frozen lockfile)
 if [[ "$FROZEN_LOCKFILE" == "0" ]]; then

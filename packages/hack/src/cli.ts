@@ -83,10 +83,21 @@ async function handleTest(options: {
   console.log(options)
 
   try {
+
     // TODO: i hate that we nave to use env vars to pass args to docker
     // we could pass to stdin but that would be more complex to handle
+    const envVars = {
+      SKIP_CARGO: useCargo,
+      LOCAL: useLocal,
+      FROZEN_LOCKFILE: frozenLockfile,
+    };
+
+    const envString = Object.entries(envVars)
+      .map(([key, value]) => `-e ${key}=${value}`)
+      .join(" ");
+
     await runCommand(
-      `docker run -e SKIP_CARGO="${useCargo}" -e LOCAL="${useLocal}" -e FROZEN_LOCKFILE="${frozenLockfile}" --rm ${IMAGE_NAME} ${selectedChannel}`,
+      `docker run ${envString} --rm ${IMAGE_NAME} ${selectedChannel}`,
     );
   } catch (error) {
     console.error("Test failed:", error.message);

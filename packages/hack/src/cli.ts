@@ -27,6 +27,7 @@ program
   .name("hack")
   .description("CLI to manage various things for building my neovim config")
   .option("-v, --version", "output the current version")
+  .allowUnknownOption()
   .action((options) => {
     if (options.version) {
       console.log(`Hack CLI version ${npmVersion}`);

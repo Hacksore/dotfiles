@@ -71,9 +71,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run tests with nightly channel (frozen)
-        run: pnpm hack build -- --channel nightly --frozen-lock
+        run: pnpm hack test --channel nightly --frozen-lock
       - name: Run tests with nightly channel
-        run: pnpm hack test -- --channel nightly
+        run: pnpm hack test --channel nightly
 
   stable:
     runs-on: ubuntu-latest
@@ -114,6 +114,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run tests with stable channel (frozen)
-        run: pnpm hack test -- --channel stable --frozen-lock
+        run: pnpm hack test --channel stable --frozen-lock
       - name: Run tests with stable channel
-        run: pnpm hack test -- --channel stable
+        run: pnpm hack test --channel stable

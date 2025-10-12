@@ -21,12 +21,12 @@ program
     false,
   )
   .option(
-    "-l, --local [value]",
-    "use the local dotfiles instead of cloning from github",
+    "-r, --remote",
+    "use the remote dotfiles from github default branch",
     true,
   )
   .option("-s, --skip-cargo [value]", "weahter to skip cargo install", false)
-  .option("-c, --channel [channel]", "channel to install", "stable")
+  .option("-n, --nightly", "use nightly for bleeding edge neovim", "stable")
   .allowUnknownOption()
   .action(handleTest);
 
@@ -69,15 +69,16 @@ async function handleBuild() {
 }
 
 async function handleTest(options: {
-  channel: string;
+  nightly: boolean;
   frozenLock: boolean;
-  local: string;
+  remote: boolean;
   skipCargo: boolean;
 }) {
-  const { channel, frozenLock, local, skipCargo } = options;
+  const { nightly, frozenLock, remote, skipCargo } = options;
   const frozenLockfile = parseFlagToBoolean(frozenLock) ? "1" : "0";
-  const useLocal = parseFlagToBoolean(local) ? "1" : "0";
+  const useLocal = remote ? "0" : "1";
   const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
+  const selectedChannel = nightly ? "nightly" : "stable";
 
   console.log(options)
 
@@ -85,7 +86,7 @@ async function handleTest(options: {
     // TODO: i hate that we nave to use env vars to pass args to docker
     // we could pass to stdin but that would be more complex to handle
     await runCommand(
-      `docker run -e SKIP_CARGO="${useCargo}" -e LOCAL="${useLocal}" -e FROZEN_LOCKFILE="${frozenLockfile}" --rm ${IMAGE_NAME} ${channel}`,
+      `docker run -e SKIP_CARGO="${useCargo}" -e LOCAL="${useLocal}" -e FROZEN_LOCKFILE="${frozenLockfile}" --rm ${IMAGE_NAME} ${selectedChannel}`,
     );
   } catch (error) {
     console.error("Test failed:", error.message);

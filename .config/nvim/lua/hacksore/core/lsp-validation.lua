@@ -1,47 +1,44 @@
 local M = {}
 
 local function validate_lsp()
-  print("Starting LSP validation...")
-
-  -- Get current buffer info
   local current_buf = vim.api.nvim_get_current_buf()
-  local current_file = vim.api.nvim_buf_get_name(current_buf)
-  local filetype = vim.bo.filetype
 
-  print("Current file: " .. current_file)
-  print("Filetype: " .. filetype)
-  print("Buffer number: " .. current_buf)
+  -- Force LSP attachment by triggering diagnostics
+  vim.cmd("doautocmd BufEnter")
+  vim.cmd("doautocmd FileType")
 
-  -- Wait for LSP to initialize
-  print("Waiting for LSP to initialize...")
-
-  local ts_client = nil
-
-  local function validte_ts_lsp()
+  local function check_diagnostics()
     local diagnostics = vim.diagnostic.get(current_buf)
+
+    if vim.tbl_isempty(diagnostics) then
+      print("No diagnostics found for the current buffer.")
+      return
+    end
+
+    print("Diagnostics for the current buffer:")
 
     for _, diag in ipairs(diagnostics) do
       print(diag.source .. ": " .. diag.message)
     end
   end
 
-  -- how can we get a ready even for when the LSP is attached?
-  vim.wait(5000, function()
+  -- Wait for ts_ls to attach, then call function once
+  local wait_result = vim.wait(5000, function()
     local clients = vim.lsp.get_clients({ bufnr = current_buf })
 
     for _, client in ipairs(clients) do
-      if client.name == "ts_ls" then
-        validte_ts_lsp()
-        break
+      if client.name == "ts_ls"  then
+        print("TypeScript LSP (ts_ls) is active, stop polling now!")
+        check_diagnostics()
+        return true -- Stop polling when found
       end
     end
 
-    return false
-  end)
+    return false -- Continue polling
+  end, 100)
 
-  if ts_client == nil then
-    print("LSP client 'ts_ls' not attached within timeout.")
-    return
+  if not wait_result then
+    print("⚠️  WARNING: Timeout waiting for relevant LSP client to attach")
   end
 
   print("")

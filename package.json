@@ -2,12 +2,15 @@
   "name": "dotfiles",
   "description": "utils for my dotties",
   "scripts": {
-    "test": "npm-run-all --serial image:*",
-    "image:build": "tsx tasks.ts build",
+    "test": "run-s image:*",
+    "image:build": "hack build",
     "image:test": "tsx tasks.ts test",
     "check:format": "stylua --check .config/nvim/lua",
     "format": "stylua .config/nvim/lua",
     "lint": "luacheck .config/nvim"
+  },
+  "bin": {
+    "hack": "./tasks.ts"
   },
   "type": "module",
   "author": "Hacksore",

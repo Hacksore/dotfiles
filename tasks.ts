@@ -1,3 +1,4 @@
+#!/usr/bin/env -S npx tsx
 import { spawn } from "node:child_process";
 import { program } from "commander";
 
@@ -6,6 +7,7 @@ const IMAGE_NAME = "hacksore/nvim";
 program
   .command("build")
   .description("build the docker image")
+  .allowUnknownOption()
   .action(handleBuild);
 
 program
@@ -17,6 +19,7 @@ program
     false,
   )
   .option("-c, --channel [channel]", "channel to install", "stable")
+  .allowUnknownOption()
   .action(handleTest);
 
 program.parse();

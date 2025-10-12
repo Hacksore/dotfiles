@@ -5,7 +5,8 @@
     "test": "npm-run-all --serial image:*",
     "image:build": "tsx tasks.ts build",
     "image:test": "tsx tasks.ts test",
-    "lint": "luacheck .config"
+    "format": "stylua \".config/nvim/lua/hacksore/core/init.lua\"",
+    "lint": "luacheck .config/nvim"
   },
   "type": "module",
   "author": "Hacksore",

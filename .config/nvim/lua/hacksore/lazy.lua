@@ -24,4 +24,3 @@ require("lazy").setup({ { import = "hacksore.plugins" }, { import = "hacksore.pl
     notify = false,
   },
 })
-

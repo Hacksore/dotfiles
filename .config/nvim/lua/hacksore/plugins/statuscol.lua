@@ -30,7 +30,7 @@ return {
         },
         -- Padding
         { text = { " " } },
-      }
+      },
     })
   end,
 }

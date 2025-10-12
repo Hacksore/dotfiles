@@ -28,4 +28,3 @@ function M.find_rustfmt_toml(start_path)
 end
 
 return M
-

@@ -14,25 +14,28 @@ local function get_buffer_info()
   }
 end
 
-local function wait_for_lsp_initialization(buf_info)
-  vim.cmd("doautocmd BufEnter")
-  vim.cmd("doautocmd FileType")
+local MAX_LSP_TIMEOUT = 10000
 
-  vim.wait(5000, function()
-    local clients = vim.lsp.get_clients({ bufnr = buf_info.buf })
-    if #clients == 0 then
-      return false
-    end
+local function wait_for_diagnostics(bufnr)
+  local ready = false
 
-    for _, client in ipairs(clients) do
-      -- TODO: this `is_attached` property seems undocumented and not sure if i should be using it 😂
-      if client.name == "ts_ls" and client.is_attached then
-        return true
+  local aug = vim.api.nvim_create_augroup("WaitForDiagnostics", { clear = true })
+  vim.api.nvim_create_autocmd("DiagnosticChanged", {
+    group = aug,
+    buffer = bufnr,
+    callback = function()
+      local diags = vim.diagnostic.get(bufnr)
+      if #diags > 0 then
+        ready = true
+        vim.api.nvim_del_augroup_by_id(aug)
       end
-    end
+    end,
+  })
 
-    return false
+  vim.wait(MAX_LSP_TIMEOUT, function()
+    return ready
   end, 200)
+  return ready
 end
 
 local function test_typescript_lsp()
@@ -42,7 +45,7 @@ local function test_typescript_lsp()
   local buf_info = get_buffer_info()
 
   -- Wait for LSP to initialize
-  wait_for_lsp_initialization(buf_info)
+  wait_for_diagnostics(buf_info.buf)
 
   print("🫡 Typescript LSP ready...")
 

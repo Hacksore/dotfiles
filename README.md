@@ -13,16 +13,19 @@ Probably one of the only degens to setup testing for their neovim config in CI ð
 As of now you can take a look at the following code snippets on how this works.
 
 - [Dockerfile](/Dockerfile) that uses `node:trixie-slim` as the base image
-- [`hack cli`](/packages/hack/src/cli.ts) for building the docker image and testing it
-- [main docker entry script](/test-nvim.sh) with a lot of the sauce
+- [`hack`](/packages/hack/src/cli.ts) CLI for building the docker image and testing it
+- [main docker entry script](/test-nvim.sh) with a lot of the magic sauce
 - [`TestTypescriptLSP` nvim command](/.config/nvim/lua/hacksore/core/lsp-validation.lua) for testing that the LSP does what it should
-- How you can [avoid pagers in neovim](https://github.com/Hacksore/dotfiles/blob/a808133b4d34f1b26097398612b1fe881829152c/.config/nvim/lua/hacksore/lazy.lua#L1-L3)
+- How you can [avoid pagers in neovim](/.config/nvim/lua/hacksore/lazy.lua#L1-L3)
 - [Running this in github action CI](/.github/workflows/nvim-ci.yaml)
 
 Testing locally is as easy as `pnpm test` and it will build the docker image and run the test command to validate the following.
 
-- Neovim config does not have any errors
-- Typescript LSP will attach to [simple.ts](/__test__/typescript/simple.ts] and emit diagnostics
+In CI here are some of the things these tests are for.
+- Neovim Lua config does not have any errors
+- Typescript LSP will attach to [simple.ts](/test/typescript/simple.ts) and validate diagnostics are emitted
+- Mason installs my plugins at their latest version on both nighly and stable
+- Mason also installs my current plugins at their frozen version ([`lazy-lock.json`](/.config/nvim/lazy-lock.json)) on both nighly and stable
 
 Demo
 [![asciicast](https://asciinema.org/a/748382.svg)](https://asciinema.org/a/748382?autoplay=1)

@@ -3,6 +3,7 @@ import { program } from "commander";
 import { version as npmVersion } from "../package.json";
 import { parseFlagToBoolean, runCommand, runCommandWithOutput } from "./utils.js";
 import ora from "ora";
+import picocolors from "picocolors";
 
 const IMAGE_NAME = "hacksore/nvim";
 
@@ -45,16 +46,15 @@ program
   .parse();
 
 async function handleBuild() {
-  console.log("🔧 Hack build");
-  const spinner = ora("Building Docker image...").start();
+  const spinner = ora("Starting hack build").start();
 
   try {
     const result = await runCommandWithOutput(`docker build --platform linux/amd64 . -t ${IMAGE_NAME}`);
 
     if (result.success) {
-      spinner.succeed("Build completed successfully");
+      spinner.stopAndPersist({ symbol: "✅", text: picocolors.green("BUILD SUCCEEDED") });
     } else {
-      spinner.fail("Build failed");
+      spinner.stopAndPersist({ symbol: "🛑", text: picocolors.red("BUILD FAILED") });
       console.error("\nBuild output:");
       console.error(result.output);
       console.error("\nError output:");

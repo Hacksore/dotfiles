@@ -14,7 +14,7 @@ COPY ./.config ./localdotfiles/.config
 
 # add in the test script and test files
 COPY ./test-nvim.sh .
-COPY ./__tests__ ./__tests__
+COPY ./test ./test
 
 RUN chmod +x test-nvim.sh
 

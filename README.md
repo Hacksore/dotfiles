@@ -15,7 +15,7 @@ As of now you can take a look at the following code snippets on how this works.
 - [Dockerfile](/Dockerfile) that uses `node:trixie-slim` as the base image
 - [`hack`](/packages/hack/src/cli.ts) CLI for building the docker image and testing it
 - [main docker entry script](/test-nvim.sh) with a lot of the magic sauce
-- [`TestTypescriptLSP` nvim command](/.config/nvim/lua/hacksore/core/lsp-validation.lua) for testing that the LSP does what it should
+- [`TestTypescriptLSP` nvim command](/.config/nvim/lua/hacksore/test/typescript.lua) for testing that the LSP does what it should
 - How you can [avoid pagers in neovim](/.config/nvim/lua/hacksore/lazy.lua#L1-L3)
 - [Running this in github action CI](/.github/workflows/nvim-ci.yaml)
 

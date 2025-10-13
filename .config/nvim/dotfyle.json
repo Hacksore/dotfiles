@@ -9,6 +9,7 @@
     "docker-langserver",
     "graphql-lsp",
     "jdtls",
+    "lua-language-server",
     "mdx-language-server",
     "prettier",
     "prisma-language-server",

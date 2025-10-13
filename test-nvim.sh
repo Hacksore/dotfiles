@@ -94,7 +94,7 @@ if [[ "$FROZEN_LOCKFILE" == "0" ]]; then
 fi
 
 # run the lsp validation test
-CI=1 nvim --headless -e -c "TestTypescriptLSP" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
+CI=1 nvim --headless -e -c "TestLSPTypescript" -c 'exe !!v:errmsg."cquit"' "/app/__tests__/typescript/simple.ts"
 
 echo -e "💻 Nvim version"
 nvim -V1 -v

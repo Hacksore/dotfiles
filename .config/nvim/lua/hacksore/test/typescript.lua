@@ -3,10 +3,7 @@ local M = {}
 local util = require("hacksore.utils.test.lsp")
 require("plenary.busted")
 
---- Main function to test Typescript LSP functionality
---- Validates that diagnostics are received and match expected errors
---- @returns nil
-local function test_typescript_lsp()
+local function test()
   print("⌛ Starting typescript LSP validation...")
   local buf_info = util.get_buffer_info()
 
@@ -31,12 +28,8 @@ local function test_typescript_lsp()
   print("✅ LSP validation completed successfully!\n")
 end
 
---- Sets up the user command to trigger the Typescript LSP test
---- @returns nil
-M.setup = function()
-  vim.api.nvim_create_user_command("TestTypescriptLSP", test_typescript_lsp, {})
-
-  -- TODO: in the future we could add more commands to test other LSPs
+M.register = function()
+  vim.api.nvim_create_user_command("TestLSPTypescript", test, {})
 end
 
 return M

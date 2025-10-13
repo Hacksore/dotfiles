@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 return {
   "kevinhwang91/nvim-ufo",
   event = "VeryLazy",

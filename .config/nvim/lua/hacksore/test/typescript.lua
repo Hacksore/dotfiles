@@ -9,8 +9,6 @@ local function test()
 
   util.wait_for_diagnostics(buf_info.buf, util.TYPESCRIPT_CLIENT_NAME)
 
-  print("🫡 Typescript LSP ready...")
-
   local diagnostics = vim.diagnostic.get(buf_info.buf)
   if #diagnostics == 0 then
     print("❌ ERROR: No diagnostics found. LSP might not be working correctly.")
@@ -28,8 +26,6 @@ local function test()
   print("✅ LSP validation completed successfully!\n")
 end
 
-M.register = function()
-  vim.api.nvim_create_user_command("TestLSPTypescript", test, {})
-end
+vim.api.nvim_create_user_command("TestLSPTypescript", test, {})
 
 return M

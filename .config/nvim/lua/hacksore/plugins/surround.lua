@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 return {
   "kylechui/nvim-surround",
   event = { "BufReadPre", "BufNewFile" },

@@ -1,6 +1,8 @@
 local utils = require("hacksore.core.utils")
 -- brew install cormacrelf/tap/dark-notify
 -- https://github.com/cormacrelf/dark-notify
+---@module "lazy"
+---@type LazySpec
 return {
   {
     "cormacrelf/dark-notify",

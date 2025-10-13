@@ -1,4 +1,6 @@
 -- NOTE: testing
+---@module "lazy"
+---@type LazySpec
 return {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },

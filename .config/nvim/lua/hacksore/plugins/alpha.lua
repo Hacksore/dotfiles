@@ -43,6 +43,8 @@ end
 
 vim.api.nvim_create_user_command("NewTSProject", create_new_ts_project, {})
 
+---@module "lazy"
+---@type LazySpec
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",

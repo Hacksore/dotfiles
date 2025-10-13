@@ -1,16 +1,12 @@
 local utils = require("hacksore.core.utils")
 
--- FIXME: figure out how to make this work for new lsp + mason
--- right now it will work but we don't want to use the legacy mason-lspconfig.nvim
+---@module "lazy"
+---@type LazySpec
 return {
   {
     "mfussenegger/nvim-jdtls",
     ft = { "java" },
     enabled = false,
-    dependencies = {
-      -- TODO: this is old
-      -- "williamboman/mason-lspconfig.nvim",
-    },
     opts = function(_, opts)
       -- use this function notation to build some variables
       local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle", ".project" }

@@ -24,6 +24,8 @@ local AUTO_INSTALL_LANGUAGE_SERVERS = {
 
 local rust_utils = require("hacksore.core.rust-utils")
 
+---@module "lazy"
+---@type LazySpec
 return {
   "mason-org/mason-lspconfig.nvim",
   opts = {

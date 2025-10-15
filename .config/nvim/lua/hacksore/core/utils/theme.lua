@@ -43,6 +43,16 @@ M.set = function(theme)
   vim.cmd("colorscheme " .. theme)
 end
 
+--- Set the light theme
+M.set_light = function()
+  return M.set(M.LIGHT)
+end
+
+--- Set the dark theme
+M.set_dark = function()
+  return M.set(M.DARK)
+end
+
 --- Toggle between light and dark themes
 --- @returns nil
 M.toggle = function()

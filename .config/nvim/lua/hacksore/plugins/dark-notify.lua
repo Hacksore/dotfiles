@@ -16,10 +16,10 @@ return {
         -- im not sure why this works but it does 😂
         onchange = function(mode)
           if mode == "light" then
-            return theme.set(theme.LIGHT)
+            return theme.set_light()
           end
 
-          theme.set(theme.DARK)
+          theme.set_dark()
         end,
       })
     end,

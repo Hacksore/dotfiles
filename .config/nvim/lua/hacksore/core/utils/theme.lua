@@ -1,6 +1,8 @@
 local M = {}
 
-M.get_all_colorschemes = function()
+--- Get a list of available colorschemes
+--- @returns string[]
+M.colorschemes = function()
   local before_color = vim.api.nvim_exec2("colorscheme", { output = true }).output
 
   local colors = { before_color }
@@ -34,38 +36,44 @@ end
 M.LIGHT = "github_light_default"
 M.DARK = "github_dark_default"
 
+--- Set the colorscheme
+--- @param theme string
+--- @returns nil
 M.set = function(theme)
   vim.cmd("colorscheme " .. theme)
 end
 
--- toggle between light and dark themes
+--- Toggle between light and dark themes
+--- @returns nil
 M.toggle = function()
   local active_theme = vim.fn.execute("colorscheme"):match("^%s*(.-)%s*$")
-  if active_theme == "github_dark_default" or active_theme == "" then
+  if active_theme == M.DARK or active_theme == "" then
     M.set(M.LIGHT)
   else
     M.set(M.DARK)
   end
 end
 
--- make a keybind to toggle themes quicly
-local theme_index = 1
+local _internal_theme_index = 1
+--- Switch to the next or previous colorscheme
+--- @param direction number 1 for next, -1 for previous
+--- @returns nil
 M.switch = function(direction)
-  local themes = M.get_all_colorschemes()
+  local themes = M.colorschemes()
 
-  theme_index = theme_index + direction
+  _internal_theme_index = _internal_theme_index + direction
 
   -- if it underflows go to the end
-  if theme_index < 1 then
-    theme_index = #themes
+  if _internal_theme_index < 1 then
+    _internal_theme_index = #themes
   end
 
   -- if it overflows go to the start
-  if theme_index > #themes then
-    theme_index = 1
+  if _internal_theme_index > #themes then
+    _internal_theme_index = 1
   end
 
-  vim.cmd("colorscheme " .. themes[theme_index])
+  vim.cmd("colorscheme " .. themes[_internal_theme_index])
 end
 
 return M

@@ -74,27 +74,4 @@ M.switch_theme = function(direction)
   vim.cmd("colorscheme " .. themes[theme_index])
 end
 
-M.has_errors_in_messages = function()
-  -- Get the contents of the messages buffer
-  local messages_buffer = vim.api.nvim_get_current_buf()
-  local messages_lines = vim.api.nvim_buf_get_lines(messages_buffer, 0, -1, false)
-
-  -- Check for error messages (adjust the pattern as needed)
-  for _, line in ipairs(messages_lines) do
-    if string.match(line, "error") or string.match(line, "Error") then
-      return true
-    end
-  end
-
-  return false
-end
-
----@param default? table The default table that you want to merge into
----@param opts? table The new options that should be merged with the default table
----@return table # The merged table
-function M.extend_tbl(default, opts)
-  opts = opts or {}
-  return default and vim.tbl_deep_extend("force", default, opts) or opts
-end
-
 return M

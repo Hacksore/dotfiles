@@ -1,4 +1,4 @@
-local utils = require("hacksore.core.utils")
+local theme_utils = require("hacksore.core.utils.theme")
 ---@module "lazy"
 ---@type LazySpec
 return {
@@ -10,6 +10,6 @@ return {
         terminal_colors = false,
       },
     })
-    utils.set_theme(utils.Theme.dark)
+    theme_utils.set_theme(theme_utils.Theme.dark)
   end,
 }

@@ -1,4 +1,4 @@
-local utils = require("hacksore.core.utils")
+local utils = require("hacksore.core.utils.misc")
 
 ---@module "lazy"
 ---@type LazySpec

@@ -1,4 +1,4 @@
-local theme_utils = require("hacksore.core.utils.theme")
+local theme = require("hacksore.core.utils.theme")
 local keymap = vim.keymap
 
 -- tmux
@@ -65,13 +65,13 @@ keymap.set("n", "<Leader>p", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
 
 -- quick key to switch themes
 keymap.set("n", "<Leader>0", function()
-  theme_utils.switch_theme(1)
+  theme.switch(1)
 end, { desc = "Next theme" })
 keymap.set("n", "<Leader>9", function()
-  theme_utils.switch_theme(-1)
+  theme.switch(-1)
 end, { desc = "Prev theme" })
 
 -- quick key to toggle theme from light to dark
 keymap.set("n", "<Leader>ll", function()
-  theme_utils.toggle_theme()
+  theme.toggle()
 end, { desc = "Toggle theme light/dark" })

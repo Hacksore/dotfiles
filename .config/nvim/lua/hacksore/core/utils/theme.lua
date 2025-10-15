@@ -31,32 +31,26 @@ M.get_all_colorschemes = function()
   return colors
 end
 
----@enum Theme (key)
-local Theme = {
-  light = "github_light_default",
-  dark = "github_dark_default",
-}
+M.LIGHT = "github_light_default"
+M.DARK = "github_dark_default"
 
-M.Theme = Theme
-
----@param theme Theme
-M.set_theme = function(theme)
+M.set = function(theme)
   vim.cmd("colorscheme " .. theme)
 end
 
 -- toggle between light and dark themes
-M.toggle_theme = function()
+M.toggle = function()
   local active_theme = vim.fn.execute("colorscheme"):match("^%s*(.-)%s*$")
   if active_theme == "github_dark_default" or active_theme == "" then
-    M.set_theme(Theme.light)
+    M.set(M.LIGHT)
   else
-    M.set_theme(Theme.dark)
+    M.set(M.DARK)
   end
 end
 
 -- make a keybind to toggle themes quicly
 local theme_index = 1
-M.switch_theme = function(direction)
+M.switch = function(direction)
   local themes = M.get_all_colorschemes()
 
   theme_index = theme_index + direction

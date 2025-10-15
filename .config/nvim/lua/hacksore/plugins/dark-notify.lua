@@ -1,4 +1,4 @@
-local theme_utils = require("hacksore.core.utils.theme")
+local theme = require("hacksore.core.utils.theme")
 -- brew install cormacrelf/tap/dark-notify
 -- https://github.com/cormacrelf/dark-notify
 ---@module "lazy"
@@ -9,17 +9,17 @@ return {
     config = function()
       require("dark_notify").run({
         schemes = {
-          light = { colorscheme = theme_utils.Theme.light },
-          dark = { colorscheme = theme_utils.Theme.dark },
+          light = { colorscheme = theme.LIGHT },
+          dark = { colorscheme = theme.DARK },
         },
         -- HACK: for my theme to work for the tab colors
         -- im not sure why this works but it does 😂
         onchange = function(mode)
           if mode == "light" then
-            return theme_utils.set_theme(theme_utils.Theme.light)
+            return theme.set(theme.LIGHT)
           end
 
-          theme_utils.set_theme(theme_utils.Theme.dark)
+          theme.set(theme.DARK)
         end,
       })
     end,

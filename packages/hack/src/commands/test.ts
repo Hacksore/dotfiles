@@ -46,10 +46,13 @@ export async function handleTest(options: {
 
   // we need to link the local dotfiles
   await runCommand(
-    `ln -s /app/.localdotfiles/.config/nvim $HOME/.config/nvim`,
+    `ln -s /app/localdotfiles/.config/nvim $HOME/.config/nvim`,
   );
 
   await runCommand("ls -hal $HOME/.config/nvim");
+  await runCommand("ls -hal $HOME/.config/nvim");
+  await runCommand("ls -hal $HOME/.config/nvim/init.lua");
+  await runCommand("echo $HOME");
 
   console.log({ options, argv, hostname: os.hostname() })
 

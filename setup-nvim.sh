@@ -39,5 +39,3 @@ echo "Neovim installation complete!"
 echo "Use 'nvim-stable' for the stable version"
 echo "Use 'nvim-nightly' for the nightly version"
 
-# create nvim home
-mkdir -p "$HOME/.config/nvim"

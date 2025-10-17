@@ -10,15 +10,16 @@ export async function handleTest(options: {
   remote: boolean;
   skipCargo: boolean;
 }) {
+  const isInsideDocker = fs.existsSync('/.dockerenv');
   const { frozenLock, remote, skipCargo } = options;
   const frozenLockfile = parseFlagToBoolean(frozenLock) ? "1" : "0";
-  const useLocal = remote ? "0" : "1";
   const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
+  const useLocal = remote ? "0" : "1";
 
-  console.log({ options, argv, docker: fs.existsSync('/.dockerenv'), hostname: os.hostname() })
+  console.log({ options, argv, isInsideDocker, hostname: os.hostname() })
 
-  // only spawn this once on the host machine
-  if (!fs.existsSync('/.dockerenv')) {
+  // spawn docker container
+  if (!isInsideDocker) {
     try {
       await runCommand(
         `docker run --rm ${IMAGE_NAME} ${argv.slice(3).join(" ")}`,
@@ -32,8 +33,9 @@ export async function handleTest(options: {
   // logic that runs inside the docker container to test neovim
   console.log("running in the docker container")
 
+
   try {
-    await runCommand("nvim-nightly --version")
+    await runCommand("/usr/local/bin/nvim-stable --version")
   } catch (error) {
   }
 }

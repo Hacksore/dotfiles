@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 import { program } from "commander";
-import packageJson from "../package.json"  with { type: "json" } ;
+import packageJson from "../package.json"  with { type: "json" };
 import { handleBuild } from "./commands/build.ts";
 import { handleTest } from "./commands/test.ts";
+import { handleRun } from "./commands/run.ts";
 
 program
   .command("build")
   .description("build the docker image")
+  .option("-n, --nightly", "use nightly for bleeding edge neovim")
   .allowUnknownOption()
   .action(handleBuild);
 
@@ -24,9 +26,14 @@ program
     false,
   )
   .option("-s, --skip-cargo [value]", "weahter to skip cargo install", false)
-  .option("-n, --nightly", "use nightly for bleeding edge neovim")
   .allowUnknownOption()
   .action(handleTest);
+
+program
+  .command("run")
+  .description("Run the neovim tests")
+  .allowUnknownOption()
+  .action(handleRun);
 
 program
   .name("hack")

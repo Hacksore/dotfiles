@@ -11,14 +11,10 @@ export async function handleTest(options: {
   const frozenLockfile = parseFlagToBoolean(frozenLock) ? "1" : "0";
   const useLocal = remote ? "0" : "1";
   const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
-  const selectedChannel = nightly ? "nightly" : "stable";
 
   console.log(options)
 
   try {
-
-    // TODO: i hate that we nave to use env vars to pass args to docker
-    // we could pass to stdin but that would be more complex to handle
     const envVars = {
       SKIP_CARGO: useCargo,
       LOCAL: useLocal,
@@ -30,7 +26,7 @@ export async function handleTest(options: {
       .join(" ");
 
     await runCommand(
-      `docker run ${envString} --rm ${IMAGE_NAME} ${selectedChannel}`,
+      `docker run ${envString} --rm ${IMAGE_NAME}`,
     );
   } catch (error) {
     console.error("Test failed:", error.message);

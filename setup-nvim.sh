@@ -33,3 +33,7 @@ esac
 # Extract and link nvim binary
 tar xzf "$NVIM_TAR" -C "$NVIM_DIR"
 ln -s "$NVIM_BIN_DIR/nvim" /usr/bin
+
+# setup hack on path
+alias hack="$HOME/packages/hack/src/cli.ts";
+echo "alias hack=\"$HOME/packages/hack/src/cli.ts\";" >> ~/.bashrc

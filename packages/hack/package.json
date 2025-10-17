@@ -5,6 +5,10 @@
   "bin": {
     "hack": "./src/cli.ts"
   },
+  "scripts": {
+    "build": "tsc",
+    "dev": "node src/cli.ts"
+  },
   "type": "module",
   "author": "Hacksore",
   "dependencies": {

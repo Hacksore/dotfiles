@@ -12,18 +12,13 @@ RUN apt update -y && apt install -y \
 # copy configs
 COPY ./.config ./localdotfiles/.config
 
+# copy in hack cli
+COPY ./packages/ ./packages/
+
 # copy package files and install dependencies
-COPY ./package.json ./pnpm-lock.yaml ./
 RUN npm install -g pnpm && pnpm install
 
 # setup nvim
-COPY ./setup-nvim.sh .
 RUN chmod +x setup-nvim.sh && ./setup-nvim.sh
 
-# add in the test script and test files
-COPY ./test-nvim.ts .
-COPY ./test ./test
-
-RUN chmod +x test-nvim.ts
-
-ENTRYPOINT ["node", "test-nvim.ts"]
+ENTRYPOINT ["hack", "--help"]

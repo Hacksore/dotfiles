@@ -44,6 +44,13 @@ export async function handleTest(options: {
   const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
   const useLocal = remote ? "0" : "1";
 
+  // we need to link the local dotfiles
+  await runCommand(
+    `ln -s /app/.localdotfiles/.config/nvim $HOME/.config/nvim`,
+  );
+
+  await runCommand("ls -hal $HOME/.config/nvim");
+
   console.log({ options, argv, hostname: os.hostname() })
 
   try {

@@ -28,9 +28,6 @@ local rust_utils = require("hacksore.core.rust-utils")
 ---@type LazySpec
 return {
   "mason-org/mason-lspconfig.nvim",
-  opts = {
-    ensure_installed = AUTO_INSTALL_LANGUAGE_SERVERS,
-  },
   dependencies = {
     { "mason-org/mason.nvim", opts = {} },
     "neovim/nvim-lspconfig",
@@ -39,7 +36,7 @@ return {
   },
   config = function()
     local is_ci = vim.env.CI == "1"
-    local language_servers = is_ci and AUTO_INSTALL_LANGUAGE_SERVERS or {}
+    local language_servers = not is_ci and AUTO_INSTALL_LANGUAGE_SERVERS or {}
     local lsputil = require("lspconfig.util")
 
     require("mason").setup({})

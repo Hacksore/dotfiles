@@ -1,3 +1,7 @@
+import { runCommand } from "../utils.ts";
+
 export async function handleRun() {
-  console.log("testing this shit");
+  
+  await runCommand("nvim-stable --version")
+  await runCommand("nvim-nightly --version")
 }

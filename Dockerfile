@@ -12,10 +12,14 @@ RUN apt update -y && apt install -y \
 # copy configs
 COPY ./.config ./localdotfiles/.config
 
+# copy package files and install dependencies
+COPY ./package.json ./pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install
+
 # add in the test script and test files
-COPY ./test-nvim.sh .
+COPY ./test-nvim.ts .
 COPY ./test ./test
 
-RUN chmod +x test-nvim.sh
+RUN chmod +x test-nvim.ts
 
-ENTRYPOINT ["/app/test-nvim.sh"]
+ENTRYPOINT ["node", "test-nvim.ts"]

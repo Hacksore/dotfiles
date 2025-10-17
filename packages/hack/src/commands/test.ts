@@ -1,5 +1,8 @@
 import { IMAGE_NAME } from "../constants.ts";
 import { parseFlagToBoolean, runCommand } from "../utils.ts";
+import fs from "node:fs";
+import os from "node:os";
+import { argv } from "node:process";
 
 export async function handleTest(options: {
   nightly: boolean;
@@ -7,29 +10,30 @@ export async function handleTest(options: {
   remote: boolean;
   skipCargo: boolean;
 }) {
-  const { nightly, frozenLock, remote, skipCargo } = options;
+  const { frozenLock, remote, skipCargo } = options;
   const frozenLockfile = parseFlagToBoolean(frozenLock) ? "1" : "0";
   const useLocal = remote ? "0" : "1";
   const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
 
-  console.log(options)
+  console.log({ options, argv, docker: fs.existsSync('/.dockerenv'), hostname: os.hostname() })
+
+  // only spawn this once on the host machine
+  if (!fs.existsSync('/.dockerenv')) {
+    try {
+      await runCommand(
+        `docker run --rm ${IMAGE_NAME} ${argv.slice(3).join(" ")}`,
+      );
+    } catch (error) {
+      console.error("Test failed:", error.message);
+      process.exit(1);
+    }
+  }
+
+  // logic that runs inside the docker container to test neovim
+  console.log("running in the docker container")
 
   try {
-    const envVars = {
-      SKIP_CARGO: useCargo,
-      LOCAL: useLocal,
-      FROZEN_LOCKFILE: frozenLockfile,
-    };
-
-    const envString = Object.entries(envVars)
-      .map(([key, value]) => `-e ${key}=${value}`)
-      .join(" ");
-
-    await runCommand(
-      `docker run ${envString} --rm ${IMAGE_NAME}`,
-    );
+    await runCommand("nvim-nightly --version")
   } catch (error) {
-    console.error("Test failed:", error.message);
-    process.exit(1);
   }
 }

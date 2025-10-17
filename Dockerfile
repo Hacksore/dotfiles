@@ -25,4 +25,4 @@ COPY setup-nvim.sh ./
 # setup nvim
 RUN chmod +x setup-nvim.sh && ./setup-nvim.sh
 
-ENTRYPOINT ["node", "packages/hack/src/cli.ts", "run"]
+ENTRYPOINT ["node", "packages/hack/src/cli.ts", "test"]

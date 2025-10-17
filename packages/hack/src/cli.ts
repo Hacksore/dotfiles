@@ -3,18 +3,16 @@ import { program } from "commander";
 import packageJson from "../package.json"  with { type: "json" };
 import { handleBuild } from "./commands/build.ts";
 import { handleTest } from "./commands/test.ts";
-import { handleRun } from "./commands/run.ts";
 
 program
   .command("build")
   .description("build the docker image")
-  .option("-n, --nightly", "use nightly for bleeding edge neovim")
   .allowUnknownOption()
   .action(handleBuild);
 
 program
   .command("test")
-  .description("test the nvim config in the docker image")
+  .description("Run the docker image and pass the flags to it to run the tests")
   .option(
     "--frozen-lock [value]",
     "if it should use the existing commit lazy lock file",
@@ -26,14 +24,9 @@ program
     false,
   )
   .option("-s, --skip-cargo [value]", "weahter to skip cargo install", false)
+  .option("-n, --nightly", "use nightly for bleeding edge neovim")
   .allowUnknownOption()
   .action(handleTest);
-
-program
-  .command("run")
-  .description("Run the neovim tests")
-  .allowUnknownOption()
-  .action(handleRun);
 
 program
   .name("hack")

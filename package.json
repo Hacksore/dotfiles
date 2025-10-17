@@ -12,8 +12,7 @@
   "type": "module",
   "author": "Hacksore",
   "dependencies": {
-    "@hack/cli": "workspace:*",
-    "execa": "^9.0.0"
+    "@hack/cli": "workspace:*"
   },
   "devDependencies": {
     "@johnnymorganz/stylua-bin": "^2.3.0",

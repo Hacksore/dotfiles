@@ -16,6 +16,10 @@ COPY ./.config ./localdotfiles/.config
 COPY ./package.json ./pnpm-lock.yaml ./
 RUN npm install -g pnpm && pnpm install
 
+# setup nvim
+COPY ./setup-nvim.sh .
+RUN chmod +x setup-nvim.sh && ./setup-nvim.sh
+
 # add in the test script and test files
 COPY ./test-nvim.ts .
 COPY ./test ./test

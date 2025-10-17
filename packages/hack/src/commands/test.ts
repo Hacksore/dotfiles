@@ -18,7 +18,7 @@ const spawnContainer = async () => {
   // spawn docker container
   try {
     await runCommand(
-      `docker run --rm ${IMAGE_NAME} ${argv.slice(3).join(" ")}`,
+      `docker run -e CI=1 --rm ${IMAGE_NAME} ${argv.slice(3).join(" ")}`,
     );
   } catch (error) {
     console.error("Test failed:", error.message);
@@ -47,9 +47,17 @@ export async function handleTest(options: {
   console.log({ options, argv, hostname: os.hostname() })
 
   try {
-    await runCommand("/usr/local/bin/nvim-stable --version")
-    console.log("✅ nvim-stable version check passed")
+    // Run nvim with TypeScript LSP test using TestTypescriptLSP command
+    // FIXME: this is a hack and we can't use auto installed cause it wont work in headless mode
+    // https://github.com/mason-org/mason-lspconfig.nvim/issues/456
+    // NOTE: this will catch breaking lua changes for neovim and exit with non-zero code
+    // and it should print out the error in the logs
+    await runCommand(
+      `nvim-stable --headless -e -c "MasonInstall typescript-language-server" -c 'exe !!v:errmsg."cquit"'`,
+    );
+
   } catch (error) {
-    console.error("❌ nvim-stable version check failed:", error.message)
+    console.error("Error:", error);
+    process.exit(1);
   }
 }

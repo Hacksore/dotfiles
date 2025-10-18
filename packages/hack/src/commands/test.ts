@@ -41,10 +41,25 @@ export async function handleTest(options: {
   }
 
   const { frozenLock, remote, skipCargo } = options;
-  const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
   const nvimBin = options.nightly ? "nvim-nightly" : "nvim-stable";
- 
-  // TODO: install cargo via the useCargo flag
+
+  // print a nice table of all the options enabled
+  console.log("🧪 Running tests with the following options:");
+  console.table({
+    "Neovim Nightly": options.nightly,
+    "Frozen Lockfile": frozenLock,
+    "Remote Dotfiles": remote,
+    "Skip Cargo Install": skipCargo,
+  });
+
+  if (!skipCargo) {
+    console.log("🚚 Installing cargo...");
+    await runCommand(
+      `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly`,
+    );
+
+    process.env.PATH = `${os.homedir()}/.cargo/bin:` + process.env.PATH;
+  }
 
   const homeDir = os.homedir();
   mkdirp(`${homeDir}/.config`);
@@ -64,13 +79,11 @@ export async function handleTest(options: {
     );
   }
 
-  if (!frozenLock) {
-    // copy the old lack file to a new copy
-    fs.copyFileSync(
-      `${homeDir}/.config/nvim/lazy-lock.json`,
-      `${homeDir}/.config/nvim/lazy-lock.original.json`,
-    );
-  }
+  // copy the old lack file to a new copy
+  fs.copyFileSync(
+    `${homeDir}/.config/nvim/lazy-lock.json`,
+    `${homeDir}/.config/nvim/lazy-lock.original.json`,
+  );
 
   try {
     // Run nvim with TypeScript LSP test using TestTypescriptLSP command
@@ -82,10 +95,24 @@ export async function handleTest(options: {
       `${nvimBin} --headless -e -c "MasonInstall typescript-language-server" -c 'exe !!v:errmsg."cquit"'`,
     );
 
+    console.log("\n\n");
+
     // NOTE: run the test case for typescript LSP
     await runCommand(
       `${nvimBin} --headless -e -c "TestLSPTypescript" -c 'exe !!v:errmsg."cquit"' "/app/test/typescript/simple.ts"`,
     );
+
+    if (!frozenLock) {
+      console.log("📝 Preparing lazy diff to see what changed...")
+
+      // NOTE: do the dif for the lock file
+      await runCommand(
+        `diff -u --color=always ${homeDir}/.config/nvim/lazy-lock.original.json ${homeDir}/.config/nvim/lazy-lock.json && echo $? || true`,
+      );
+    }
+
+    console.log("✅ Noevim test run succesfully...")
+    await runCommand(`${nvimBin} -V1 -v`)
 
   } catch (error) {
     console.error("Error:", error);

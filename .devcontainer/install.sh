@@ -38,7 +38,7 @@ git config --global --unset commit.gpgsign
 git config --global --unset gpg.format
 
 # install node
-nvm install 20 --lts
+nvm install 24 --lts
 
 # install rust up
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y

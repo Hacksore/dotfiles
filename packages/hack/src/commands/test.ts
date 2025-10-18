@@ -11,7 +11,8 @@ import { runCommand } from "../utils.ts";
  */
 const spawnContainer = async (): Promise<boolean> => {
   const isInsideDocker = fs.existsSync("/.dockerenv");
-  if (isInsideDocker) {
+  const isGithubCodespace = Boolean(process.env.CODESPACES);
+  if (isInsideDocker && !isGithubCodespace) {
     return false;
   }
 

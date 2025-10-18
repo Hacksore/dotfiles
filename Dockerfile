@@ -1,4 +1,4 @@
-FROM node:trixie-slim
+FROM node:trixie-slim AS base
 
 WORKDIR /app
 
@@ -9,13 +9,36 @@ RUN apt update -y && apt install -y \
   fd-find ripgrep fzf \
   libstdc++6 libc-dev
 
-# copy configs
-COPY ./.config ./localdotfiles/.config
+# Install pnpm
+RUN npm install -g pnpm
 
-# add in the test script and test files
-COPY ./test-nvim.sh .
+# copy setup script
+COPY setup-nvim.sh ./
 COPY ./test ./test
 
-RUN chmod +x test-nvim.sh
+# setup nvim
+RUN chmod +x setup-nvim.sh && ./setup-nvim.sh
 
-ENTRYPOINT ["/app/test-nvim.sh"]
+# Prune stage - create a pruned workspace
+FROM base AS pruner
+WORKDIR /app
+COPY . .
+RUN npx turbo prune @hack/cli --docker
+
+# Install stage - install dependencies in pruned workspace
+FROM base AS installer
+WORKDIR /app
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=pruner /app/out/full/ .
+RUN pnpm install --frozen-lockfile
+
+# Runtime stage - copy everything from installer
+FROM base AS runner
+WORKDIR /app
+COPY --from=installer /app/ .
+
+# copy configs
+COPY ./.config/nvim/ ./localdotfiles/.config/nvim
+
+ENTRYPOINT ["npx", "hack", "test"]

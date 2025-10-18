@@ -13,19 +13,22 @@ eval "$($HOMEBREW_PATH/bin/brew shellenv)"
 # set shell
 sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
 
-# clone dotfiles
-git clone https://github.com/Hacksore/dotfiles.git ~/dotfiles
-
 # install stow
-brew install bundle
 brew bundle --file=~/dotfiles/Brewfile.linux
 
 # remove any zsh we don't want
 rm ~/.zprofile
 rm ~/.zshrc
 
-# link configs
-cd ~/dotfiles && stow .
+if [[ "$GITHUB_REPOSITORY" = "Hacksore/dotfiles" ]]; then
+  # if we are in a codespace for our dotfiles we should always use the codespace to lin
+  cd /workspaces/dotfiles && stow --target="$HOME" .
+else 
+  # if we are in some other workspace always use the remote dotfiles
+  # clone dotfiles
+  git clone https://github.com/Hacksore/dotfiles.git ~/dotfiles
+  cd ~/dotfiles && stow .
+fi
 
 # source nvm
 export NVM_DIR="$HOME/.nvm"
@@ -38,7 +41,7 @@ git config --global --unset commit.gpgsign
 git config --global --unset gpg.format
 
 # install node
-nvm install 20 --lts
+nvm install 24 --lts
 
 # install rust up
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -49,3 +52,12 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # install stable+nightly
 rustup install stable
 rustup install nightly
+
+# move to the right dotfile repo and then pnpm i
+if [[ "$GITHUB_REPOSITORY" = "Hacksore/dotfiles" ]]; then
+  cd /workspaces/dotfiles
+else
+  cd ~/dotfiles
+fi
+
+pnpm install

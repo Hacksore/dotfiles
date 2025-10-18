@@ -14,6 +14,7 @@ bin/docker-credential-osxkeychain
 bin/kubectl
 bin/orb
 bin/orbctl
+out
 
 .gitconfig-work
 

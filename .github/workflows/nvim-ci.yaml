@@ -21,16 +21,18 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          version: "10.18.3"
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
       - name: Install
         run: pnpm install
       - name: Check format
-        run: pnpm check:format
+        run: npx run-s check:*
+      - name: Check lint 
+        run: npx run-s lint:js
 
   nightly:
     runs-on: ubuntu-latest
@@ -40,11 +42,11 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          version: "10.18.3"
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
       - name: Cache Docker layers
         uses: actions/cache@v4
@@ -83,11 +85,11 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          version: "10.18.3"
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
       - name: Cache Docker layers
         uses: actions/cache@v4

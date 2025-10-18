@@ -6,7 +6,7 @@ interface User {
 function getUser(): User {
   return {
     id: 1,
-    name: "John"
+    name: "John",
   };
 }
 

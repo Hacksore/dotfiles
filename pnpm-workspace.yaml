@@ -3,3 +3,4 @@ packages:
 
 onlyBuiltDependencies:
   - '@johnnymorganz/stylua-bin'
+  - esbuild

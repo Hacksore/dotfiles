@@ -5,19 +5,29 @@
     "test": "pnpm run image:build && pnpm run image:test",
     "image:build": "hack build",
     "image:test": "hack test",
-    "check:format": "stylua --check .config/nvim/lua",
-    "format": "stylua .config/nvim/lua",
-    "lint": "luacheck .config/nvim"
+    "format": "run-s format:*",
+    "format:lua": "stylua .config/nvim/lua",
+    "format:js": "biome format --write .",
+    "lint:js": "biome lint .",
+    "lint:lua": "luacheck .config/nvim",
+    "check:lua": "stylua --check .config/nvim/lua",
+    "check:js": "biome check .",
+    "fix:js": "biome check --write ."
   },
   "type": "module",
   "author": "Hacksore",
   "dependencies": {
     "@hack/cli": "workspace:*"
   },
+  "packageManager": "pnpm@10.18.3",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "devDependencies": {
+    "@biomejs/biome": "2.2.6",
     "@johnnymorganz/stylua-bin": "^2.3.0",
     "@types/node": "20",
-    "tsx": "^4.19.2",
+    "npm-run-all": "^4.1.5",
     "turbo": "^2.5.8",
     "typescript": "^5.8.2"
   }

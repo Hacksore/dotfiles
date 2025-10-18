@@ -18,7 +18,9 @@ export async function runCommand(command: string) {
   });
 }
 
-export async function runCommandWithOutput(command: string): Promise<{ success: boolean; output: string; error: string }> {
+export async function runCommandWithOutput(
+  command: string,
+): Promise<{ success: boolean; output: string; error: string }> {
   return new Promise((resolve) => {
     const child = spawn(command, { shell: true });
 
@@ -37,7 +39,7 @@ export async function runCommandWithOutput(command: string): Promise<{ success: 
       resolve({
         success: code === 0,
         output: stdout,
-        error: stderr
+        error: stderr,
       });
     });
 
@@ -45,7 +47,7 @@ export async function runCommandWithOutput(command: string): Promise<{ success: 
       resolve({
         success: false,
         output: stdout,
-        error: stderr + error.message
+        error: stderr + error.message,
       });
     });
   });
@@ -56,7 +58,9 @@ export async function runCommandWithOutput(command: string): Promise<{ success: 
  * Supports: "true", "false", "1", "0", "yes", "no", "on", "off"
  * Case insensitive
  */
-export const parseFlagToBoolean = (value: string | boolean | undefined): boolean => {
+export const parseFlagToBoolean = (
+  value: string | boolean | undefined,
+): boolean => {
   if (typeof value === "boolean") return value;
   if (typeof value === "undefined") return false;
 
@@ -74,4 +78,4 @@ export const parseFlagToBoolean = (value: string | boolean | undefined): boolean
 
   // Default to false for unrecognized values
   return false;
-}
+};

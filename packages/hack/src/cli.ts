@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program } from "commander";
-import packageJson from "../package.json"  with { type: "json" };
+import packageJson from "../package.json" with { type: "json" };
 import { handleBuild } from "./commands/build.ts";
 import { handleTest } from "./commands/test.ts";
 

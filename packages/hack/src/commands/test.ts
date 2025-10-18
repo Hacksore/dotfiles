@@ -4,16 +4,16 @@ import fs from "node:fs";
 import os from "node:os";
 import { argv } from "node:process";
 
-import { mkdirp } from "fs-extra/esm"
+import { mkdirp } from "fs-extra/esm";
 
 /**
  * Spawns a Docker container to run tests if not already inside one.
  * @returns {Promise<boolean>} Returns true if a container was spawned, false otherwise.
  */
 const spawnContainer = async (): Promise<boolean> => {
-  const isInsideDocker = fs.existsSync('/.dockerenv');
+  const isInsideDocker = fs.existsSync("/.dockerenv");
   if (isInsideDocker) {
-    return false
+    return false;
   }
 
   // spawn docker container
@@ -27,7 +27,7 @@ const spawnContainer = async (): Promise<boolean> => {
   }
 
   return true;
-}
+};
 
 export async function handleTest(options: {
   nightly: boolean;
@@ -72,7 +72,6 @@ export async function handleTest(options: {
     await runCommand(
       `ln -s /app/remote-dotfiles/.config/nvim $HOME/.config/nvim`,
     );
-
   } else {
     await runCommand(
       `ln -s /app/localdotfiles/.config/nvim $HOME/.config/nvim`,
@@ -103,7 +102,7 @@ export async function handleTest(options: {
     );
 
     if (!frozenLock) {
-      console.log("📝 Preparing lazy diff to see what changed...")
+      console.log("📝 Preparing lazy diff to see what changed...");
 
       // NOTE: do the dif for the lock file
       await runCommand(
@@ -111,9 +110,8 @@ export async function handleTest(options: {
       );
     }
 
-    console.log("✅ Noevim test run succesfully...")
-    await runCommand(`${nvimBin} -V1 -v`)
-
+    console.log("✅ Noevim test run succesfully...");
+    await runCommand(`${nvimBin} -V1 -v`);
   } catch (error) {
     console.error("Error:", error);
     process.exit(1);

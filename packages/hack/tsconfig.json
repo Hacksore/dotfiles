@@ -9,16 +9,9 @@
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "lib": [
-      "esnext"
-    ],
-    "baseUrl": "./",
+    "lib": ["esnext"],
+    "baseUrl": "./"
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "src/**/*.ts",
-    "bin/*.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts", "bin/*.ts"]
 }

@@ -72,8 +72,6 @@ export async function handleTest(options: {
     );
   }
 
-  console.log({ options, argv, hostname: os.hostname() })
-
   try {
     // Run nvim with TypeScript LSP test using TestTypescriptLSP command
     // FIXME: this is a hack and we can't use auto installed cause it wont work in headless mode

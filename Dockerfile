@@ -13,6 +13,8 @@ RUN apt update -y && apt install -y \
 # copy setup script
 COPY setup-nvim.sh ./
 
+COPY ./test ./test
+
 # setup nvim
 RUN chmod +x setup-nvim.sh && ./setup-nvim.sh
 

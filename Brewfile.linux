@@ -3,8 +3,7 @@ brew "fd"
 brew "fzf"
 brew "jq"
 brew "lazygit"
-brew "utf8proc", args: ["HEAD"]
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "nvm"
 brew "ripgrep"
 brew "pnpm"

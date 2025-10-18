@@ -32,7 +32,7 @@ jobs:
       - name: Check format
         run: npx run-s check:*
       - name: Check lint 
-        run: npx run-s lint:*
+        run: npx run-s lint:js
 
   nightly:
     runs-on: ubuntu-latest

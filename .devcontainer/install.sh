@@ -24,8 +24,13 @@ brew bundle --file=~/dotfiles/Brewfile.linux
 rm ~/.zprofile
 rm ~/.zshrc
 
-# link configs
-cd ~/dotfiles && stow .
+if [[ "$GITHUB_REPOSITORY" == "Hacksore/dotfiles" ]]; then
+  # if we are in a codespace for our dotfiles we should always use the codespace to lin
+  cd /workspaces/dotfiles && stow .
+else 
+  # if we are in some other workspace always use the remote dotfiles
+  cd ~/dotfiles && stow .
+fi
 
 # source nvm
 export NVM_DIR="$HOME/.nvm"

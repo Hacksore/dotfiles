@@ -1,4 +1,4 @@
-FROM node:trixie-slim
+FROM node:trixie-slim AS base
 
 WORKDIR /app
 
@@ -9,28 +9,34 @@ RUN apt update -y && apt install -y \
   fd-find ripgrep fzf \
   libstdc++6 libc-dev
 
+# Install pnpm
+RUN npm install -g pnpm
 
 # copy setup script
 COPY setup-nvim.sh ./
-
 COPY ./test ./test
 
 # setup nvim
 RUN chmod +x setup-nvim.sh && ./setup-nvim.sh
 
-# copy package files first for dependency caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY packages/hack/package.json ./packages/hack/
+# Prune stage - create a pruned workspace
+FROM base AS pruner
+WORKDIR /app
+COPY . .
+RUN npx turbo prune @hack/cli --docker
 
-# create minimal source structure for workspace linking
-RUN mkdir -p packages/hack/src && echo 'export {}' > packages/hack/src/cli.ts
+# Install stage - install dependencies in pruned workspace
+FROM base AS installer
+WORKDIR /app
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=pruner /app/out/full/ .
+RUN pnpm install --frozen-lockfile
 
-# install dependencies (this layer will be cached unless package files change)
-RUN npm install -g pnpm && pnpm install
-
-# copy actual source code after dependencies are installed
-COPY packages/hack/src ./packages/hack/src
-COPY packages/hack/tsconfig.json ./packages/hack/
+# Runtime stage - copy everything from installer
+FROM base AS runner
+WORKDIR /app
+COPY --from=installer /app/ .
 
 # copy configs
 COPY ./.config/nvim/ ./localdotfiles/.config/nvim

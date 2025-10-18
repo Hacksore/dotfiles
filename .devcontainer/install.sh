@@ -14,21 +14,27 @@ eval "$($HOMEBREW_PATH/bin/brew shellenv)"
 sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
 
 # install stow
-brew bundle --file=~/dotfiles/Brewfile.linux
+brew install stow
 
 # remove any zsh we don't want
-rm ~/.zprofile
-rm ~/.zshrc
+rm ~/.zprofile ~/.zshrc
 
 if [[ "$GITHUB_REPOSITORY" = "Hacksore/dotfiles" ]]; then
+  echo "Using workspace dotfiles cause you are working on that repo"
   # if we are in a codespace for our dotfiles we should always use the codespace to lin
   cd /workspaces/dotfiles && stow --target="$HOME" .
+  DOTFILE_HOME="/workspaces/dotfiles"
 else 
+  echo "Using Hacksore/dotfiles cause your not in that codespace"
   # if we are in some other workspace always use the remote dotfiles
   # clone dotfiles
   git clone https://github.com/Hacksore/dotfiles.git ~/dotfiles
-  cd ~/dotfiles && stow .
+  cd "$HOME/dotfiles" && stow .
+  DOTFILE_HOME="$HOME/dotfiles"
 fi
+
+brew bundle --file="$DOTFILE_HOME/Brewfile.linux"
+
 
 # source nvm
 export NVM_DIR="$HOME/.nvm"

@@ -4,13 +4,14 @@ import fs from "node:fs";
 import os from "node:os";
 import { argv } from "node:process";
 
+import { mkdirp } from "fs-extra/esm"
+
 /**
  * Spawns a Docker container to run tests if not already inside one.
  * @returns {Promise<boolean>} - Returns true if a container was spawned, false otherwise.
  */
 const spawnContainer = async () => {
   const isInsideDocker = fs.existsSync('/.dockerenv');
-  console.log({ isInsideDocker });
   if (isInsideDocker) {
     return false
   }
@@ -40,19 +41,36 @@ export async function handleTest(options: {
   }
 
   const { frozenLock, remote, skipCargo } = options;
-  const frozenLockfile = parseFlagToBoolean(frozenLock) ? "1" : "0";
   const useCargo = parseFlagToBoolean(skipCargo) ? "1" : "0";
-  const useLocal = remote ? "0" : "1";
+  const nvimBin = options.nightly ? "nvim-nightly" : "nvim-stable";
+ 
+  // TODO: install cargo via the useCargo flag
 
-  // we need to link the local dotfiles
-  await runCommand(
-    `ln -s /app/localdotfiles/.config/nvim $HOME/.config/nvim`,
-  );
+  const homeDir = os.homedir();
+  mkdirp(`${homeDir}/.config`);
 
-  await runCommand("ls -hal $HOME/.config/nvim");
-  await runCommand("ls -hal $HOME/.config/nvim");
-  await runCommand("ls -hal $HOME/.config/nvim/init.lua");
-  await runCommand("echo $HOME");
+  if (remote) {
+    await runCommand(
+      `git clone https://github.com/Hacksore/dotfiles.git /app/remote-dotfiles`,
+    );
+
+    await runCommand(
+      `ln -s /app/remote-dotfiles/.config/nvim $HOME/.config/nvim`,
+    );
+
+  } else {
+    await runCommand(
+      `ln -s /app/localdotfiles/.config/nvim $HOME/.config/nvim`,
+    );
+  }
+
+  if (!frozenLock) {
+    // copy the old lack file to a new copy
+    fs.copyFileSync(
+      `${homeDir}/.config/nvim/lazy-lock.json`,
+      `${homeDir}/.config/nvim/lazy-lock.original.json`,
+    );
+  }
 
   console.log({ options, argv, hostname: os.hostname() })
 
@@ -63,7 +81,12 @@ export async function handleTest(options: {
     // NOTE: this will catch breaking lua changes for neovim and exit with non-zero code
     // and it should print out the error in the logs
     await runCommand(
-      `nvim-stable --headless -e -c "MasonInstall typescript-language-server" -c 'exe !!v:errmsg."cquit"'`,
+      `${nvimBin} --headless -e -c "MasonInstall typescript-language-server" -c 'exe !!v:errmsg."cquit"'`,
+    );
+
+    // NOTE: run the test case for typescript LSP
+    await runCommand(
+      `${nvimBin} --headless -e -c "TestLSPTypescript" -c 'exe !!v:errmsg."cquit"' "/app/test/typescript/simple.ts"`,
     );
 
   } catch (error) {

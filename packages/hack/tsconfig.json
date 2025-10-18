@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "target": "ESNext",
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "nodenext",
     "isolatedModules": true,
     "esModuleInterop": true,
     "noEmit": true,
-    "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "lib": [
       "esnext"
     ],

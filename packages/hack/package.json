@@ -13,8 +13,11 @@
   "author": "Hacksore",
   "dependencies": {
     "commander": "^13.0.0",
-    "figlet": "^1.9.3",
+    "fs-extra": "^11.3.2",
     "ora": "^8.0.1",
     "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4"
   }
 }

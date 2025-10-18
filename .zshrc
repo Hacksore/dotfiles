@@ -113,4 +113,4 @@ esac
 
 # hack cli
 # shellcheck disable=SC2139
-alias hack="$HOME/dotfiles/packages/hack/src/cli.ts";
+alias hack="$HOME/packages/hack/src/cli.ts";

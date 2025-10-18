@@ -8,9 +8,9 @@ import { mkdirp } from "fs-extra/esm"
 
 /**
  * Spawns a Docker container to run tests if not already inside one.
- * @returns {Promise<boolean>} - Returns true if a container was spawned, false otherwise.
+ * @returns {Promise<boolean>} Returns true if a container was spawned, false otherwise.
  */
-const spawnContainer = async () => {
+const spawnContainer = async (): Promise<boolean> => {
   const isInsideDocker = fs.existsSync('/.dockerenv');
   if (isInsideDocker) {
     return false

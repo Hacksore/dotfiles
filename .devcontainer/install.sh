@@ -35,7 +35,6 @@ fi
 
 brew bundle --file="$DOTFILE_HOME/Brewfile.linux"
 
-
 # source nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$HOMEBREW_PATH/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PATH/opt/nvm/nvm.sh" # This loads nvm
@@ -48,9 +47,6 @@ git config --global --unset gpg.format
 
 # install node
 nvm install 24 --lts
-
-# install rust up
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # source the rust env
 . "$HOME/.cargo/env"

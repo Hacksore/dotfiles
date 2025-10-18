@@ -6,19 +6,18 @@
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": ["**/*.js", "**/*.ts", "**/*.tsx", "**/*.jsx"]
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space",
-    "includes": ["**/*.js", "**/*.ts", "**/*.tsx", "**/*.jsx"]
+    "indentStyle": "space"
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true
-    },
-    "includes": ["**/*.js", "**/*.ts", "**/*.tsx", "**/*.jsx"]
+    }
   },
   "javascript": {
     "formatter": {

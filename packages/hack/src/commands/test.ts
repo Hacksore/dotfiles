@@ -1,10 +1,9 @@
-import { IMAGE_NAME } from "../constants.ts";
-import { parseFlagToBoolean, runCommand } from "../utils.ts";
 import fs from "node:fs";
 import os from "node:os";
 import { argv } from "node:process";
-
 import { mkdirp } from "fs-extra/esm";
+import { IMAGE_NAME } from "../constants.ts";
+import { runCommand } from "../utils.ts";
 
 /**
  * Spawns a Docker container to run tests if not already inside one.
@@ -58,7 +57,7 @@ export async function handleTest(options: {
       `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly`,
     );
 
-    process.env.PATH = `${os.homedir()}/.cargo/bin:` + process.env.PATH;
+    process.env.PATH = `${os.homedir()}/.cargo/bin:${process.env.PATH}`;
   }
 
   const homeDir = os.homedir();

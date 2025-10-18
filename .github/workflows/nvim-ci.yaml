@@ -30,7 +30,9 @@ jobs:
       - name: Install
         run: pnpm install
       - name: Check format
-        run: pnpm check:format
+        run: npx run-s check:*
+      - name: Check lint 
+        run: npx run-s lint:*
 
   nightly:
     runs-on: ubuntu-latest

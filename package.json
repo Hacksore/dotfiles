@@ -10,8 +10,9 @@
     "format:js": "biome format --write .",
     "lint:js": "biome lint .",
     "lint:lua": "luacheck .config/nvim",
-    "check:format": "stylua --check .config/nvim/lua",
-    "check:js": "biome check ."
+    "check:lua": "stylua --check .config/nvim/lua",
+    "check:js": "biome check .",
+    "fix:js": "biome check --write ."
   },
   "type": "module",
   "author": "Hacksore",

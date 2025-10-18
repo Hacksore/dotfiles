@@ -1,7 +1,7 @@
 import ora from "ora";
 import picocolors from "picocolors";
-import { runCommandWithOutput } from "../utils.ts";
 import { IMAGE_NAME } from "../constants.ts";
+import { runCommandWithOutput } from "../utils.ts";
 
 export async function handleBuild() {
   const spinner = ora("Starting hack build").start();

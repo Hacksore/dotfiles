@@ -89,7 +89,6 @@ brew "telnet"
 brew "tmate"
 brew "tmux"
 brew "tree"
-brew "typescript-language-server"
 brew "uv"
 brew "watch"
 brew "websocat"
@@ -172,6 +171,7 @@ cask "thonny"
 cask "tuple"
 cask "visual-studio-code"
 cask "wezterm"
+cask "windows-app"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "Color Picker", id: 1545870783
@@ -181,5 +181,4 @@ mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
 mas "Motion", id: 434290957
 mas "NexiGo Webcam Settings", id: 1568831522
-mas "Windows App", id: 1295203466
 mas "Xcode", id: 497799835

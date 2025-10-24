@@ -2,8 +2,8 @@
 	name = Sean Boult
 	email = 996134+Hacksore@users.noreply.github.com
 	signingkey = ~/.ssh/id_rsa.personal.pub 
-[includeIf "gitdir/i:${HOME}/workplace/**"]
-    path = ~/.gitconfig-work
+[includeIf "gitdir/i:**/workplace/**"]
+    path = .gitconfig-work
 [submodule]
 	recurse = true
 [init]

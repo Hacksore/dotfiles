@@ -17,4 +17,5 @@ bin/orbctl
 out
 
 .gitconfig-work
+.pnpm-store
 

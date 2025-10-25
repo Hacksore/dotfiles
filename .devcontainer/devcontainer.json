@@ -7,5 +7,5 @@
       "version": "latest"
     }
   },
-  "postCreateCommand": "bash .devcontainer/install.sh"
+  "postCreateCommand": "zsh .devcontainer/install.sh"
 }

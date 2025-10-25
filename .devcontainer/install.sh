@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 export HOMEBREW_PATH="/home/linuxbrew/.linuxbrew"
 # NOTE: this exists but i don't know how to use it yet
@@ -18,6 +18,7 @@ brew install stow
 
 # remove any zsh we don't want
 rm ~/.zprofile ~/.zshrc
+rm -rf /home/vscode/Library/pnpm
 
 if [[ "$GITHUB_REPOSITORY" = "Hacksore/dotfiles" ]]; then
   echo "Using workspace dotfiles cause you are working on that repo"
@@ -62,4 +63,4 @@ else
   cd ~/dotfiles
 fi
 
-pnpm install
+source "$HOME/.zshrc"

@@ -51,3 +51,5 @@
 	allowedSignersFile = ~/.ssh/allowed_signers
 [tag]
 	gpgsign = true
+[rerere]
+	enabled = true

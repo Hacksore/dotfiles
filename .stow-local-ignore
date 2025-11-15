@@ -18,6 +18,8 @@ TODO.md
 LICENSE
 Makefile
 Dockerfile
+node_modules
+pnpm-*.yaml
 
 Library/CloudStorage
 

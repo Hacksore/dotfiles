@@ -12,6 +12,7 @@
     "lint:lua": "luacheck .config/nvim",
     "check:lua": "stylua --check .config/nvim/lua",
     "check:js": "biome check .",
+    "fix": "run-s format:* fix:*",
     "fix:js": "biome check --write ."
   },
   "type": "module",

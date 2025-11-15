@@ -35,7 +35,16 @@ keymap.set("t", "<C-K>", "<Cmd>wincmd k<CR>", { desc = "Terminal up window navig
 keymap.set("t", "<C-L>", "<Cmd>wincmd l<CR>", { desc = "Terminal right window navigation" })
 
 -- format
-keymap.set("n", "<Leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
+keymap.set("n", "<Leader>lf", function()
+  vim.lsp.buf.format()
+
+  -- TODO: get biome imports working but for now we just have to use the LSP code actions
+  -- vim.lsp.buf.code_action({
+  --   ---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
+  --   context = { only = { "source.organizeImports.biome" } },
+  --   apply = true,
+  -- })
+end, { desc = "Format buffer" })
 
 -- lsp things
 keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Hover diagnostics" })

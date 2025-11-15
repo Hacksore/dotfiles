@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import { type Command, program } from "commander";
 import { handleBuild } from "./commands/build.ts";
 import { handleTest } from "./commands/test.ts";

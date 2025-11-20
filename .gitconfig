@@ -4,6 +4,8 @@
 	signingkey = ~/.ssh/id_rsa.personal.pub 
 [includeIf "gitdir/i:**/workplace/**"]
     path = .gitconfig-work
+[includeIf "gitdir/i:~/oss/**"]
+    path = .gitconfig-work
 [submodule]
 	recurse = true
 [init]

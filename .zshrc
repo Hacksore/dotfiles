@@ -104,6 +104,7 @@ export PATH="$HOME/.deno/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/postgresql@16/bin:$PATH"
 RUSTUP_PATH=$(brew --prefix rustup)
 export PATH="$RUSTUP_PATH/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

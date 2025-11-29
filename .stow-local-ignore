@@ -10,7 +10,6 @@ biome.json
 bootstrap.sh
 tasks.ts
 test-nvim.sh
-pnpm-lock.yaml
 package.json
 node_modules
 README.md
@@ -19,7 +18,8 @@ LICENSE
 Makefile
 Dockerfile
 node_modules
-pnpm-*.yaml
+pnpm-lock.yaml
+pnpm-workspace.yaml
 
 Library/CloudStorage
 

@@ -2,16 +2,10 @@
 ---@type LazySpec
 return {
   "saghen/blink.cmp",
-  -- optional: provides snippets for the snippet source
   dependencies = {
     "rafamadriz/friendly-snippets",
-    "giuxtaposition/blink-cmp-copilot",
   },
-  -- use a release tag to download pre-built binaries
-  -- This means you have to install and configure rust nightly
-  -- rustup install nightly
-  build = "cargo +nightly build --release",
-
+  version = '1.*',
   ---@module "blink.cmp"
   ---@type blink.cmp.Config
   opts = {
@@ -48,7 +42,7 @@ return {
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
     },
-    fuzzy = { implementation = "prefer_rust" },
+    fuzzy = { implementation = "prefer_rust_with_warning" }
   },
   opts_extend = { "sources.default" },
 }

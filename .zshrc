@@ -64,6 +64,9 @@ export PATH="$HOMEBREW_PATH/opt/ruby/bin:$PATH"
 export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@23/libexec/openjdk.jdk/Contents/Home"
 export PATH="$JAVA_HOME/homebrew/opt/openjdk@23/bin:$PATH"
 
+# python
+export PATH="$HOMEBREW_PATH/opt/python@3.12/libexec/bin:$PATH"
+
 # hist settings
 export HISTSIZE=1000000
 export SAVEHIST=1000000

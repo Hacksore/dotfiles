@@ -5,7 +5,7 @@
 [includeIf "gitdir/i:**/workplace/**"]
     path = .gitconfig-work
 [includeIf "gitdir/i:~/oss/**"]
-    path = .gitconfig-work
+    path = .gitconfig-oss
 [submodule]
 	recurse = true
 [init]

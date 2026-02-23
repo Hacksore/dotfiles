@@ -1,0 +1,4 @@
+[user]
+	name = Sean Boult
+	email = 116204283+sboult@users.noreply.github.com
+	signingkey = ~/.ssh/id_ecdsa.pub

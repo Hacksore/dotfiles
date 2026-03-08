@@ -6,14 +6,20 @@ return {
   dependencies = {
     "MunifTanjim/nui.nvim",
   },
+  -- Load at startup to avoid blank buffer on first file open when using `nvim .`
+  -- (lazy loading + netrw disabled causes this bug: nvim-neo-tree/neo-tree.nvim#1699)
+  lazy = false,
   cmd = "Neotree",
   opts = {
     event_handlers = {
       {
         event = "file_opened",
         handler = function()
-          -- auto close
-          require("neo-tree.command").execute({ action = "close" })
+          -- Defer close to next tick so the buffer has time to load before we close.
+          -- Closing immediately was causing the first file open to fail (blank buffer).
+          vim.schedule(function()
+            require("neo-tree.command").execute({ action = "close" })
+          end)
         end,
       },
     },

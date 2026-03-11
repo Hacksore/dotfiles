@@ -17,6 +17,7 @@ local AUTO_INSTALL_LANGUAGE_SERVERS = {
   "pylsp",
   "yamlls",
   "bashls",
+  "oxlint",
   "graphql",
   "mdx_analyzer",
   "prismals",
@@ -156,6 +157,11 @@ return {
           validate = { enable = true },
         },
       },
+    })
+
+    -- Use Mason's oxlint with --lsp flag
+    vim.lsp.config("oxlint", {
+      cmd = { vim.fn.stdpath("data") .. "/mason/bin/oxlint", "--lsp" },
     })
 
     for _, lsp in ipairs(AUTO_INSTALL_LANGUAGE_SERVERS) do

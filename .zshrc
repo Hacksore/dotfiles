@@ -2,6 +2,8 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC1091
 
+export EDITOR="nvim"
+
 # Set up zsh
 export ZSH="$HOME/.oh-my-zsh"
 

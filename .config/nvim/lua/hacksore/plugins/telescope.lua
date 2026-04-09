@@ -49,10 +49,13 @@ return {
       defaults = {
         path_display = { "smart" },
         vimgrep_arguments = vimgrep_arguments,
+        preview = {
+          treesitter = false,
+        },
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-            ["<C-j>"] = actions.move_selection_next, -- move to next result
+            ["<C-j>"] = actions.move_selection_next,     -- move to next result
             ["<C-t>"] = trouble_telescope.open,
           },
         },

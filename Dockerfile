@@ -9,8 +9,9 @@ RUN apt update -y && apt install -y \
   fd-find ripgrep fzf \
   libstdc++6 libc-dev
 
-# Install pnpm
-RUN npm install -g pnpm
+# Install pnpm + tree-sitter CLI (nvim-treesitter main requires `tree-sitter` >= 0.26.1 in PATH;
+# Debian's tree-sitter-cli package is too old for that.)
+RUN npm install -g pnpm tree-sitter-cli
 
 # copy setup script
 COPY setup-nvim.sh ./

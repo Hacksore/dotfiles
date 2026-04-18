@@ -9,7 +9,6 @@ Brewfile.lock.json
 biome.json
 bootstrap.sh
 tasks.ts
-test-nvim.sh
 package.json
 node_modules
 README.md

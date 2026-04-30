@@ -13,9 +13,7 @@ function formatElapsed(ms: number): string {
 
 export async function handleBuild() {
   const start = Date.now();
-  const spinner = ora(
-    `Building Docker image (${formatElapsed(0)})`,
-  ).start();
+  const spinner = ora(`Building Docker image (${formatElapsed(0)})`).start();
 
   const interval = setInterval(() => {
     spinner.text = `Building Docker image (${formatElapsed(Date.now() - start)})`;

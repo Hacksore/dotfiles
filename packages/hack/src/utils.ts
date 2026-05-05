@@ -1,5 +1,17 @@
 import { spawn } from "node:child_process";
 
+export class CommandError extends Error {
+  readonly command: string;
+  readonly exitCode: number | null;
+
+  constructor(command: string, exitCode: number | null) {
+    super(`Command failed with exit code ${exitCode}: ${command}`);
+    this.name = "CommandError";
+    this.command = command;
+    this.exitCode = exitCode;
+  }
+}
+
 export async function runCommand(command: string) {
   const child = spawn(command, { shell: true, stdio: "inherit" });
 
@@ -8,7 +20,7 @@ export async function runCommand(command: string) {
       if (code === 0) {
         resolve(code);
       } else {
-        reject(new Error(`Command failed with exit code ${code}`));
+        reject(new CommandError(command, code));
       }
     });
 

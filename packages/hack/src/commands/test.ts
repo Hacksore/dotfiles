@@ -1,48 +1,77 @@
 import fs from "node:fs";
 import os from "node:os";
-import { argv } from "node:process";
 import { mkdirp } from "fs-extra/esm";
 import {
   type ContainerRuntime,
-  IMAGE_NAME,
+  getContainerRunCommand,
   resolveContainerRuntime,
 } from "../constants.ts";
-import { runCommand } from "../utils.ts";
+import { CommandError, runCommand } from "../utils.ts";
+
+type TestOptions = {
+  nightly: boolean;
+  frozenLock: boolean;
+  remote: boolean;
+  skipCargo: boolean;
+  runtime?: ContainerRuntime;
+};
+
+function getContainerTestArgs(options: TestOptions): string[] {
+  const args: string[] = [];
+
+  if (options.nightly) args.push("--nightly");
+  if (options.frozenLock) args.push("--frozen-lock");
+  if (options.remote) args.push("--remote");
+  if (options.skipCargo) args.push("--skip-cargo");
+
+  return args;
+}
+
+const isInsideContainer = (): boolean => {
+  return (
+    process.env.HACK_CONTAINER === "1" ||
+    fs.existsSync("/.dockerenv") ||
+    fs.existsSync("/.finchenv") ||
+    fs.existsSync("/.applecontainerenv")
+  );
+};
 
 /**
  * Spawns a container to run tests if not already inside one.
  * @returns {Promise<boolean>} Returns true if a container was spawned, false otherwise.
  */
-const spawnContainer = async (runtime: ContainerRuntime): Promise<boolean> => {
-  const isInsideContainer =
-    process.env.HACK_CONTAINER === "1" || fs.existsSync("/.dockerenv");
-  const isGithubCodespace = Boolean(process.env.CODESPACES);
-  if (isInsideContainer && !isGithubCodespace) {
+const spawnContainer = async (options: TestOptions): Promise<boolean> => {
+  const isContainer = isInsideContainer();
+  const isCodespace = Boolean(process.env.CODESPACES);
+  if (isContainer && !isCodespace) {
     return false;
   }
 
+  const runtime = resolveContainerRuntime(options.runtime);
+  const command = getContainerRunCommand(
+    runtime,
+    getContainerTestArgs(options),
+  );
+
   // spawn container
   try {
-    await runCommand(
-      `${runtime} run -e CI=1 -e HACK_CONTAINER=1 --rm ${IMAGE_NAME} ${argv.slice(3).join(" ")}`,
-    );
+    await runCommand(command);
   } catch (error) {
-    console.error("Test failed:", error.message);
+    if (error instanceof CommandError) {
+      console.error("\nTest failed while running:");
+      console.error(error.command);
+      console.error(`Container runtime exited with code ${error.exitCode}`);
+    } else {
+      console.error("Test failed:", error);
+    }
     process.exit(1);
   }
 
   return true;
 };
 
-export async function handleTest(options: {
-  nightly: boolean;
-  frozenLock: boolean;
-  remote: boolean;
-  skipCargo: boolean;
-  runtime?: ContainerRuntime;
-}) {
-  const runtime = resolveContainerRuntime(options.runtime);
-  const spawnedContainer = await spawnContainer(runtime);
+export async function handleTest(options: TestOptions) {
+  const spawnedContainer = await spawnContainer(options);
   if (spawnedContainer) {
     return;
   }

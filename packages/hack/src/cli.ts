@@ -9,6 +9,7 @@ import {
   DEFAULT_CONTAINER_RUNTIME,
   resolveContainerRuntime,
 } from "./constants.ts";
+import { parseFlagToBoolean } from "./utils.ts";
 
 function addContainerRuntimeOption(cmd: Command) {
   cmd.addOption(
@@ -57,9 +58,9 @@ function transformTestOptions(opts: {
 }) {
   return {
     nightly: Boolean(opts.nightly),
-    frozenLock: Boolean(opts.frozenLock),
+    frozenLock: parseFlagToBoolean(opts.frozenLock),
     remote: Boolean(opts.remote),
-    skipCargo: Boolean(opts.skipCargo),
+    skipCargo: parseFlagToBoolean(opts.skipCargo),
     runtime: transformContainerRuntimeOption(opts),
   };
 }
@@ -69,8 +70,10 @@ const buildCommand = program
   .description("build hacksore/nvim container test image")
   .allowUnknownOption();
 addContainerRuntimeOption(buildCommand);
-buildCommand.action((opts) => {
-  return handleBuild({ runtime: transformContainerRuntimeOption(opts) });
+buildCommand.action((_opts, command) => {
+  return handleBuild({
+    runtime: transformContainerRuntimeOption(command.optsWithGlobals()),
+  });
 });
 
 const testCommand = program
@@ -78,8 +81,8 @@ const testCommand = program
   .description("Run the hacksore/nvim container test image");
 addContainerRuntimeOption(testCommand);
 addTestOptions(testCommand);
-testCommand.action((opts) => {
-  return handleTest(transformTestOptions(opts));
+testCommand.action((_opts, command) => {
+  return handleTest(transformTestOptions(command.optsWithGlobals()));
 });
 
 program

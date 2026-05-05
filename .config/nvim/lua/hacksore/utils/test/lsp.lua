@@ -1,6 +1,6 @@
 local M = {}
 
--- NOTE: this used to be 10000 but finch seems slower so i bumped it 
+-- NOTE: this used to be 10000 but finch seems slower so i bumped it
 M.MAX_LSP_TIMEOUT = 20000
 M.TYPESCRIPT_CLIENT_NAME = "ts_ls"
 

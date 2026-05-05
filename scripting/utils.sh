@@ -40,6 +40,36 @@ function dotfiles {
 	echo "You have been moved to dotfiles directory 😎"
 }
 
+function demoprompt {
+	if [[ "$DEMO_PROMPT_ACTIVE" == "1" ]]; then
+		PROMPT="$DEMO_PROMPT_ORIGINAL_PROMPT"
+		RPROMPT="$DEMO_PROMPT_ORIGINAL_RPROMPT"
+		RPS1="$DEMO_PROMPT_ORIGINAL_RPS1"
+		PS2="$DEMO_PROMPT_ORIGINAL_PS2"
+
+		unset DEMO_PROMPT_ACTIVE
+		unset DEMO_PROMPT_ORIGINAL_PROMPT
+		unset DEMO_PROMPT_ORIGINAL_RPROMPT
+		unset DEMO_PROMPT_ORIGINAL_RPS1
+		unset DEMO_PROMPT_ORIGINAL_PS2
+	else
+		DEMO_PROMPT_ORIGINAL_PROMPT="$PROMPT"
+		DEMO_PROMPT_ORIGINAL_RPROMPT="$RPROMPT"
+		DEMO_PROMPT_ORIGINAL_RPS1="$RPS1"
+		DEMO_PROMPT_ORIGINAL_PS2="$PS2"
+		DEMO_PROMPT_ACTIVE="1"
+
+		PROMPT='%F{green}sean%f@%F{208}aws%f $ '
+		RPROMPT=''
+		RPS1=''
+		PS2='> '
+	fi
+
+	if [[ -n "${ZLE_STATE:-}" ]]; then
+		zle reset-prompt
+	fi
+}
+
 # creating this function to override the default env so we don't output anything starting with SECRET_ and OP_
 function env {
 	normalOutput=$(command env)

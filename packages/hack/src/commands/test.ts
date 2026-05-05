@@ -2,24 +2,29 @@ import fs from "node:fs";
 import os from "node:os";
 import { argv } from "node:process";
 import { mkdirp } from "fs-extra/esm";
-import { IMAGE_NAME } from "../constants.ts";
+import {
+  type ContainerRuntime,
+  IMAGE_NAME,
+  resolveContainerRuntime,
+} from "../constants.ts";
 import { runCommand } from "../utils.ts";
 
 /**
- * Spawns a Docker container to run tests if not already inside one.
+ * Spawns a container to run tests if not already inside one.
  * @returns {Promise<boolean>} Returns true if a container was spawned, false otherwise.
  */
-const spawnContainer = async (): Promise<boolean> => {
-  const isInsideDocker = fs.existsSync("/.dockerenv");
+const spawnContainer = async (runtime: ContainerRuntime): Promise<boolean> => {
+  const isInsideContainer =
+    process.env.HACK_CONTAINER === "1" || fs.existsSync("/.dockerenv");
   const isGithubCodespace = Boolean(process.env.CODESPACES);
-  if (isInsideDocker && !isGithubCodespace) {
+  if (isInsideContainer && !isGithubCodespace) {
     return false;
   }
 
-  // spawn docker container
+  // spawn container
   try {
     await runCommand(
-      `docker run -e CI=1 --rm ${IMAGE_NAME} ${argv.slice(3).join(" ")}`,
+      `${runtime} run -e CI=1 -e HACK_CONTAINER=1 --rm ${IMAGE_NAME} ${argv.slice(3).join(" ")}`,
     );
   } catch (error) {
     console.error("Test failed:", error.message);
@@ -34,8 +39,10 @@ export async function handleTest(options: {
   frozenLock: boolean;
   remote: boolean;
   skipCargo: boolean;
+  runtime?: ContainerRuntime;
 }) {
-  const spawnedContainer = await spawnContainer();
+  const runtime = resolveContainerRuntime(options.runtime);
+  const spawnedContainer = await spawnContainer(runtime);
   if (spawnedContainer) {
     return;
   }

@@ -1,6 +1,10 @@
 import ora from "ora";
 import picocolors from "picocolors";
-import { IMAGE_NAME } from "../constants.ts";
+import {
+  type ContainerRuntime,
+  IMAGE_NAME,
+  resolveContainerRuntime,
+} from "../constants.ts";
 import { runCommandWithOutput } from "../utils.ts";
 
 function formatElapsed(ms: number): string {
@@ -11,17 +15,21 @@ function formatElapsed(ms: number): string {
   return rem ? `${m}m ${rem}s` : `${m}m`;
 }
 
-export async function handleBuild() {
+export async function handleBuild(options?: { runtime?: ContainerRuntime }) {
+  const runtime = resolveContainerRuntime(options?.runtime);
+  const runtimeName = runtime === "docker" ? "Docker" : "Finch";
   const start = Date.now();
-  const spinner = ora(`Building Docker image (${formatElapsed(0)})`).start();
+  const spinner = ora(
+    `Building ${runtimeName} image (${formatElapsed(0)})`,
+  ).start();
 
   const interval = setInterval(() => {
-    spinner.text = `Building Docker image (${formatElapsed(Date.now() - start)})`;
+    spinner.text = `Building ${runtimeName} image (${formatElapsed(Date.now() - start)})`;
   }, 1000);
 
   try {
     const result = await runCommandWithOutput(
-      `docker build --platform linux/amd64 . -t ${IMAGE_NAME}`,
+      `${runtime} build --platform linux/amd64 . -t ${IMAGE_NAME}`,
     );
 
     clearInterval(interval);

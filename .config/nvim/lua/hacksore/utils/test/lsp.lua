@@ -1,6 +1,7 @@
 local M = {}
 
-M.MAX_LSP_TIMEOUT = 10000
+-- NOTE: this used to be 10000 but finch seems slower so i bumped it 
+M.MAX_LSP_TIMEOUT = 20000
 M.TYPESCRIPT_CLIENT_NAME = "ts_ls"
 
 --- Utility function to get current buffer info

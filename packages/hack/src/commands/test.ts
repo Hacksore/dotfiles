@@ -146,7 +146,7 @@ export async function handleTest(options: TestOptions) {
       );
     }
 
-    console.log("✅ Noevim test run succesfully...");
+    console.log("✅ Neovim test ran succesfully...");
     await runCommand(`${nvimBin} -V1 -v`);
   } catch (error) {
     console.error("Error:", error);

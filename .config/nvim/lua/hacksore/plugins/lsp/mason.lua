@@ -47,6 +47,13 @@ return {
 
     vim.diagnostic.config({ signs = { text = { " ", " ", " ", " " } } })
 
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+    -- pass all the defaults
+    vim.lsp.config("*", {
+      capabilities = capabilities,
+    })
+
     vim.lsp.config("rust_analyzer", {
       on_attach = function(client, bufnr)
         -- Parse rustfmt.toml to get tab_spaces setting
@@ -163,9 +170,5 @@ return {
     vim.lsp.config("oxlint", {
       cmd = { vim.fn.stdpath("data") .. "/mason/bin/oxlint", "--lsp" },
     })
-
-    for _, lsp in ipairs(AUTO_INSTALL_LANGUAGE_SERVERS) do
-      vim.lsp.enable(lsp)
-    end
   end,
 }

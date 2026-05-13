@@ -38,20 +38,13 @@ return {
   config = function()
     local is_ci = vim.env.CI == "1"
     local language_servers = not is_ci and AUTO_INSTALL_LANGUAGE_SERVERS or {}
-    local lsputil = require("lspconfig.util")
 
-    require("mason").setup({})
-    require("mason-lspconfig").setup({
-      ensure_installed = language_servers,
-    })
+    require("mason").setup()
 
     vim.diagnostic.config({ signs = { text = { " ", " ", " ", " " } } })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-    -- pass all the defaults
     vim.lsp.config("*", {
-      capabilities = capabilities,
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
     })
 
     vim.lsp.config("rust_analyzer", {
@@ -135,8 +128,8 @@ return {
 
     vim.lsp.config("ts_ls", {
       root_dir = function(bufnr, on_dir)
-        local denoRootDir = lsputil.root_pattern("deno.json", "deno.json")(bufnr)
-        if denoRootDir then
+        local deno_root = vim.fs.root(bufnr, { "deno.json", "deno.jsonc", "deno.lock" })
+        if deno_root then
           return nil
         end
 
@@ -169,6 +162,10 @@ return {
     -- Use Mason's oxlint with --lsp flag
     vim.lsp.config("oxlint", {
       cmd = { vim.fn.stdpath("data") .. "/mason/bin/oxlint", "--lsp" },
+    })
+
+    require("mason-lspconfig").setup({
+      ensure_installed = language_servers,
     })
   end,
 }

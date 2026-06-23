@@ -59,7 +59,7 @@ function demoprompt {
 		DEMO_PROMPT_ORIGINAL_PS2="$PS2"
 		DEMO_PROMPT_ACTIVE="1"
 
-		PROMPT='%F{green}sean%f@%F{208}aws%f $ '
+		PROMPT='%F{green}demo%f $ '
 		RPROMPT=''
 		RPS1=''
 		PS2='> '

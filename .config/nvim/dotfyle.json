@@ -12,6 +12,7 @@
     "lua-language-server",
     "mdx-language-server",
     "oxlint",
+    "prettier",
     "prisma-language-server",
     "pylsp",
     "ruby-lsp",

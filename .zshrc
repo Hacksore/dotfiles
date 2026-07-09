@@ -108,8 +108,7 @@ export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.govm/shim:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/postgresql@16/bin:$PATH"
-RUSTUP_PATH=$(brew --prefix rustup)
-export PATH="$RUSTUP_PATH/bin:$PATH"
+export PATH="$HOMEBREW_PATH/opt/rustup/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # pnpm

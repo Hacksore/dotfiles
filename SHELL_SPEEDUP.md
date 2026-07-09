@@ -47,7 +47,7 @@ else
 fi
 ```
 
-### 3. Remove stale zcompdump files
+### 3. Remove stale zcompdump files ✅
 
 You have 8 zcompdump files accumulating. Clean them up after fixing compinit:
 
@@ -57,7 +57,7 @@ rm -f ~/.zcompdump*
 
 Then let compinit regenerate a single fresh one.
 
-### 4. Hardcode `brew --prefix rustup`
+### 4. Hardcode `brew --prefix rustup` ✅
 
 Line 110 shells out to `brew --prefix rustup` on every startup (~83ms). Replace with the hardcoded result:
 

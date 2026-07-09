@@ -8,7 +8,7 @@ export EDITOR="nvim"
 export ZSH="$HOME/.oh-my-zsh"
 
 # good zsh theme
-ZSH_THEME="murilasso"
+ZSH_THEME=""
 
 # some programs require this for ~/.config
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -37,6 +37,10 @@ export LANG=en_US.UTF-8
 
 # load ohmyzsh
 source "$ZSH/oh-my-zsh.sh"
+
+# load starship prompt
+export STARSHIP_CONFIG="$HOME/dotfiles/.config/starship.toml"
+eval "$(starship init zsh)"
 
 # good fuzzy
 eval "$(fzf --zsh)"

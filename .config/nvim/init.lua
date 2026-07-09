@@ -50,5 +50,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank({ higroup = "IncSearch" })
   end,
 })
-
-vim.api.nvim_set_hl(0, "LazyGitBorder", { fg = "#0D1117", bg = "none" })

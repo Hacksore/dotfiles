@@ -6,7 +6,7 @@ keymap.set("n", "<Leader>gg", function()
   if vim.env.TMUX then
     vim.fn.system("tmux-lazygit")
   else
-    vim.cmd.LazyGit()
+    vim.notify("lazygit tmux window is only available inside tmux", vim.log.levels.WARN)
   end
 end, { desc = "Open lazygit in tmux" })
 keymap.set("n", "<C-n>", function()

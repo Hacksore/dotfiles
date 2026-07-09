@@ -13,15 +13,23 @@ ZSH_THEME="murilasso"
 # some programs require this for ~/.config
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# no auto update brew
+export HOMEBREW_NO_AUTO_UPDATE="1"
+
 # make path either linux or mac for brew
 if [ -d "/opt/homebrew/bin" ]; then
   export HOMEBREW_PATH="/opt/homebrew"
+  export HOMEBREW_REPOSITORY="/opt/homebrew"
 else
   export HOMEBREW_PATH="/home/linuxbrew/.linuxbrew"
+  export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
 fi
 
-# load brew
-eval "$($HOMEBREW_PATH/bin/brew shellenv)"
+export HOMEBREW_PREFIX="$HOMEBREW_PATH"
+export HOMEBREW_CELLAR="$HOMEBREW_PATH/Cellar"
+export PATH="$HOMEBREW_PATH/bin:$HOMEBREW_PATH/sbin:$PATH"
+export MANPATH="$HOMEBREW_PATH/share/man:${MANPATH:-}"
+export INFOPATH="$HOMEBREW_PATH/share/info:${INFOPATH:-}"
 
 # force utf8
 export LC_ALL=en_US.UTF-8
@@ -44,9 +52,6 @@ source "$HOME/.zprofile"
 # load zsh plugins
 source "$HOMEBREW_PATH/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOMEBREW_PATH/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# no auto update brew
-export HOMEBREW_NO_AUTO_UPDATE="1"
 
 # add cargo to path
 export PATH="$HOME/.cargo/bin:$PATH"

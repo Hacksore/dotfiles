@@ -18,7 +18,7 @@
 
 ## Action Items (priority order)
 
-### 1. Replace NVM with fnm
+### 1. Replace NVM with fnm ✅
 
 NVM is **88% of your startup** — it's the single biggest win. `fnm` (Fast Node Manager) is a Rust-based drop-in replacement that loads in <5ms.
 
@@ -30,19 +30,7 @@ eval "$(fnm env --use-on-cd)"
 
 fnm supports `.nvmrc` and `.node-version` files automatically.
 
-### 2. Replace oh-my-zsh with a minimal setup
-
-oh-my-zsh loads ~21 internal files and runs its own compinit. You're only using it for:
-- The `murilasso` theme (a prompt)
-- No `plugins=()` array is set, so it loads defaults
-
-**Options (pick one):**
-
-- **Starship prompt** (Rust, ~3ms): `eval "$(starship init zsh)"` — replaces the theme entirely
-- **Pure prompt**: lightweight async git prompt
-- **Keep just the theme**: extract `murilasso.zsh-theme` into your dotfiles and source it directly, then delete oh-my-zsh
-
-### 3. Fix duplicate compinit calls
+### 2. Fix duplicate compinit calls
 
 You call `compinit` twice:
 1. oh-my-zsh calls it internally
@@ -59,7 +47,7 @@ else
 fi
 ```
 
-### 4. Remove stale zcompdump files
+### 3. Remove stale zcompdump files
 
 You have 8 zcompdump files accumulating. Clean them up after fixing compinit:
 
@@ -69,7 +57,7 @@ rm -f ~/.zcompdump*
 
 Then let compinit regenerate a single fresh one.
 
-### 5. Hardcode `brew --prefix rustup`
+### 4. Hardcode `brew --prefix rustup`
 
 Line 110 shells out to `brew --prefix rustup` on every startup (~83ms). Replace with the hardcoded result:
 
@@ -82,7 +70,7 @@ export PATH="$RUSTUP_PATH/bin:$PATH"
 export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 ```
 
-### 6. Lazy-load bashcompinit + AWS completer
+### 5. Lazy-load bashcompinit + AWS completer
 
 `bashcompinit` is only needed for `aws` tab-completion. Defer it until first use:
 
@@ -95,7 +83,7 @@ aws() {
 }
 ```
 
-### 7. Move brew shellenv to .zshenv (or hardcode)
+### 6. Move brew shellenv to .zshenv (or hardcode)
 
 `eval "$(brew shellenv)"` forks a process. The output is static — hardcode it:
 

@@ -1,4 +1,4 @@
-format = "$username$hostname:$directory$ruby$nodejs${custom.aws_profile}$cmd_duration$line_break$git_branch$git_status${custom.git_dirty}${custom.git_clean} $character"
+format = "$username$hostname:$directory$ruby$nodejs$cmd_duration$line_break$git_branch$git_status${custom.git_dirty}${custom.git_clean} $character"
 right_format = "$status"
 add_newline = false
 
@@ -26,12 +26,6 @@ symbol = ""
 [nodejs]
 format = " [node $version]($style)"
 style = "green"
-
-[custom.aws_profile]
-command = "printf '%s' \"${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}\""
-when = "test -n \"${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}\""
-format = " [aws:$output]($style)"
-style = "yellow"
 
 [cmd_duration]
 min_time = 2000

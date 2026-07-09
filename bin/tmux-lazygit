@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -z "${TMUX:-}" ]]; then
+  lazygit
+  exit 0
+fi
+
+current_session="$(tmux display-message -p '#S')"
+current_path="$(tmux display-message -p '#{pane_current_path}')"
+repo_root="$(git -C "$current_path" rev-parse --show-toplevel 2> /dev/null || printf '%s' "$current_path")"
+repo_name="$(basename "$repo_root")"
+window_name="lazygit:$repo_name"
+
+while IFS=$'\t' read -r window_id lazygit_root; do
+  if [[ "$lazygit_root" == "$repo_root" ]]; then
+    tmux select-window -t "$window_id"
+    exit 0
+  fi
+done < <(tmux list-windows -t "$current_session" -F '#{window_id}	#{@lazygit_root}')
+
+window_id="$(tmux new-window -d -P -F '#{window_id}' -n "$window_name" -c "$repo_root" lazygit)"
+tmux set-option -wq -t "$window_id" @lazygit_root "$repo_root"
+tmux select-window -t "$window_id"

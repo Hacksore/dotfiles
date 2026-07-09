@@ -14,4 +14,11 @@ git:
   overrideGpg: true
 os:
   editPreset: "nvim" # see 'Configuring File Editing' section
-
+keybinding:
+  universal:
+    quit: <c-c>
+customCommands:
+  - key: q
+    context: global
+    command: tmux select-window -t :1
+    description: Return to editor

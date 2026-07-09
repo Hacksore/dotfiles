@@ -2,7 +2,13 @@ local theme = require("hacksore.core.utils.theme")
 local keymap = vim.keymap
 
 -- tmux
-keymap.set("n", "<Leader>gg", "<cmd>silent !tmux neww lazygit<cr>", { desc = "Open lazygit in tmux" })
+keymap.set("n", "<Leader>gg", function()
+  if vim.env.TMUX then
+    vim.fn.system("tmux-lazygit")
+  else
+    vim.cmd.LazyGit()
+  end
+end, { desc = "Open lazygit in tmux" })
 keymap.set("n", "<C-n>", function()
   vim.fn.system("tmux switch-client -n")
 end, { desc = "Switch tmux session forward" })

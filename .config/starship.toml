@@ -1,4 +1,4 @@
-format = "$username$hostname:$directory $ruby$line_break$git_branch${custom.git_dirty}${custom.git_clean} $character"
+format = "$username$hostname:$directory$ruby$nodejs${custom.aws_profile}$cmd_duration$line_break$git_branch$git_status${custom.git_dirty}${custom.git_clean} $character"
 right_format = "$status"
 add_newline = false
 
@@ -19,13 +19,35 @@ truncation_length = 8
 truncate_to_repo = false
 
 [ruby]
-format = "[$symbol($version )]($style)"
+format = " [$symbol($version)]($style)"
 style = "red"
 symbol = ""
+
+[nodejs]
+format = " [node $version]($style)"
+style = "green"
+
+[custom.aws_profile]
+command = "printf '%s' \"${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}\""
+when = "test -n \"${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}\""
+format = " [aws:$output]($style)"
+style = "yellow"
+
+[cmd_duration]
+min_time = 2000
+format = " [took $duration]($style)"
+style = "yellow"
 
 [git_branch]
 format = "[$branch]($style)"
 style = "blue"
+
+[git_status]
+format = "([$ahead_behind]($style))"
+style = "yellow"
+ahead = " ⇡${count}"
+behind = " ⇣${count}"
+diverged = " ⇕⇡${ahead_count}⇣${behind_count}"
 
 [custom.git_dirty]
 command = "printf '✗'"

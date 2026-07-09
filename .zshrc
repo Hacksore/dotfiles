@@ -33,10 +33,10 @@ source "$ZSH/oh-my-zsh.sh"
 # good fuzzy
 eval "$(fzf --zsh)"
 
-# load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PATH/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PATH/opt/nvm/nvm.sh"                                       # This loads nvm
-[ -s "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PATH/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+# load fnm
+if command -v fnm >/dev/null; then
+  eval "$(fnm env --use-on-cd)"
+fi
 
 # profile
 source "$HOME/.zprofile"

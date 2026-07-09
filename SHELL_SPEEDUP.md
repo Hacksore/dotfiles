@@ -30,7 +30,7 @@ eval "$(fnm env --use-on-cd)"
 
 fnm supports `.nvmrc` and `.node-version` files automatically.
 
-### 2. Fix duplicate compinit calls
+### 2. Fix duplicate compinit calls ✅
 
 You call `compinit` twice:
 1. oh-my-zsh calls it internally

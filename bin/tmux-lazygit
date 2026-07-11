@@ -8,13 +8,21 @@ if [[ -z "${TMUX:-}" ]]; then
 fi
 
 current_session="$(tmux display-message -p '#S')"
+origin_pane="$(tmux display-message -p '#{pane_id}')"
+current_lazygit_root="$(tmux show-options -wqv @lazygit_root || true)"
+saved_origin_pane="$(tmux show-options -wqv @lazygit_origin_pane || true)"
 current_path="$(tmux display-message -p '#{pane_current_path}')"
 repo_root="$(git -C "$current_path" rev-parse --show-toplevel 2> /dev/null || printf '%s' "$current_path")"
 repo_name="$(basename "$repo_root")"
 window_name="lazygit:$repo_name"
 
+if [[ -n "$current_lazygit_root" && -n "$saved_origin_pane" ]]; then
+  origin_pane="$saved_origin_pane"
+fi
+
 while IFS=$'\t' read -r window_id lazygit_root; do
   if [[ "$lazygit_root" == "$repo_root" ]]; then
+    tmux set-option -wq -t "$window_id" @lazygit_origin_pane "$origin_pane"
     tmux select-window -t "$window_id"
     exit 0
   fi
@@ -22,4 +30,5 @@ done < <(tmux list-windows -t "$current_session" -F '#{window_id}	#{@lazygit_roo
 
 window_id="$(tmux new-window -d -P -F '#{window_id}' -n "$window_name" -c "$repo_root" lazygit)"
 tmux set-option -wq -t "$window_id" @lazygit_root "$repo_root"
+tmux set-option -wq -t "$window_id" @lazygit_origin_pane "$origin_pane"
 tmux select-window -t "$window_id"

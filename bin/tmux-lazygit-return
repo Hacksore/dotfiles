@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -z "${TMUX:-}" ]]; then
+  exit 0
+fi
+
+origin_pane="$(tmux show-options -wqv @lazygit_origin_pane || true)"
+
+if [[ -n "$origin_pane" ]] && origin_window="$(tmux display-message -p -t "$origin_pane" '#{window_id}' 2> /dev/null)"; then
+  tmux select-window -t "$origin_window"
+  tmux select-pane -t "$origin_pane"
+else
+  tmux last-window
+fi

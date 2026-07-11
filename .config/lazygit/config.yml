@@ -20,5 +20,5 @@ keybinding:
 customCommands:
   - key: q
     context: global
-    command: tmux select-window -t :1
+    command: ~/bin/tmux-lazygit-return
     description: Return to editor

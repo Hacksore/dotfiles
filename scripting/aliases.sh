@@ -20,7 +20,7 @@ alias s="zsh"
 alias dnsc="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
 # quick code
-alias c="cd $HOME/Code"
+alias c="codex --yolo"
 
 # git pretty log
 alias lg="git lg"

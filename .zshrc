@@ -119,6 +119,7 @@ export PATH="$HOME/.deno/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/postgresql@16/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/rustup/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOMEBREW/opt/libpq/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

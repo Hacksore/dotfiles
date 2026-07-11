@@ -73,7 +73,7 @@ function demoprompt {
 # creating this function to override the default env so we don't output anything starting with SECRET_ and OP_
 function env {
 	normalOutput=$(command env)
-	echo $normalOutput | awk '$0 !~ /SECRET_|OP_/'
+	echo "$normalOutput" | awk '$0 !~ /SECRET_|OP_/'
 }
 
 # nice timeing func
@@ -84,16 +84,16 @@ function timezsh {
 
 # very useful command for monorepos where you switch branch a lot and old dirs are left behind
 function gitclean {
-  # Use command substitution to capture the output of the git command
-  ignored_dirs=($(git ls-files --others --exclude-standard --directory)) 
+	# Use command substitution to capture the output of the git command
+	ignored_dirs=($(git ls-files --others --exclude-standard --directory))
 
-  for dir in "${ignored_dirs[@]}"; do
-    # Check if the directory contains any non-gitignored files/folders
-    if [[ -z $(git ls-files --directory "$dir") ]]; then
-      echo "removing $dir"
-      rm -rf "$dir"
-    fi
-  done
+	for dir in "${ignored_dirs[@]}"; do
+		# Check if the directory contains any non-gitignored files/folders
+		if [[ -z $(git ls-files --directory "$dir") ]]; then
+			echo "removing $dir"
+			rm -rf "$dir"
+		fi
+	done
 }
 
 function canary {

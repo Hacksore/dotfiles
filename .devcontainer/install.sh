@@ -21,17 +21,17 @@ rm ~/.zprofile ~/.zshrc
 rm -rf /home/vscode/Library/pnpm
 
 if [[ "$GITHUB_REPOSITORY" = "Hacksore/dotfiles" ]]; then
-  echo "Using workspace dotfiles cause you are working on that repo"
-  # if we are in a codespace for our dotfiles we should always use the codespace to lin
-  cd /workspaces/dotfiles && stow --target="$HOME" .
-  DOTFILE_HOME="/workspaces/dotfiles"
-else 
-  echo "Using Hacksore/dotfiles cause your not in that codespace"
-  # if we are in some other workspace always use the remote dotfiles
-  # clone dotfiles
-  git clone https://github.com/Hacksore/dotfiles.git ~/dotfiles
-  cd "$HOME/dotfiles" && stow .
-  DOTFILE_HOME="$HOME/dotfiles"
+	echo "Using workspace dotfiles cause you are working on that repo"
+	# if we are in a codespace for our dotfiles we should always use the codespace to lin
+	cd /workspaces/dotfiles && stow --target="$HOME" .
+	DOTFILE_HOME="/workspaces/dotfiles"
+else
+	echo "Using Hacksore/dotfiles cause your not in that codespace"
+	# if we are in some other workspace always use the remote dotfiles
+	# clone dotfiles
+	git clone https://github.com/Hacksore/dotfiles.git ~/dotfiles
+	cd "$HOME/dotfiles" && stow .
+	DOTFILE_HOME="$HOME/dotfiles"
 fi
 
 brew bundle --file="$DOTFILE_HOME/Brewfile.linux"
@@ -58,9 +58,9 @@ rustup install nightly
 
 # move to the right dotfile repo and then pnpm i
 if [[ "$GITHUB_REPOSITORY" = "Hacksore/dotfiles" ]]; then
-  cd /workspaces/dotfiles
+	cd /workspaces/dotfiles
 else
-  cd ~/dotfiles
+	cd ~/dotfiles
 fi
 
 source "$HOME/.zshrc"

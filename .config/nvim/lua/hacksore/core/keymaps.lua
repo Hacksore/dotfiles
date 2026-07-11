@@ -42,7 +42,12 @@ keymap.set("t", "<C-L>", "<Cmd>wincmd l<CR>", { desc = "Terminal right window na
 
 -- format
 keymap.set("n", "<Leader>lf", function()
-  vim.lsp.buf.format()
+  local ok, conform = pcall(require, "conform")
+  if ok then
+    conform.format({ lsp_format = "fallback" })
+  else
+    vim.lsp.buf.format()
+  end
 
   -- TODO: get biome imports working but for now we just have to use the LSP code actions
   -- vim.lsp.buf.code_action({

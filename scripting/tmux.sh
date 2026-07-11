@@ -2,21 +2,21 @@
 
 # allow switching tmux sessions with ctrl + p and ctrl + n
 function switch_tmux_window_prev {
-  if [[ -n "$TMUX" ]]; then
-    # Switch to the next session
-    tmux switch-client -p
-  else
-    echo "Not inside a tmux session."
-  fi
+	if [[ -n "$TMUX" ]]; then
+		# Switch to the next session
+		tmux switch-client -p
+	else
+		echo "Not inside a tmux session."
+	fi
 }
 
 function switch_tmux_window_next {
-  if [[ -n "$TMUX" ]]; then
-    # Switch to the next session
-    tmux switch-client -n
-  else
-    echo "Not inside a tmux session."
-  fi
+	if [[ -n "$TMUX" ]]; then
+		# Switch to the next session
+		tmux switch-client -n
+	else
+		echo "Not inside a tmux session."
+	fi
 }
 
 zle -N switch_tmux_window_prev

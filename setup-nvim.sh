@@ -38,4 +38,3 @@ ln -sf "$NIGHTLY_DIR/bin/nvim" "/usr/local/bin/nvim-nightly"
 echo "Neovim installation complete!"
 echo "Use 'nvim-stable' for the stable version"
 echo "Use 'nvim-nightly' for the nightly version"
-

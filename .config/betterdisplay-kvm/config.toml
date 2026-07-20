@@ -1,4 +1,4 @@
-usb_device_id = "046d:c547"
+usb_device_id = "046d:c54d"
 system_one_input = 15
 system_two_input = 18
 log_level = "info"

@@ -70,8 +70,8 @@ function demoprompt {
 	fi
 }
 
-# creating this function to override the default env so we don't output anything starting with SECRET_ and OP_
-function env {
+# print the environment without values starting with SECRET_ and OP_
+function safeenv {
 	normalOutput=$(command env)
 	echo "$normalOutput" | awk '$0 !~ /SECRET_|OP_/'
 }

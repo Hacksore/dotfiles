@@ -13,8 +13,8 @@ alias gd="git diff"
 # alias vim="nvim"
 # alias vi="nvim"
 
-# reload the shell to source - might be better to use source command instead to save history
-alias s="zsh"
+# reload the shell without nesting another process
+alias s="exec zsh"
 
 # flush dns
 alias dnsc="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"

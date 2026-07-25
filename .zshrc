@@ -51,7 +51,9 @@ if command -v fnm >/dev/null; then
 fi
 
 # profile
-source "$HOME/.zprofile"
+source "$HOME/scripts/utils.sh"
+source "$HOME/scripts/aliases.sh"
+source "$HOME/scripts/tmux.sh"
 
 # load zsh plugins
 source "$HOMEBREW_PATH/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -59,7 +61,7 @@ source "$HOMEBREW_PATH/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # add 1p goodies for mac only
 if [ "$(uname)" = "Darwin" ]; then
-  export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
   # op cli plugins
   source "$HOME/.config/op/plugins.sh"
@@ -67,15 +69,15 @@ fi
 
 
 # hist settings
-export HISTSIZE=1000000
-export SAVEHIST=1000000
+HISTSIZE=1000000
+SAVEHIST=1000000
 
 # some good settings for hist
-export HIST_IGNORE_ALL_DUPS="1"
-export HIST_SAVE_NO_DUPS="1"
-export HIST_REDUCE_BLANKS="1"
-export INC_APPEND_HISTORY_TIME="1"
-export EXTENDED_HISTORY="1"
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY_TIME
+setopt EXTENDED_HISTORY
 
 # make new astro theme work
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5e5e5e"
@@ -104,7 +106,6 @@ export LIBRARY_PATH="$LIBRARY_PATH:$HOMEBREW_PATH/lib"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.govm/shim:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
-export PATH="$HOMEBREW_PATH/opt/postgresql@16/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/rustup/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/libpq/bin:$PATH"
@@ -117,7 +118,7 @@ export PATH="$HOMEBREW_PATH/opt/ruby/bin:$PATH"
 
 # java
 export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@23/libexec/openjdk.jdk/Contents/Home"
-export PATH="$JAVA_HOME/homebrew/opt/openjdk@23/bin:$PATH"
+export PATH="$JAVA_HOME/bin:$PATH"
 
 # python
 export PATH="$HOMEBREW_PATH/opt/python@3.12/libexec/bin:$PATH"

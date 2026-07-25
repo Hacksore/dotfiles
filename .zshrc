@@ -57,9 +57,6 @@ source "$HOME/.zprofile"
 source "$HOMEBREW_PATH/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOMEBREW_PATH/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# add cargo to path
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # add 1p goodies for mac only
 if [ "$(uname)" = "Darwin" ]; then
   export SSH_AUTH_SOCK="$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
@@ -68,15 +65,6 @@ if [ "$(uname)" = "Darwin" ]; then
   source "$HOME/.config/op/plugins.sh"
 fi
 
-# add ruby to path
-export PATH="$HOMEBREW_PATH/opt/ruby/bin:$PATH"
-
-# java
-export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@23/libexec/openjdk.jdk/Contents/Home"
-export PATH="$JAVA_HOME/homebrew/opt/openjdk@23/bin:$PATH"
-
-# python
-export PATH="$HOMEBREW_PATH/opt/python@3.12/libexec/bin:$PATH"
 
 # hist settings
 export HISTSIZE=1000000
@@ -112,7 +100,7 @@ setopt completealiases
 
 export LIBRARY_PATH="$LIBRARY_PATH:$HOMEBREW_PATH/lib"
 
-# path adds
+# various path adds
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.govm/shim:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
@@ -120,6 +108,19 @@ export PATH="$HOMEBREW_PATH/opt/postgresql@16/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/rustup/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/libpq/bin:$PATH"
+
+# cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# ruby
+export PATH="$HOMEBREW_PATH/opt/ruby/bin:$PATH"
+
+# java
+export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@23/libexec/openjdk.jdk/Contents/Home"
+export PATH="$JAVA_HOME/homebrew/opt/openjdk@23/bin:$PATH"
+
+# python
+export PATH="$HOMEBREW_PATH/opt/python@3.12/libexec/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

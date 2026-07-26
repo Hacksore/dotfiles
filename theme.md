@@ -3,6 +3,42 @@
 This setup keeps WezTerm, tmux, and Codex synchronized with the macOS light or
 dark appearance. No manual action is required when entering or leaving tmux.
 
+## TL;DR: why Codex looks broken after a theme switch
+
+There are three separate layers:
+
+| Layer | What happens after macOS changes theme |
+| --- | --- |
+| WezTerm | Changes its palette immediately. |
+| tmux | The watcher applies matching pane and status-bar colors. |
+| Codex | Refreshes live UI, but cannot redraw completed output in terminal scrollback. |
+
+Codex does not own a fully redrawable transcript. Once a message or diff is
+printed, it becomes ordinary terminal scrollback. A dark-mode diff therefore
+keeps its dark green RGB background if macOS changes to light mode afterward.
+The composer can already be light while older output above it is still dark.
+
+The refresh signals in this setup fix Codex's current color cache and all new
+live UI. They cannot rewrite terminal history that has already been printed.
+This is a Codex rendering limitation, not a remaining WezTerm or tmux theme
+problem.
+
+To make the complete transcript use the current appearance, exit Codex and
+resume the conversation. Codex replays the history and renders it again:
+
+```sh
+# Make sure macOS is already using the desired appearance.
+c resume
+```
+
+Launching `c` and then choosing `/resume` does the same thing. Merely
+detaching from and reattaching to tmux does not help because tmux preserves the
+existing scrollback.
+
+It is possible to remove every background with `FORCE_COLOR=1`, but that also
+removes useful Codex UI boxes. This configuration deliberately keeps the boxes
+and accepts that already-printed output cannot change color in place.
+
 ## Signal flow
 
 ```text

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+mode="${1:-}"
+theme_dir="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/themes"
+
+case "$mode" in
+	light | dark) ;;
+	*)
+		echo "usage: ${0##*/} light|dark" >&2
+		exit 2
+		;;
+esac
+
+theme_file="$theme_dir/$mode.conf"
+if [[ ! -r "$theme_file" ]]; then
+	echo "tmux theme is not readable: $theme_file" >&2
+	exit 1
+fi
+
+tmux source-file "$theme_file"
+tmux refresh-client -S

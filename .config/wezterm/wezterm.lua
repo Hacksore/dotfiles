@@ -3,7 +3,7 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 local theme = require("theme")
 
-theme.apply_to_config(config)
+theme.apply_to_config(config, { sync = true })
 -- Font
 config.font = wezterm.font({
   family = "JetBrainsMono Nerd Font",

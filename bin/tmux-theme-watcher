@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Keep one dark-notify process per tmux server. tmux.conf may be sourced more
+# than once, so a PID file prevents duplicate watchers.
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -z "${TMUX:-}" ]]; then
+	echo "${0##*/} must be started by tmux" >&2
+	exit 1
+fi
+
+if command -v dark-notify >/dev/null 2>&1; then
+	dark_notify="$(command -v dark-notify)"
+elif [[ -x /opt/homebrew/bin/dark-notify ]]; then
+	dark_notify=/opt/homebrew/bin/dark-notify
+elif [[ -x /usr/local/bin/dark-notify ]]; then
+	dark_notify=/usr/local/bin/dark-notify
+else
+	echo "dark-notify is not installed; run: brew install dark-notify" >&2
+	exit 1
+fi
+
+theme_setter="${HOME}/bin/tmux-theme"
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/tmux"
+tmux_socket="${TMUX%%,*}"
+socket_key="$(printf '%s' "$tmux_socket" | md5 -q)"
+pid_file="$state_dir/theme-watcher-$socket_key.pid"
+
+mkdir -p "$state_dir"
+
+if [[ -r "$pid_file" ]]; then
+	existing_pid="$(<"$pid_file")"
+	if [[ "$existing_pid" =~ ^[0-9]+$ ]] && kill -0 "$existing_pid" 2>/dev/null; then
+		exit 0
+	fi
+	rm -f "$pid_file"
+fi
+
+printf '%s\n' "$$" >"$pid_file"
+
+dark_notify_pid=""
+cleanup() {
+	if [[ -n "$dark_notify_pid" ]]; then
+		kill "$dark_notify_pid" 2>/dev/null || true
+	fi
+	if [[ -r "$pid_file" ]] && [[ "$(<"$pid_file")" == "$$" ]]; then
+		rm -f "$pid_file"
+	fi
+}
+trap cleanup EXIT HUP INT TERM
+
+while tmux -S "$tmux_socket" list-sessions >/dev/null 2>&1; do
+	"$dark_notify" -c "$theme_setter" &
+	dark_notify_pid=$!
+	wait "$dark_notify_pid" || true
+	dark_notify_pid=""
+	sleep 1
+done

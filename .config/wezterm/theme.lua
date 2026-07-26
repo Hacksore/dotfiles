@@ -3,7 +3,34 @@ local wezterm = require("wezterm")
 local M = {}
 
 local colors = {
-  -- TODO: add light theme
+  light = {
+    selection_bg = "#b6d7ff",
+    selection_fg = "#1f2328",
+    cursor_bg = "#1f2328",
+    cursor_fg = "#ffffff",
+    foreground = "#1f2328",
+    background = "#ffffff",
+    ansi = {
+      "#24292f", -- black
+      "#cf222e", -- red
+      "#116329", -- green
+      "#4d2d00", -- yellow
+      "#0969da", -- blue
+      "#8250df", -- magenta
+      "#1b7c83", -- cyan
+      "#6e7781", -- white
+    },
+    brights = {
+      "#57606a", -- bright black
+      "#a40e26", -- bright red
+      "#1a7f37", -- bright green
+      "#633c01", -- bright yellow
+      "#218bff", -- bright blue
+      "#a475f9", -- bright magenta
+      "#3192aa", -- bright cyan
+      "#8c959f", -- bright white
+    },
+  },
   dark = {
     selection_bg = "#3e4452",
     selection_fg = "#abb2bf",
@@ -33,6 +60,15 @@ local colors = {
     },
   },
 }
+
+local function get_appearance()
+  -- wezterm.gui is unavailable when the config is evaluated by a mux server.
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+
+  return "Dark"
+end
 
 local function select_for_appearance(appearance, options)
   if appearance:find("Dark") then
@@ -65,16 +101,17 @@ function M.apply_to_config(c, opts)
   -- default options
   local defaults = {
     sync = false,
-    color_overrides = { dark = {} },
-    token_overrides = { dark = {} },
+    color_overrides = { light = {}, dark = {} },
   }
 
   local o = tableMerge(defaults, opts)
   local palette = tableMerge(colors, o.color_overrides)
+  local appearance = get_appearance()
 
   -- Create color schemes
   local color_schemes = {
-    ["Dark Theme"] = palette.dark
+    ["Light Theme"] = palette.light,
+    ["Dark Theme"] = palette.dark,
   }
 
   if c.color_schemes == nil then
@@ -82,23 +119,28 @@ function M.apply_to_config(c, opts)
   end
   c.color_schemes = tableMerge(c.color_schemes, color_schemes)
 
-  if opts.sync then
-    c.color_scheme = select_for_appearance(wezterm.gui.get_appearance(), {
+  if o.sync then
+    c.color_scheme = select_for_appearance(appearance, {
       dark = "Dark Theme",
-      light = "Dark Theme",
+      light = "Light Theme",
     })
   else
     c.color_scheme = "Dark Theme"
   end
 
   -- Set window frame colors
+  local frame_palette = palette.dark
+  if o.sync then
+    frame_palette = select_for_appearance(appearance, palette)
+  end
+
   local window_frame = {
-    active_titlebar_bg = palette.dark.background,
-    active_titlebar_fg = palette.dark.foreground,
-    inactive_titlebar_bg = palette.dark.background,
-    inactive_titlebar_fg = palette.dark.foreground,
-    button_fg = palette.dark.foreground,
-    button_bg = palette.dark.background,
+    active_titlebar_bg = frame_palette.background,
+    active_titlebar_fg = frame_palette.foreground,
+    inactive_titlebar_bg = frame_palette.background,
+    inactive_titlebar_fg = frame_palette.foreground,
+    button_fg = frame_palette.foreground,
+    button_bg = frame_palette.background,
   }
 
   if c.window_frame == nil then

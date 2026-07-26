@@ -19,8 +19,8 @@ alias s="exec zsh"
 # flush dns
 alias dnsc="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
-# quick code
-alias c="codex --yolo"
+# quick code; use the terminal's ANSI palette instead of Codex's RGB theme
+alias c="codex --yolo --config 'tui.theme=\"ansi\"'"
 
 # git pretty log
 alias lg="git lg"

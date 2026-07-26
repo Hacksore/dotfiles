@@ -23,3 +23,11 @@ fi
 
 tmux source-file "$theme_file"
 tmux refresh-client -S
+
+# Codex caches the terminal's OSC 10/11 colors. Send its focus-gained event
+# directly to each Codex pane after tmux's pane colors have been updated.
+while IFS=$'\t' read -r pane_id pane_command; do
+	if [[ "$pane_command" == codex* ]]; then
+		tmux send-keys -l -t "$pane_id" $'\033[I'
+	fi
+done < <(tmux list-panes -a -F '#{pane_id}	#{pane_current_command}')

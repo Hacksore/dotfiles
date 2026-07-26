@@ -4,6 +4,21 @@ local act = wezterm.action
 local theme = require("theme")
 
 theme.apply_to_config(config, { sync = true })
+
+-- Codex refreshes its cached OSC 10/11 colors on focus gained, but a macOS
+-- appearance change reloads WezTerm's config without changing window focus.
+-- Tmux sessions are refreshed separately by tmux-theme-watcher.
+wezterm.on("window-config-reloaded", function(_, pane)
+  local process = pane:get_foreground_process_name() or ""
+  local executable = process:match("([^/]+)$") or process
+
+  if executable:match("^codex") then
+    wezterm.time.call_after(0.1, function()
+      pane:send_text("\x1b[I")
+    end)
+  end
+end)
+
 -- Font
 config.font = wezterm.font({
   family = "JetBrainsMono Nerd Font",

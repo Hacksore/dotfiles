@@ -36,6 +36,7 @@ jobs:
           cache-to: type=gha,mode=max,scope=dotfiles-container
       - name: Smoke test runtime image
         run: |
+          test "$(docker image inspect --format '{{ index .Config.Labels "exe.dev/login-user" }}' "${IMAGE_NAME}:ci")" = hacksore
           docker run --rm "${IMAGE_NAME}:ci" /usr/bin/zsh -lc '
             set -e
             test "$(id -un)" = hacksore

@@ -66,4 +66,6 @@ ENV PATH=/home/linuxbrew/.linuxbrew/opt/rustup/bin:/home/linuxbrew/.linuxbrew/op
 
 WORKDIR /home/hacksore
 
+LABEL "exe.dev/login-user"="hacksore"
+
 CMD ["/usr/bin/zsh", "-l"]

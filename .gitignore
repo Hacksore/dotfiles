@@ -2,6 +2,7 @@
 node_modules
 
 .config/lazygit/state.yml
+.config/lazygit/github_pull_requests.json
 .config/op
 .config/brazil
 .config/cr
@@ -19,4 +20,3 @@ out
 
 .gitconfig-work
 .pnpm-store
-

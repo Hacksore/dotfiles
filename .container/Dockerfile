@@ -23,7 +23,8 @@ RUN apt-get update \
         procps \
         sudo \
         zsh \
-    && locale-gen en_US.UTF-8 \
+    && sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen \
+    && locale-gen \
     && useradd --create-home --shell /usr/bin/zsh --uid 1000 hacksore \
     && install -d -o hacksore -g hacksore /home/hacksore/.cache \
     && echo 'hacksore ALL=(root) NOPASSWD:ALL' >/etc/sudoers.d/hacksore \

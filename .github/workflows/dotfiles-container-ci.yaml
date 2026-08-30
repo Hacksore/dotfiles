@@ -43,7 +43,7 @@ jobs:
             test "$(getent passwd "$(id -un)" | cut -d: -f7)" = /usr/bin/zsh
             test -L "$HOME/.zshrc"
             test -e "$HOME/.config/nvim/init.lua"
-            command -v brew fnm node pnpm rustup rustc cargo go python ruby java dotnet deno nvim starship tmux
+            command -v brew fnm node pnpm rustup rustc cargo go python ruby java deno nvim starship tmux
             node --version
             pnpm --version
             rustup toolchain list

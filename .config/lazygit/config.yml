@@ -22,3 +22,5 @@ customCommands:
     context: global
     command: ~/bin/tmux-lazygit-return
     description: Return to editor
+services:
+  "github.com": ""

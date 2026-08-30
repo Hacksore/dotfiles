@@ -18,7 +18,7 @@ env:
   IMAGE_NAME: docker.io/hacksore/dotfiles-container
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -31,25 +31,28 @@ jobs:
           context: .
           file: .container/Dockerfile
           load: true
-          tags: ${{ env.IMAGE_NAME }}:test
+          tags: ${{ env.IMAGE_NAME }}:ci
           cache-from: type=gha,scope=dotfiles-container
           cache-to: type=gha,mode=max,scope=dotfiles-container
       - name: Smoke test runtime image
         run: |
-          docker run --rm "${IMAGE_NAME}:test" /usr/bin/zsh -lc '
+          docker run --rm "${IMAGE_NAME}:ci" /usr/bin/zsh -lc '
+            set -e
+            test "$(id -un)" = hacksore
+            test "$HOME" = /home/hacksore
             test "$(getent passwd "$(id -un)" | cut -d: -f7)" = /usr/bin/zsh
             test -L "$HOME/.zshrc"
-            test -L "$HOME/.config/nvim"
+            test -e "$HOME/.config/nvim/init.lua"
             command -v brew fnm node pnpm rustup rustc cargo go python ruby java dotnet deno nvim starship tmux
             node --version
             pnpm --version
             rustup toolchain list
           '
-          docker run --rm --tty "${IMAGE_NAME}:test" /usr/bin/zsh -ic 'echo shell-config-ok'
+          docker run --rm --tty "${IMAGE_NAME}:ci" /usr/bin/zsh -ic 'echo shell-config-ok'
 
   publish:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo

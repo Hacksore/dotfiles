@@ -12,7 +12,7 @@ Mount a project into the home workspace when needed:
 
 ```sh
 docker run --rm -it \
-  -v "$PWD:/home/vscode/work" \
-  -w /home/vscode/work \
+  -v "$PWD:/home/hacksore/work" \
+  -w /home/hacksore/work \
   hacksore/dotfiles-container:latest
 ```

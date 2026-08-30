@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:jammy
+FROM debian:bookworm-slim
 
 ARG NODE_VERSION=24
 ARG PNPM_VERSION=10.19.0
@@ -8,8 +8,9 @@ ENV HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew \
     HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew \
     HOMEBREW_NO_AUTO_UPDATE=1 \
     HOMEBREW_NO_ENV_HINTS=1 \
+    HOME=/home/hacksore \
     SHELL=/usr/bin/zsh \
-    PATH=/home/vscode/.local/share/fnm/aliases/default/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    PATH=/home/hacksore/.local/share/fnm/aliases/default/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends \
@@ -17,21 +18,31 @@ RUN apt-get update \
         ca-certificates \
         curl \
         file \
+        git \
         locales \
         procps \
+        sudo \
+        zsh \
     && locale-gen en_US.UTF-8 \
+    && useradd --create-home --shell /usr/bin/zsh --uid 1000 hacksore \
+    && install -d -o hacksore -g hacksore /home/hacksore/.cache \
+    && echo 'hacksore ALL=(root) NOPASSWD:ALL' >/etc/sudoers.d/hacksore \
+    && chmod 0440 /etc/sudoers.d/hacksore \
     && rm -rf /var/lib/apt/lists/*
 
-USER vscode
+USER hacksore
 
 RUN NONINTERACTIVE=1 CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
 
-COPY --chown=vscode:vscode Brewfile.linux /tmp/Brewfile.linux
+RUN git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh" \
+    && rm -rf "$HOME/.oh-my-zsh/.git"
+
+COPY --chown=hacksore:hacksore Brewfile.linux /tmp/Brewfile.linux
 RUN brew bundle --file=/tmp/Brewfile.linux \
     && brew cleanup --prune=all \
     && rm -rf "$HOME/.cache/Homebrew" /tmp/Brewfile.linux
 
-COPY --chown=vscode:vscode . /home/vscode/dotfiles
+COPY --chown=hacksore:hacksore . /home/hacksore/dotfiles
 
 RUN rm -f "$HOME/.zprofile" "$HOME/.zshrc" \
     && cd "$HOME/dotfiles" \
@@ -53,10 +64,6 @@ RUN cd "$HOME/dotfiles" \
 
 ENV PATH=/home/linuxbrew/.linuxbrew/opt/rustup/bin:/home/linuxbrew/.linuxbrew/opt/python/libexec/bin:${PATH}
 
-USER root
-RUN chsh --shell /usr/bin/zsh vscode
-
-USER vscode
-WORKDIR /home/vscode
+WORKDIR /home/hacksore
 
 CMD ["/usr/bin/zsh", "-l"]

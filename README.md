@@ -7,6 +7,20 @@ my setup for neovim, tmux, zsh, wezterm, and moar!
 
 <img width="4096" height="2304" alt="image" src="https://github.com/user-attachments/assets/c9a9d332-472c-4566-b203-c875233548f4" />
 
+## Runtime container
+
+`hacksore/dotfiles-container` is a standalone Linux home environment with the
+dotfiles, zsh, Homebrew tools, and language toolchains installed in the image.
+
+```sh
+docker run --rm -it hacksore/dotfiles-container:latest
+```
+
+The runtime image is separate from `.devcontainer`: IDEs build the devcontainer
+when they open the repository, while the runtime image is built from
+[`.container/Dockerfile`](.container/Dockerfile) and published by its own CI
+workflow.
+
 ## Testing Neovim Configs
 Probably one of the only degens to setup testing for their neovim config in CI 😂.
 

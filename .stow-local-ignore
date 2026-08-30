@@ -2,6 +2,7 @@ README.md
 .git
 .github
 .devcontainer
+.container
 .vscode
 Brewfile
 Brewfile.linux
@@ -21,4 +22,3 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 
 Library/CloudStorage
-

@@ -117,11 +117,11 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOMEBREW_PATH/opt/ruby/bin:$PATH"
 
 # java
-export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk@23/libexec/openjdk.jdk/Contents/Home"
+export JAVA_HOME="$HOMEBREW_PATH/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # python
-export PATH="$HOMEBREW_PATH/opt/python@3.12/libexec/bin:$PATH"
+export PATH="$HOMEBREW_PATH/opt/python/libexec/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

@@ -7,7 +7,7 @@ export HOMEBREW_PATH="/home/linuxbrew/.linuxbrew"
 # https://docs.github.com/en/codespaces/setting-your-user-preferences/personalizing-github-codespaces-for-your-account#dotfiles
 
 # install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
 
 # load brew
 eval "$($HOMEBREW_PATH/bin/brew shellenv)"
@@ -49,6 +49,7 @@ eval "$(fnm env --shell zsh)"
 fnm install 24
 fnm default 24
 fnm use 24
+npm install --global pnpm@10.19.0
 
 # source the rust env
 . "$HOME/.cargo/env"

@@ -16,21 +16,9 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Login to Docker Hub
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: docker/login-action@v4
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # build the devcontainer from .devcontainer.json
-      - name: Build and publish devcontainer
+      - name: Build and test devcontainer
         uses: devcontainers/ci@v0.3
         with:
-          imageName: docker.io/hacksore/dotfiles-devcontainer
-          imageTag: latest
-          cacheFrom: docker.io/hacksore/dotfiles-devcontainer
           runCmd: |
-            echo all done 😊
-          push: filter
-          refFilterForPush: refs/heads/master
-          eventFilterForPush: push
+            zsh -lc 'command -v brew fnm node pnpm rustup nvim starship'
+          push: never

@@ -19,7 +19,18 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Build and test (${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            platform: linux/amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            platform: linux/arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
@@ -30,14 +41,19 @@ jobs:
         with:
           context: .
           file: .container/Dockerfile
+          platforms: ${{ matrix.platform }}
           load: true
-          tags: ${{ env.IMAGE_NAME }}:ci
-          cache-from: type=gha,scope=dotfiles-container
-          cache-to: type=gha,mode=max,scope=dotfiles-container
+          tags: ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}-${{ matrix.arch }}
+          cache-from: |
+            type=gha,scope=dotfiles-container-${{ matrix.arch }}
+            type=gha,scope=dotfiles-container
+          cache-to: type=gha,mode=max,scope=dotfiles-container-${{ matrix.arch }}
       - name: Smoke test runtime image
+        env:
+          IMAGE_TAG: ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}-${{ matrix.arch }}
         run: |
-          test "$(docker image inspect --format '{{ index .Config.Labels "exe.dev/login-user" }}' "${IMAGE_NAME}:ci")" = hacksore
-          docker run --rm "${IMAGE_NAME}:ci" /usr/bin/zsh -lc '
+          test "$(docker image inspect --format '{{ index .Config.Labels "exe.dev/login-user" }}' "${IMAGE_TAG}")" = hacksore
+          docker run --rm "${IMAGE_TAG}" /usr/bin/zsh -lc '
             set -e
             test "$(id -un)" = hacksore
             test "$HOME" = /home/hacksore
@@ -49,17 +65,24 @@ jobs:
             pnpm --version
             rustup toolchain list
           '
-          docker run --rm --tty "${IMAGE_NAME}:ci" /usr/bin/zsh -ic 'echo shell-config-ok'
+          docker run --rm --tty "${IMAGE_TAG}" /usr/bin/zsh -ic 'echo shell-config-ok'
+      - name: Login to Docker Hub
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        uses: docker/login-action@v4
+        with:
+          username: hacksore
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Push platform image
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        env:
+          IMAGE_TAG: ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}-${{ matrix.arch }}
+        run: docker push "${IMAGE_TAG}"
 
   publish:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v6
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
       - name: Login to Docker Hub
@@ -67,22 +90,17 @@ jobs:
         with:
           username: hacksore
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Docker metadata
-        id: meta
-        uses: docker/metadata-action@v6
-        with:
-          images: ${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest
-            type=sha,format=long,prefix=sha-
-      - name: Build and publish runtime image
-        uses: docker/build-push-action@v7
-        with:
-          context: .
-          file: .container/Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha,scope=dotfiles-container
-          cache-to: type=gha,mode=max,scope=dotfiles-container
+      - name: Publish multi-platform image
+        env:
+          AMD64_IMAGE: ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}-amd64
+          ARM64_IMAGE: ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}-arm64
+          SHA_IMAGE: ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
+        run: |
+          docker buildx imagetools create \
+            --tag "${IMAGE_NAME}:latest" \
+            --tag "${SHA_IMAGE}" \
+            "${AMD64_IMAGE}" \
+            "${ARM64_IMAGE}"
+          docker buildx imagetools inspect --raw "${SHA_IMAGE}" | jq -e '
+            [.manifests[].platform | select(.os == "linux") | .architecture] | sort == ["amd64", "arm64"]
+          '

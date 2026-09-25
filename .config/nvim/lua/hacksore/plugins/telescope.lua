@@ -61,7 +61,12 @@ return {
       },
     })
 
-    telescope.load_extension("fzf")
+    local ok_fzf = pcall(telescope.load_extension, "fzf")
+    if not ok_fzf then
+      vim.schedule(function()
+        vim.notify("telescope-fzf-native.nvim is unavailable; using default Telescope sorter", vim.log.levels.WARN)
+      end)
+    end
     telescope.load_extension("ui-select")
 
     -- set keymaps
